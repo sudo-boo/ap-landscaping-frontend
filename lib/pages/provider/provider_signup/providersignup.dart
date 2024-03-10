@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:http/http.dart' as http;
-import 'config.dart';
+import '../../../config.dart';
 
 class ProviderSignUp extends StatefulWidget {
   const ProviderSignUp({super.key});

@@ -1,12 +1,12 @@
 import 'package:ap_landscaping/pages/customer/customerHome.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
-import 'package:ap_landscaping/providerHome.dart';
+import 'package:ap_landscaping/pages/provider/providerHome.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'pages/customer/customer_login/customerlogin.dart';
-import './providerlogin.dart';
+import 'pages/provider/provider_login/providerlogin.dart';
 import 'pages/customer/customer_signup/customersignup.dart';
-import './providersignup.dart';
+import 'pages/provider/provider_signup/providersignup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 

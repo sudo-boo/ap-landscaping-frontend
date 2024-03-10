@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:ap_landscaping/providerHome.dart';
+import 'package:ap_landscaping/pages/provider/providerHome.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'config.dart';
+import '../../../config.dart';
 
 class ProviderSignIn extends StatefulWidget {
   const ProviderSignIn({super.key});
