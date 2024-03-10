@@ -1,4 +1,4 @@
-const url = 'http://localhost:8000/api/';
+const url = 'http://localhost:5000/api';
 // const url = 'http://10.0.0.2:8000/api/';
 const providerRegister = "${url}provider/signup";
 const customerRegister = "${url}customer/signup";
