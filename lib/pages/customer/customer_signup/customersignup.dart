@@ -3,7 +3,7 @@ import 'package:ap_landscaping/pages/customer/personal_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/customerinfo.dart';
 import 'package:http/http.dart' as http;
-import 'config.dart';
+import '../../../config.dart';
 
 class CustomerSignUp extends StatefulWidget {
   const CustomerSignUp({super.key});
