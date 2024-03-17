@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/utilities/customer_home_category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/categories_page.dart';
 import 'package:ap_landscaping/pages/customer/my_services_page.dart';
@@ -150,395 +151,53 @@ class _customerPageState extends State<customerPage> {
                   physics:
                       const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
                   children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SchedulingPage(
-                                serviceName: 'Lawn Treatment',
-                                token: widget.token,
-                                customerId: widget.customerId),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 120,
-                              height: 75,
-                              decoration: const ShapeDecoration(
-                                color: Color(0xFFFFE9E9),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                  ),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(
-                                    8.0), // Padding inside the circle
-                                child: Image.asset(
-                                  'lib/assets/images/serviceIcon1.png', // Accessing the image from the assets
-                                  fit: BoxFit
-                                      .cover, // To ensure the image fits well within the circle
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 120,
-                            height: 34,
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFFFFBBC1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                ),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Lawn Treatment',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    HomePageCategoryCard(
+                        serviceName: 'Lawn Treatment',
+                        token: widget.token,
+                        customerId: widget.customerId,
+                        imageLink: 'lib/assets/images/serviceIcon1.png',
+                        containerColorTop: const Color(0xFFFFE9E9),
+                        containerColorBottom: const Color(0xFFFFBBC1),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SchedulingPage(
-                                serviceName: 'Leaf Removal',
-                                token: widget.token,
-                                customerId: widget.customerId),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 120,
-                              height: 75,
-                              decoration: const ShapeDecoration(
-                                color: Color(0xFFCEF29B),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                  ),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(
-                                    8.0), // Padding inside the circle
-                                child: Image.asset(
-                                  'lib/assets/images/serviceIcon2.png', // Accessing the image from the assets
-                                  fit: BoxFit
-                                      .contain, // To ensure the image fits well within the circle
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 120,
-                            height: 34,
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFF96C257),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                ),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Leaf Removal',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    HomePageCategoryCard(
+                      serviceName: 'Leaf Removal',
+                      token: widget.token,
+                      customerId: widget.customerId,
+                      imageLink: 'lib/assets/images/serviceIcon2.png',
+                      containerColorTop: const Color(0xFF96C257),
+                      containerColorBottom: const Color(0xFF96C257),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SchedulingPage(
-                                serviceName: 'Landscaping',
-                                token: widget.token,
-                                customerId: widget.customerId),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 120,
-                              height: 75,
-                              decoration: const ShapeDecoration(
-                                color: Color(0xFFFDFABE),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                  ),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(
-                                    8.0), // Padding inside the circle
-                                child: Image.asset(
-                                  'lib/assets/images/serviceIcon3.png', // Accessing the image from the assets
-                                  fit: BoxFit
-                                      .contain, // To ensure the image fits well within the circle
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 120,
-                            height: 34,
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFFF4D376),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                ),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Landscaping',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    HomePageCategoryCard(
+                      serviceName: 'Landscaping',
+                      token: widget.token,
+                      customerId: widget.customerId,
+                      imageLink: 'lib/assets/images/serviceIcon3.png',
+                      containerColorTop: const Color(0xFFFDFABE),
+                      containerColorBottom: const Color(0xFFF4D376),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SchedulingPage(
-                                serviceName: 'Bush Trimming',
-                                token: widget.token,
-                                customerId: widget.customerId),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 120,
-                              height: 75,
-                              decoration: const ShapeDecoration(
-                                color: Color(0xFFFEDCFD),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                  ),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(
-                                    8.0), // Padding inside the circle
-                                child: Image.asset(
-                                  'lib/assets/images/serviceIcon4.png', // Accessing the image from the assets
-                                  fit: BoxFit
-                                      .contain, // To ensure the image fits well within the circle
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 120,
-                            height: 34,
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFFFFB0FE),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                ),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Bush Trimming',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    HomePageCategoryCard(
+                      serviceName: 'Bush Trimming',
+                      token: widget.token,
+                      customerId: widget.customerId,
+                      imageLink: 'lib/assets/images/serviceIcon4.png',
+                      containerColorTop: const Color(0xFFFEDCFD),
+                      containerColorBottom: const Color(0xFFFFB0FE),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SchedulingPage(
-                                serviceName: 'Mulching',
-                                token: widget.token,
-                                customerId: widget.customerId),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 120,
-                              height: 75,
-                              decoration: const ShapeDecoration(
-                                color: Color(0xFFFFDFCB),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                  ),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(
-                                    8.0), // Padding inside the circle
-                                child: Image.asset(
-                                  'lib/assets/images/serviceIcon5.png', // Accessing the image from the assets
-                                  fit: BoxFit
-                                      .cover, // To ensure the image fits well within the circle
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 120,
-                            height: 34,
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFFFD9F67),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                ),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Mulching',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    HomePageCategoryCard(
+                      serviceName: 'Mulching',
+                      token: widget.token,
+                      customerId: widget.customerId,
+                      imageLink: 'lib/assets/images/serviceIcon5.png',
+                      containerColorTop: const Color(0xFFFFDFCB),
+                      containerColorBottom: const Color(0xFFFD9F67),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SchedulingPage(
-                                serviceName: 'Tree Care',
-                                token: widget.token,
-                                customerId: widget.customerId),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 120,
-                              height: 75,
-                              decoration: const ShapeDecoration(
-                                color: Color(0xFFB0E5FC),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                  ),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(
-                                    8.0), // Padding inside the circle
-                                child: Image.asset(
-                                  'lib/assets/images/serviceIcon6.png', // Accessing the image from the assets
-                                  fit: BoxFit
-                                      .contain, // To ensure the image fits well within the circle
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 120,
-                            height: 34,
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFF8DC3DA),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                ),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Tree Care',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    HomePageCategoryCard(
+                      serviceName: 'Tree Care',
+                      token: widget.token,
+                      customerId: widget.customerId,
+                      imageLink: 'lib/assets/images/serviceIcon6.png',
+                      containerColorTop: const Color(0xFFB0E5FC),
+                      containerColorBottom: const Color(0xFF8DC3DA),
                     ),
                   ],
                 ),

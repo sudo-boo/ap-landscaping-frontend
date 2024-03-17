@@ -204,9 +204,16 @@ class _myServicesPageState extends State<myServicesPage> {
               icon: const Image(
                 image: AssetImage('lib/assets/images/backIcon.png'),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+            onPressed: () {
+              // Navigator.pop(context);
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => customerPage(
+                          token: widget.token,
+                          customerId: widget.customerId)));
+            },
+          ),
           actions: <Widget>[
             IconButton(
               icon: const Image(
@@ -922,7 +929,7 @@ class _myServicesPageState extends State<myServicesPage> {
                         height: 45, width: 45),
                     onPressed: () {
                       // Navigator.pop(context);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => customerPage(
@@ -957,7 +964,7 @@ class _myServicesPageState extends State<myServicesPage> {
                     icon: Image.asset('lib/assets/images/moreIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => profilePage(

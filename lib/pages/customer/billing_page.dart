@@ -34,7 +34,7 @@ class _BillingPageState extends State<BillingPage> {
         },
         body: jsonEncode(orderBody));
     if (response.statusCode == 201) {
-      Navigator.push(
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => CongratsPage(

@@ -334,13 +334,15 @@ class _profilePageState extends State<profilePage> {
                     icon: Image.asset('lib/assets/images/myServicesIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
-                      // _onItemTapped(1);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => myServicesPage(
-                                  token: widget.token,
-                                  customerId: widget.customerId)));
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => myServicesPage(
+                            token: widget.token,
+                            customerId: widget.customerId,
+                          ),
+                        ),
+                      );
                     }),
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
