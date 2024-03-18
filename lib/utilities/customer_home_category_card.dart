@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../pages/customer/scheduling_page.dart';
 
+
 class HomePageCategoryCard extends StatelessWidget {
   final String serviceName;
   final dynamic token;
