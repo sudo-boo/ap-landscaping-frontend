@@ -321,7 +321,7 @@ class _profilePageState extends State<profilePage> {
                   icon: Image.asset('lib/assets/images/homeIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => customerPage(

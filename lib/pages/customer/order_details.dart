@@ -404,16 +404,18 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   actions: [
                     TextButton(
                       child: const Text("Ok"),
-                    onPressed: () {
-                      // _onItemTapped(1);
-                      Navigator.push(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  CustomerServicesPage(
-                                      token: widget.token,
-                                      customerId: widget.customerId)));
-                    }
+                            builder: (context) => CustomerServicesPage(
+                              token: widget.token,
+                              customerId: widget.customerId,
+                            ),
+                          ),
+                              (route) => false,
+                        );
+                      },
                     )
                   ],
                 );
