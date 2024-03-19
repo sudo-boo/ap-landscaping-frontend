@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/customer/my_services_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
@@ -398,14 +399,21 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: const Text("Order cancelled successfully"),
+                  title: const Text("Order Rescheduled successfully"),
                   // content: Text(err.message),
                   actions: [
                     TextButton(
                       child: const Text("Ok"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                    onPressed: () {
+                      // _onItemTapped(1);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CustomerServicesPage(
+                                      token: widget.token,
+                                      customerId: widget.customerId)));
+                    }
                     )
                   ],
                 );

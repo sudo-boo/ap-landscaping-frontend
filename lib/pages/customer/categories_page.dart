@@ -1,6 +1,5 @@
 import 'package:ap_landscaping/pages/customer/my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/profile_page.dart';
-import 'package:ap_landscaping/pages/customer/scheduling_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/customer_category_page_card.dart';
@@ -133,7 +132,7 @@ class _categoriesState extends State<categoriesPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => myServicesPage(
+                              builder: (context) => CustomerServicesPage(
                                   token: widget.token,
                                   customerId: widget.customerId)));
                     }),

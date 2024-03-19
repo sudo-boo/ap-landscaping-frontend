@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/categories_page.dart';
 import 'package:ap_landscaping/pages/customer/my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/profile_page.dart';
-import 'package:ap_landscaping/pages/customer/scheduling_page.dart';
 
 class customerPage extends StatefulWidget {
   final token;
@@ -229,7 +228,7 @@ class _customerPageState extends State<customerPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => myServicesPage(
+                              builder: (context) => CustomerServicesPage(
                                   token: widget.token,
                                   customerId: widget.customerId)));
                     }),

@@ -8,17 +8,17 @@ import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 
-class myServicesPage extends StatefulWidget {
+class CustomerServicesPage extends StatefulWidget {
   final token;
   final customerId;
-  const myServicesPage(
+  const CustomerServicesPage(
       {required this.token, required this.customerId, Key? key})
       : super(key: key);
   @override
-  State<myServicesPage> createState() => _myServicesPageState();
+  State<CustomerServicesPage> createState() => _CustomerServicesPageState();
 }
 
-class _myServicesPageState extends State<myServicesPage> {
+class _CustomerServicesPageState extends State<CustomerServicesPage> {
   // Future<List<orderInfo>> customerOrdersList() async {
   //   final response = await http.get(
   //     Uri.parse('$customerOrders${widget.customerId}'),

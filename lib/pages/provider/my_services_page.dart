@@ -181,13 +181,20 @@ class _myServicesPageState extends State<myServicesPage> {
               height: 0,
             ),
           ),
-          leading: IconButton(
-              icon: const Image(
-                image: AssetImage('lib/assets/images/backIcon.png'),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+          // leading: IconButton(
+          //     icon: const Image(
+          //       image: AssetImage('lib/assets/images/backIcon.png'),
+          //     ),
+          //     onPressed: () {
+          //     // Navigator.pop(context);
+          //     Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => providerPage(
+          //             token: widget.token,
+          //             providerId: widget.providerId)));
+          //     },
+          // ),
           actions: <Widget>[
             IconButton(
               icon: const Image(
@@ -1231,7 +1238,7 @@ class _myServicesPageState extends State<myServicesPage> {
                         height: 45, width: 45),
                     onPressed: () {
                       // Navigator.pop(context);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => providerPage(

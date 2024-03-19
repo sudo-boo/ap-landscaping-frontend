@@ -42,8 +42,8 @@ class _ProviderSignInState extends State<ProviderSignIn> {
       prefs.setString('token', myToken);
       prefs.setString('userOrProvider', 'provider');
       prefs.setString('id', myProviderId.toString());
-      print(myProviderId);
-      Navigator.push(
+      // print(myProviderId);
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) =>

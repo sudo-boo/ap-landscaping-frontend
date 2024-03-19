@@ -43,7 +43,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
       prefs.setString('token', myToken);
       prefs.setString('userOrProvider', 'user');
       prefs.setString('id', myCustomerId.toString());
-      Navigator.push(
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) =>

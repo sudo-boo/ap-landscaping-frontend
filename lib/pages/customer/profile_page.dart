@@ -337,7 +337,7 @@ class _profilePageState extends State<profilePage> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => myServicesPage(
+                          builder: (context) => CustomerServicesPage(
                             token: widget.token,
                             customerId: widget.customerId,
                           ),

@@ -29,12 +29,12 @@ class _providerPageState extends State<providerPage> {
             height: 0,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.person), // Profile Icon
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/home');
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.person), // Profile Icon
+        //   onPressed: () {
+        //     Navigator.of(context).pushReplacementNamed('/home');
+        //   },
+        // ),
         actions: <Widget>[
           IconButton(
             icon: const Image(
@@ -101,7 +101,7 @@ class _providerPageState extends State<providerPage> {
                         height: 45, width: 45),
                     onPressed: () {
                       // _onItemTapped(1);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => myServicesPage(

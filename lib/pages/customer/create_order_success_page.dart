@@ -50,7 +50,7 @@ class _CongratsPageState extends State<CongratsPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => myServicesPage(
+                        builder: (context) => CustomerServicesPage(
                             token: widget.token,
                             customerId: widget.customerId)));
               },
