@@ -1,6 +1,8 @@
 // const url = 'http://localhost:5000/api';
-const url = 'http://10.0.2.2:5000/api/';
+// const url = 'http://10.0.2.2:5000/api/';
 // const url = 'http://10.0.0.2:5000/api/';
+const url = 'https://ap-landscaping-backend.onrender.com/api/';
+
 const providerRegister = "${url}provider/signup";
 const customerRegister = "${url}customer/signup";
 const providerLogin = "${url}provider/login";
