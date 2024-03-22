@@ -138,7 +138,7 @@ class _profilePageState extends State<profilePage> {
         print('Logout successful');
         await SharedPreferences.getInstance().then((prefs) {
           prefs.remove('token');
-          prefs.remove('userOrProvider');
+          prefs.remove('profileType');
           prefs.remove('id');
         });
         Navigator.of(context).pushAndRemoveUntil(

@@ -425,7 +425,8 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                   const SizedBox(width: 4),
                   TextButton(
                     onPressed: () {
-
+                      Navigator.of(context)
+                          .pushReplacementNamed('/superusersignin');
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero, // Remove padding

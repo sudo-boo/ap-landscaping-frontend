@@ -143,7 +143,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => PersonalDetailsPage(

@@ -40,7 +40,7 @@ class _ProviderSignInState extends State<ProviderSignIn> {
       var myToken = jsonResponse['token'];
       var myProviderId = jsonResponse['providerId'];
       prefs.setString('token', myToken);
-      prefs.setString('userOrProvider', 'provider');
+      prefs.setString('profileType', 'provider');
       prefs.setString('id', myProviderId.toString());
       // print(myProviderId);
       Navigator.pushReplacement(
@@ -319,7 +319,6 @@ class _ProviderSignInState extends State<ProviderSignIn> {
     );
   }
 }
-
 
 class providerForgotPasswordPage extends StatefulWidget {
   const providerForgotPasswordPage({super.key});

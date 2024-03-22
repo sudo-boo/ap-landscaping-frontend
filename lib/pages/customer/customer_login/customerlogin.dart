@@ -41,7 +41,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
       var myToken = jsonResponse['token'];
       var myCustomerId = jsonResponse['customerId'];
       prefs.setString('token', myToken);
-      prefs.setString('userOrProvider', 'user');
+      prefs.setString('profileType', 'user');
       prefs.setString('id', myCustomerId.toString());
       Navigator.pushReplacement(
           context,

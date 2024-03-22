@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:ap_landscaping/pages/SuperUser/SuperUserLogin/superuser_login.dart';
+// import 'package:ap_landscaping/pages/SuperUser/SuperUserSignUp/superuser_signup.dart';
 import 'package:ap_landscaping/pages/customer/customerHome.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
 import 'package:ap_landscaping/pages/provider/providerHome.dart';
-import 'package:flutter/material.dart';
 import 'pages/customer/customer_login/customerlogin.dart';
 import 'pages/provider/provider_login/providerlogin.dart';
 import 'pages/customer/customer_signup/customersignup.dart';
@@ -14,19 +16,19 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   runApp(MyApp(
     token: prefs.getString('token'),
-    userOrProvider: prefs.getString('userOrProvider'),
+    profileType: prefs.getString('profileType'),
     id: prefs.getString('id'),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final userOrProvider;
+  final profileType;
   final token;
   final id;
   const MyApp(
       {@required this.token,
       Key? key,
-      required this.userOrProvider,
+      required this.profileType,
       required this.id})
       : super(key: key);
 
@@ -39,11 +41,13 @@ class MyApp extends StatelessWidget {
       if (isExpired) {
         homeWidget = const MyHomePage(title: 'AP Landscaping');
       } else {
-        if (userOrProvider == 'user') {
+        if (profileType == 'user') {
           homeWidget = customerPage(token: token, customerId: id);
-        } else if (userOrProvider == 'provider') {
+        } else if (profileType == 'provider') {
           homeWidget = providerPage(token: token, providerId: id);
-        } else {
+        } else if(profileType == 'superuser'){
+          homeWidget = const MyHomePage(title: 'SuperUser Identified!!');
+        } else{
           homeWidget = const MyHomePage(title: 'AP Landscaping');
         }
       }
@@ -62,8 +66,10 @@ class MyApp extends StatelessWidget {
             const MyHomePage(title: 'AP Landscaping'),
         '/customersignin': (BuildContext ctx) => const CustomerSignIn(),
         '/providersignin': (BuildContext ctx) => const ProviderSignIn(),
+        '/superusersignin': (BuildContext ctx) => const SuperUserSignIn(),
         '/customersignup': (BuildContext ctx) => const CustomerSignUp(),
         '/providersignup': (BuildContext ctx) => const ProviderSignUp(),
+        // '/superusersignup': (BuildContext ctx) => const SuperUserSignUp(),
       },
       home: homeWidget,
     );

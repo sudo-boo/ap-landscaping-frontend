@@ -7,6 +7,9 @@ const providerRegister = "${url}provider/signup";
 const customerRegister = "${url}customer/signup";
 const providerLogin = "${url}provider/login";
 const customerLogin = "${url}customer/login";
+const superUserRegister = "${url}superuser/signup";
+const superUserLogin = "${url}super-user/login";
+const superUserLogout = "${url}super-user/logout";
 
 const customerOrders = "${url}orders/customerOrders/";
 const customerPastOrders = "${url}orders/past/customer";
