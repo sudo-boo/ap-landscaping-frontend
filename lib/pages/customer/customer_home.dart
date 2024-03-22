@@ -2,7 +2,7 @@ import 'package:ap_landscaping/utilities/customer_home_category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/categories_page.dart';
 import 'package:ap_landscaping/pages/customer/my_services_page.dart';
-import 'package:ap_landscaping/pages/customer/profile_page.dart';
+import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 
 class customerPage extends StatefulWidget {
   final token;

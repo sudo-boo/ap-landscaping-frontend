@@ -1,5 +1,8 @@
 import 'package:ap_landscaping/pages/SuperUser/superuser_profile_page.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
+import 'package:ap_landscaping/utilities/superuser_stats_card.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 // import 'crew_page.dart';
 
@@ -16,6 +19,7 @@ class SuperUserPage extends StatefulWidget {
 class _SuperUserPageState extends State<SuperUserPage> {
   @override
   Widget build(BuildContext context) {
+    Dimensions getDims = Dimensions(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -40,39 +44,82 @@ class _SuperUserPageState extends State<SuperUserPage> {
         ],
         backgroundColor: Colors.transparent,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Container(
-          width: 200,
-          child: InkWell(
-            onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => crewPage(
-              //             token: widget.token, providerId: widget.providerId)));
-            },
-            child: Card(
-              color: const Color.fromRGBO(229, 255, 218, 1),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 20),
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: getDims.fractionWidth(0.01)),
+              child: Container(
+                width: getDims.fractionWidth(0.9),
+                height: 84,
+                padding: const EdgeInsets.only(
+                  top: 24,
+                  left: 30,
+                  right: 30,
+                  bottom: 26,
+                ),
+                decoration: ShapeDecoration(
+                  color: const Color(0xFFCEF29B),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  shadows: const [
+                    BoxShadow(
+                      color: Color(0x3F000000),
+                      blurRadius: 4,
+                      offset: Offset(0, 4),
+                      spreadRadius: 0,
+                    )
+                  ],
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text('Crew'),
-                    IconButton(
-                      icon: const Image(
-                        image: AssetImage('lib/assets/images/crewPageIcon.png'),
+                    Text(
+                      'Welcome Superuser',
+                      style: TextStyle(
+                        color: Color(0xFF3E363F),
+                        fontSize: 28,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                        height: 0,
                       ),
-                      onPressed: () {},
-                      // onPressed: () {}
                     ),
                   ],
                 ),
               ),
             ),
           ),
+      Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  SuperUserStatsCard(value: "58", title: "Total Bookings", cardColor: Color(0xFFFFE9E9)),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+                  SuperUserStatsCard(value: "50", title: "Total Services", cardColor: Color(0xFFFDFABE)),
+                ],
+              ),
+              SizedBox(height: getDims.fractionHeight(0.01)),
+              Row(
+                children: [
+                  SuperUserStatsCard(value: "5", title: "Crew", cardColor: Color(0xFFE5FFDA)),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+                  SuperUserStatsCard(value: "\$7657", title: "Total Earning", cardColor: Color(0xFFE5DBFF)),
+                ],
+              ),
+            ],
+          ),
         ),
+      )
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,

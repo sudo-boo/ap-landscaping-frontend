@@ -1,9 +1,10 @@
+import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/SuperUser/SuperUserLogin/superuser_login.dart';
 // import 'package:ap_landscaping/pages/SuperUser/SuperUserSignUp/superuser_signup.dart';
-import 'package:ap_landscaping/pages/customer/customerHome.dart';
+import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
-import 'package:ap_landscaping/pages/provider/providerHome.dart';
+import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'pages/customer/customer_login/customerlogin.dart';
 import 'pages/provider/provider_login/providerlogin.dart';
 import 'pages/customer/customer_signup/customersignup.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         } else if (profileType == 'provider') {
           homeWidget = providerPage(token: token, providerId: id);
         } else if(profileType == 'superuser'){
-          homeWidget = const MyHomePage(title: 'SuperUser Identified!!');
+          homeWidget = SuperUserPage(token: token, superuserId: id);
         } else{
           homeWidget = const MyHomePage(title: 'AP Landscaping');
         }

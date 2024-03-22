@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:ap_landscaping/pages/provider/order_details_page.dart';
-import 'package:ap_landscaping/pages/provider/profile_page.dart';
-import 'package:ap_landscaping/pages/provider/providerHome.dart';
+import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
+import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';

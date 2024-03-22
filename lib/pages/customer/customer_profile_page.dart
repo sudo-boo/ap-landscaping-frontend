@@ -1,19 +1,19 @@
 import 'dart:convert';
 
+import 'package:ap_landscaping/pages/customer/customer_home.dart';
+import 'package:ap_landscaping/pages/customer/my_services_page.dart';
+import 'package:ap_landscaping/pages/customer/update_profile_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
-import 'package:ap_landscaping/pages/provider/my_services_page.dart';
-import 'package:ap_landscaping/pages/provider/providerHome.dart';
-import 'package:ap_landscaping/pages/provider/update_profile_info.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ap_landscaping/config.dart';
 
-import '../../config.dart';
 
 class profilePage extends StatefulWidget {
   final token;
-  final providerId;
-  const profilePage({required this.token, required this.providerId, Key? key})
+  final customerId;
+  const profilePage({required this.token, required this.customerId, Key? key})
       : super(key: key);
 
   @override
@@ -72,7 +72,7 @@ class _profilePageState extends State<profilePage> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Handle sign out logic
-                    logoutProvider();
+                    logoutCustomer();
                     Navigator.of(context).pop(); // Dismiss the bottom sheet
                   },
                   style: ElevatedButton.styleFrom(
@@ -122,8 +122,8 @@ class _profilePageState extends State<profilePage> {
     );
   }
 
-  Future<void> logoutProvider() async {
-    var url = Uri.parse(providerLogout); // Replace with your actual endpoint
+  Future<void> logoutCustomer() async {
+    var url = Uri.parse(customerLogout); // Replace with your actual endpoint
     try {
       print(widget.token);
       var response = await http.post(
@@ -235,7 +235,7 @@ class _profilePageState extends State<profilePage> {
                               MaterialPageRoute(
                                   builder: (context) => updateprofileInfoPage(
                                       token: widget.token,
-                                      providerId: widget.providerId)));
+                                      customerId: widget.customerId)));
                         },
                       ),
                       ListTile(
@@ -297,9 +297,6 @@ class _profilePageState extends State<profilePage> {
                         ),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {
-                          // logoutprovider();
-                          //  Navigator.of(context).pushReplacementNamed('/home');
-                          // print(widget.token);
                           showCustomSignOutBottomSheet(context);
                         },
                       ),
@@ -324,12 +321,12 @@ class _profilePageState extends State<profilePage> {
                   icon: Image.asset('lib/assets/images/homeIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => providerPage(
+                            builder: (context) => customerPage(
                                 token: widget.token,
-                                providerId: widget.providerId)));
+                                customerId: widget.customerId)));
                   },
                   // onPressed: () => _onItemTapped(0),
                 ),
@@ -337,13 +334,15 @@ class _profilePageState extends State<profilePage> {
                     icon: Image.asset('lib/assets/images/myServicesIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
-                      // _onItemTapped(1);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => myServicesPage(
-                                  token: widget.token,
-                                  providerId: widget.providerId)));
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CustomerServicesPage(
+                            token: widget.token,
+                            customerId: widget.customerId,
+                          ),
+                        ),
+                      );
                     }),
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(

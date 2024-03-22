@@ -1,4 +1,4 @@
-import 'package:ap_landscaping/pages/customer/customerHome.dart';
+import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/customer/my_services_page.dart';
 import 'package:flutter/material.dart';
 

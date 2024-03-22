@@ -28,7 +28,7 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
     prefs = await SharedPreferences.getInstance();
   }
 
-  void pLogin() async {
+  void sLogin() async {
     var pBody = {
       "email": emailController.text,
       "password": passwordController.text
@@ -136,13 +136,7 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
                               _isObscured = !_isObscured;
                             });
                           },
-                          // enabledBorder: OutlineInputBorder(
-                          //   borderRadius: BorderRadius.circular(10.0),
-                          // ),
                         ),
-                        // enabledBorder: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(10.0),
-                        // ),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -158,15 +152,15 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                     child: isLoading
-                        ? const CircularProgressIndicator()
-                        : InkWell(
+                    ? const CircularProgressIndicator()
+                    : InkWell(
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           setState(() {
                             isLoading = true;
                           });
                           //auth
-                          pLogin();
+                          sLogin();
                         }
                       },
                       child: SizedBox(
@@ -219,8 +213,10 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
                         ),
                       ),
                     ],
-                  )
-                ]))),
+                  )]
+                )
+            )
+        ),
       ),
     );
   }

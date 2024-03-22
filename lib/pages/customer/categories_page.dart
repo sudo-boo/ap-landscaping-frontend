@@ -1,5 +1,5 @@
 import 'package:ap_landscaping/pages/customer/my_services_page.dart';
-import 'package:ap_landscaping/pages/customer/profile_page.dart';
+import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/customer_category_page_card.dart';

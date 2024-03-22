@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
 // import 'package:ap_landscaping/pages/provider/my_services_page.dart';
-// import 'package:ap_landscaping/pages/provider/providerHome.dart';
+// import 'package:ap_landscaping/pages/provider/provider_home.dart';
 // import 'package:ap_landscaping/pages/provider/update_profile_info.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -316,7 +316,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
         color: Colors.white,
         child: Stack(
           alignment: Alignment.topCenter,
-          clipBehavior: Clip.none, // Allows the child to overflow the stack
+          clipBehavior: Clip.none,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -325,12 +325,14 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                   icon: Image.asset('lib/assets/images/homeIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SuperUserPage(
-                                token: widget.token,
-                                superuserId: widget.superuserId)));
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => SuperUserPage(
+                          token: widget.token,
+                          superuserId: widget.superuserId)
+                      ),
+                        (Route<dynamic> route) => false,
+                    );
                   },
                   // onPressed: () => _onItemTapped(0),
                 ),

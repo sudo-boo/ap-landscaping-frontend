@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/provider/my_services_page.dart';
-import 'package:ap_landscaping/pages/provider/profile_page.dart';
+import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 
 import 'crew_page.dart';
 
