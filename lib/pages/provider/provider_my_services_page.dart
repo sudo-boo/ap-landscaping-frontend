@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ap_landscaping/pages/provider/provider_order_details_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
+import 'package:ap_landscaping/utilities/provider_services_card.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
@@ -150,13 +151,10 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
         },
         body: json.encode({'action': action, 'orderId' : orderId}),
       );
-
       if (response.statusCode == 200) {
-        print(
-            'Order ${action == 'accept' ? 'accepted' : 'declined'} successfully');
+        print('Order ${action == 'accept' ? 'accepted' : 'declined'} successfully');
       } else {
-        print(
-            'Failed to ${action == 'accept' ? 'accept' : 'decline'} order. Status Code: ${response.statusCode}');
+        print('Failed to ${action == 'accept' ? 'accept' : 'decline'} order. Status Code: ${response.statusCode}');
       }
     } catch (error) {
       print('Error accepting/declining order: $error');
@@ -181,20 +179,6 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
               height: 0,
             ),
           ),
-          // leading: IconButton(
-          //     icon: const Image(
-          //       image: AssetImage('lib/assets/images/backIcon.png'),
-          //     ),
-          //     onPressed: () {
-          //     // Navigator.pop(context);
-          //     Navigator.pushReplacement(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => providerPage(
-          //             token: widget.token,
-          //             providerId: widget.providerId)));
-          //     },
-          // ),
           actions: <Widget>[
             IconButton(
               icon: const Image(
@@ -276,7 +260,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                                   if (!order!.isAcceptedByProvider) {
                                     statusText = 'Not Accepted Yet';
                                     statusColor = Colors.orange;
-                                  } else if (order!.isCancelled) {
+                                  } else if (order.isCancelled) {
                                     statusText = 'Cancelled';
                                     statusColor = const Color(0xFFEA2F2F);
                                   } else if (order.isFinished) {
@@ -287,603 +271,27 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                                     statusColor = Colors.orange;
                                   }
                                   if (order.isAcceptedByProvider) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Stack(children: [
-                                        Card(
-                                          color: const Color(0xFFCEF29B),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Column(
-                                              children: [
-                                                Align(
-                                                  alignment:
-                                                  Alignment.centerLeft,
-                                                  child: Text(
-                                                    order.serviceType,
-                                                    // textAlign: TextAlign.left,
-                                                    style: const TextStyle(
-                                                      color: Color(0xFF1C1F34),
-                                                      fontSize: 24,
-                                                      fontFamily: 'Inter',
-                                                      fontWeight:
-                                                      FontWeight.w600,
-                                                      height: 0,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Container(
-                                                  padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      24.0,
-                                                      40.0,
-                                                      24.0,
-                                                      24.0),
-                                                  decoration: ShapeDecoration(
-                                                    color: Colors.white,
-                                                    shape:
-                                                    RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                                                    ),
-                                                  ),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Date',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order!.date,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Container(
-                                                        width: double.maxFinite,
-                                                        height: 1,
-                                                        decoration:
-                                                        ShapeDecoration(
-                                                          color: const Color(
-                                                              0xFF3E363F),
-                                                          shape:
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                12),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Time',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order.time,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Container(
-                                                        width: double.maxFinite,
-                                                        height: 1,
-                                                        decoration:
-                                                        ShapeDecoration(
-                                                          color: const Color(
-                                                              0xFF3E363F),
-                                                          shape:
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                12),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Customer',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order.customerName,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Container(
-                                                        width: double.maxFinite,
-                                                        height: 1,
-                                                        decoration:
-                                                        ShapeDecoration(
-                                                          color: const Color(
-                                                              0xFF3E363F),
-                                                          shape:
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                12),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Payment mode',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order.providerId!,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                        children: [
-                                                          ElevatedButton(
-                                                            onPressed: () {
-                                                              Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                      ProviderOrderDetailsPage(
-                                                                        token: widget
-                                                                            .token,
-                                                                        providerId:
-                                                                        widget
-                                                                            .providerId,
-                                                                        orderId:
-                                                                        order
-                                                                            .id,
-                                                                      ),
-                                                                ),
-                                                              );
-                                                            },
-                                                            style:
-                                                            ElevatedButton
-                                                                .styleFrom(
-                                                              backgroundColor:
-                                                              Colors.green[
-                                                              900],
-                                                            ),
-                                                            child: const Text(
-                                                              'View Details',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 69,
-                                          left: 30,
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 4),
-                                            decoration: BoxDecoration(
-                                              color: statusColor,
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                            child: Text(
-                                              statusText,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                                fontFamily: 'Inter',
-                                                fontWeight: FontWeight.w600,
-                                                height: 0,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
+                                    return ProviderServicesCard(
+                                        token: widget.token,
+                                        providerId: widget.providerId,
+                                        order: order,
+                                        statusText: statusText,
+                                        statusColor: statusColor
                                     );
                                   } else {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Stack(children: [
-                                        Card(
-                                          color: const Color(0xFFCEF29B),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Column(
-                                              children: [
-                                                Align(
-                                                  alignment:
-                                                  Alignment.centerLeft,
-                                                  child: Text(
-                                                    order.serviceType,
-                                                    // textAlign: TextAlign.left,
-                                                    style: const TextStyle(
-                                                      color: Color(0xFF1C1F34),
-                                                      fontSize: 24,
-                                                      fontFamily: 'Inter',
-                                                      fontWeight:
-                                                      FontWeight.w600,
-                                                      height: 0,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Container(
-                                                  padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      24.0,
-                                                      40.0,
-                                                      24.0,
-                                                      24.0),
-                                                  decoration: ShapeDecoration(
-                                                    color: Colors.white,
-                                                    shape:
-                                                    RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                                                    ),
-                                                  ),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Date',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order!.date,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Container(
-                                                        width: double.maxFinite,
-                                                        height: 1,
-                                                        decoration:
-                                                        ShapeDecoration(
-                                                          color: const Color(
-                                                              0xFF3E363F),
-                                                          shape:
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                12),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Time',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order.time,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Container(
-                                                        width: double.maxFinite,
-                                                        height: 1,
-                                                        decoration:
-                                                        ShapeDecoration(
-                                                          color: const Color(
-                                                              0xFF3E363F),
-                                                          shape:
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                12),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Customer',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order.customerName,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Container(
-                                                        width: double.maxFinite,
-                                                        height: 1,
-                                                        decoration:
-                                                        ShapeDecoration(
-                                                          color: const Color(
-                                                              0xFF3E363F),
-                                                          shape:
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                12),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                        children: [
-                                                          const Text(
-                                                            'Payment mode',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF1C1F34),
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                              'Inter',
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                              height: 0,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            order.providerId!,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                        children: [
-                                                          ElevatedButton(
-                                                            onPressed: () {
-                                                              acceptOrDeclineOrder(
-                                                                  order.id,
-                                                                  'accept');
-                                                            },
-                                                            style:
-                                                            ElevatedButton
-                                                                .styleFrom(
-                                                              backgroundColor:
-                                                              // const Color.fromRGBO(166, 135, 255, 1),
-                                                              Color
-                                                                  .fromARGB(
-                                                                  255,
-                                                                  144,
-                                                                  90,
-                                                                  219),
-                                                            ),
-                                                            child: const Text(
-                                                              'Accept',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          ElevatedButton(
-                                                            onPressed: () {
-                                                              acceptOrDeclineOrder(
-                                                                  order.id,
-                                                                  'decline');
-                                                            },
-                                                            style:
-                                                            ElevatedButton
-                                                                .styleFrom(
-                                                              backgroundColor:
-                                                              Colors.white,
-                                                            ),
-                                                            child: const Text(
-                                                              'Decline',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 69,
-                                          left: 30,
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 4),
-                                            decoration: BoxDecoration(
-                                              color: statusColor,
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                            ),
-                                            child: Text(
-                                              statusText,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                                fontFamily: 'Inter',
-                                                fontWeight: FontWeight.w600,
-                                                height: 0,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
+                                    return ProviderServicesCard(
+                                      token: widget.token,
+                                      providerId: widget.providerId,
+                                      order: order,
+                                      statusText: statusText,
+                                      statusColor: statusColor,
+                                      isAccepted: false,
+                                      onPress1: (){
+                                        acceptOrDeclineOrder(order.id, 'accept');
+                                      },
+                                      onPress2: (){
+                                        acceptOrDeclineOrder(order.id, 'decline');
+                                      },
                                     );
                                   }
                                 },
@@ -900,8 +308,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                   child: Center(
                     child: RefreshIndicator(
                       onRefresh: () async {
-                        await Future.delayed(
-                            Duration(seconds: 1)); // Simulating a delay
+                        await Future.delayed(const Duration(seconds: 1)); // Simulating a delay
                         setState(() {
                           pastorders = providerPreviousOrdersList();
                         });
@@ -938,278 +345,12 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                                     statusText = 'Pending';
                                     statusColor = Colors.orange;
                                   }
-                                  return Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Stack(children: [
-                                      Card(
-                                        color: const Color(0xFFCEF29B),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Column(
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  order.serviceType,
-                                                  // textAlign: TextAlign.left,
-                                                  style: const TextStyle(
-                                                    color: Color(0xFF1C1F34),
-                                                    fontSize: 24,
-                                                    fontFamily: 'Inter',
-                                                    fontWeight: FontWeight.w600,
-                                                    height: 0,
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Container(
-                                                padding:
-                                                const EdgeInsets.fromLTRB(
-                                                    24.0, 40.0, 24.0, 24.0),
-                                                decoration: ShapeDecoration(
-                                                  color: Colors.white,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        10),
-                                                  ),
-                                                ),
-                                                child: Column(
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                      children: [
-                                                        const Text(
-                                                          'Date',
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF1C1F34),
-                                                            fontSize: 14,
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                            FontWeight.w600,
-                                                            height: 0,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          order!.date,
-                                                          textAlign:
-                                                          TextAlign.center,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Container(
-                                                      width: double.maxFinite,
-                                                      height: 1,
-                                                      decoration:
-                                                      ShapeDecoration(
-                                                        color: const Color(
-                                                            0xFF3E363F),
-                                                        shape:
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(12),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                      children: [
-                                                        const Text(
-                                                          'Time',
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF1C1F34),
-                                                            fontSize: 14,
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                            FontWeight.w600,
-                                                            height: 0,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          order.time,
-                                                          textAlign:
-                                                          TextAlign.center,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Container(
-                                                      width: double.maxFinite,
-                                                      height: 1,
-                                                      decoration:
-                                                      ShapeDecoration(
-                                                        color: const Color(
-                                                            0xFF3E363F),
-                                                        shape:
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(12),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                      children: [
-                                                        const Text(
-                                                          'Customer',
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF1C1F34),
-                                                            fontSize: 14,
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                            FontWeight.w600,
-                                                            height: 0,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          order.customerName,
-                                                          textAlign:
-                                                          TextAlign.center,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Container(
-                                                      width: double.maxFinite,
-                                                      height: 1,
-                                                      decoration:
-                                                      ShapeDecoration(
-                                                        color: const Color(
-                                                            0xFF3E363F),
-                                                        shape:
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(12),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                      children: [
-                                                        const Text(
-                                                          'Payment mode',
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF1C1F34),
-                                                            fontSize: 14,
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                            FontWeight.w600,
-                                                            height: 0,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          order.providerId!,
-                                                          textAlign:
-                                                          TextAlign.center,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 8,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                    ProviderOrderDetailsPage(
-                                                                      token: widget
-                                                                          .token,
-                                                                      providerId: widget
-                                                                          .providerId,
-                                                                      orderId:
-                                                                      order.id,
-                                                                    ),
-                                                              ),
-                                                            );
-                                                          },
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            backgroundColor:
-                                                            Colors
-                                                                .green[900],
-                                                          ),
-                                                          child: const Text(
-                                                            'View Details',
-                                                            style: TextStyle(
-                                                              color:
-                                                              Colors.white,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 69,
-                                        left: 30,
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 4),
-                                          decoration: BoxDecoration(
-                                            color: statusColor,
-                                            borderRadius:
-                                            BorderRadius.circular(10),
-                                          ),
-                                          child: Text(
-                                            statusText,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w600,
-                                              height: 0,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
+                                  return ProviderServicesCard(
+                                      token: widget.token,
+                                      providerId: widget.providerId,
+                                      order: order,
+                                      statusText: statusText,
+                                      statusColor: statusColor
                                   );
                                 },
                               );
@@ -1234,17 +375,20 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   IconButton(
-                    icon: Image.asset('lib/assets/images/homeIcon.png',
-                        height: 45, width: 45),
+                    icon: Image.asset(
+                      'lib/assets/images/homeIcon.png',
+                      height: 45, width: 45
+                    ),
                     onPressed: () {
-                      // Navigator.pop(context);
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProviderPage(
-                                  token: widget.token,
-                                  providerId: widget.providerId)));
-                    },
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProviderPage(
+                            token: widget.token,
+                            providerId: widget.providerId
+                          )
+                        )
+                      );},
                   ),
                   IconButton(
                       icon: Image.asset(
