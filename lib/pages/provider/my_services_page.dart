@@ -497,7 +497,7 @@ class _myServicesPageState extends State<myServicesPage> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            order.providerId,
+                                                            order.providerId!,
                                                             textAlign: TextAlign
                                                                 .center,
                                                           ),
@@ -791,7 +791,7 @@ class _myServicesPageState extends State<myServicesPage> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            order.providerId,
+                                                            order.providerId!,
                                                             textAlign: TextAlign
                                                                 .center,
                                                           ),
@@ -1131,7 +1131,7 @@ class _myServicesPageState extends State<myServicesPage> {
                                                           ),
                                                         ),
                                                         Text(
-                                                          order.providerId,
+                                                          order.providerId!,
                                                           textAlign:
                                                           TextAlign.center,
                                                         ),

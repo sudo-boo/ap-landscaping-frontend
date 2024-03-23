@@ -54,7 +54,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
           order_info.time = data['order']['time'] ?? '';
           order_info.expectationNote = data['order']['expectationNote'] ?? '';
           order_info.customerId = data['order']['customerId'] ?? '';
-          order_info.providerId = data['order']['providerId'] ?? '';
+          order_info.providerId = data['order']['providerId'];
           order_info.isFinished = data['order']['isFinished'] ?? '';
           order_info.isCancelled = data['order']['isCancelled'] ?? '';
           order_info.id = data['order']['id'] ?? '';
@@ -73,46 +73,47 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
   Future<void> getProviderDetailsById() async {
     try {
-      final response = await http.get(
-        Uri.parse('$providerDetailsbyId${order_info.providerId}'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': '${widget.token}',
-        },
-      );
-      if (response.statusCode == 200) {
-        final dynamic data = json.decode(response.body);
-        setState(() {
-          provider_info.username = data['provider']['username'] ?? '';
-          provider_info.email = data['provider']['email'] ?? '';
-          provider_info.mobile_number = data['provider']['mobilenumber'] ?? '';
-          // provider_info.password = data['provider']['username'] ?? '';
-          provider_info.address = data['provider']['address'] ?? '';
-          // provider_info.card_details = data['provider']['username'] ?? '';
-          // provider_info.cvv = data['provider']['username'] ?? '';
-          // provider_info.paypal_id = data['provider']['username'] ?? '';
-          // provider_info.aec_transfer = data['provider']['username'] ?? '';
-          // provider_info.card_type = data['provider']['username'] ?? '';
-          // provider_info.card_holders_name = data['provider']['username'] ?? '';
-          // provider_info.card_number = data['provider']['username'] ?? '';
-          provider_info.qualifications = data['provider']['username'] ?? '';
-          provider_info.years_of_experience =
-              data['provider']['yearsofexperience'] ?? 0;
-          provider_info.bio = data['provider']['bio'] ?? '';
-          // provider_info.bank_name = data['provider']['username'] ?? '';
-          // provider_info.account_nummber = data['provider']['username'] ?? '';
-          // provider_info.services = data['provider']['services'] ?? '';
-          provider_info.google_id = data['provider']['googleId'] ?? '';
-          // isLoading = false;
-        });
-      } else if (response.statusCode == 404) {
-        // return {'error': 'Order not found'};
+      if (order_info.providerId != null) {
+        final response = await http.get(
+          Uri.parse('$providerDetailsbyId${order_info.providerId}'),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': '${widget.token}',
+          },
+        );
+        if (response.statusCode == 200) {
+          final dynamic data = json.decode(response.body);
+          setState(() {
+            provider_info.username = data['provider']['username'] ?? 'Not Assigned Yet!!';
+            provider_info.email = data['provider']['email'] ?? 'NA';
+            provider_info.mobile_number = data['provider']['mobilenumber'] ?? 'NA';
+            provider_info.address = data['provider']['address'] ?? 'NA';
+            provider_info.qualifications = data['provider']['qualifications'] ?? 'NA';
+            provider_info.years_of_experience = data['provider']['yearsofexperience'] ?? 0;
+            provider_info.bio = data['provider']['bio'] ?? 'NA';
+            provider_info.google_id = data['provider']['googleId'] ?? 'NA';
+          });
+        } else if (response.statusCode == 404) {
+          // Handle 404 error
+        } else {
+          // Handle other errors
+        }
       } else {
-        // return {'error': 'Failed to fetch order'};
+        // Initialize to 'Not Assigned Yet!!' if providerId is null
+        setState(() {
+          provider_info.username = 'Not Assigned Yet!!';
+          provider_info.email = 'NA';
+          provider_info.mobile_number = 'NA';
+          provider_info.address = 'NA';
+          provider_info.qualifications = 'NA';
+          provider_info.years_of_experience = 0;
+          provider_info.bio = 'NA';
+          provider_info.google_id = 'NA';
+        });
       }
     } catch (e) {
       print('Error getting order: $e');
-      // return {'error': 'Failed to fetch order'};
+      // Handle error
     }
   }
 

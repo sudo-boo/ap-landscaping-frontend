@@ -7,7 +7,7 @@ class orderInfo {
   String time;
   String expectationNote;
   String customerId;
-  String providerId;
+  String? providerId;
   bool isFinished = false;
   bool isCancelled = false;
   String id;
