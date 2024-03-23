@@ -109,6 +109,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       json.decode(response.body)['upcomingOrders'];
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
+        print(order['providerId']);
         if(order['providerId'] != null){
           final providerDetails =
           await getProviderDetailsById(order['providerId']);
@@ -144,6 +145,21 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
           ));
         }
       }
+      for (var order in orders) {
+        print("Order ID: ${order.id}");
+        print("Service Type: ${order.serviceType}");
+        print("Address: ${order.address}");
+        print("Date: ${order.date}");
+        print("Time: ${order.time}");
+        print("Expectation Note: ${order.expectationNote}");
+        print("Customer ID: ${order.customerId}");
+        print("Provider ID: ${order.providerId}");
+        print("Is Finished: ${order.isFinished}");
+        print("Is Cancelled: ${order.isCancelled}");
+        print("Provider Name: ${order.providerName}");
+        // Print other details as needed
+        print("-----------------------------------");
+      }
       // print();
       return orders;
     } else {
@@ -154,7 +170,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
   Future<providerInfo> getProviderDetailsById(String provider_id) async {
     try {
       final response = await http.get(
-        Uri.parse('$providerDetailsbyId${provider_id}'),
+        Uri.parse('$providerDetailsbyId$provider_id'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': '${widget.token}',
@@ -258,7 +274,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
             ]),
             Expanded(
               child: TabBarView(children: [
-                Container(
+                SizedBox(
                   // color: Colors.green[100],
                   width: double.infinity,
                   child: Center(
@@ -267,7 +283,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                         // Implement your refresh logic here.
                         // For example, you can call providerPreviousOrdersList() again.
                         await Future.delayed(
-                            Duration(seconds: 1)); // Simulating a delay
+                            const Duration(seconds: 1)); // Simulating a delay
                         setState(() {
                           futureorders = customerUpcomingOrdersList();
                         });
@@ -320,7 +336,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Center(
                     child: RefreshIndicator(
@@ -328,7 +344,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                         // Implement your refresh logic here.
                         // For example, you can call providerPreviousOrdersList() again.
                         await Future.delayed(
-                            Duration(seconds: 1)); // Simulating a delay
+                            const Duration(seconds: 1)); // Simulating a delay
                         setState(() {
                           pastorders = customerPreviousOrdersList();
                         });

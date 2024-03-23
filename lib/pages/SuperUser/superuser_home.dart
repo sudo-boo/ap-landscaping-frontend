@@ -94,31 +94,31 @@ class _SuperUserPageState extends State<SuperUserPage> {
               ),
             ),
           ),
-      Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SuperUserStatsCard(value: "58", title: "Total Bookings", cardColor: Color(0xFFFFE9E9)),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.03),
-                  SuperUserStatsCard(value: "50", title: "Total Services", cardColor: Color(0xFFFDFABE)),
+                  Row(
+                    children: [
+                      SuperUserStatsCard(value: "58", title: "Total Bookings", cardColor: Color(0xFFFFE9E9)),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+                      SuperUserStatsCard(value: "50", title: "Total Services", cardColor: Color(0xFFFDFABE)),
+                    ],
+                  ),
+                  SizedBox(height: getDims.fractionHeight(0.01)),
+                  Row(
+                    children: [
+                      SuperUserStatsCard(value: "5", title: "Crew", cardColor: Color(0xFFE5FFDA)),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+                      SuperUserStatsCard(value: "\$7657", title: "Total Earning", cardColor: Color(0xFFE5DBFF)),
+                    ],
+                  ),
                 ],
               ),
-              SizedBox(height: getDims.fractionHeight(0.01)),
-              Row(
-                children: [
-                  SuperUserStatsCard(value: "5", title: "Crew", cardColor: Color(0xFFE5FFDA)),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.03),
-                  SuperUserStatsCard(value: "\$7657", title: "Total Earning", cardColor: Color(0xFFE5DBFF)),
-                ],
-              ),
-            ],
-          ),
-        ),
-      )
+            ),
+          )
         ],
       ),
       bottomNavigationBar: BottomAppBar(

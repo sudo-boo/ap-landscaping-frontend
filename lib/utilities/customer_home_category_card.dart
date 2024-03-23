@@ -28,7 +28,7 @@ class HomePageCategoryCard extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => SchedulingPage(
-              serviceName: 'Leaf Removal',
+              serviceName: serviceName,
               token: token,
               customerId: customerId
           ),

@@ -12,7 +12,7 @@ class orderInfo {
   bool isCancelled = false;
   String id;
   String customerName;
-  String providerName;
+  String? providerName;
   bool isAcceptedByProvider;
 
   orderInfo(
@@ -27,7 +27,7 @@ class orderInfo {
       this.isCancelled = false,
       this.id = '',
       this.customerName = '',
-      this.providerName = '',
+      this.providerName,
       this.isAcceptedByProvider = false});
 
   Map<String, dynamic> toJson() => {
