@@ -7,7 +7,7 @@ import 'package:ap_landscaping/pages/my_home_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'pages/customer/customer_login/customerlogin.dart';
 import 'pages/provider/provider_login/providerlogin.dart';
-import 'pages/customer/customer_signup/customersignup.dart';
+import 'pages/customer/customer_signup/customer_signup.dart';
 import 'pages/provider/provider_signup/providersignup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
