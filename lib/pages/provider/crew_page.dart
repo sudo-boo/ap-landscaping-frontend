@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import '../../config.dart';
 import '../../models/crewinfo.dart';
-import 'add_crew_page.dart';
+import 'provider_add_crew_page.dart';
 
 class crewPage extends StatefulWidget {
   final token;
@@ -96,7 +96,7 @@ class _crewPageState extends State<crewPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => addCrewPage(
+                    builder: (context) => ProviderAddCrewPage(
                         token: widget.token, providerId: widget.providerId),
                   ),
                 );

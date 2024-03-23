@@ -7,18 +7,18 @@ import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 
-class OrderDetailsPage extends StatefulWidget {
+class CustomerOrderDetailsPage extends StatefulWidget {
   final token;
   final customerId;
   final orderId;
-  const OrderDetailsPage({Key? key, this.token, this.customerId, this.orderId})
+  const CustomerOrderDetailsPage({Key? key, this.token, this.customerId, this.orderId})
       : super(key: key);
 
   @override
-  _OrderDetailsPageState createState() => _OrderDetailsPageState();
+  _CustomerOrderDetailsPageState createState() => _CustomerOrderDetailsPageState();
 }
 
-class _OrderDetailsPageState extends State<OrderDetailsPage> {
+class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
   bool isLoading = true;
   orderInfo order_info = orderInfo();
   providerInfo provider_info = providerInfo();

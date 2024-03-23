@@ -1,6 +1,6 @@
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import '../pages/customer/scheduling_page.dart';
+import '../pages/customer/customer_scheduling_page.dart';
 
 
 class HomePageCategoryCard extends StatelessWidget {
@@ -29,7 +29,7 @@ class HomePageCategoryCard extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SchedulingPage(
+          builder: (context) => CustomerSchedulingPage(
               serviceName: serviceName,
               token: token,
               customerId: customerId

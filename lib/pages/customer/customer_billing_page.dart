@@ -5,19 +5,19 @@ import 'package:ap_landscaping/models/orderinfo.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class BillingPage extends StatefulWidget {
+class CustomerBillingPage extends StatefulWidget {
   final token;
   final customerId;
   final orderInfo order_info;
-  const BillingPage(
+  const CustomerBillingPage(
       {Key? key, this.token, this.customerId, required this.order_info})
       : super(key: key);
 
   @override
-  _BillingPageState createState() => _BillingPageState();
+  _CustomerBillingPageState createState() => _CustomerBillingPageState();
 }
 
-class _BillingPageState extends State<BillingPage> {
+class _CustomerBillingPageState extends State<CustomerBillingPage> {
   void create_Order() async {
     var orderBody = {
       "serviceType": widget.order_info.serviceType,

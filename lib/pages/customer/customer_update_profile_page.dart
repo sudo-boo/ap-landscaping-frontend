@@ -5,18 +5,18 @@ import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/customerinfo.dart';
 
 
-class updateprofileInfoPage extends StatefulWidget {
+class CustomerUpdateProfileInfoPage extends StatefulWidget {
   final token;
   final customerId;
-  const updateprofileInfoPage(
+  const CustomerUpdateProfileInfoPage(
       {required this.token, required this.customerId, Key? key})
       : super(key: key);
 
   @override
-  State<updateprofileInfoPage> createState() => _updateprofileInfoPageState();
+  State<CustomerUpdateProfileInfoPage> createState() => _CustomerUpdateProfileInfoPageState();
 }
 
-class _updateprofileInfoPageState extends State<updateprofileInfoPage> {
+class _CustomerUpdateProfileInfoPageState extends State<CustomerUpdateProfileInfoPage> {
   customerInfo customer_info = customerInfo();
   bool isLoading = true;
   final _formKey = GlobalKey<FormState>();

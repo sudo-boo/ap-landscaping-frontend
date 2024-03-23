@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ap_landscaping/pages/provider/order_details_page.dart';
+import 'package:ap_landscaping/pages/provider/provider_order_details_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +10,17 @@ import '../../models/customerinfo.dart';
 import '../../models/orderinfo.dart';
 
 
-class myServicesPage extends StatefulWidget {
+class ProviderMyServicesPage extends StatefulWidget {
   final token;
   final providerId;
-  const myServicesPage(
+  const ProviderMyServicesPage(
       {required this.token, required this.providerId, Key? key})
       : super(key: key);
   @override
-  State<myServicesPage> createState() => _myServicesPageState();
+  State<ProviderMyServicesPage> createState() => _ProviderMyServicesPageState();
 }
 
-class _myServicesPageState extends State<myServicesPage> {
+class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
   late Future<List<orderInfo>> pastorders;
   late Future<List<orderInfo>> futureorders;
 
@@ -518,7 +518,7 @@ class _myServicesPageState extends State<myServicesPage> {
                                                                 MaterialPageRoute(
                                                                   builder:
                                                                       (context) =>
-                                                                      OrderDetailsPage(
+                                                                      ProviderOrderDetailsPage(
                                                                         token: widget
                                                                             .token,
                                                                         providerId:
@@ -1152,7 +1152,7 @@ class _myServicesPageState extends State<myServicesPage> {
                                                               MaterialPageRoute(
                                                                 builder:
                                                                     (context) =>
-                                                                    OrderDetailsPage(
+                                                                    ProviderOrderDetailsPage(
                                                                       token: widget
                                                                           .token,
                                                                       providerId: widget
@@ -1267,7 +1267,7 @@ class _myServicesPageState extends State<myServicesPage> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => profilePage(
+                          builder: (context) => ProviderProfilePage(
                               token: widget.token,
                               providerId: widget.providerId),
                         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ap_landscaping/pages/customer/order_details.dart';
+import 'package:ap_landscaping/pages/customer/customer_order_details.dart';
 
 class CustomerMyServicesCard extends StatefulWidget {
   final order;
@@ -241,7 +241,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      OrderDetailsPage(
+                                      CustomerOrderDetailsPage(
                                         token: widget.token,
                                         customerId: widget.customerId,
                                         orderId: widget.order.id,

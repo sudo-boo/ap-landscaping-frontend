@@ -1,6 +1,6 @@
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:ap_landscaping/pages/provider/my_services_page.dart';
+import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 
 import '../../utilities/homepage_stats_card.dart';
@@ -183,7 +183,7 @@ class _ProviderPageState extends State<ProviderPage> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => myServicesPage(
+                              builder: (context) => ProviderMyServicesPage(
                                   token: widget.token,
                                   providerId: widget.providerId)));
                     }),
@@ -201,7 +201,7 @@ class _ProviderPageState extends State<ProviderPage> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => profilePage(
+                        builder: (context) => ProviderProfilePage(
                             token: widget.token, providerId: widget.providerId),
                       ),
                     );

@@ -4,18 +4,18 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 
-class CancellationPage extends StatefulWidget {
+class CustomerOrderCancellationPage extends StatefulWidget {
   final token;
   final customerId;
   final orderId;
-  const CancellationPage({Key? key, this.token, this.customerId, this.orderId})
+  const CustomerOrderCancellationPage({Key? key, this.token, this.customerId, this.orderId})
       : super(key: key);
 
   @override
-  _CancellationPageState createState() => _CancellationPageState();
+  _CustomerOrderCancellationPageState createState() => _CustomerOrderCancellationPageState();
 }
 
-class _CancellationPageState extends State<CancellationPage> {
+class _CustomerOrderCancellationPageState extends State<CustomerOrderCancellationPage> {
   TextEditingController reasonController = TextEditingController();
   TextEditingController additionalInfo = TextEditingController();
   Future<void> cancelOrderFunc() async {

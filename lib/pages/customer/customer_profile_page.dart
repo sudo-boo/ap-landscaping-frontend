@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
-import 'package:ap_landscaping/pages/customer/update_profile_page.dart';
+import 'package:ap_landscaping/pages/customer/customer_update_profile_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -240,7 +240,7 @@ class _profilePageState extends State<profilePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => updateprofileInfoPage(
+                                  builder: (context) => CustomerUpdateProfileInfoPage(
                                       token: widget.token,
                                       customerId: widget.customerId)));
                         },

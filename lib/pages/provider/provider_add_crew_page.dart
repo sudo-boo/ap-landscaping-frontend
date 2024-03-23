@@ -4,16 +4,16 @@ import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/crewinfo.dart';
 
-class addCrewPage extends StatefulWidget {
+class ProviderAddCrewPage extends StatefulWidget {
   final token;
   final providerId;
 
-  const addCrewPage({super.key, this.token, this.providerId});
+  const ProviderAddCrewPage({super.key, this.token, this.providerId});
   @override
-  State<addCrewPage> createState() => _addCrewPageState();
+  State<ProviderAddCrewPage> createState() => _ProviderAddCrewPageState();
 }
 
-class _addCrewPageState extends State<addCrewPage> {
+class _ProviderAddCrewPageState extends State<ProviderAddCrewPage> {
   crewInfo crew_info = crewInfo();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Future<void> createCrew() async {

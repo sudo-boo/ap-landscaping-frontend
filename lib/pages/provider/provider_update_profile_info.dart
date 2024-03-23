@@ -5,18 +5,18 @@ import '../../models/providerinfo.dart';
 import 'dart:convert';
 
 
-class updateprofileInfoPage extends StatefulWidget {
+class ProviderUpdateProfileInfoPage extends StatefulWidget {
   final token;
   final providerId;
-  const updateprofileInfoPage(
+  const ProviderUpdateProfileInfoPage(
       {required this.token, required this.providerId, Key? key})
       : super(key: key);
 
   @override
-  State<updateprofileInfoPage> createState() => _updateprofileInfoPageState();
+  State<ProviderUpdateProfileInfoPage> createState() => _ProviderUpdateProfileInfoPageState();
 }
 
-class _updateprofileInfoPageState extends State<updateprofileInfoPage> {
+class _ProviderUpdateProfileInfoPageState extends State<ProviderUpdateProfileInfoPage> {
   providerInfo provider_info = providerInfo();
   bool isLoading = true;
   final _formKey = GlobalKey<FormState>();

@@ -1,26 +1,26 @@
 import 'dart:convert';
 
 import 'package:ap_landscaping/pages/my_home_page.dart';
-import 'package:ap_landscaping/pages/provider/my_services_page.dart';
+import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
-import 'package:ap_landscaping/pages/provider/update_profile_info.dart';
+import 'package:ap_landscaping/pages/provider/provider_update_profile_info.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config.dart';
 
-class profilePage extends StatefulWidget {
+class ProviderProfilePage extends StatefulWidget {
   final token;
   final providerId;
-  const profilePage({required this.token, required this.providerId, Key? key})
+  const ProviderProfilePage({required this.token, required this.providerId, Key? key})
       : super(key: key);
 
   @override
-  State<profilePage> createState() => _profilePageState();
+  State<ProviderProfilePage> createState() => _ProviderProfilePageState();
 }
 
-class _profilePageState extends State<profilePage> {
+class _ProviderProfilePageState extends State<ProviderProfilePage> {
   void showCustomSignOutBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -241,7 +241,7 @@ class _profilePageState extends State<profilePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => updateprofileInfoPage(
+                                  builder: (context) => ProviderUpdateProfileInfoPage(
                                       token: widget.token,
                                       providerId: widget.providerId)));
                         },
@@ -349,7 +349,7 @@ class _profilePageState extends State<profilePage> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => myServicesPage(
+                              builder: (context) => ProviderMyServicesPage(
                                   token: widget.token,
                                   providerId: widget.providerId)));
                     }),

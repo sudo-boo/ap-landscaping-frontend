@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pages/customer/scheduling_page.dart';
+import '../pages/customer/customer_scheduling_page.dart';
 
 class CategoryPageCard extends StatelessWidget {
   final String serviceName;
@@ -26,7 +26,7 @@ class CategoryPageCard extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SchedulingPage(
+          builder: (context) => CustomerSchedulingPage(
               serviceName: serviceName,
               token: token,
               customerId: customerId

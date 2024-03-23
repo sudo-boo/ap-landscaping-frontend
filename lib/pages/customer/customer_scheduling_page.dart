@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'package:intl/intl.dart';
-import 'billing_page.dart';
+import 'customer_billing_page.dart';
 
-class SchedulingPage extends StatefulWidget {
+class CustomerSchedulingPage extends StatefulWidget {
   final token;
   final customerId;
   final String serviceName;
 
-  const SchedulingPage(
+  const CustomerSchedulingPage(
       {Key? key, required this.serviceName, this.token, this.customerId})
       : super(key: key);
 
   @override
-  _SchedulingPageState createState() => _SchedulingPageState();
+  _CustomerSchedulingPageState createState() => _CustomerSchedulingPageState();
 }
 
-class _SchedulingPageState extends State<SchedulingPage> {
+class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
   orderInfo order_info = orderInfo();
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -329,7 +329,7 @@ class _SchedulingPageState extends State<SchedulingPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BillingPage(
+                          builder: (context) => CustomerBillingPage(
                             token: widget.token,
                             customerId: widget.customerId,
                             order_info: order_info,

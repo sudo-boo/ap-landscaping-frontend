@@ -7,18 +7,18 @@ import '../../models/customerinfo.dart';
 import '../../models/orderinfo.dart';
 
 
-class OrderDetailsPage extends StatefulWidget {
+class ProviderOrderDetailsPage extends StatefulWidget {
   final token;
   final providerId;
   final orderId;
-  const OrderDetailsPage({Key? key, this.token, this.providerId, this.orderId})
+  const ProviderOrderDetailsPage({Key? key, this.token, this.providerId, this.orderId})
       : super(key: key);
 
   @override
-  _OrderDetailsPageState createState() => _OrderDetailsPageState();
+  _ProviderOrderDetailsPageState createState() => _ProviderOrderDetailsPageState();
 }
 
-class _OrderDetailsPageState extends State<OrderDetailsPage> {
+class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
   bool isLoading = true;
   orderInfo order_info = orderInfo();
   customerInfo customer_info = customerInfo();
