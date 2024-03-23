@@ -1,6 +1,6 @@
 import 'package:ap_landscaping/pages/SuperUser/superuser_profile_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
-import 'package:ap_landscaping/utilities/superuser_stats_card.dart';
+import 'package:ap_landscaping/utilities/homepage_stats_card.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -102,17 +102,17 @@ class _SuperUserPageState extends State<SuperUserPage> {
                 children: [
                   Row(
                     children: [
-                      SuperUserStatsCard(value: "58", title: "Total Bookings", cardColor: Color(0xFFFFE9E9)),
+                      StatsCard(value: "58", title: "Total Bookings", cardColor: Color(0xFFFFE9E9)),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.03),
-                      SuperUserStatsCard(value: "50", title: "Total Services", cardColor: Color(0xFFFDFABE)),
+                      StatsCard(value: "50", title: "Total Services", cardColor: Color(0xFFFDFABE)),
                     ],
                   ),
                   SizedBox(height: getDims.fractionHeight(0.01)),
                   Row(
                     children: [
-                      SuperUserStatsCard(value: "5", title: "Crew", cardColor: Color(0xFFE5FFDA)),
+                      StatsCard(value: "5", title: "Crew", cardColor: Color(0xFFE5FFDA)),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.03),
-                      SuperUserStatsCard(value: "\$7657", title: "Total Earning", cardColor: Color(0xFFE5DBFF)),
+                      StatsCard(value: "\$7657", title: "Total Earning", cardColor: Color(0xFFE5DBFF)),
                     ],
                   ),
                 ],

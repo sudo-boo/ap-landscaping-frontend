@@ -1241,7 +1241,7 @@ class _myServicesPageState extends State<myServicesPage> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => providerPage(
+                              builder: (context) => ProviderPage(
                                   token: widget.token,
                                   providerId: widget.providerId)));
                     },

@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         if (profileType == 'user') {
           homeWidget = customerPage(token: token, customerId: id);
         } else if (profileType == 'provider') {
-          homeWidget = providerPage(token: token, providerId: id);
+          homeWidget = ProviderPage(token: token, providerId: id);
         } else if(profileType == 'superuser'){
           homeWidget = SuperUserPage(token: token, superuserId: id);
         } else{

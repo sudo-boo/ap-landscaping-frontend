@@ -327,7 +327,7 @@ class _profilePageState extends State<profilePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => providerPage(
+                            builder: (context) => ProviderPage(
                                 token: widget.token,
                                 providerId: widget.providerId)));
                   },

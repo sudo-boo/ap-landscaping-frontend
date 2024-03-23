@@ -47,7 +47,7 @@ class _ProviderSignInState extends State<ProviderSignIn> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  providerPage(token: myToken, providerId: myProviderId)));
+                  ProviderPage(token: myToken, providerId: myProviderId)));
     } else {
       showDialog(
           context: context,
