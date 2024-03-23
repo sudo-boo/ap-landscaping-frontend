@@ -1,25 +1,19 @@
-import 'package:ap_landscaping/pages/provider/provider_signup/provider_qualifications_page.dart';
+import 'package:ap_landscaping/pages/provider/provider_signup/provider_payment_details.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 
-class ProviderSignUp extends StatefulWidget {
-  const ProviderSignUp({super.key});
+class QualificationsPage extends StatefulWidget {
+  final providerInfo provider_info;
+  QualificationsPage({super.key, required this.provider_info});
   @override
-  State<ProviderSignUp> createState() => _ProviderSignUpState();
+  _QualificationsPageState createState() => _QualificationsPageState();
 }
 
-class _ProviderSignUpState extends State<ProviderSignUp> {
+class _QualificationsPageState extends State<QualificationsPage> {
   final _formKey = GlobalKey<FormState>();
-  providerInfo provider_info = providerInfo();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isObscured1 = true;
-  bool _isObscured2 = true;
-  @override
-  void dispose() {
-    _passwordController.dispose();
-    super.dispose();
-  }
-
+  // List<String> Services = ['Apple', 'Banana', 'Grapes', 'Orange', 'Mango'];
+  // Modify this list with the actual list of services
+  List<String> selectedServices = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +22,7 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
         backgroundColor: const Color(0xFFBBE1C5),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () =>
-              Navigator.of(context).pushReplacementNamed('/providersignin'),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: Container(
@@ -41,10 +34,10 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
             child: Column(
               children: <Widget>[
                 const Image(
-                  image: AssetImage('lib/assets/images/signupPage1.png'),
+                  image: AssetImage('lib/assets/images/signupPage2.png'),
                 ),
                 const Text(
-                  'Hello There!',
+                  'Hola!!',
                   style: TextStyle(
                     color: Color(0xFF3E363F),
                     fontSize: 50,
@@ -58,81 +51,99 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                   padding: const EdgeInsets.fromLTRB(50, 50, 50, 0),
                   child: TextFormField(
                     decoration: const InputDecoration(
-                      labelText: 'Username',
+                      labelText: 'Address',
                       // enabledBorder: OutlineInputBorder(
                       //   borderRadius: BorderRadius.circular(10.0),
                       // ),
                     ),
-                    onSaved: (value) => provider_info.username = value ?? '',
+                    onSaved: (value) =>
+                    widget.provider_info.address = value ?? '',
                     validator: (value) =>
-                        value!.isEmpty ? 'Please enter a username' : null,
+                    value!.isEmpty ? 'Please enter an address' : null,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                   child: TextFormField(
                     decoration: const InputDecoration(
-                      labelText: 'Email address',
+                      labelText: 'Years of Service',
                       // enabledBorder: OutlineInputBorder(
                       //   borderRadius: BorderRadius.circular(10.0),
                       // ),
                     ),
-                    onSaved: (value) => provider_info.email = value ?? '',
-                    validator: (value) =>
-                        value!.isEmpty ? 'Please enter an email' : null,
+                    keyboardType: TextInputType.number,
+                    onSaved: (value) => widget.provider_info
+                        .years_of_experience = int.tryParse(value ?? '0') ?? 0,
+                    validator: (value) => value!.isEmpty
+                        ? 'Please enter your years of experience'
+                        : null,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
                   child: TextFormField(
-                    controller: _passwordController,
-                    obscureText: _isObscured1,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      suffixIcon: IconButton(
-                    icon: Icon(
-                      _isObscured1 ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isObscured1 = !_isObscured1;
-                      });
-                    },
-                  ),
+                    decoration: const InputDecoration(
+                      labelText: 'Qualification',
                       // enabledBorder: OutlineInputBorder(
                       //   borderRadius: BorderRadius.circular(10.0),
                       // ),
                     ),
-                    onSaved: (value) => provider_info.password = value ?? '',
-                    validator: (value) =>
-                        value!.isEmpty ? 'Please enter a password' : null,
+                    onSaved: (value) =>
+                    widget.provider_info.qualifications = value ?? '',
+                    validator: (value) => value!.isEmpty
+                        ? 'Please enter your Qualifications'
+                        : null,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
                   child: TextFormField(
-                    obscureText: _isObscured2,
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      suffixIcon: IconButton(
-                    icon: Icon(
-                      _isObscured2 ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isObscured2 = !_isObscured2;
-                      });
-                    },
-                  ),
+                    decoration: const InputDecoration(
+                      labelText: 'Mobile number',
                       // enabledBorder: OutlineInputBorder(
                       //   borderRadius: BorderRadius.circular(10.0),
                       // ),
                     ),
-                    validator: (value) => value != _passwordController.text
-                        ? 'Password does not match'
-                        : null,
+                    onSaved: (value) =>
+                    widget.provider_info.mobile_number = value ?? '',
+                    validator: (value) =>
+                    value!.isEmpty ? 'Please enter a mobile number' : null,
                   ),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                //   child: TextFormField(
+                //     decoration: const InputDecoration(
+                //       labelText: 'Bio',
+                //       // enabledBorder: OutlineInputBorder(
+                //       //   borderRadius: BorderRadius.circular(10.0),
+                //       // ),
+                //     ),
+                //     onSaved: (value) => widget.provider_info.bio = value ?? '',
+                //     validator: (value) =>
+                //         value!.isEmpty ? 'Let customers know you' : null,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.fromLTRB(30, 10, 30, 50),
+                //   child: Container(
+                //     decoration: BoxDecoration(
+                //       // border: Border.all(color: Colors.black), // Border color
+                //       borderRadius: BorderRadius.circular(10.0),
+                //     ),
+                //     child: DropDownMultiSelect(
+                //       options: Services,
+                //       selectedValues: selectedServices,
+                //       onChanged: (value) {
+                //         setState(() {
+                //           selectedServices = value;
+                //           widget.provider_info.services = value;
+                //         });
+                //       },
+                //       whenEmpty: 'Select the services you can provide.',
+                //     ),
+                //   ),
+                // ),
                 InkWell(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
@@ -140,8 +151,8 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QualificationsPage(
-                                provider_info: provider_info)),
+                            builder: (context) => PaymentDetailsPage(
+                                provider_info: widget.provider_info)),
                       );
                     }
                   },
