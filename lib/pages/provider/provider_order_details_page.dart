@@ -270,7 +270,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                       children: [
                         IconButton(
                           icon: Image.asset(
-                            'lib/assets/images/reasonIcon.png',
+                            'assets/images/reasonIcon.png',
                             // height: 45, width: 45
                           ),
                           onPressed: () {},
@@ -518,7 +518,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                       children: [
                         IconButton(
                           icon: Image.asset(
-                            'lib/assets/images/reasonIcon.png',
+                            'assets/images/reasonIcon.png',
                             // height: 45, width: 45
                           ),
                           onPressed: () {},
@@ -612,7 +612,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
           automaticallyImplyLeading: true,
           leading: IconButton(
               icon: const Image(
-                image: AssetImage('lib/assets/images/backIcon.png'),
+                image: AssetImage('assets/images/backIcon.png'),
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -868,7 +868,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
           automaticallyImplyLeading: true,
           leading: IconButton(
               icon: const Image(
-                image: AssetImage('lib/assets/images/backIcon.png'),
+                image: AssetImage('assets/images/backIcon.png'),
               ),
               onPressed: () {
                 Navigator.pop(context);

@@ -34,7 +34,7 @@ class _QualificationsPageState extends State<QualificationsPage> {
             child: Column(
               children: <Widget>[
                 const Image(
-                  image: AssetImage('lib/assets/images/signupPage2.png'),
+                  image: AssetImage('assets/images/signupPage2.png'),
                 ),
                 const Text(
                   'Hola!!',

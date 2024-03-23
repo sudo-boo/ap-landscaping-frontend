@@ -41,7 +41,7 @@ class _ProviderPageState extends State<ProviderPage> {
         actions: <Widget>[
           IconButton(
             icon: const Image(
-              image: AssetImage('lib/assets/images/notificationsIcon.png'),
+              image: AssetImage('assets/images/notificationsIcon.png'),
             ), // Notifications Bell Icon
             onPressed: () {
               // Handle notifications icon action (e.g., show notifications)
@@ -170,13 +170,13 @@ class _ProviderPageState extends State<ProviderPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 IconButton(
-                  icon: Image.asset('lib/assets/images/homePressedIcon.png',
+                  icon: Image.asset('assets/images/homePressedIcon.png',
                       height: 45, width: 45),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(0),
                 ),
                 IconButton(
-                    icon: Image.asset('lib/assets/images/myServicesIcon.png',
+                    icon: Image.asset('assets/images/myServicesIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
                       // _onItemTapped(1);
@@ -189,13 +189,13 @@ class _ProviderPageState extends State<ProviderPage> {
                     }),
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
-                  icon: Image.asset('lib/assets/images/communicationIcon.png',
+                  icon: Image.asset('assets/images/communicationIcon.png',
                       height: 45, width: 45),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
-                  icon: Image.asset('lib/assets/images/moreIcon.png',
+                  icon: Image.asset('assets/images/moreIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
                     Navigator.pushReplacement(
@@ -221,7 +221,7 @@ class _ProviderPageState extends State<ProviderPage> {
                 ),
                 child: IconButton(
                   icon: Image.asset(
-                    'lib/assets/images/centerIcon.png',
+                    'assets/images/centerIcon.png',
                     height: 100, // Adjust the size of the inner image/icon
                     width: 100,
                   ),

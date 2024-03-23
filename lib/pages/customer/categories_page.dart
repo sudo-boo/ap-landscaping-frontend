@@ -35,7 +35,7 @@ class _categoriesState extends State<categoriesPage> {
         ),
         leading: IconButton(
             icon: const Image(
-              image: AssetImage('lib/assets/images/backIcon.png'),
+              image: AssetImage('assets/images/backIcon.png'),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -55,7 +55,7 @@ class _categoriesState extends State<categoriesPage> {
             serviceName: 'Lawn Treatment',
             token: widget.token,
             customerId: widget.customerId,
-            imageLink: 'lib/assets/images/serviceIcon1.png',
+            imageLink: 'assets/images/serviceIcon1.png',
             containerColorTop: const Color(0xFFFFE9E9),
             containerColorBottom: const Color(0xFFFFBBC1),
           ),
@@ -63,7 +63,7 @@ class _categoriesState extends State<categoriesPage> {
             serviceName: 'Leaf Removal',
             token: widget.token,
             customerId: widget.customerId,
-            imageLink: 'lib/assets/images/serviceIcon2.png',
+            imageLink: 'assets/images/serviceIcon2.png',
             containerColorTop: const Color(0xFF96C257),
             containerColorBottom: const Color(0xFF96C257),
           ),
@@ -71,7 +71,7 @@ class _categoriesState extends State<categoriesPage> {
             serviceName: 'Landscaping',
             token: widget.token,
             customerId: widget.customerId,
-            imageLink: 'lib/assets/images/serviceIcon3.png',
+            imageLink: 'assets/images/serviceIcon3.png',
             containerColorTop: const Color(0xFFFDFABE),
             containerColorBottom: const Color(0xFFF4D376),
           ),
@@ -79,7 +79,7 @@ class _categoriesState extends State<categoriesPage> {
             serviceName: 'Bush Trimming',
             token: widget.token,
             customerId: widget.customerId,
-            imageLink: 'lib/assets/images/serviceIcon4.png',
+            imageLink: 'assets/images/serviceIcon4.png',
             containerColorTop: const Color(0xFFFEDCFD),
             containerColorBottom: const Color(0xFFFFB0FE),
           ),
@@ -87,7 +87,7 @@ class _categoriesState extends State<categoriesPage> {
             serviceName: 'Mulching',
             token: widget.token,
             customerId: widget.customerId,
-            imageLink: 'lib/assets/images/serviceIcon5.png',
+            imageLink: 'assets/images/serviceIcon5.png',
             containerColorTop: const Color(0xFFFFDFCB),
             containerColorBottom: const Color(0xFFFD9F67),
           ),
@@ -95,7 +95,7 @@ class _categoriesState extends State<categoriesPage> {
             serviceName: 'Tree Care',
             token: widget.token,
             customerId: widget.customerId,
-            imageLink: 'lib/assets/images/serviceIcon6.png',
+            imageLink: 'assets/images/serviceIcon6.png',
             containerColorTop: const Color(0xFFB0E5FC),
             containerColorBottom: const Color(0xFF8DC3DA),
           ),
@@ -103,7 +103,7 @@ class _categoriesState extends State<categoriesPage> {
             serviceName: 'Customize',
             token: widget.token,
             customerId: widget.customerId,
-            imageLink: 'lib/assets/images/serviceIcon4.png',
+            imageLink: 'assets/images/serviceIcon4.png',
             containerColorTop: const Color(0xFFB0E5FC),
             containerColorBottom: const Color(0xFF8DC3DA),
           ),
@@ -119,13 +119,13 @@ class _categoriesState extends State<categoriesPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 IconButton(
-                  icon: Image.asset('lib/assets/images/homePressedIcon.png',
+                  icon: Image.asset('assets/images/homePressedIcon.png',
                       height: 45, width: 45),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(0),
                 ),
                 IconButton(
-                    icon: Image.asset('lib/assets/images/myServicesIcon.png',
+                    icon: Image.asset('assets/images/myServicesIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
                       // _onItemTapped(1);
@@ -138,13 +138,13 @@ class _categoriesState extends State<categoriesPage> {
                     }),
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
-                  icon: Image.asset('lib/assets/images/communicationIcon.png',
+                  icon: Image.asset('assets/images/communicationIcon.png',
                       height: 45, width: 45),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
-                  icon: Image.asset('lib/assets/images/moreIcon.png',
+                  icon: Image.asset('assets/images/moreIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
                     Navigator.pushReplacement(
@@ -170,7 +170,7 @@ class _categoriesState extends State<categoriesPage> {
                 ),
                 child: IconButton(
                   icon: Image.asset(
-                    'lib/assets/images/centerIcon.png',
+                    'assets/images/centerIcon.png',
                     height: 100, // Adjust the size of the inner image/icon
                     width: 100,
                   ),

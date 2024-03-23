@@ -41,7 +41,7 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
             child: Column(
               children: <Widget>[
                 const Image(
-                  image: AssetImage('lib/assets/images/signupPage1.png'),
+                  image: AssetImage('assets/images/signupPage1.png'),
                 ),
                 const Text(
                   'Hello There!',

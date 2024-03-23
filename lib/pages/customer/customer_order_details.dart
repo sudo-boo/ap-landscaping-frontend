@@ -282,7 +282,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                       children: [
                         IconButton(
                           icon: Image.asset(
-                            'lib/assets/images/reasonIcon.png',
+                            'assets/images/reasonIcon.png',
                             // height: 45, width: 45
                           ),
                           onPressed: () {},
@@ -539,7 +539,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                       children: [
                         IconButton(
                           icon: Image.asset(
-                            'lib/assets/images/reasonIcon.png',
+                            'assets/images/reasonIcon.png',
                             // height: 45, width: 45
                           ),
                           onPressed: () {},
@@ -633,7 +633,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
           automaticallyImplyLeading: true,
           leading: IconButton(
               icon: const Image(
-                image: AssetImage('lib/assets/images/backIcon.png'),
+                image: AssetImage('assets/images/backIcon.png'),
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -889,7 +889,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
           automaticallyImplyLeading: true,
           leading: IconButton(
               icon: const Image(
-                image: AssetImage('lib/assets/images/backIcon.png'),
+                image: AssetImage('assets/images/backIcon.png'),
               ),
               onPressed: () {
                 Navigator.pop(context);

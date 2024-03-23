@@ -65,7 +65,7 @@ class _ProviderAddCrewPageState extends State<ProviderAddCrewPage> {
         ),
         leading: IconButton(
             icon: const Image(
-              image: AssetImage('lib/assets/images/backIcon.png'),
+              image: AssetImage('assets/images/backIcon.png'),
             ),
             onPressed: () {
               Navigator.pop(context);

@@ -82,7 +82,7 @@ class _crewPageState extends State<crewPage> {
           ),
           leading: IconButton(
               icon: const Image(
-                image: AssetImage('lib/assets/images/backIcon.png'),
+                image: AssetImage('assets/images/backIcon.png'),
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -90,7 +90,7 @@ class _crewPageState extends State<crewPage> {
           actions: <Widget>[
             IconButton(
               icon: const Image(
-                image: AssetImage('lib/assets/images/addCrewIcon.png'),
+                image: AssetImage('assets/images/addCrewIcon.png'),
               ),
               onPressed: () {
                 Navigator.push(

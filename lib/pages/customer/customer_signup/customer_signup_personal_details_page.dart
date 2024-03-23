@@ -33,7 +33,7 @@ class _CustomerPersonalDetailsPageState extends State<CustomerPersonalDetailsPag
             child: Column(
               children: <Widget>[
                 const Image(
-                  image: AssetImage('lib/assets/images/signupPage2.png'),
+                  image: AssetImage('assets/images/signupPage2.png'),
                 ),
                 const Text(
                   'Hola!!',

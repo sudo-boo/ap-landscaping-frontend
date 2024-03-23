@@ -112,7 +112,7 @@ class _CustomerPaymentDetailsPageState extends State<CustomerPaymentDetailsPage>
             child: Column(
               children: <Widget>[
                 const Image(
-                  image: AssetImage('lib/assets/images/signupPage3.png'),
+                  image: AssetImage('assets/images/signupPage3.png'),
                 ),
                 const Text(
                   'Bonjour!!',

@@ -19,7 +19,7 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
             top: 70,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage1cloud1.png'),
+                  'assets/images/welcomePage1cloud1.png'),
             ),
           ),
           const Positioned(
@@ -27,7 +27,7 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
             top: 60,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage1cloud2.png'),
+                  'assets/images/welcomePage1cloud2.png'),
             ),
           ),
           const Positioned(
@@ -35,7 +35,7 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
             top: 300,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage1cloud3.png'),
+                  'assets/images/welcomePage1cloud3.png'),
             ),
           ),
           const Positioned(
@@ -43,7 +43,7 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
             top: 200,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage1cloud4.png'),
+                  'assets/images/welcomePage1cloud4.png'),
             ),
           ),
           const Positioned(
@@ -52,7 +52,7 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
             top: 50,
             child: Image(
               image:
-              AssetImage('lib/assets/images/welcomePage1.png'),
+              AssetImage('assets/images/welcomePage1.png'),
             ),
           ),
           Positioned(
@@ -137,7 +137,7 @@ class _SecondScrollPageState extends State<SecondScrollPage> {
             top: 50,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage2vector1.png'),
+                  'assets/images/welcomePage2vector1.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -147,7 +147,7 @@ class _SecondScrollPageState extends State<SecondScrollPage> {
             top: 270,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage2rainbow.png'),
+                  'assets/images/welcomePage2rainbow.png'),
               fit: BoxFit.fitWidth,
             ),
           ),
@@ -157,7 +157,7 @@ class _SecondScrollPageState extends State<SecondScrollPage> {
             top: 100,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage2brain.png'),
+                  'assets/images/welcomePage2brain.png'),
             ),
           ),
           Positioned(
@@ -239,7 +239,7 @@ class _ThirdScrollPageState extends State<ThirdScrollPage> {
             top: 0,
             child: Image(
               image: AssetImage(
-                  'lib/assets/images/welcomePage3group1.png'),
+                  'assets/images/welcomePage3group1.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -249,7 +249,7 @@ class _ThirdScrollPageState extends State<ThirdScrollPage> {
             top: 120,
             child: Image(
               image:
-              AssetImage('lib/assets/images/welcomePage3.png'),
+              AssetImage('assets/images/welcomePage3.png'),
               fit: BoxFit.fitWidth,
             ),
           ),
@@ -332,7 +332,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
             top: 100,
             child: Image(
               image:
-              AssetImage('lib/assets/images/startPageRect.png'),
+              AssetImage('assets/images/startPageRect.png'),
             ),
           ),
           const Positioned(
@@ -340,7 +340,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
             right: 35,
             top: 100,
             child: Image(
-              image: AssetImage('lib/assets/images/startPage.png'),
+              image: AssetImage('assets/images/startPage.png'),
             ),
           ),
           const Positioned(

@@ -181,7 +181,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
         ),
         leading: IconButton(
             icon: const Image(
-              image: AssetImage('lib/assets/images/backIcon.png'),
+              image: AssetImage('assets/images/backIcon.png'),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -212,7 +212,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           ),
                           child: IconButton(
                             icon: Image.asset(
-                              'lib/assets/images/userIcon.png',
+                              'assets/images/userIcon.png',
                               // height: 100, // Adjust the size of the inner image/icon
                               // width: 100,
                             ),
@@ -249,7 +249,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           ),
                           child: IconButton(
                             icon: Image.asset(
-                              'lib/assets/images/settingsIcon.png',
+                              'assets/images/settingsIcon.png',
                               // height: 100, // Adjust the size of the inner image/icon
                               // width: 100,
                             ),
@@ -279,7 +279,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           ),
                           child: IconButton(
                             icon: Image.asset(
-                              'lib/assets/images/logoutIcon.png',
+                              'assets/images/logoutIcon.png',
                               // height: 100, // Adjust the size of the inner image/icon
                               // width: 100,
                             ),
@@ -322,7 +322,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 IconButton(
-                  icon: Image.asset('lib/assets/images/homeIcon.png',
+                  icon: Image.asset('assets/images/homeIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
@@ -337,7 +337,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                   // onPressed: () => _onItemTapped(0),
                 ),
                 IconButton(
-                    icon: Image.asset('lib/assets/images/myServicesIcon.png',
+                    icon: Image.asset('assets/images/myServicesIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
                       // _onItemTapped(1);
@@ -350,13 +350,13 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                     }),
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
-                  icon: Image.asset('lib/assets/images/communicationIcon.png',
+                  icon: Image.asset('assets/images/communicationIcon.png',
                       height: 45, width: 45),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
-                  icon: Image.asset('lib/assets/images/morePressedIcon.png',
+                  icon: Image.asset('assets/images/morePressedIcon.png',
                       height: 45, width: 45),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(4),
@@ -374,7 +374,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                 ),
                 child: IconButton(
                   icon: Image.asset(
-                    'lib/assets/images/centerIcon.png',
+                    'assets/images/centerIcon.png',
                     height: 100, // Adjust the size of the inner image/icon
                     width: 100,
                   ),

@@ -87,7 +87,7 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
             child: SingleChildScrollView(
                 child: Column(children: <Widget>[
                   const Image(
-                    image: AssetImage('lib/assets/images/loginPage.png'),
+                    image: AssetImage('assets/images/loginPage.png'),
                   ),
                   const Text(
                     'Welcome Back SuperUser!',

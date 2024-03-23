@@ -152,7 +152,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
             child: SingleChildScrollView(
                 child: Column(children: <Widget>[
               const Image(
-                image: AssetImage('lib/assets/images/loginPage.png'),
+                image: AssetImage('assets/images/loginPage.png'),
               ),
               const Text(
                 'Welcome Back Customer!',
@@ -327,7 +327,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                         color: Colors.grey[200],
                       ),
                       child: const Image(
-                        image: AssetImage('lib/assets/images/google.png'),
+                        image: AssetImage('assets/images/google.png'),
                         height: 40,
                       ),
                     ),
@@ -346,7 +346,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                         color: Colors.grey[200],
                       ),
                       child: const Image(
-                        image: AssetImage('lib/assets/images/apple.png'),
+                        image: AssetImage('assets/images/apple.png'),
                         height: 40,
                       ),
                     ),
@@ -418,7 +418,7 @@ class _customerForgotPasswordPageState
           ),
           leading: IconButton(
               icon: const Image(
-                image: AssetImage('lib/assets/images/backIcon.png'),
+                image: AssetImage('assets/images/backIcon.png'),
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -467,7 +467,7 @@ class _customerForgotPasswordPageState
                         children: [
                           Image(
                             image: AssetImage(
-                                'lib/assets/images/forgotPasswordMobileNumber.png'),
+                                'assets/images/forgotPasswordMobileNumber.png'),
                           ),
                           Text(
                             'Mobile Number',
@@ -505,7 +505,7 @@ class _customerForgotPasswordPageState
                         children: [
                           Image(
                             image: AssetImage(
-                                'lib/assets/images/forgotPasswordEmail.png'),
+                                'assets/images/forgotPasswordEmail.png'),
                           ),
                           Text(
                             'Email',
@@ -617,7 +617,7 @@ class _CustomPhoneNumberDialogState extends State<CustomPhoneNumberDialog> {
         mainAxisSize: MainAxisSize.min, // To make the dialog compact
         children: <Widget>[
           Image.asset(
-            'lib/assets/images/forgotPasswordImage.png',
+            'assets/images/forgotPasswordImage.png',
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
@@ -748,7 +748,7 @@ class _CustomEmailDialogState extends State<CustomEmailDialog> {
         mainAxisSize: MainAxisSize.min, // To make the dialog compact
         children: <Widget>[
           Image.asset(
-            'lib/assets/images/forgotPasswordImage.png',
+            'assets/images/forgotPasswordImage.png',
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
@@ -847,7 +847,7 @@ class _CustomOTPDialogState extends State<CustomOTPDialog> {
         mainAxisSize: MainAxisSize.min, // To make the dialog compact
         children: <Widget>[
           Image.asset(
-            'lib/assets/images/forgotPasswordImage.png',
+            'assets/images/forgotPasswordImage.png',
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
@@ -1038,7 +1038,7 @@ class _CustomPasswordResetDialogState extends State<CustomPasswordResetDialog> {
         mainAxisSize: MainAxisSize.min, // To make the dialog compact
         children: <Widget>[
           Image.asset(
-            'lib/assets/images/forgotPasswordImage.png',
+            'assets/images/forgotPasswordImage.png',
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
