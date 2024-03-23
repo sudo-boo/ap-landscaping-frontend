@@ -1,16 +1,17 @@
-import 'package:ap_landscaping/pages/customer/payment_details_page.dart';
 import 'package:flutter/material.dart';
-import '../../models/customerinfo.dart';
+import 'package:ap_landscaping/pages/customer/customer_signup/payment_details_page.dart';
+import '../../../models/customerinfo.dart';
+import '../../provider/provider_signup/providersignup.dart';
 
-class PersonalDetailsPage extends StatefulWidget {
+class CustomerPersonalDetailsPage extends StatefulWidget {
   final customerInfo customer_info;
-  const PersonalDetailsPage({super.key, required this.customer_info});
+  const CustomerPersonalDetailsPage({super.key, required this.customer_info});
 
   @override
-  _PersonalDetailsPageState createState() => _PersonalDetailsPageState();
+  _CustomerPersonalDetailsPageState createState() => _CustomerPersonalDetailsPageState();
 }
 
-class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
+class _CustomerPersonalDetailsPageState extends State<CustomerPersonalDetailsPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -82,7 +83,7 @@ class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PaymentDetailsPage(
+                            builder: (context) => CustomerPaymentDetailsPage(
                                 customer_info: widget.customer_info)),
                       );
                     }

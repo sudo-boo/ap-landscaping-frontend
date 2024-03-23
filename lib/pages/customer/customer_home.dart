@@ -225,7 +225,7 @@ class _customerPageState extends State<customerPage> {
                         height: 45, width: 45),
                     onPressed: () {
                       // _onItemTapped(1);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => CustomerServicesPage(
@@ -236,7 +236,8 @@ class _customerPageState extends State<customerPage> {
                 IconButton(
                   icon: Image.asset('lib/assets/images/communicationIcon.png',
                       height: 45, width: 45),
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(

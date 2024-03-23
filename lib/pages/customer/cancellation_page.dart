@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -36,21 +37,30 @@ class _CancellationPageState extends State<CancellationPage> {
       if (response.statusCode == 200) {
         print('Order cancelled successfully');
         showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Order cancelled successfully"),
-                // content: Text(err.message),
-                actions: [
-                  TextButton(
-                    child: const Text("Ok"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              );
-            });
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Order cancelled successfully"),
+              // content: Text(err.message),
+              actions: [
+                TextButton(
+                  child: const Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => CustomerServicesPage(
+                              token: widget.token,
+                              customerId: widget.customerId
+                          )
+                      ),
+                          (Route<dynamic> route) => false,
+                    );
+                  },
+                )
+              ],
+            );
+          }
+          );
       } else {
         throw Exception('Failed to cancel order');
       }
@@ -96,7 +106,7 @@ class _CancellationPageState extends State<CancellationPage> {
                           const SizedBox(
                             width: double.infinity,
                             child: Text(
-                              'Cancallation may cost you.',
+                              'Cancellation may cost you.',
                               textAlign: TextAlign.center,
                             ),
                           ),

@@ -1,4 +1,4 @@
-import 'package:ap_landscaping/pages/customer/personal_details_page.dart';
+import 'package:ap_landscaping/pages/customer/customer_signup/personal_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/customerinfo.dart';
 
@@ -146,7 +146,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PersonalDetailsPage(
+                            builder: (context) => CustomerPersonalDetailsPage(
                                 customer_info: customer_info)),
                       );
                     }

@@ -1,19 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:ap_landscaping/pages/customer/congrats_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/config.dart';
 import '/models/customerinfo.dart';
 
-class PaymentDetailsPage extends StatefulWidget {
+class CustomerPaymentDetailsPage extends StatefulWidget {
   final customerInfo customer_info;
-  const PaymentDetailsPage({super.key, required this.customer_info});
+  const CustomerPaymentDetailsPage({super.key, required this.customer_info});
 
   @override
-  _PaymentDetailsPageState createState() => _PaymentDetailsPageState();
+  _CustomerPaymentDetailsPageState createState() => _CustomerPaymentDetailsPageState();
 }
 
-class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
+class _CustomerPaymentDetailsPageState extends State<CustomerPaymentDetailsPage> {
   final _formKey = GlobalKey<FormState>();
   bool _isObscured3 = true;
   void cSignup(customerInfo customer_info) async {
@@ -35,11 +34,45 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(regBody));
     if (response.statusCode == 201) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const CongratsPage()),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                  size: 60,
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Congratulations you have been successfully registered!!\nPlease verify your email before logging in\nTo do so an email is sent to you, Click the verify button on it.',
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/customersignin',
+                          (Route<dynamic> route) => false,
+                    );
+                  },
+                  child: Text('Go to Login Page'),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ), backgroundColor: Colors.green,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       );
-    } else {
+    }
+    else {
       showDialog(
           context: context,
           builder: (BuildContext context) {

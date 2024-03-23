@@ -183,7 +183,14 @@ class _profilePageState extends State<profilePage> {
               image: AssetImage('lib/assets/images/backIcon.png'),
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => customerPage(
+                    token: widget.token,
+                    customerId: widget.customerId)
+                )
+              );
             }),
         // backgroundColor: Colors.green[900],
       ),

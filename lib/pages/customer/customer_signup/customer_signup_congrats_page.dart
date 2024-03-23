@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 //
-class CongratsPage extends StatefulWidget {
-  const CongratsPage({super.key});
+class CustomerSignUpCongratsPage extends StatefulWidget {
+  const CustomerSignUpCongratsPage({super.key});
   @override
-  State<CongratsPage> createState() => _CongratsPageState();
+  State<CustomerSignUpCongratsPage> createState() => _CustomerSignUpCongratsPageState();
 }
 
-class _CongratsPageState extends State<CongratsPage> {
+class _CustomerSignUpCongratsPageState extends State<CustomerSignUpCongratsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,10 @@ class _CongratsPageState extends State<CongratsPage> {
               Navigator.of(context).pushReplacementNamed('/customersignin');
             },
             child:
-            const Text('Go to Login Page', style: TextStyle(fontSize: 18)),
+            const Text(
+              'Go to Login Page',
+              style: TextStyle(fontSize: 18)
+            ),
           )
         ]),
       ),

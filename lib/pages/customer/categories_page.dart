@@ -129,7 +129,7 @@ class _categoriesState extends State<categoriesPage> {
                         height: 45, width: 45),
                     onPressed: () {
                       // _onItemTapped(1);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => CustomerServicesPage(
@@ -147,7 +147,7 @@ class _categoriesState extends State<categoriesPage> {
                   icon: Image.asset('lib/assets/images/moreIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => profilePage(
