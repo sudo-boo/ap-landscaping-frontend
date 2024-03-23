@@ -1,4 +1,5 @@
 import 'package:ap_landscaping/utilities/customer_home_category_card.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/categories_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
@@ -18,6 +19,7 @@ class _customerPageState extends State<customerPage> {
 
   @override
   Widget build(BuildContext context) {
+    Dimensions getDims = Dimensions(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -108,7 +110,7 @@ class _customerPageState extends State<customerPage> {
                         height: 0,
                       ),
                     ),
-                    const SizedBox(width: 225),
+                    SizedBox(width: getDims.fractionWidth(0.55)),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -142,7 +144,7 @@ class _customerPageState extends State<customerPage> {
               right: 0,
               child: Container(
                 child: GridView.count(
-                  crossAxisCount: 3,
+                  crossAxisCount: MediaQuery.of(context).size.width > 420 ? 3 : 2,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
                   padding: const EdgeInsets.all(16),

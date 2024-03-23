@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import '../pages/customer/scheduling_page.dart';
 
@@ -22,6 +23,7 @@ class HomePageCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Dimensions getDims = Dimensions(context);
     return InkWell(
       onTap: () {
       Navigator.push(
@@ -40,8 +42,8 @@ class HomePageCategoryCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              width: 120,
-              height: 75,
+              width: 190,
+              height: getDims.fractionHeight(0.2),
               decoration: ShapeDecoration(
                 color: containerColorTop,
                 shape: const RoundedRectangleBorder(
@@ -61,8 +63,8 @@ class HomePageCategoryCard extends StatelessWidget {
             ),
           ),
           Container(
-            width: 120,
-            height: 34,
+            width: 500,
+            height: getDims.fractionHeight(0.04),
             decoration: ShapeDecoration(
               color: containerColorBottom,
               shape: const RoundedRectangleBorder(
@@ -78,7 +80,7 @@ class HomePageCategoryCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 14,
+                  fontSize: 13,
                 ),
               ),
             ),
