@@ -1252,13 +1252,6 @@ class _myServicesPageState extends State<myServicesPage> {
                           height: 45,
                           width: 45),
                       onPressed: () {
-                        // _onItemTapped(1);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => myServicesPage(
-                        //             token: widget.token,
-                        //             providerId: widget.providerId)));
                       }),
                   const SizedBox(
                       width: 90), // Placeholder for the center button
@@ -1271,7 +1264,7 @@ class _myServicesPageState extends State<myServicesPage> {
                     icon: Image.asset('lib/assets/images/moreIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => profilePage(

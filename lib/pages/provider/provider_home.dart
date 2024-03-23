@@ -198,7 +198,7 @@ class _ProviderPageState extends State<ProviderPage> {
                   icon: Image.asset('lib/assets/images/moreIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => profilePage(
