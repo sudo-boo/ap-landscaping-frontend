@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:ap_landscaping/pages/provider/provider_order_details_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'package:ap_landscaping/utilities/provider_services_card.dart';
@@ -288,9 +286,27 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                                       isAccepted: false,
                                       onPress1: (){
                                         acceptOrDeclineOrder(order.id, 'accept');
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ProviderMyServicesPage(
+                                              token: widget.token,
+                                              providerId: widget.providerId
+                                            )
+                                          )
+                                        );
                                       },
                                       onPress2: (){
                                         acceptOrDeclineOrder(order.id, 'decline');
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ProviderMyServicesPage(
+                                              token: widget.token,
+                                              providerId: widget.providerId
+                                            )
+                                          )
+                                        );
                                       },
                                     );
                                   }
