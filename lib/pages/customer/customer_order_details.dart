@@ -89,7 +89,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
             provider_info.mobile_number = data['provider']['mobilenumber'] ?? 'NA';
             provider_info.address = data['provider']['address'] ?? 'NA';
             provider_info.qualifications = data['provider']['qualifications'] ?? 'NA';
-            provider_info.years_of_experience = data['provider']['yearsofexperience'] ?? 0;
+            provider_info.years_of_experience = data['provider']['yearsofexperience'] ?? 'NA';
             provider_info.bio = data['provider']['bio'] ?? 'NA';
             provider_info.google_id = data['provider']['googleId'] ?? 'NA';
           });
@@ -106,7 +106,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
           provider_info.mobile_number = 'NA';
           provider_info.address = 'NA';
           provider_info.qualifications = 'NA';
-          provider_info.years_of_experience = 0;
+          provider_info.years_of_experience = 'NA';
           provider_info.bio = 'NA';
           provider_info.google_id = 'NA';
         });

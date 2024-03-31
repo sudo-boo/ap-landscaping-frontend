@@ -23,7 +23,7 @@ class _SuperUserAllcustomersPageState extends State<SuperUserAllcustomersPage> {
     try {
       print('Fetching customer details...');
       final response = await http.get(
-        Uri.parse('$url/super-user/customers'),
+        Uri.parse(superUserGetAllUsers),
         headers: {'Content-Type': 'application/json'},
       );
       if (response.statusCode == 200) {
@@ -81,7 +81,7 @@ class _SuperUserAllcustomersPageState extends State<SuperUserAllcustomersPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('customer Details'),
+          title: const Text('User Details'),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +119,7 @@ class _SuperUserAllcustomersPageState extends State<SuperUserAllcustomersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('customers'),
+        title: const Text('Users'),
       ),
       body: FutureBuilder<List<customerInfo>>(
         future: _customerDetailsFuture,
@@ -131,7 +131,7 @@ class _SuperUserAllcustomersPageState extends State<SuperUserAllcustomersPage> {
           } else {
             List<customerInfo>? allcustomersList = snapshot.data;
             if (allcustomersList == null || allcustomersList.isEmpty) {
-              return Center(child: Text('No customers found.'));
+              return Center(child: Text('No Users found.'));
             } else {
               return ListView.builder(
                 itemCount: allcustomersList.length,

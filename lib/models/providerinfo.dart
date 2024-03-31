@@ -7,14 +7,14 @@ class providerInfo {
   String password;
   String address;
   String card_details;
-  int cvv;
+  String cvv;
   String paypal_id;
   String aec_transfer;
   String card_type;
   String card_holders_name;
   String card_number;
   String qualifications;
-  int years_of_experience;
+  String years_of_experience;
   String bio;
   String bank_name;
   String account_nummber;
@@ -28,14 +28,14 @@ class providerInfo {
     this.password = '',
     this.address = '',
     this.card_details = '',
-    this.cvv = 0,
+    this.cvv = '',
     this.paypal_id = '',
     this.aec_transfer = '',
     this.card_type = '',
     this.card_holders_name = '',
     this.card_number = '',
     this.qualifications = '',
-    this.years_of_experience = 0,
+    this.years_of_experience = '',
     this.bio = '',
     this.bank_name = '',
     this.google_id = '',

@@ -42,7 +42,7 @@ class HomePageCategoryCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              width: 190,
+              width: 300,
               height: getDims.fractionHeight(0.2),
               decoration: ShapeDecoration(
                 color: containerColorTop,
@@ -80,7 +80,7 @@ class HomePageCategoryCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 13,
+                  fontSize: 10,
                 ),
               ),
             ),

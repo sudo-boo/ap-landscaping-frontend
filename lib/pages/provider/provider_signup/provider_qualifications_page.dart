@@ -73,7 +73,7 @@ class _QualificationsPageState extends State<QualificationsPage> {
                     ),
                     keyboardType: TextInputType.number,
                     onSaved: (value) => widget.provider_info
-                        .years_of_experience = int.tryParse(value ?? '0') ?? 0,
+                        .years_of_experience = value ?? '',
                     validator: (value) => value!.isEmpty
                         ? 'Please enter your years of experience'
                         : null,
