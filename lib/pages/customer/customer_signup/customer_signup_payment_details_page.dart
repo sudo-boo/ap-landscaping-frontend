@@ -197,15 +197,11 @@ class _CustomerPaymentDetailsPageState extends State<CustomerPaymentDetailsPage>
                             _isObscured3 = !_isObscured3;
                           });
                         },
-                        // enabledBorder: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(10.0),
-                        // ),
-                      ),),
+                      ),
+                    ),
                     keyboardType: TextInputType.number,
-                    onSaved: (value) => widget.customer_info.cvv =
-                        int.tryParse(value ?? '0') ?? 0,
-                    validator: (value) =>
-                    value!.isEmpty ? 'Please enter cvv' : null,
+                    onSaved: (value) => widget.customer_info.cvv = value ?? '',
+                    validator: (value) => value!.isEmpty ? 'Please enter CVV' : null,
                   ),
                 ),
                 Padding(

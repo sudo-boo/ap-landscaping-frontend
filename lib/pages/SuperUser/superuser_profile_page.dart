@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_users.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
 // import 'package:ap_landscaping/pages/provider/customer_my_services_page.dart';
@@ -124,14 +125,14 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
   }
 
   Future<void> logoutSuperUser() async {
-    var url = Uri.parse(superUserLogout); // Replace with your actual endpoint
+    var url = Uri.parse(superUserLogout);
     try {
       print(widget.token);
       var response = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': '${widget.token}', // Include the token in the header
+          'Authorization': '${widget.token}',
         },
       );
 
@@ -237,6 +238,42 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           //         builder: (context) => updateprofileInfoPage(
                           //             token: widget.token,
                           //             providerId: widget.providerId)));
+                        },
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: const ShapeDecoration(
+                            color: Color(0xFF3E363F),
+                            shape: OvalBorder(),
+                          ),
+                          child: IconButton(
+                            icon: Image.asset(
+                              'assets/images/userIcon.png',
+                              // height: 100, // Adjust the size of the inner image/icon
+                              // width: 100,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        title: const Text(
+                          'Users',
+                          style: TextStyle(
+                            color: Color(0xFF181D27),
+                            fontSize: 16,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0.12,
+                          ),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SuperUserAllcustomersPage(),
+                          ));
                         },
                       ),
                       ListTile(
