@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+double fontHelper(BuildContext context){
+  const aspectRatio = 375 / 810;
+  return (MediaQuery.of(context).size.width / aspectRatio) / 810;
+}
+
 class Dimensions {
   late double _screenWidth;
   late double _screenHeight;

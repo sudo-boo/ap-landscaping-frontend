@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/customer_order_details.dart';
 
@@ -38,9 +39,9 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                   child: Text(
                     widget.order.serviceType,
                     // textAlign: TextAlign.left,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Color(0xFF1C1F34),
-                      fontSize: 24,
+                      fontSize: fontHelper(context) * 22,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                       height: 0,
@@ -67,12 +68,12 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                         MainAxisAlignment
                             .spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Date',
                             style: TextStyle(
                               color:
                               Color(0xFF1C1F34),
-                              fontSize: 14,
+                              fontSize: fontHelper(context) * 12,
                               fontFamily: 'Inter',
                               fontWeight:
                               FontWeight.w600,
@@ -111,12 +112,12 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                         MainAxisAlignment
                             .spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Time',
                             style: TextStyle(
                               color:
                               Color(0xFF1C1F34),
-                              fontSize: 14,
+                              fontSize: fontHelper(context) * 12,
                               fontFamily: 'Inter',
                               fontWeight:
                               FontWeight.w600,
@@ -155,12 +156,12 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                         MainAxisAlignment
                             .spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Provider',
                             style: TextStyle(
                               color:
                               Color(0xFF1C1F34),
-                              fontSize: 14,
+                              fontSize: fontHelper(context) * 12,
                               fontFamily: 'Inter',
                               fontWeight:
                               FontWeight.w600,
@@ -199,12 +200,12 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                         MainAxisAlignment
                             .spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Payment mode',
                             style: TextStyle(
                               color:
                               Color(0xFF1C1F34),
-                              fontSize: 14,
+                              fontSize: fontHelper(context) * 12,
                               fontFamily: 'Inter',
                               fontWeight:
                               FontWeight.w600,
@@ -282,9 +283,9 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
             ),
             child: Text(
               widget.statusText,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: fontHelper(context) * 12,
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
                 height: 0,

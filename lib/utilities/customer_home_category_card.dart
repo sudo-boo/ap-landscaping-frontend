@@ -78,9 +78,9 @@ class HomePageCategoryCard extends StatelessWidget {
               child: Text(
                 serviceName,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
-                  fontSize: 10,
+                  fontSize: fontHelper(context) * 10,
                 ),
               ),
             ),

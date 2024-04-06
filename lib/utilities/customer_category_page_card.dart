@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import '../pages/customer/customer_scheduling_page.dart';
 
@@ -75,9 +76,9 @@ class CategoryPageCard extends StatelessWidget {
               child: Text(
                 serviceName,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
-                  fontSize: 14,
+                  fontSize: fontHelper(context) * 14,
                 ),
               ),
             ),

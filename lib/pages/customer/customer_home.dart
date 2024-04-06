@@ -74,7 +74,7 @@ class _customerPageState extends State<customerPage> {
                 image: AssetImage('assets/images/homeScreen.png'),
               ),
             ),
-            const Positioned(
+            Positioned(
                 left: 0,
                 right: 0,
                 top: 300,
@@ -83,7 +83,7 @@ class _customerPageState extends State<customerPage> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF3E363F),
-                    fontSize: 24,
+                    fontSize: fontHelper(context) * 24,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,
@@ -100,11 +100,11 @@ class _customerPageState extends State<customerPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Category',
                       style: TextStyle(
                         color: Color(0xFF3E363F),
-                        fontSize: 18,
+                        fontSize: fontHelper(context) * 18,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                         height: 0,
@@ -122,12 +122,12 @@ class _customerPageState extends State<customerPage> {
                           ),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         'View All',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Color(0xFF3E363F),
-                          fontSize: 14,
+                          fontSize: fontHelper(context) * 14,
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.w600,
                           height: 0,
@@ -144,13 +144,12 @@ class _customerPageState extends State<customerPage> {
               right: 0,
               child: Container(
                 child: GridView.count(
-                  crossAxisCount: MediaQuery.of(context).size.width > 420 ? 3 : 2,
+                  crossAxisCount: 3,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
                   padding: const EdgeInsets.all(16),
                   shrinkWrap: true,
-                  physics:
-                      const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                  physics: ScrollPhysics(),
                   children: <Widget>[
                     HomePageCategoryCard(
                         serviceName: 'Lawn Treatment',

@@ -1,5 +1,6 @@
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/customer_category_page_card.dart';
@@ -23,11 +24,11 @@ class _categoriesState extends State<categoriesPage> {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         // title: Text(widget.serviceName),
-        title: const Text(
+        title: Text(
           'Categories',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: fontHelper(context) * 25,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
             height: 0,
