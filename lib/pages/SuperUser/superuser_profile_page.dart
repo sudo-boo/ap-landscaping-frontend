@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_providers.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_users.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
@@ -251,8 +252,6 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           child: IconButton(
                             icon: Image.asset(
                               'assets/images/userIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
                             ),
                             onPressed: () {},
                           ),
@@ -272,8 +271,48 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SuperUserAllcustomersPage(),
+                                  builder: (context) => SuperUserAllCustomersPage(
+                                    superUserId: widget.superuserId,
+                                    token: widget.token,
+                                  ),
                           ));
+                        },
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: const ShapeDecoration(
+                            color: Color(0xFF3E363F),
+                            shape: OvalBorder(),
+                          ),
+                          child: IconButton(
+                            icon: Image.asset(
+                              'assets/images/userIcon.png',
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        title: const Text(
+                          'Providers',
+                          style: TextStyle(
+                            color: Color(0xFF181D27),
+                            fontSize: 16,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0.12,
+                          ),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SuperUserAllProvidersPage(
+                                  superUserId: widget.superuserId,
+                                  token: widget.token,
+                                ),
+                              ));
                         },
                       ),
                       ListTile(

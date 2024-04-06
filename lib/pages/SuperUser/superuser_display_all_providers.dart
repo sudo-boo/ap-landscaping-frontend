@@ -5,6 +5,13 @@ import '../../models/providerinfo.dart';
 import '../../config.dart';
 
 class SuperUserAllProvidersPage extends StatefulWidget {
+  final token;
+  final superUserId;
+  const SuperUserAllProvidersPage({
+    required this.token,
+    required this.superUserId,
+    Key? key
+  })      : super(key: key);
   @override
   _SuperUserAllProvidersPageState createState() => _SuperUserAllProvidersPageState();
 }
@@ -24,7 +31,10 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
       print('Fetching provider details...');
       final response = await http.get(
         Uri.parse(superUserGetAllProviders),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': '${widget.token}',
+        },
       );
       if (response.statusCode == 200) {
         final dynamic data = json.decode(response.body);
