@@ -43,8 +43,9 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
         List<providerInfo> allProvidersList = [];
 
         for (var providerData in providersData) {
-          // print("$providerData");
+          print("$providerData");
           providerInfo provider = providerInfo(
+            id: providerData['id'].toString(),
             username: providerData['username'].toString(),
             email: providerData['email'].toString(),
             mobile_number: providerData['mobilenumber'].toString(),
@@ -97,6 +98,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Username: ${provider.username}'),
+                Text('ID: ${provider.id}'),
                 Text('Email: ${provider.email}'),
                 Text('Mobile Number: ${provider.mobile_number}'),
                 Text('Address: ${provider.address}'),
@@ -129,7 +131,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('providers'),
+        title: Text('Providers'),
       ),
       body: FutureBuilder<List<providerInfo>>(
         future: _providerDetailsFuture,

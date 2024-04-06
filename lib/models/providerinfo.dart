@@ -1,6 +1,7 @@
 import 'dart:core';
 
 class providerInfo {
+  String id;
   String username;
   String email;
   String mobile_number;
@@ -22,6 +23,7 @@ class providerInfo {
   String google_id;
 
   providerInfo({
+    this.id = '',
     this.username = '',
     this.email = '',
     this.mobile_number = '',
@@ -44,6 +46,7 @@ class providerInfo {
   }) : services = services ?? [];
 
   Map<String, dynamic> toJson() => {
+        'id': id,
         'username': username,
         'email': email,
         'mobile_numder': mobile_number,

@@ -1,4 +1,5 @@
 import 'package:ap_landscaping/pages/SuperUser/superuser_profile_page.dart';
+import 'package:ap_landscaping/pages/SuperUser/superuser_services.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:ap_landscaping/utilities/homepage_stats_card.dart';
 import 'package:flutter/material.dart';
@@ -141,12 +142,13 @@ class _SuperUserPageState extends State<SuperUserPage> {
                         height: 45, width: 45),
                     onPressed: () {
                       // _onItemTapped(1);
-                      // Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => myServicesPage(
-                      //             token: widget.token,
-                      //             providerId: widget.providerId)));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SuperUserServicesPage(
+                                  token: widget.token,
+                                  superUserId: widget.superuserId
+                              )));
                     }),
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
@@ -159,7 +161,7 @@ class _SuperUserPageState extends State<SuperUserPage> {
                   icon: Image.asset('assets/images/moreIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => SuperUserProfilePage(

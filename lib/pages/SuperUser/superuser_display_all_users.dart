@@ -28,7 +28,8 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
 
   Future<List<customerInfo>> fetchAllcustomerDetails() async {
     try {
-      // print('Fetching customer details...');
+      print('Fetching customer details...');
+      print(widget.token);
       final response = await http.get(
         Uri.parse(superUserGetAllUsers),
         headers: {
@@ -37,8 +38,8 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
         },
       );
       // Debug: Print response status code and body
-      // print('Response status code: ${response.statusCode}');
-      // print('Response body: ${response.body}');
+      print('Response status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
 
       if (response.statusCode == 200) {
         final dynamic data = json.decode(response.body);

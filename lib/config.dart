@@ -10,8 +10,11 @@ const customerLogin = "${url}customer/login";
 const superUserRegister = "${url}superuser/signup";
 const superUserLogin = "${url}super-user/login";
 const superUserLogout = "${url}super-user/logout";
+
 const superUserGetAllUsers = "${url}super-user/customers";
 const superUserGetAllProviders = "${url}super-user/providers";
+const superUserGetOrdersWithNoProviders = "${url}super-user/unassigned";
+const superUserAssignProvider = "${url}orders/assign-provider";
 
 const customerOrders = "${url}orders/customerOrders/";
 const customerPastOrders = "${url}orders/past/customer";

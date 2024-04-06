@@ -1,0 +1,21 @@
+          // for (var order in orders) {
+          //   print("Order Id: ${order.orderId}");
+          //   print("ID: ${order.id}");
+          //   print("Service Type: ${order.serviceType}");
+          //   print("Address: ${order.address}");
+          //   print("Date: ${order.date}");
+          //   print("Time: ${order.time}");
+          //   print("Expectation Note: ${order.expectationNote}");
+          //   print("Customer ID: ${order.customerId}");
+          //   print("Provider ID: ${order.providerId}");
+          //   print("Is Finished: ${order.isFinished}");
+          //   print("Is Cancelled: ${order.isCancelled}");
+          //   print("Provider Name: ${order.providerName}");
+          //   // Print other details as needed
+          //   print("-----------------------------------");
+          // }
+          // print('Orders fetched successfully.');
+
+
+
+

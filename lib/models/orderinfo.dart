@@ -14,6 +14,7 @@ class orderInfo {
   String customerName;
   String? providerName;
   bool isAcceptedByProvider;
+  String orderId;
 
   orderInfo(
       {this.serviceType = '',
@@ -26,23 +27,25 @@ class orderInfo {
       this.isFinished = false,
       this.isCancelled = false,
       this.id = '',
+      this.orderId = '',
       this.customerName = '',
       this.providerName,
       this.isAcceptedByProvider = false});
 
   Map<String, dynamic> toJson() => {
-        'serviceType': serviceType,
-        'address': address,
-        'date': date,
-        'time': time,
-        'expectationNote': expectationNote,
-        'customerId': customerId,
-        'providerId': providerId,
-        'isFinished': isFinished,
-        'isCancelled': isCancelled,
-        'id': id,
-        'customerName': customerName,
-        'providerName': providerName,
-        'isAcceptedByProvider': isAcceptedByProvider,
-      };
+    'serviceType': serviceType,
+    'address': address,
+    'time': time,
+    'expectationNote': expectationNote,
+    'customerId': customerId,
+    'providerId': providerId,
+    'isFinished': isFinished,
+    'isCancelled': isCancelled,
+    'id': id,
+    'orderId': orderId,
+    'customerName': customerName,
+    'providerName': providerName,
+    'isAcceptedByProvider': isAcceptedByProvider,
+    'date': date,
+  };
 }
