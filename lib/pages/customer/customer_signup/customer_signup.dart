@@ -1,4 +1,5 @@
 import 'package:ap_landscaping/pages/customer/customer_signup/customer_signup_personal_details_page.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/customerinfo.dart';
 
@@ -45,11 +46,11 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                 const Image(
                   image: AssetImage('assets/images/signupPage1.png'),
                 ),
-                const Text(
+                Text(
                   'Hello There!',
                   style: TextStyle(
                     color: Color(0xFF3E363F),
-                    fontSize: 50,
+                    fontSize: fontHelper(context) * 50,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0.02,

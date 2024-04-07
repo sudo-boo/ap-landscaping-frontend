@@ -238,6 +238,7 @@ class _customerPageState extends State<customerPage> {
                   icon: Image.asset('assets/images/communicationIcon.png',
                       height: 45, width: 45),
                   onPressed: () {
+
                   },
                   // onPressed: () => _onItemTapped(3),
                 ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:ap_landscaping/pages/customer/customer_home.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -154,11 +155,11 @@ class _CustomerSignInState extends State<CustomerSignIn> {
               const Image(
                 image: AssetImage('assets/images/loginPage.png'),
               ),
-              const Text(
+              Text(
                 'Welcome Back Customer!',
                 style: TextStyle(
                   color: Color(0xFF3E363F),
-                  fontSize: 30,
+                  fontSize: fontHelper(context) * 30,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                   // height: 0.02,
@@ -246,11 +247,11 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                               borderRadius: BorderRadius.circular(
                                   5), // Adjust the radius as needed
                             ),
-                            child: const Text(
+                            child: Text(
                               'Login',
                               style: TextStyle(
                                 color: Colors.white, // Text color
-                                fontSize: 16, // Adjust the font size as needed
+                                fontSize: 16 * fontHelper(context), // Adjust the font size as needed
                               ),
                             ),
                           ),
@@ -406,11 +407,11 @@ class _customerForgotPasswordPageState
           backgroundColor: const Color(0xFFBBE1C5),
           automaticallyImplyLeading: true,
           // title: Text(widget.serviceName),
-          title: const Text(
+          title: Text(
             'Forgot Password',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 24 * fontHelper(context),
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -433,13 +434,13 @@ class _customerForgotPasswordPageState
             const SizedBox(
               height: 50,
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(50, 10, 50, 30),
               child: Text(
                 'Select contact details where you want to reset your passwrod.',
                 style: TextStyle(
                   color: Color(0xFF3E363F),
-                  fontSize: 16,
+                  fontSize: 16 * fontHelper(context),
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                   letterSpacing: -0.05,
@@ -456,7 +457,7 @@ class _customerForgotPasswordPageState
                         CustomPhoneNumberDialog(),
                   );
                 },
-                child: const Card(
+                child: Card(
                   color: Colors.white,
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(10, 10, 35, 10),
@@ -465,7 +466,7 @@ class _customerForgotPasswordPageState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image(
+                          const Image(
                             image: AssetImage(
                                 'assets/images/forgotPasswordMobileNumber.png'),
                           ),
@@ -473,7 +474,7 @@ class _customerForgotPasswordPageState
                             'Mobile Number',
                             style: TextStyle(
                               color: Color(0xFF3E363F),
-                              fontSize: 20,
+                              fontSize: 20 * fontHelper(context),
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
                               height: 0,
@@ -494,7 +495,7 @@ class _customerForgotPasswordPageState
                     builder: (BuildContext context) => CustomEmailDialog(),
                   );
                 },
-                child: const Card(
+                child: Card(
                   color: Colors.white,
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(10, 10, 100, 10),
@@ -503,7 +504,7 @@ class _customerForgotPasswordPageState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image(
+                          const Image(
                             image: AssetImage(
                                 'assets/images/forgotPasswordEmail.png'),
                           ),
@@ -511,7 +512,7 @@ class _customerForgotPasswordPageState
                             'Email',
                             style: TextStyle(
                               color: Color(0xFF3E363F),
-                              fontSize: 20,
+                              fontSize: 20 * fontHelper(context),
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
                               height: 0,
@@ -621,11 +622,11 @@ class _CustomPhoneNumberDialogState extends State<CustomPhoneNumberDialog> {
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             "Enter your mobile number",
             style: TextStyle(
               color: Color(0xFF3E363F),
-              fontSize: 24,
+              fontSize: 24 * fontHelper(context),
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -752,11 +753,11 @@ class _CustomEmailDialogState extends State<CustomEmailDialog> {
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             "Enter your Email Address",
             style: TextStyle(
               color: Color(0xFF3E363F),
-              fontSize: 24,
+              fontSize: 24 * fontHelper(context),
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -851,22 +852,22 @@ class _CustomOTPDialogState extends State<CustomOTPDialog> {
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             "OTP sent",
             style: TextStyle(
               color: Color(0xFF3E363F),
-              fontSize: 24,
+              fontSize: 24 * fontHelper(context),
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               letterSpacing: -0.19,
             ),
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             'Type the OTP sent to your selected contact details.',
             style: TextStyle(
               color: Color(0xFF3E363F),
-              fontSize: 18,
+              fontSize: 18 * fontHelper(context),
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               letterSpacing: -0.07,
@@ -1042,11 +1043,11 @@ class _CustomPasswordResetDialogState extends State<CustomPasswordResetDialog> {
             // height: 45, width: 45
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             "Reset Your Password",
             style: TextStyle(
               color: Color(0xFF3E363F),
-              fontSize: 24,
+              fontSize: 24 * fontHelper(context),
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,

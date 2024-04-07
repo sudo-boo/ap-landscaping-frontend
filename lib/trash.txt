@@ -19,3 +19,45 @@
 
 
 
+
+  // void createPayment() async {
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse(paymentEngage),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Bearer ${widget.token}',
+  //       },
+  //       body: json.encode({
+  //         "orderId": widget.orderID,
+  //         "amount": 10
+  //       }),
+  //     );
+  //
+  //     // Print the request body for debugging
+  //     print('Request body: ${json.encode({
+  //       "orderId": widget.orderID,
+  //       "amount": 10,
+  //     })}');
+  //
+  //     // Print the response status code for debugging
+  //     print('Response status code: ${response.statusCode}');
+  //
+  //     // Print the response body for debugging
+  //     print('Response body: ${response.body}');
+  //
+  //     if (response.statusCode == 200) {
+  //       final responseData = json.decode(response.body);
+  //       setState(() {
+  //         sessionId = responseData['sessionId']['id'];
+  //         // paymentUrl = responseData['sessionId']['id'];
+  //       });
+  //     } else {
+  //       // Handle error
+  //       print('Error: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     // Handle network errors
+  //     print('Error: $e');
+  //   }
+  // }

@@ -1,5 +1,6 @@
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/pages/customer/create_order_success_page.dart';
+import 'package:ap_landscaping/pages/customer/test_payments_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'package:http/http.dart' as http;
@@ -37,8 +38,13 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => CongratsPage(
-                  token: widget.token, customerId: widget.customerId)));
+              builder: (context) => CustomerPaymentsPage(
+                  token: widget.token, customerId: widget.customerId, orderID: "XIXENYPVi0eFhQt0Z98I"
+              )
+
+              // builder: (context) => WikipediaLauncher()
+          )
+      );
     } else {
       print(response.statusCode);
       showDialog(
@@ -253,7 +259,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green[900]),
                         child: const Text(
-                          'Confirm Order',
+                          'Proceed to Payment',
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -263,6 +269,8 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                   ),
                 )
               ],
-            )));
+            )
+        )
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class FirstScrollPage extends StatefulWidget {
@@ -343,16 +344,16 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
               image: AssetImage('assets/images/startPage.png'),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: 50,
             right: 50,
-            top: 550,
+            top: screenHeight(context) * 0.6,
             child: SizedBox(
               child: Text(
                 "Would you like to register as a customer seeking landscaping services, or as a service provider offering your landscaping expertise?",
                 style: TextStyle(
                   color: Color(0xFF3E363F),
-                  fontSize: 16,
+                  fontSize: fontHelper(context) * 15,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                   // height: 0.08,
@@ -363,7 +364,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
           Positioned(
             left: 70,
             right: 70,
-            top: 700,
+            top: screenHeight(context) * 0.75,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -377,9 +378,9 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                     Navigator.of(context)
                         .pushReplacementNamed('/customersignin');
                   },
-                  child: const Text('Customer',
+                  child: Text('Customer',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: fontHelper(context) * 18,
                         color: Colors.white,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
@@ -398,9 +399,9 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                     Navigator.of(context)
                         .pushReplacementNamed('/providersignin');
                   },
-                  child: const Text('Client',
+                  child: Text('Client',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: fontHelper(context) * 18,
                         color: Colors.white,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
@@ -414,7 +415,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
           Positioned(
               left: 50,
               right: 50,
-              top: 775,
+              top: screenHeight(context) * 0.9,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
