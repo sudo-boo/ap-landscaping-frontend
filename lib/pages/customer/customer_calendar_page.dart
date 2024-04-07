@@ -157,11 +157,11 @@ class _CustomerCalendarPageState extends State<CustomerCalendarPage> {
                 },
                 todayBuilder: (context, date, _) {
                   return Container(
-                    margin: const EdgeInsets.all(4.0),
+                    margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle, // Change shape to rectangle
                       borderRadius: BorderRadius.circular(8.0), // Adjust border radius as needed
-                      color: Colors.red, // Set your desired color for today
+                      color: Colors.green.withOpacity(0.5), // Set your desired color for today
                     ),
                     child: Center(
                       child: Text(
