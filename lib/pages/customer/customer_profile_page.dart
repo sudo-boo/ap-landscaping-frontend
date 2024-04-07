@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ap_landscaping/pages/customer/customer_calendar_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_update_profile_page.dart';
@@ -241,6 +242,42 @@ class _profilePageState extends State<profilePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CustomerUpdateProfileInfoPage(
+                                      token: widget.token,
+                                      customerId: widget.customerId)));
+                        },
+                      ),
+                      ListTile(
+                        leading: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: const ShapeDecoration(
+                            color: Color(0xFF3E363F),
+                            shape: OvalBorder(),
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                                Icons.calendar_month_rounded,
+                              color: Colors.grey.shade300,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        title: const Text(
+                          'Calendar',
+                          style: TextStyle(
+                            color: Color(0xFF181D27),
+                            fontSize: 16,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0.12,
+                          ),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CustomerCalendarPage(
                                       token: widget.token,
                                       customerId: widget.customerId)));
                         },

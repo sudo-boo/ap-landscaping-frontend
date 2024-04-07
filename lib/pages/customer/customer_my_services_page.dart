@@ -109,7 +109,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       json.decode(response.body)['upcomingOrders'];
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
-        print(order['providerId']);
+        // print(order['providerId']);
         if(order['providerId'] != null){
           final providerDetails =
           await getProviderDetailsById(order['providerId']);
@@ -145,21 +145,21 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
           ));
         }
       }
-      for (var order in orders) {
-        print("Order ID: ${order.id}");
-        print("Service Type: ${order.serviceType}");
-        print("Address: ${order.address}");
-        print("Date: ${order.date}");
-        print("Time: ${order.time}");
-        print("Expectation Note: ${order.expectationNote}");
-        print("Customer ID: ${order.customerId}");
-        print("Provider ID: ${order.providerId}");
-        print("Is Finished: ${order.isFinished}");
-        print("Is Cancelled: ${order.isCancelled}");
-        print("Provider Name: ${order.providerName}");
-        // Print other details as needed
-        print("-----------------------------------");
-      }
+      // for (var order in orders) {
+      //   print("Order ID: ${order.id}");
+      //   print("Service Type: ${order.serviceType}");
+      //   print("Address: ${order.address}");
+      //   print("Date: ${order.date}");
+      //   print("Time: ${order.time}");
+      //   print("Expectation Note: ${order.expectationNote}");
+      //   print("Customer ID: ${order.customerId}");
+      //   print("Provider ID: ${order.providerId}");
+      //   print("Is Finished: ${order.isFinished}");
+      //   print("Is Cancelled: ${order.isCancelled}");
+      //   print("Provider Name: ${order.providerName}");
+      //   // Print other details as needed
+      //   print("-----------------------------------");
+      // }
       // print();
       return orders;
     } else {
