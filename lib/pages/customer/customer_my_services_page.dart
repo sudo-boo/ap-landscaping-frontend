@@ -1,6 +1,7 @@
 import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:ap_landscaping/utilities/customer_services_card.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'dart:convert';
@@ -231,13 +232,17 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
             },
           ),
           actions: <Widget>[
-            IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/notificationsIcon.png'),
-              ), // Notifications Bell Icon
-              onPressed: () {
-                // Handle notifications icon action (e.g., show notifications)
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: Icon(
+                    Icons.notifications_rounded,
+                  size: fontHelper(context) * 30,
+                ),
+                onPressed: () {
+                  // Handle notifications icon action (e.g., show notifications)
+                },
+              ),
             ),
           ],
           backgroundColor: Colors.transparent,

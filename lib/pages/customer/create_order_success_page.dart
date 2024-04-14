@@ -2,16 +2,16 @@ import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:flutter/material.dart';
 
-class CongratsPage extends StatefulWidget {
+class CustomerOrderConfirmationPage extends StatefulWidget {
   final token;
   final customerId;
-  const CongratsPage({Key? key, this.token, this.customerId}) : super(key: key);
+  const CustomerOrderConfirmationPage({Key? key, required this.token, required this.customerId}) : super(key: key);
 
   @override
-  _CongratsPageState createState() => _CongratsPageState();
+  _CustomerOrderConfirmationPageState createState() => _CustomerOrderConfirmationPageState();
 }
 
-class _CongratsPageState extends State<CongratsPage> {
+class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +47,7 @@ class _CongratsPageState extends State<CongratsPage> {
             padding: const EdgeInsets.all(0),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: (context) => CustomerServicesPage(

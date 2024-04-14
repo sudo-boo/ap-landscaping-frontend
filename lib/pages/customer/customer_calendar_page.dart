@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/customer/customer_order_details.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -230,79 +231,102 @@ class _CustomerCalendarPageState extends State<CustomerCalendarPage> {
       ),
     );
   }
-
   List<Widget> _buildEventsList(DateTime selectedDay) {
     final events = _events[selectedDay];
     return events != null
         ? events.map((event) => Padding(
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color(0xFFBBE1C5), // Set background color to #BBE1C5
-          borderRadius: BorderRadius.circular(20),
-        ),
-        padding: EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25, 10, 0, 0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 8, // Width of the icon
-                    height: 8, // Height of the icon
-                    margin: EdgeInsets.only(right: 5, top: 5), // Adjust spacing as needed
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.blue, width: 2), // Border properties
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                    child: Text(
-                      'Time: ${event['time']}',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        color: Colors.grey.shade700,
+      child: GestureDetector(
+        onTap: () {
+          // Navigate to another page when tapped
+          print(event['orderId']);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CustomerOrderDetailsPage(
+                customerId: widget.customerId,
+                token: widget.token,
+                orderId: event['orderId'],
+              )
+            ),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.lightGreen.shade700.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25, 10, 0, 0),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 8, // Width of the icon
+                      height: 8, // Height of the icon
+                      margin: EdgeInsets.only(right: 5, top: 5), // Adjust spacing as needed
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.blue, width: 2), // Border properties
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: Text(
+                        'Time: ${event['time']}',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25, 5, 0, 0),
+                child: Text(
+                  '${event['title']}',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.bold,
+                    fontSize: fontHelper(context) * 20,
+                    color: Colors.black,
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25, 10, 0, 0),
-              child: Text(
-                '${event['title']}',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.bold,
-                  fontSize: fontHelper(context) * 20,
-                  color: Colors.black,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25, 10, 0, 10),
-              child: Text(
-                '${event['provider']}',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w300,
-                  fontSize: fontHelper(context) * 12,
-                  color: Colors.grey.shade700,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25, 10, 0, 10),
+                child: Text(
+                  '${event['provider']}',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w300,
+                    fontSize: fontHelper(context) * 12,
+                    color: Colors.grey.shade700,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     )).toList()
-        : [Text('No events for this day')];
+        : [
+      const Padding(
+        padding: EdgeInsets.all(50.0),
+        child: Center(
+            child: Text('No events for this day')
+        ),
+      )
+    ];
   }
+
 
   List<String> _getEventsForDay(DateTime day) {
     final events = _events[day];
@@ -319,6 +343,7 @@ class _CustomerCalendarPageState extends State<CustomerCalendarPage> {
           'title': order.serviceType!,
           'time': order.time!,
           'provider': order.providerName!,
+          'orderId': order.id,
         };
         // Check if the _events already contains events for the given day
         if (_events.containsKey(formattedDate)) {

@@ -11,7 +11,7 @@ class CustomerOrderDetailsPage extends StatefulWidget {
   final token;
   final customerId;
   final orderId;
-  const CustomerOrderDetailsPage({Key? key, this.token, this.customerId, this.orderId})
+  const CustomerOrderDetailsPage({Key? key, required this.token, required this.customerId, required this.orderId})
       : super(key: key);
 
   @override
