@@ -86,6 +86,7 @@ class _CustomerCalendarPageState extends State<CustomerCalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text(
           'Calendar',
           style: TextStyle(
@@ -131,7 +132,7 @@ class _CustomerCalendarPageState extends State<CustomerCalendarPage> {
               selectedDayPredicate: (DateTime date) {
                 return isSameDay(_selectedDay, date);
               },
-              calendarStyle: CalendarStyle(
+              calendarStyle: const CalendarStyle(
                 markersAlignment: Alignment.bottomLeft,
                 defaultTextStyle: TextStyle(
                   fontFamily: 'Inter',
@@ -223,8 +224,11 @@ class _CustomerCalendarPageState extends State<CustomerCalendarPage> {
             ),
           ),
           Expanded(
-            child: ListView(
-              children: _buildEventsList(_selectedDay),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+              child: ListView(
+                children: _buildEventsList(_selectedDay),
+              ),
             ),
           ),
         ],

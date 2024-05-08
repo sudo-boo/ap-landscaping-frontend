@@ -42,7 +42,7 @@ class HomePageCategoryCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              width: 300,
+              width: 256,
               height: getDims.fractionHeight(0.2),
               decoration: ShapeDecoration(
                 color: containerColorTop,
@@ -54,17 +54,17 @@ class HomePageCategoryCard extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(2.0),
                 child: Image.asset(
                   imageLink,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
           ),
           Container(
-            width: 500,
-            height: getDims.fractionHeight(0.04),
+            width: 256,
+            height: getDims.fractionHeight(0.038),
             decoration: ShapeDecoration(
               color: containerColorBottom,
               shape: const RoundedRectangleBorder(
@@ -80,7 +80,7 @@ class HomePageCategoryCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: fontHelper(context) * 10,
+                  fontSize: fontHelper(context) * 11,
                 ),
               ),
             ),

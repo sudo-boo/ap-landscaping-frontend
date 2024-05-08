@@ -673,7 +673,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                   const Padding(
                     padding: EdgeInsets.only(left: 27.0, top: 16.0),
                     child: Text(
-                      'About Client',
+                      'About Provider',
                       style: TextStyle(
                         color: Color(0xFF3E363F),
                         fontSize: 16,
@@ -928,7 +928,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                   const Padding(
                     padding: EdgeInsets.only(left: 27.0, top: 16.0),
                     child: Text(
-                      'About Client',
+                      'About Provider',
                       style: TextStyle(
                         color: Color(0xFF3E363F),
                         fontSize: 16,

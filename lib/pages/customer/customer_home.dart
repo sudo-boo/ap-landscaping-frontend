@@ -1,9 +1,14 @@
+import 'dart:convert';
 import 'package:ap_landscaping/utilities/customer_home_category_card.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/categories_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
+import 'package:http/http.dart' as http;
+import '../../config.dart';
+import '../../models/customerinfo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class customerPage extends StatefulWidget {
   final token;
@@ -16,23 +21,73 @@ class customerPage extends StatefulWidget {
 }
 
 class _customerPageState extends State<customerPage> {
+  // Define customerInfo1 at the class level
+  customerInfo customerInfo1 = customerInfo();
+
+  Future<void> fetchAndSaveCustomerInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Check if the name is null in SharedPreferences
+    String? savedName = prefs.getString('name');
+    if (savedName == null) {
+      final url = Uri.parse(customerProfileInfo); // Replace with your API URL
+      try {
+        final response = await http.get(
+          url,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': '${widget.token}',
+          },
+        );
+
+        if (response.statusCode == 200) {
+          final dynamic data = json.decode(response.body);
+          setState(() {
+            // Update customerInfo1 with fetched data
+            customerInfo1.username = data['customer']['username'] ?? '';
+            // Other assignments...
+          });
+
+          await prefs.setString('name', customerInfo1.username);
+          // Print confirmation message
+          print('Username set in SharedPreferences: ${customerInfo1.username}');
+        } else {
+          // Handle error or non-200 responses
+          print('Failed to fetch customer info');
+        }
+      } catch (e) {
+        print('Error: $e');
+      }
+    } else {
+      // Name already exists in SharedPreferences, no need to fetch
+      print('Name already exists in SharedPreferences: $savedName');
+    }
+  }
 
   @override
+  void initState() {
+    super.initState();
+    fetchAndSaveCustomerInfo();
+  }
+
   Widget build(BuildContext context) {
     Dimensions getDims = Dimensions(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.person), // Profile Icon
+          icon: const Icon(Icons.person,
+            size: 35,
+          ), // Profile Icon
           onPressed: () {
             // Handle profile icon action (e.g., navigate to profile page)
           },
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Image(
-              image: AssetImage('assets/images/notificationsIcon.png'),
-            ), // Notifications Bell Icon
+            icon: Icon(
+              Icons.notifications_none_rounded,
+              size: 35,
+            ),
             onPressed: () {
               // Handle notifications icon action (e.g., show notifications)
             },
@@ -56,28 +111,28 @@ class _customerPageState extends State<customerPage> {
             Positioned(
               left: -280,
               right: -280,
-              top: -600,
+              top: -screenHeight(context) * 0.82,
               child: Container(
-                width: 960,
-                height: 960,
+                height: screenHeight(context) * 1.3,
                 decoration: const ShapeDecoration(
                   color: Color(0xFF73A580),
                   shape: OvalBorder(),
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: 0,
               right: 0,
               top: 0,
               child: Image(
-                image: AssetImage('assets/images/homeScreen.png'),
+                image: AssetImage('assets/images/homeScreen.png',),
+                height: screenHeight(context) * 0.4,
               ),
             ),
             Positioned(
+                top: screenHeight(context) * 0.4,
                 left: 0,
                 right: 0,
-                top: 300,
                 child: Text(
                   'Welcome Customer',
                   textAlign: TextAlign.center,
@@ -90,7 +145,7 @@ class _customerPageState extends State<customerPage> {
                   ),
                 )),
             Positioned(
-              top: 360,
+              top: screenHeight(context) * 0.47,
               left: 0,
               right: 0,
               child: Padding(
@@ -139,7 +194,7 @@ class _customerPageState extends State<customerPage> {
               ),
             ),
             Positioned(
-              top: 400,
+              top: screenHeight(context) * 0.52,
               left: 0,
               right: 0,
               child: Container(
@@ -217,13 +272,13 @@ class _customerPageState extends State<customerPage> {
               children: <Widget>[
                 IconButton(
                   icon: Image.asset('assets/images/homePressedIcon.png',
-                      height: 45, width: 45),
+                      height: 40, width: 40),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(0),
                 ),
                 IconButton(
                     icon: Image.asset('assets/images/myServicesIcon.png',
-                        height: 45, width: 45),
+                        height: 40, width: 40),
                     onPressed: () {
                       // _onItemTapped(1);
                       Navigator.pushReplacement(
@@ -236,7 +291,7 @@ class _customerPageState extends State<customerPage> {
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
                   icon: Image.asset('assets/images/communicationIcon.png',
-                      height: 45, width: 45),
+                      height: 40, width: 40),
                   onPressed: () {
 
                   },
@@ -244,7 +299,7 @@ class _customerPageState extends State<customerPage> {
                 ),
                 IconButton(
                   icon: Image.asset('assets/images/moreIcon.png',
-                      height: 45, width: 45),
+                      height: 40, width: 40),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -259,10 +314,10 @@ class _customerPageState extends State<customerPage> {
               ],
             ),
             Positioned(
-              top: -35, // Adjust this value to position the button as needed
+              top: -30, // Adjust this value to position the button as needed
               child: Container(
-                height: 100, // Increase the height for a larger button
-                width: 100, // Increase the width for a larger button
+                height: 90, // Increase the height for a larger button
+                width: 90, // Increase the width for a larger button
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle, // Ensures the container is circular
                   color: Color(0xFFBCDD8C), // Background color of the button
@@ -270,8 +325,8 @@ class _customerPageState extends State<customerPage> {
                 child: IconButton(
                   icon: Image.asset(
                     'assets/images/centerIcon.png',
-                    height: 100, // Adjust the size of the inner image/icon
-                    width: 100,
+                    height: 90, // Adjust the size of the inner image/icon
+                    width: 90,
                   ),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(2),

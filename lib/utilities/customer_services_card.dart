@@ -61,210 +61,218 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                       BorderRadius.circular(10),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-                        children: [
-                          Text(
-                            'Date',
-                            style: TextStyle(
-                              color:
-                              Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
-                              fontFamily: 'Inter',
-                              fontWeight:
-                              FontWeight.w600,
-                              height: 0,
-                            ),
-                          ),
-                          Text(
-                            widget.order!.date,
-                            textAlign:
-                            TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                        width: double.maxFinite,
-                        height: 1,
-                        decoration: ShapeDecoration(
-                          color:
-                          const Color(0xFF3E363F),
-                          shape:
-                          RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(
-                                12),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-                        children: [
-                          Text(
-                            'Time',
-                            style: TextStyle(
-                              color:
-                              Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
-                              fontFamily: 'Inter',
-                              fontWeight:
-                              FontWeight.w600,
-                              height: 0,
-                            ),
-                          ),
-                          Text(
-                            widget.order.time,
-                            textAlign:
-                            TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                        width: double.maxFinite,
-                        height: 1,
-                        decoration: ShapeDecoration(
-                          color:
-                          const Color(0xFF3E363F),
-                          shape:
-                          RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(
-                                12),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-                        children: [
-                          Text(
-                            'Provider',
-                            style: TextStyle(
-                              color:
-                              Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
-                              fontFamily: 'Inter',
-                              fontWeight:
-                              FontWeight.w600,
-                              height: 0,
-                            ),
-                          ),
-                          Text(
-                            widget.order.providerName,
-                            textAlign:
-                            TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                        width: double.maxFinite,
-                        height: 1,
-                        decoration: ShapeDecoration(
-                          color:
-                          const Color(0xFF3E363F),
-                          shape:
-                          RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(
-                                12),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-                        children: [
-                          Text(
-                            'Payment mode',
-                            style: TextStyle(
-                              color:
-                              Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
-                              fontFamily: 'Inter',
-                              fontWeight:
-                              FontWeight.w600,
-                              height: 0,
-                            ),
-                          ),
-                          Text(
-                            widget.order.providerId,
-                            textAlign:
-                            TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      // ListTile(
-                      //   title: Text(
-                      //     order.serviceType,
-                      //     textAlign: TextAlign.center,
-                      //   ),
-                      //   subtitle: Text(
-                      //     order.date,
-                      //     textAlign: TextAlign.center,
-                      //   ),
-                      // ),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      CustomerOrderDetailsPage(
-                                        token: widget.token,
-                                        customerId: widget.customerId,
-                                        orderId: widget.order.id,
-                                      ),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton
-                                .styleFrom(
-                              backgroundColor:
-                              Colors.green[900],
-                            ),
-                            child: const Text(
-                              'View Details',
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Date',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
                               ),
                             ),
+                            Text(
+                              widget.order!.date,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                          width: double.maxFinite,
+                          height: 1,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFF3E363F),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment
+                              .spaceBetween,
+                          children: [
+                            Text(
+                              'Time',
+                              style: TextStyle(
+                                color:
+                                Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                            Text(
+                              widget.order.time,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                          width: double.maxFinite,
+                          height: 1,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFF3E363F),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment
+                              .spaceBetween,
+                          children: [
+                            Text(
+                              'Provider',
+                              style: TextStyle(
+                                color:
+                                Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight:
+                                FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                            Text(
+                              widget.order.providerName,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                          width: double.maxFinite,
+                          height: 1,
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFF3E363F),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment
+                              .spaceBetween,
+                          children: [
+                            Text(
+                              'Payment mode',
+                              style: TextStyle(
+                                color: Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                            Text(
+                              widget.order.providerId,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF1C1F34),
+                                fontSize: fontHelper(context) * 13,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        // ListTile(
+                        //   title: Text(
+                        //     order.serviceType,
+                        //     textAlign: TextAlign.center,
+                        //   ),
+                        //   subtitle: Text(
+                        //     order.date,
+                        //     textAlign: TextAlign.center,
+                        //   ),
+                        // ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CustomerOrderDetailsPage(
+                                          token: widget.token,
+                                          customerId: widget.customerId,
+                                          orderId: widget.order.id,
+                                        ),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                Colors.green[900],
+                              ),
+                              child: const Text(
+                                'View Details',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

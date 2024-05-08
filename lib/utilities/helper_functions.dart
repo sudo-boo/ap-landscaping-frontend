@@ -1,9 +1,23 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
+// double fontHelper(BuildContext context){
+//   double aspectRatio = ((screenWidth(context) + screenHeight(context)) * (screenWidth(context) + screenHeight(context)));
+//   return sqrt(sqrt(sqrt(sqrt(sqrt(sqrt(sqrt(sqrt(aspectRatio))))))));
+// }
+
+
 double fontHelper(BuildContext context){
-  double aspectRatio = 400 / 900;
-  return (MediaQuery.of(context).size.width / aspectRatio) / 900;
+  // print(screenHeight(context));
+  double aspectRatio = MediaQuery.of(context).size.height / 900;
+  // print(aspectRatio);
+  return aspectRatio;
 }
+
+// double fontHelper(BuildContext context){
+//   return 1;
+// }
 
 double screenWidth(BuildContext context){
   return MediaQuery.of(context).size.width;

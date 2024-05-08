@@ -399,7 +399,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                     Navigator.of(context)
                         .pushReplacementNamed('/providersignin');
                   },
-                  child: Text('Client',
+                  child: Text('Provider',
                       style: TextStyle(
                         fontSize: fontHelper(context) * 18,
                         color: Colors.white,

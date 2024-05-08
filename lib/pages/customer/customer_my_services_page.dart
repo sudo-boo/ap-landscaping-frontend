@@ -417,7 +417,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                 children: <Widget>[
                   IconButton(
                     icon: Image.asset('assets/images/homeIcon.png',
-                        height: 45, width: 45),
+                        height: 40, width: 40),
                     onPressed: () {
                       // Navigator.pop(context);
                       Navigator.pushReplacement(
@@ -435,21 +435,20 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                   IconButton(
                       icon: Image.asset(
                           'assets/images/myServicesPressedIcon.png',
-                          height: 45,
-                          width: 45),
+                          height: 40, width: 40),
                       onPressed: () {
                       }),
                   const SizedBox(
                       width: 90), // Placeholder for the center button
                   IconButton(
                     icon: Image.asset('assets/images/communicationIcon.png',
-                        height: 45, width: 45),
+                        height: 40, width: 40),
                     onPressed: () {},
                     // onPressed: () => _onItemTapped(3),
                   ),
                   IconButton(
                     icon: Image.asset('assets/images/moreIcon.png',
-                        height: 45, width: 45),
+                        height: 40, width: 40),
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
@@ -465,10 +464,10 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                 ],
               ),
               Positioned(
-                top: -35, // Adjust this value to position the button as needed
+                top: -30, // Adjust this value to position the button as needed
                 child: Container(
-                  height: 100, // Increase the height for a larger button
-                  width: 100, // Increase the width for a larger button
+                  height: 90, // Increase the height for a larger button
+                  width: 90, // Increase the width for a larger button
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle, // Ensures the container is circular
                     color: Color(0xFFBCDD8C), // Background color of the button
@@ -476,8 +475,8 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                   child: IconButton(
                     icon: Image.asset(
                       'assets/images/centerIcon.png',
-                      height: 100, // Adjust the size of the inner image/icon
-                      width: 100,
+                      height: 90, // Adjust the size of the inner image/icon
+                      width: 90,
                     ),
                     onPressed: () {},
                     // onPressed: () => _onItemTapped(2),

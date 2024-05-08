@@ -5,6 +5,7 @@ import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_update_profile_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,9 @@ class profilePage extends StatefulWidget {
 }
 
 class _profilePageState extends State<profilePage> {
+
+  late String username = '';
+
   void showCustomSignOutBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -141,6 +145,7 @@ class _profilePageState extends State<profilePage> {
           prefs.remove('token');
           prefs.remove('profileType');
           prefs.remove('id');
+          prefs.remove('name');
         });
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -163,7 +168,24 @@ class _profilePageState extends State<profilePage> {
     }
   }
 
+  Future<void> getUsernameFromSharedPreferences() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        username = prefs.getString('name') ?? ''; // Retrieve username from shared preferences
+      });
+    } catch (e) {
+      print('Error retrieving username: $e');
+    }
+  }
+
+
   @override
+  void initState() {
+    super.initState();
+    getUsernameFromSharedPreferences();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -202,35 +224,81 @@ class _profilePageState extends State<profilePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
               child: Card(
-                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                color: const Color(0xFFFDFABE),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.fromLTRB(5, 18, 10, 18),
                   child: Column(
                     children: [
                       ListTile(
                         leading: Container(
-                          width: 40,
-                          height: 40,
+                          width: 60,
+                          height: 60,
+                          decoration: const ShapeDecoration(
+                            color: Color(0xFF3E363F),
+                            shape: CircleBorder(),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.perm_identity_outlined,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        title: Text(
+                          username,
+                          style: const TextStyle(
+                            color: Color(0xFF181D27),
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0.12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: ListTile(
+                        leading: Container(
+                          width: 50,
+                          height: 50,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF3E363F),
                             shape: OvalBorder(),
                           ),
                           child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/userIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
+                            icon: const Icon(
+                              Icons.perm_identity_outlined,
+                              color: Colors.white,
                             ),
                             onPressed: () {},
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'My Account',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: fontHelper(context) * 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -246,27 +314,30 @@ class _profilePageState extends State<profilePage> {
                                       customerId: widget.customerId)));
                         },
                       ),
-                      ListTile(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: ListTile(
                         leading: Container(
-                          width: 40,
-                          height: 40,
+                          width: 50,
+                          height: 50,
                           decoration: const ShapeDecoration(
-                            color: Color(0xFF3E363F),
+                            color: Colors.orangeAccent,
                             shape: OvalBorder(),
                           ),
                           child: IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                                 Icons.calendar_month_rounded,
-                              color: Colors.grey.shade300,
+                              color: Colors.white,
                             ),
                             onPressed: () {},
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Calendar',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: fontHelper(context) * 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -282,28 +353,32 @@ class _profilePageState extends State<profilePage> {
                                       customerId: widget.customerId)));
                         },
                       ),
-                      ListTile(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: ListTile(
                         leading: Container(
-                          width: 40,
-                          height: 40,
+                          width: 50,
+                          height: 50,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF96C257),
                             shape: OvalBorder(),
                           ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/settingsIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
+                          child: Center(
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.settings_outlined,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
                             ),
-                            onPressed: () {},
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Settings',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: fontHelper(context) * 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -312,28 +387,30 @@ class _profilePageState extends State<profilePage> {
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {},
                       ),
-                      ListTile(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                      child: ListTile(
                         leading: Container(
-                          width: 40,
-                          height: 40,
+                          width: 50,
+                          height: 50,
                           decoration: const ShapeDecoration(
                             color: Color(0xFFC8B88A),
                             shape: OvalBorder(),
                           ),
                           child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/logoutIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
+                            icon: const Icon(
+                              Icons.logout_rounded,
+                              color: Colors.white,
                             ),
                             onPressed: () {},
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Sign out',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: fontHelper(context) * 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -344,8 +421,8 @@ class _profilePageState extends State<profilePage> {
                           showCustomSignOutBottomSheet(context);
                         },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -363,7 +440,7 @@ class _profilePageState extends State<profilePage> {
               children: <Widget>[
                 IconButton(
                   icon: Image.asset('assets/images/homeIcon.png',
-                      height: 45, width: 45),
+                      height: 40, width: 40),
                   onPressed: () {
                     Navigator.pushReplacement(
                         context,
@@ -376,7 +453,7 @@ class _profilePageState extends State<profilePage> {
                 ),
                 IconButton(
                     icon: Image.asset('assets/images/myServicesIcon.png',
-                        height: 45, width: 45),
+                        height: 40, width: 40),
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
@@ -391,23 +468,23 @@ class _profilePageState extends State<profilePage> {
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
                   icon: Image.asset('assets/images/communicationIcon.png',
-                      height: 45, width: 45),
+                      height: 40, width: 40),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
                   icon: Image.asset('assets/images/morePressedIcon.png',
-                      height: 45, width: 45),
+                      height: 40, width: 40),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(4),
                 ),
               ],
             ),
             Positioned(
-              top: -35, // Adjust this value to position the button as needed
+              top: -30, // Adjust this value to position the button as needed
               child: Container(
-                height: 100, // Increase the height for a larger button
-                width: 100, // Increase the width for a larger button
+                height: 90, // Increase the height for a larger button
+                width: 90, // Increase the width for a larger button
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle, // Ensures the container is circular
                   color: Color(0xFFBCDD8C), // Background color of the button
@@ -415,8 +492,8 @@ class _profilePageState extends State<profilePage> {
                 child: IconButton(
                   icon: Image.asset(
                     'assets/images/centerIcon.png',
-                    height: 100, // Adjust the size of the inner image/icon
-                    width: 100,
+                    height: 90, // Adjust the size of the inner image/icon
+                    width: 90,
                   ),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(2),
