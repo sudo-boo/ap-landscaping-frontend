@@ -49,12 +49,15 @@ class _ProviderSignInState extends State<ProviderSignIn> {
               builder: (context) =>
                   ProviderPage(token: myToken, providerId: myProviderId)));
     } else {
+      setState(() {
+        isLoading = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text("Error"),
-              // content: Text(err.message),
+              content: Text("Error code: ${response.statusCode}"),
               actions: [
                 TextButton(
                   child: const Text("Ok"),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../pages/provider/provider_order_details_page.dart';
+import '../pages/services_data.dart';
+import 'helper_functions.dart';
 
-import 'package:flutter/material.dart';
-
-class ProviderServicesCard extends StatelessWidget {
+class ProviderServicesCard extends StatefulWidget {
   final dynamic order;
   final token;
   final providerId;
@@ -27,6 +26,32 @@ class ProviderServicesCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ProviderServicesCard> createState() => _ProviderServicesCardState();
+}
+
+
+class _ProviderServicesCardState extends State<ProviderServicesCard> {
+  late String imageURL = '';
+
+  void setData(){
+    for (var service in servicesData) {
+      if (service.containsKey(widget.order.serviceType)) {
+        var serviceData = service[widget.order.serviceType];
+        setState(() {
+          imageURL = serviceData["image_link"];
+        });
+        break;
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -41,7 +66,7 @@ class ProviderServicesCard extends StatelessWidget {
                   alignment:
                   Alignment.centerLeft,
                   child: Text(
-                    order.serviceType,
+                    widget.order.serviceType,
                     // textAlign: TextAlign.left,
                     style: const TextStyle(
                       color: Color(0xFF1C1F34),
@@ -53,12 +78,32 @@ class ProviderServicesCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+                    child: imageURL.isNotEmpty
+                        ? Image(
+                      image: AssetImage(imageURL),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: screenWidth(context) * 0.35,
+                    )
+                        : Icon(
+                      Icons.image_not_supported, // Placeholder icon
+                      size: 50, // Adjust size as needed
+                      color: Colors.grey, // Adjust color as needed
+                    ),
+                  ),
+                ),
+
+
                 const SizedBox(
                   height: 10,
                 ),
                 Container(
                   padding:
-                  const EdgeInsets.fromLTRB(24.0, 40.0, 24.0, 24.0),
+                  const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -81,7 +126,7 @@ class ProviderServicesCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            order!.date,
+                            widget.order!.date,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -113,7 +158,7 @@ class ProviderServicesCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            order.time,
+                            widget.order.time,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -144,7 +189,7 @@ class ProviderServicesCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            order.customerName,
+                            widget.order.customerName,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -176,13 +221,13 @@ class ProviderServicesCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            order.providerId!,
+                            widget.order.providerId!,
                             textAlign: TextAlign.center,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8,),
-                      (isAccepted)
+                      const SizedBox(height: 15,),
+                      (widget.isAccepted)
                           ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -193,9 +238,9 @@ class ProviderServicesCard extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                       ProviderOrderDetailsPage(
-                                        token: token,
-                                        providerId: providerId,
-                                        orderId: order.id,
+                                        token: widget.token,
+                                        providerId: widget.providerId,
+                                        orderId: widget.order.id,
                                       ),
                                     ),
                                   );
@@ -218,7 +263,7 @@ class ProviderServicesCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ElevatedButton(
-                                onPressed: onPress1,
+                                onPressed: widget.onPress1,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(255, 144, 90, 219),
                                 ),
@@ -230,7 +275,7 @@ class ProviderServicesCard extends StatelessWidget {
                                 ),
                               ),
                               ElevatedButton(
-                                onPressed: onPress2,
+                                onPressed: widget.onPress2,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                 ),
@@ -257,12 +302,12 @@ class ProviderServicesCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: statusColor,
+              color: widget.statusColor,
               borderRadius:
               BorderRadius.circular(10),
             ),
             child: Text(
-              statusText,
+              widget.statusText,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,

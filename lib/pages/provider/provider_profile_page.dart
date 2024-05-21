@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config.dart';
+import '../../utilities/helper_functions.dart';
 
 class ProviderProfilePage extends StatefulWidget {
   final token;
@@ -21,6 +22,8 @@ class ProviderProfilePage extends StatefulWidget {
 }
 
 class _ProviderProfilePageState extends State<ProviderProfilePage> {
+  String username = '';
+
   void showCustomSignOutBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -122,6 +125,17 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
     );
   }
 
+  Future<void> getUsernameFromSharedPreferences() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        username = prefs.getString('name') ?? ''; // Retrieve username from shared preferences
+      });
+    } catch (e) {
+      print('Error retrieving username: $e');
+    }
+  }
+
   Future<void> logoutProvider() async {
     var url = Uri.parse(providerLogout); // Replace with your actual endpoint
     try {
@@ -163,6 +177,11 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getUsernameFromSharedPreferences();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -195,6 +214,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
             }),
         // backgroundColor: Colors.green[900],
       ),
+
       body: Container(
         color: const Color(0xFFBBE1C5),
         width: double.infinity,
@@ -202,35 +222,81 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
               child: Card(
-                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                color: const Color(0xFFFDFABE),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.fromLTRB(5, 18, 10, 18),
                   child: Column(
                     children: [
                       ListTile(
                         leading: Container(
-                          width: 40,
-                          height: 40,
+                          width: 60,
+                          height: 60,
+                          decoration: const ShapeDecoration(
+                            color: Color(0xFF3E363F),
+                            shape: CircleBorder(),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.perm_identity_outlined,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        title: Text(
+                          username,
+                          style: const TextStyle(
+                            color: Color(0xFF181D27),
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0.12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: ListTile(
+                        leading: Container(
+                          width: 50,
+                          height: 50,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF3E363F),
                             shape: OvalBorder(),
                           ),
                           child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/userIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
+                            icon: const Icon(
+                              Icons.perm_identity_outlined,
+                              color: Colors.white,
                             ),
                             onPressed: () {},
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'My Account',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: fontHelper(context) * 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -246,28 +312,32 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                                       providerId: widget.providerId)));
                         },
                       ),
-                      ListTile(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: ListTile(
                         leading: Container(
-                          width: 40,
-                          height: 40,
+                          width: 50,
+                          height: 50,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF96C257),
                             shape: OvalBorder(),
                           ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/settingsIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
+                          child: Center(
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.settings_outlined,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
                             ),
-                            onPressed: () {},
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Settings',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: fontHelper(context) * 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -276,28 +346,30 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {},
                       ),
-                      ListTile(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+                      child: ListTile(
                         leading: Container(
-                          width: 40,
-                          height: 40,
+                          width: 50,
+                          height: 50,
                           decoration: const ShapeDecoration(
                             color: Color(0xFFC8B88A),
                             shape: OvalBorder(),
                           ),
                           child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/logoutIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
+                            icon: const Icon(
+                              Icons.logout_rounded,
+                              color: Colors.white,
                             ),
                             onPressed: () {},
                           ),
                         ),
-                        title: const Text(
+                        title: Text(
                           'Sign out',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: fontHelper(context) * 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -305,20 +377,184 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                         ),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {
-                          // logoutprovider();
-                          //  Navigator.of(context).pushReplacementNamed('/home');
-                          // print(widget.token);
                           showCustomSignOutBottomSheet(context);
                         },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ],
         ),
       ),
+      // body: Container(
+      //   color: const Color(0xFFBBE1C5),
+      //   width: double.infinity,
+      //   height: double.infinity,
+      //   child: Column(
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.all(16.0),
+      //         child: Card(
+      //           color: Colors.white,
+      //           child: Padding(
+      //             padding: const EdgeInsets.all(10.0),
+      //             child: Column(
+      //               children: [
+      //                 Padding(
+      //                   padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+      //                   child: Card(
+      //                     shape: RoundedRectangleBorder(
+      //                       borderRadius: BorderRadius.circular(30.0),
+      //                     ),
+      //                     color: const Color(0xFFFDFABE),
+      //                     child: Padding(
+      //                       padding: const EdgeInsets.fromLTRB(5, 18, 10, 18),
+      //                       child: Column(
+      //                         children: [
+      //                           ListTile(
+      //                             leading: Container(
+      //                               width: 60,
+      //                               height: 60,
+      //                               decoration: const ShapeDecoration(
+      //                                 color: Color(0xFF3E363F),
+      //                                 shape: CircleBorder(),
+      //                               ),
+      //                               child: IconButton(
+      //                                 icon: const Icon(
+      //                                   Icons.perm_identity_outlined,
+      //                                   color: Colors.white,
+      //                                 ),
+      //                                 onPressed: () {},
+      //                               ),
+      //                             ),
+      //                             title: Text(
+      //                               username,
+      //                               style: const TextStyle(
+      //                                 color: Color(0xFF181D27),
+      //                                 fontSize: 20,
+      //                                 fontFamily: 'Inter',
+      //                                 fontWeight: FontWeight.w600,
+      //                                 height: 0.12,
+      //                               ),
+      //                             ),
+      //                           ),
+      //                         ],
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 ),
+      //                 ListTile(
+      //                   leading: Container(
+      //                     width: 40,
+      //                     height: 40,
+      //                     decoration: const ShapeDecoration(
+      //                       color: Color(0xFF3E363F),
+      //                       shape: OvalBorder(),
+      //                     ),
+      //                     child: IconButton(
+      //                       icon: Image.asset(
+      //                         'assets/images/userIcon.png',
+      //                         // height: 100, // Adjust the size of the inner image/icon
+      //                         // width: 100,
+      //                       ),
+      //                       onPressed: () {},
+      //                     ),
+      //                   ),
+      //                   title: const Text(
+      //                     'My Account',
+      //                     style: TextStyle(
+      //                       color: Color(0xFF181D27),
+      //                       fontSize: 16,
+      //                       fontFamily: 'Inter',
+      //                       fontWeight: FontWeight.w600,
+      //                       height: 0.12,
+      //                     ),
+      //                   ),
+      //                   trailing: const Icon(Icons.arrow_forward_ios),
+      //                   onTap: () {
+      //                     Navigator.push(
+      //                         context,
+      //                         MaterialPageRoute(
+      //                             builder: (context) => ProviderUpdateProfileInfoPage(
+      //                                 token: widget.token,
+      //                                 providerId: widget.providerId)));
+      //                   },
+      //                 ),
+      //                 ListTile(
+      //                   leading: Container(
+      //                     width: 40,
+      //                     height: 40,
+      //                     decoration: const ShapeDecoration(
+      //                       color: Color(0xFF96C257),
+      //                       shape: OvalBorder(),
+      //                     ),
+      //                     child: IconButton(
+      //                       icon: Image.asset(
+      //                         'assets/images/settingsIcon.png',
+      //                         // height: 100, // Adjust the size of the inner image/icon
+      //                         // width: 100,
+      //                       ),
+      //                       onPressed: () {},
+      //                     ),
+      //                   ),
+      //                   title: const Text(
+      //                     'Settings',
+      //                     style: TextStyle(
+      //                       color: Color(0xFF181D27),
+      //                       fontSize: 16,
+      //                       fontFamily: 'Inter',
+      //                       fontWeight: FontWeight.w600,
+      //                       height: 0.12,
+      //                     ),
+      //                   ),
+      //                   trailing: const Icon(Icons.arrow_forward_ios),
+      //                   onTap: () {},
+      //                 ),
+      //                 ListTile(
+      //                   leading: Container(
+      //                     width: 40,
+      //                     height: 40,
+      //                     decoration: const ShapeDecoration(
+      //                       color: Color(0xFFC8B88A),
+      //                       shape: OvalBorder(),
+      //                     ),
+      //                     child: IconButton(
+      //                       icon: Image.asset(
+      //                         'assets/images/logoutIcon.png',
+      //                         // height: 100, // Adjust the size of the inner image/icon
+      //                         // width: 100,
+      //                       ),
+      //                       onPressed: () {},
+      //                     ),
+      //                   ),
+      //                   title: const Text(
+      //                     'Sign out',
+      //                     style: TextStyle(
+      //                       color: Color(0xFF181D27),
+      //                       fontSize: 16,
+      //                       fontFamily: 'Inter',
+      //                       fontWeight: FontWeight.w600,
+      //                       height: 0.12,
+      //                     ),
+      //                   ),
+      //                   trailing: const Icon(Icons.arrow_forward_ios),
+      //                   onTap: () {
+      //                     // logoutprovider();
+      //                     //  Navigator.of(context).pushReplacementNamed('/home');
+      //                     // print(widget.token);
+      //                     showCustomSignOutBottomSheet(context);
+      //                   },
+      //                 ),
+      //               ],
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         child: Stack(

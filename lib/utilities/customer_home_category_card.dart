@@ -1,3 +1,5 @@
+import 'package:ap_landscaping/pages/customer/create_order_success_page.dart';
+import 'package:ap_landscaping/pages/customer/customer_services_intro_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import '../pages/customer/customer_scheduling_page.dart';
@@ -26,17 +28,28 @@ class HomePageCategoryCard extends StatelessWidget {
     Dimensions getDims = Dimensions(context);
     return InkWell(
       onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CustomerSchedulingPage(
-              serviceName: serviceName,
-              token: token,
-              customerId: customerId
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CustomerServicesInfoPage(
+                serviceName: serviceName,
+                token: token,
+                customerId: customerId
+            ),
           ),
-        ),
-      );
-    },
+        );
+      },
+    //   onTap: () {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => CustomerOrderConfirmationPage(
+    //           token: token,
+    //           customerId: customerId
+    //       ),
+    //     ),
+    //   );
+    // },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

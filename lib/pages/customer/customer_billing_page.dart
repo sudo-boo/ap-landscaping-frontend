@@ -19,7 +19,8 @@ class CustomerBillingPage extends StatefulWidget {
 }
 
 class _CustomerBillingPageState extends State<CustomerBillingPage> {
-  void create_Order() async {
+
+  Future<void> CreateOrder() async {
     var orderBody = {
       "serviceType": widget.order_info.serviceType,
       "address": widget.order_info.address,
@@ -28,44 +29,60 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
       "expectationNote": widget.order_info.expectationNote,
       "customerId": widget.order_info.customerId,
     };
-    var response = await http.post(Uri.parse(createOrder),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': '${widget.token}',
-        },
-        body: jsonEncode(orderBody));
-    if (response.statusCode == 201) {
-      Navigator.pushReplacement(
+
+    try {
+      var response = await http.post(Uri.parse(createOrder),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': '${widget.token}',
+          },
+          body: jsonEncode(orderBody));
+
+
+      if (response.statusCode == 201) {
+        var responseBody = jsonDecode(response.body);
+        print("Order id is : ${responseBody["orderId"]}");
+
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => CustomerPaymentsPage(
-                  token: widget.token, customerId: widget.customerId, orderID: "XIXENYPVi0eFhQt0Z98I"
-              )
-
-              // builder: (context) => WikipediaLauncher()
-          )
-      );
-    } else {
-      print(response.statusCode);
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Error"),
-              // content: Text(err.message),
-              actions: [
-                TextButton(
-                  child: const Text("Ok"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
+            builder: (context) => CustomerPaymentsPage(
+              token: widget.token,
+              customerId: widget.customerId,
+              orderID: responseBody["orderId"],
+              serviceType: widget.order_info.serviceType,
+            ),
+          ),
+        );
+      } else {
+        print(response.statusCode);
+        showErrorDialog(context, 'Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      print(e);
+      showErrorDialog(context, 'An error occurred.');
     }
   }
 
+  void showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Error"),
+          content: Text(message),
+          actions: [
+            TextButton(
+              child: const Text("Ok"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -254,7 +271,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          create_Order();
+                          CreateOrder();
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green[900]),

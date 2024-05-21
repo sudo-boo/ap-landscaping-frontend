@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 import '../../utilities/customer_category_page_card.dart';
 
 
-class categoriesPage extends StatefulWidget {
+class ServicesCategoriesPage extends StatefulWidget {
   final token;
   final customerId;
-  const categoriesPage(
+  const ServicesCategoriesPage(
       {required this.token, required this.customerId, Key? key})
       : super(key: key);
 
   @override
-  State<categoriesPage> createState() => _categoriesState();
+  State<ServicesCategoriesPage> createState() => _ServicesCategoriesState();
 }
 
-class _categoriesState extends State<categoriesPage> {
+class _ServicesCategoriesState extends State<ServicesCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

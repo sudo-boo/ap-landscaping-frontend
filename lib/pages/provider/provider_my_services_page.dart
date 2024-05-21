@@ -138,25 +138,72 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
     }
   }
 
-  Future<void> acceptOrDeclineOrder(String orderId, String action) async {
+  Future<void> acceptOrDeclineOrder(BuildContext context, String orderId, String action) async {
     try {
       final response = await http.put(
-        Uri.parse(
-            acceptOrderByProvider),
+        Uri.parse(acceptOrderByProvider),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': '${widget.token}',
         },
-        body: json.encode({'action': action, 'orderId' : orderId}),
+        body: json.encode({'action': action, 'orderId': orderId}),
       );
+
       if (response.statusCode == 200) {
-        print('Order ${action == 'accept' ? 'accepted' : 'declined'} successfully');
+        _showPopup(context, 'Success', 'Order ${action == 'accept' ? 'accepted' : 'declined'} successfully.!!');
       } else {
-        print('Failed to ${action == 'accept' ? 'accept' : 'decline'} order. Status Code: ${response.statusCode}');
+        _showPopup(context, 'Failure', 'Failed to ${action == 'accept' ? 'accept' : 'decline'} order. Status Code: ${response.statusCode}');
       }
     } catch (error) {
-      print('Error accepting/declining order: $error');
+      _showPopup(context, 'Error', 'Error accepting/declining order: $error');
     }
+  }
+
+  void _showPopup(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              color: Colors.green, // Change title color to green
+            ),
+          ),
+          content: Text(
+            message,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              color: Colors.black87, // Change content text color to black
+            ),
+          ),
+          backgroundColor: Colors.white, // Change background color to white
+          actions: [
+            TextButton(
+              child: Text(
+                'OK',
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  color: Colors.green, // Change button text color to green
+                ),
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProviderMyServicesPage(
+                            token: widget.token,
+                            providerId: widget.providerId
+                        )
+                    )
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -285,28 +332,10 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                                       statusColor: statusColor,
                                       isAccepted: false,
                                       onPress1: (){
-                                        acceptOrDeclineOrder(order.id, 'accept');
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => ProviderMyServicesPage(
-                                              token: widget.token,
-                                              providerId: widget.providerId
-                                            )
-                                          )
-                                        );
+                                        acceptOrDeclineOrder(context, order.id, 'accept');
                                       },
                                       onPress2: (){
-                                        acceptOrDeclineOrder(order.id, 'decline');
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => ProviderMyServicesPage(
-                                              token: widget.token,
-                                              providerId: widget.providerId
-                                            )
-                                          )
-                                        );
+                                        acceptOrDeclineOrder(context, order.id, 'decline');
                                       },
                                     );
                                   }

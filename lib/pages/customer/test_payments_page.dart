@@ -8,15 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../services_data.dart';
+
 class CustomerPaymentsPage extends StatefulWidget {
   final String token;
   final String customerId;
   final String orderID;
+  final String serviceType;
 
   const CustomerPaymentsPage({
     required this.token,
     required this.customerId,
     required this.orderID,
+    required this.serviceType,
     Key? key,
   }) : super(key: key);
 
@@ -46,6 +50,16 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
   // }
 
   void createPayment() async {
+    double priceAmount = 0.0;
+    for (var service in servicesData) {
+      if (service.containsKey(widget.serviceType)) {
+        var serviceData = service[widget.serviceType];
+        setState(() {
+          priceAmount = serviceData["price"];
+        });
+        break;
+      }
+    }
     try {
       final response = await http.post(
         Uri.parse(paymentEngage),
@@ -55,15 +69,15 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
         },
         body: json.encode({
           "orderId": widget.orderID,
-          "amount": 10
+          "amount": priceAmount
         }),
       );
 
       // Print the request body for debugging
-      print('Request body: ${json.encode({
-        "orderId": widget.orderID,
-        "amount": 10,
-      })}');
+      // print('Request body: ${json.encode({
+      //   "orderId": widget.orderID,
+      //   "amount": 10,
+      // })}');
 
       // Print the response status code for debugging
       print('Response status code: ${response.statusCode}');
@@ -73,12 +87,12 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
         setState(() {
           sessionId = responseData['sessionId']['id'];
           paymentUrl = responseData['sessionId']['url'];
-          print("session ID: $sessionId");
-          print("url: $paymentUrl");
-          print('Response Data:');
-          responseData.forEach((key, value) {
-            print('$key: $value');
-          });
+          // print("session ID: $sessionId");
+          // print("url: $paymentUrl");
+          // print('Response Data:');
+          // responseData.forEach((key, value) {
+          //   print('$key: $value');
+          // });
         });
 
         // Launch the payment URL directly
@@ -122,7 +136,10 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CustomerOrderConfirmationPage(token: widget.token, customerId: widget.customerId)
+                              builder: (context) => CustomerOrderConfirmationPage(
+                                  token: widget.token,
+                                  customerId: widget.customerId
+                              )
                           ),
                         );
                         return NavigationDecision.prevent;
@@ -141,7 +158,10 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => customerPage(token: widget.token, customerId: widget.customerId),
+                                        builder: (context) => customerPage(
+                                          token: widget.token,
+                                          customerId: widget.customerId
+                                        ),
                                       ),
                                     );
                                   },
@@ -152,8 +172,6 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                         );
                         return NavigationDecision.prevent;
                       }
-
-
                       return NavigationDecision.navigate;
                     },
                   ),

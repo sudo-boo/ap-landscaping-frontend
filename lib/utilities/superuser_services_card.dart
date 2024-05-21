@@ -2,6 +2,8 @@ import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/customer_order_details.dart';
 
+import '../pages/services_data.dart';
+
 class SuperUserServicesCard extends StatefulWidget {
   final order;
   final token;
@@ -21,6 +23,26 @@ class SuperUserServicesCard extends StatefulWidget {
 }
 
 class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
+  late String imageURL = '';
+
+  void setData(){
+    for (var service in servicesData) {
+      if (service.containsKey(widget.order.serviceType)) {
+        var serviceData = service[widget.order.serviceType];
+        setState(() {
+          imageURL = serviceData["image_link"];
+        });
+        break;
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,12 +84,29 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+                    child: imageURL.isNotEmpty
+                        ? Image(
+                      image: AssetImage(imageURL),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: screenWidth(context) * 0.35,
+                    )
+                        : Icon(
+                      Icons.image_not_supported, // Placeholder icon
+                      size: 50, // Adjust size as needed
+                      color: Colors.grey, // Adjust color as needed
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(
-                      24.0, 40.0, 24.0, 24.0),
+                  padding: const EdgeInsets.all(20),
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -234,7 +273,7 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                         ],
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 15,
                       ),
                       // ListTile(
                       //   title: Text(

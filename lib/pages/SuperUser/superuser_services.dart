@@ -1,11 +1,15 @@
 import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
+import 'package:ap_landscaping/pages/SuperUser/superuser_profile_page.dart';
 import 'package:ap_landscaping/utilities/superuser_services_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
+
+import '../../utilities/helper_functions.dart';
 
 class SuperUserServicesPage extends StatefulWidget {
   final token;
@@ -85,27 +89,116 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
     }
   }
 
-  Future<void> assignProvider(String orderId, String providerId) async {
+
+  Future<void> assignProvider(String orderId, providerInfo? providerInfo1, BuildContext context) async {
     try {
       final response = await http.post(
-          Uri.parse(superUserAssignProvider),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': '${widget.token}',
-          },
-          body: jsonEncode({
-            "orderId": orderId,
-            "providerId": providerId,
-          })
+        Uri.parse(superUserAssignProvider),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': '${widget.token}',
+        },
+        body: jsonEncode({
+          "orderId": orderId,
+          "providerId": providerInfo1!.id,
+        }),
       );
       if (response.statusCode == 200) {
-        print("Request successful");
+        // print("Request successful");
+        // Show success dialog
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(
+                  "Success",
+                style: TextStyle(
+                  color: Colors.green,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                  height: 0,
+                ),
+              ),
+              content: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: Color(0xFF1C1F34),
+                    fontSize: fontHelper(context) * 14,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w400,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "Order successfully assigned to Provider ",
+                    ),
+                    TextSpan(
+                      text: "${providerInfo1.username}",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // Navigate to another page after the assignment is done
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => SuperUserServicesPage(
+                          token: widget.token,
+                          superUserId: widget.superUserId,
+                        ),
+                      ),
+                          (Route<dynamic> route) => false,
+                    );
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
       } else {
         print("Request failed with status: ${response.statusCode}");
+        // Show error dialog
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text("Failed to assign provider. Please try again later."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
       }
     } catch (e) {
       print("Error occurred: $e");
-      // Handle error
+      // Show error dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("An unexpected error occurred. Please try again later."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -126,49 +219,55 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                 });
               });
             }
-
             return AlertDialog(
               title: Text(
                 'Select Provider',
                 style: TextStyle(
-                  color: Colors.blue, // Text color of the title
+                  color: Colors.green, // Text color of the title
                 ),
               ),
               content: SingleChildScrollView(
                 child: Column(
                   children: allProvidersList.map((provider) {
-                    return ListTile(
-                      leading: Icon(
-                          Icons.account_circle,
-                        size: 40,
-                      ), // Profile icon
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(provider.username),
-                          Text(
-                            'ID: ${provider.id}',
-                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                    return Card(
+                      elevation: 0,
+                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      child: SizedBox( // Wrap ListTile with SizedBox
+                        width: double.infinity, // Set width to match parent width
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.account_circle,
+                            size: 40,
+                            color: Colors.black12,
                           ),
-                        ],
+                          title: Text(
+                            provider.username,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            'ID: ${provider.id}',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          trailing: Radio<providerInfo>(
+                            value: provider,
+                            groupValue: selectedProvider,
+                            onChanged: (provider) {
+                              setState(() {
+                                selectedProvider = provider;
+                              });
+                            },
+                          ),
+                          onTap: () {
+                            setState(() {
+                              selectedProvider = provider;
+                            });
+                          },
+                        ),
                       ),
-                      trailing: Radio<providerInfo>(
-                        value: provider,
-                        groupValue: selectedProvider,
-                        onChanged: (provider) {
-                          setState(() {
-                            selectedProvider = provider;
-                          });
-                        },
-                      ),
-                      onTap: () {
-                        setState(() {
-                          selectedProvider = provider;
-                        });
-                      },
                     );
                   }).toList(),
-
                 ),
               ),
               actions: <Widget>[
@@ -185,18 +284,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                       print("OrderID: $orderId");
                       print('ProviderID: ${selectedProvider!.id}');
 
-                      await assignProvider(orderId, selectedProvider!.id); // Wait for the function to complete
-
-                      // Navigate to another page after the assignment is done
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (context) => SuperUserServicesPage(
-                            token: widget.token,
-                            superUserId: widget.superUserId,
-                          ),
-                        ),
-                            (Route<dynamic> route) => false,
-                      );
+                      await assignProvider(orderId, selectedProvider, context); // Wait for the function to complete
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Please select a provider')),
@@ -499,6 +587,16 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                     icon: Image.asset('assets/images/moreIcon.png',
                         height: 45, width: 45),
                     onPressed: () {
+                      // Navigator.pop(context);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SuperUserProfilePage(
+                                  token: widget.token,
+                                  superuserId: widget.superUserId
+                              )
+                          )
+                      );
                     },
                   ),
                 ],

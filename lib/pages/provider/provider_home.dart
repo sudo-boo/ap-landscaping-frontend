@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:ap_landscaping/config.dart';
+import 'package:ap_landscaping/models/providerinfo.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 import '../../utilities/homepage_stats_card.dart';
 import 'crew_page.dart';
 
@@ -17,7 +22,52 @@ class ProviderPage extends StatefulWidget {
 }
 
 class _ProviderPageState extends State<ProviderPage> {
+  providerInfo providerInfo1 = providerInfo();
+
+  Future<void> fetchAndSaveProviderInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Check if the name is null in SharedPreferences
+    String? savedName = prefs.getString('name');
+    if (savedName == null) {
+      final url = Uri.parse(providerProfileInfo); // Replace with your API URL
+      try {
+        final response = await http.get(
+          url,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': '${widget.token}',
+          },
+        );
+
+        if (response.statusCode == 200) {
+          final dynamic data = json.decode(response.body);
+          setState(() {
+            // Update customerInfo1 with fetched data
+            providerInfo1.username = data['provider']['username'] ?? '';
+            print(providerInfo1.username);
+            // Other assignments...
+          });
+
+          await prefs.setString('name', providerInfo1.username);
+          print('Username set in SharedPreferences: ${providerInfo1.username}');
+        } else {
+          print('Failed to fetch customer info');
+        }
+      } catch (e) {
+        print('Error: $e');
+      }
+    } else {
+      print('Name already exists in SharedPreferences: $savedName');
+    }
+  }
+
   @override
+  void initState() {
+    super.initState();
+    fetchAndSaveProviderInfo();
+  }
+
   Widget build(BuildContext context) {
     Dimensions getDims = Dimensions(context);
     return Scaffold(

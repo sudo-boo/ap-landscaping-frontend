@@ -171,7 +171,7 @@ class _customerPageState extends State<customerPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => categoriesPage(
+                            builder: (context) => ServicesCategoriesPage(
                                 token: widget.token,
                                 customerId: widget.customerId),
                           ),
