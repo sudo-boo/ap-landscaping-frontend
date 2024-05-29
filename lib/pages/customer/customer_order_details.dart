@@ -211,7 +211,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 6),
-                child: Container(
+                child: SizedBox(
                   width: double.maxFinite,
                   height: 22,
                   child: Row(
@@ -225,8 +225,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                         clipBehavior: Clip.antiAlias,
                         decoration: ShapeDecoration(
                           color: const Color(0xFFA686FF),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -921,6 +920,31 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                                     ),
                                   ],
                                 ),
+                                Row(
+                                  children: <Widget>[
+                                    const Icon(Icons.call_rounded, color: Color.fromRGBO(62, 54, 63, 1)), // Email icon
+                                    const SizedBox(width: 8,),
+                                    receivedProviderData
+                                    ? Text(
+                                      provider_info.mobile_number,
+                                      style: const TextStyle(
+                                        color: Color(0xFF3E363F),
+                                        fontSize: 16,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                    : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: 200,
+                                        height: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -1092,9 +1116,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20,),
                 InkWell(
                   onTap: () {
                     showCustomCancellationBottomSheet(context);
@@ -1140,10 +1162,9 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-              ]
+              ],
+
+              const SizedBox(height: 30,),
             ],
           ),
         ),
