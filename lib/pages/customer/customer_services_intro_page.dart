@@ -25,7 +25,7 @@ class _CustomerServicesInfoPageState extends State<CustomerServicesInfoPage> {
   String imageURL = "";
   String description = "";
   String time = "";
-  String offer = "";
+  double offer = 0.0;
   double price = 0.0;
   double rating = 5.0;
 
@@ -173,7 +173,7 @@ class _CustomerServicesInfoPageState extends State<CustomerServicesInfoPage> {
                           ),
                           SizedBox(width: 10,),
                           Text(
-                            offer,
+                            "$offer% off",
                             style: TextStyle(
                                 fontFamily: 'Inter',
                                 fontSize: fontHelper(context) * 16.0,

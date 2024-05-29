@@ -1,4 +1,8 @@
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
+import 'package:ap_landscaping/pages/services_data.dart';
+import 'package:ap_landscaping/utilities/custom_spacer.dart';
+import 'package:ap_landscaping/utilities/helper_functions.dart';
+import 'package:ap_landscaping/utilities/order_details_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
@@ -6,6 +10,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CustomerOrderDetailsPage extends StatefulWidget {
   final token;
@@ -20,6 +25,7 @@ class CustomerOrderDetailsPage extends StatefulWidget {
 
 class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
   bool isLoading = true;
+  bool receivedProviderData = false;
   orderInfo order_info = orderInfo();
   providerInfo provider_info = providerInfo();
   @override
@@ -92,6 +98,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
             provider_info.years_of_experience = data['provider']['yearsofexperience'] ?? 'NA';
             provider_info.bio = data['provider']['bio'] ?? 'NA';
             provider_info.google_id = data['provider']['googleId'] ?? 'NA';
+            receivedProviderData = true;
           });
         } else if (response.statusCode == 404) {
           // Handle 404 error
@@ -109,6 +116,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
           provider_info.years_of_experience = 'NA';
           provider_info.bio = 'NA';
           provider_info.google_id = 'NA';
+          receivedProviderData = true;
         });
       }
     } catch (e) {
@@ -389,9 +397,6 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
 
     Future<void> rescheduleOrderFunc() async {
       try {
-        var cBody = {
-          'reason': _reasonController.text,
-        };
         final response = await http.put(
           Uri.parse(
               '$rescheduleByCustomer${widget.orderId}'), // Replace with your API endpoint
@@ -620,269 +625,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else if (!isLoading &&
-        !order_info.isCancelled &&
-        !order_info.isFinished) {
-      return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          leading: IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/backIcon.png'),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          // backgroundColor: Colors.green[900],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Card(
-                  child: Column(
-                    children: <Widget>[
-                      // ListTile(
-                      //   title: Text('Booking ID'),
-                      //   subtitle: Text('#123'),
-                      //   trailing: Text('9:41'),
-                      // ),
-                      ListTile(
-                        // leading: Image.asset('assets/lawn_treatment.png'), // Replace with your image asset
-                        title: Text(order_info.serviceType),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('Date:   ${order_info.date}'),
-                            Text('Time:   ${order_info.time}'),
-                          ],
-                        ),
-                      ),
-                      // ListTile(
-                      //   title: const Text('Status'),
-                      //   subtitle: Container(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     color: Colors.purple.shade100,
-                      //     child: const Text('Service Time: 35 Min'),
-                      //   ),
-                      // ),
-                      // ListTile(
-                      //   title: const Text('Duration'),
-                      //   subtitle: Container(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     color: Colors.purple.shade100,
-                      //     child: const Text('Service Time: 35 Min'),
-                      //   ),
-                      // ),
-                      // const ListTile(
-                      //   title: Text('Price Detail'),
-                      //   subtitle: Text('Price: ₹120'),
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 27.0, top: 16.0),
-                    child: Text(
-                      'About Provider',
-                      style: TextStyle(
-                        color: Color(0xFF3E363F),
-                        fontSize: 16,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-                    child: Card(
-                      color: const Color(0xFFFFE9E9),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text(
-                              provider_info.username,
-                              style: const TextStyle(
-                                color: Color(0xFF3E363F),
-                                fontSize: 16,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    const Icon(Icons.email_rounded,
-                                        color: Color(0xFF3E363F)),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      provider_info.email,
-                                      style: const TextStyle(
-                                        color: Color(0xFF3E363F),
-                                        fontSize: 14,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    const Icon(Icons.location_on_rounded,
-                                        color: Color.fromRGBO(
-                                            62, 54, 63, 1)), // Email icon
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      provider_info.address,
-                                      style: const TextStyle(
-                                        color: Color(0xFF3E363F),
-                                        fontSize: 14,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    const Icon(Icons.call_rounded,
-                                        color: Color.fromRGBO(
-                                            62, 54, 63, 1)), // Email icon
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      provider_info.mobile_number,
-                                      style: const TextStyle(
-                                        color: Color(0xFF3E363F),
-                                        fontSize: 14,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              InkWell(
-                onTap: () {
-                  showCustomReschedulingBottomSheet(context);
-                },
-                child: Container(
-                  width: 334,
-                  height: 56,
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFA686FF),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Reschedule Booking',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                                letterSpacing: -0.07,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              InkWell(
-                onTap: () {
-                  showCustomCancellationBottomSheet(context);
-                },
-                child: Container(
-                  width: 336,
-                  height: 56,
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side:
-                      const BorderSide(width: 1, color: Color(0xFFA686FF)),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Cancel Booking',
-                              style: TextStyle(
-                                color: Color(0xFFA686FF),
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                                letterSpacing: -0.07,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+      return const OrderDetailsLoadingPage();
     } else {
       return Scaffold(
         appBar: AppBar(
@@ -900,79 +643,229 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Card(
-                  child: Column(
-                    children: <Widget>[
-                      // ListTile(
-                      //   title: Text('Booking ID'),
-                      //   subtitle: Text('#123'),
-                      //   trailing: Text('9:41'),
-                      // ),
-                      ListTile(
-                        // leading: Image.asset('assets/lawn_treatment.png'), // Replace with your image asset
-                        title: Text(order_info.serviceType),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('Date:   ${order_info.date}'),
-                            Text('Time:   ${order_info.time}'),
+                padding: const EdgeInsets.fromLTRB(5, 16, 5, 0),
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Text(
+                          order_info.serviceType,
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: fontHelper(context) * 28,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ),
+                      subtitle: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Date: \t ${order_info.date}',
+                                style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: fontHelper(context) * 16,
+                                    fontWeight: FontWeight.w600
+                                ),
+                              ),
+                              Text(
+                                'Time: \t ${order_info.time}',
+                                style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: fontHelper(context) * 16,
+                                    fontWeight: FontWeight.w600
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 10, 5, 5),
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      // leading: Image.asset('assets/lawn_treatment.png'), // Replace with your image asset
+                      title: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Status: ",
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: fontHelper(context) * 22,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 15),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: order_info!.isCancelled
+                                    ? const Color(0xFFEA2F2F)
+                                    : order_info.isFinished
+                                    ? const Color(0xFF3BAE5B)
+                                    : Colors.orange,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  order_info!.isCancelled
+                                    ? "Cancelled"
+                                    : order_info.isFinished
+                                    ? "Finished"
+                                    : "Pending",
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: fontHelper(context) * 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                      // ListTile(
-                      //   title: const Text('Status'),
-                      //   subtitle: Container(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     color: Colors.purple.shade100,
-                      //     child: const Text('Service Time: 35 Min'),
-                      //   ),
-                      // ),
-                      // ListTile(
-                      //   title: const Text('Duration'),
-                      //   subtitle: Container(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     color: Colors.purple.shade100,
-                      //     child: const Text('Service Time: 35 Min'),
-                      //   ),
-                      // ),
-                      // const ListTile(
-                      //   title: Text('Price Detail'),
-                      //   subtitle: Text('Price: ₹120'),
-                      // ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+              CustomSpacer(width: screenWidth(context) * 0.9, padding: 5, height: 2,),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 10, 5, 15),
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      // leading: Image.asset('assets/lawn_treatment.png'), // Replace with your image asset
+                      title: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: Text(
+                            "Duration : ",
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: fontHelper(context) * 22,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ),
+                      subtitle: Container(
+                          padding: const EdgeInsets.fromLTRB(20, 15, 8, 15),
+                          decoration: BoxDecoration(
+                            color: Colors.purple.shade100,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            "Service Time: ${servicesData
+                                .firstWhere((service) =>
+                                service.containsKey(order_info.serviceType))
+                                .values
+                                .first['time']}",
+                            style: TextStyle(
+                              color: Color(0xFF3E363F),
+                              fontSize: fontHelper(context) * 16,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                    ),
+                  ],
+                ),
+              ),
+              CustomSpacer(width: screenWidth(context) * 0.9, height: 2,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 27.0, top: 16.0),
                     child: Text(
-                      'About Provider',
+                      'About Provider : ',
                       style: TextStyle(
                         color: Color(0xFF3E363F),
-                        fontSize: 16,
+                        fontSize: fontHelper(context) * 22,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-                    child: Card(
-                      color: const Color(0xFFFFE9E9),
+                    padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 16.0),
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFFEAEA),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: Column(
                         children: [
                           ListTile(
-                            title: Text(
-                              provider_info.username,
-                              style: const TextStyle(
-                                color: Color(0xFF3E363F),
-                                fontSize: 16,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
+                            contentPadding: EdgeInsets.zero,
+                            title: Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 5, 20),
+                              child: Row(
+                                children: [
+                                  receivedProviderData
+                                      ? CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.green[100],
+                                    child: const Icon(
+                                      Icons.person,
+                                      size: 35,
+                                    ),
+                                  )
+                                      : SizedBox(
+                                    width: 48,
+                                    height: 48,
+                                    child: Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 15), // Spacing between avatar and username
+                                  // Username
+                                  Flexible(
+                                    child: receivedProviderData
+                                    ? Text(
+                                      provider_info.username,
+                                      style: TextStyle(
+                                        color: Color(0xFF3E363F),
+                                        fontSize: fontHelper(context) * 22,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                    : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             subtitle: Column(
@@ -980,56 +873,50 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    const Icon(Icons.email_rounded,
-                                        color: Color(0xFF3E363F)),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
+                                    const Icon(Icons.email_rounded, color: Color(0xFF3E363F)),
+                                    const SizedBox(width: 8,),
+                                    receivedProviderData
+                                    ? Text(
                                       provider_info.email,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                    : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: 150,
+                                        height: 16,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   children: <Widget>[
-                                    const Icon(Icons.location_on_rounded,
-                                        color: Color.fromRGBO(
-                                            62, 54, 63, 1)), // Email icon
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
+                                    const Icon(Icons.location_on_rounded, color: Color.fromRGBO(62, 54, 63, 1)), // Email icon
+                                    const SizedBox(width: 8,),
+                                    receivedProviderData
+                                    ? Text(
                                       provider_info.address,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    const Icon(Icons.call_rounded,
-                                        color: Color.fromRGBO(
-                                            62, 54, 63, 1)), // Email icon
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      provider_info.mobile_number,
-                                      style: const TextStyle(
-                                        color: Color(0xFF3E363F),
-                                        fontSize: 14,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w600,
+                                    )
+                                    : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: 200,
+                                        height: 16,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ],
@@ -1043,6 +930,220 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                   ),
                 ],
               ),
+
+              CustomSpacer(width: screenWidth(context) * 0.9, padding: 5, height: 2,),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 5, 5, 15),
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      // leading: Image.asset('assets/lawn_treatment.png'), // Replace with your image asset
+                      title: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                        child: Text(
+                          "Price Details : ",
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: fontHelper(context) * 22,
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ),
+                      subtitle: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFCFF29B),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Price: ",
+                                  style: TextStyle(
+                                    color: Color(0xFF3E363F),
+                                    fontSize: fontHelper(context) * 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  "\$${servicesData
+                                      .firstWhere((service) =>
+                                      service.containsKey(order_info.serviceType))
+                                      .values
+                                      .first['price']}",
+                                  style: TextStyle(
+                                    color: Color(0xFF3E363F),
+                                    fontSize: fontHelper(context) * 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Offer: ",
+                                  style: TextStyle(
+                                    color: Color(0xFF3E363F),
+                                    fontSize: fontHelper(context) * 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  "${servicesData
+                                      .firstWhere((service) =>
+                                      service.containsKey(order_info.serviceType))
+                                      .values
+                                      .first['offer']}% off",
+                                  style: TextStyle(
+                                    color: Color(0xFF3E363F),
+                                    fontSize: fontHelper(context) * 16,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const CustomSpacer(padding: 4,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total Amount: ",
+                                  style: TextStyle(
+                                    color: Color(0xFF3E363F),
+                                    fontSize: fontHelper(context) * 17,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                Text(
+                                  "\$${servicesData
+                                      .firstWhere((service) =>
+                                      service.containsKey(order_info.serviceType))
+                                      .values
+                                      .first['price']}",
+                                  style: TextStyle(
+                                    color: Color(0xFF3E363F),
+                                    fontSize: fontHelper(context) * 17,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              if (!isLoading && !order_info.isCancelled && !order_info.isFinished) ...[
+                InkWell(
+                  onTap: () {
+                    showCustomReschedulingBottomSheet(context);
+                  },
+                  child: Container(
+                    width: 334,
+                    height: 56,
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFA686FF),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Reschedule Booking',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w600,
+                                  height: 0,
+                                  letterSpacing: -0.07,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    showCustomCancellationBottomSheet(context);
+                  },
+                  child: Container(
+                    width: 336,
+                    height: 56,
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side:
+                        const BorderSide(width: 1, color: Color(0xFFA686FF)),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Cancel Booking',
+                                style: TextStyle(
+                                  color: Color(0xFFA686FF),
+                                  fontSize: 18,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w600,
+                                  height: 0,
+                                  letterSpacing: -0.07,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+              ]
             ],
           ),
         ),

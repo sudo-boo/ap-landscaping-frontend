@@ -2,6 +2,8 @@ import 'package:ap_landscaping/pages/customer/customer_home.dart';
 import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:ap_landscaping/utilities/customer_services_card.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
+import 'package:ap_landscaping/utilities/order_details_loading_page.dart';
+import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'dart:convert';
@@ -301,7 +303,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const ServicesLoadingPage();
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else if (!snapshot.hasData ||
@@ -362,7 +364,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const ServicesLoadingPage();
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else if (!snapshot.hasData ||
@@ -443,7 +445,14 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                   IconButton(
                     icon: Image.asset('assets/images/communicationIcon.png',
                         height: 40, width: 40),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const OrderDetailsLoadingPage()
+                          )
+                      );
+                    },
                     // onPressed: () => _onItemTapped(3),
                   ),
                   IconButton(

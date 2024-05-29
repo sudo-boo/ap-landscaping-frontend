@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'package:ap_landscaping/utilities/provider_services_card.dart';
+import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
@@ -288,7 +289,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const ServicesLoadingPage();
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else if (!snapshot.hasData ||
@@ -366,7 +367,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const ServicesLoadingPage();
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else if (!snapshot.hasData ||

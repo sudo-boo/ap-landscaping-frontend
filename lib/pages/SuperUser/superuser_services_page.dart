@@ -1,5 +1,6 @@
 import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_profile_page.dart';
+import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:ap_landscaping/utilities/superuser_services_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -447,7 +448,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const ServicesLoadingPage();
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else if (!snapshot.hasData ||
@@ -497,7 +498,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
+                              return const ServicesLoadingPage();
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else if (!snapshot.hasData ||
