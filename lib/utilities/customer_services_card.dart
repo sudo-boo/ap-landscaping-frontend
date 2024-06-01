@@ -90,9 +90,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                 ),
 
 
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10,),
                 Container(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                   decoration: ShapeDecoration(
@@ -130,9 +128,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Container(
                         width: double.maxFinite,
                         height: 1,
@@ -147,9 +143,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                         height: 8,
                       ),
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Time',
@@ -175,9 +169,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Container(
                         width: double.maxFinite,
                         height: 1,
@@ -188,13 +180,9 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Provider',
@@ -221,9 +209,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Container(
                         width: double.maxFinite,
                         height: 1,
@@ -235,13 +221,9 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Payment mode',
@@ -254,7 +236,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                             ),
                           ),
                           Text(
-                            widget.order.providerId,
+                            "Coming Soon!",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFF1C1F34),
@@ -266,9 +248,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 20,),
                       // ListTile(
                       //   title: Text(
                       //     order.serviceType,
