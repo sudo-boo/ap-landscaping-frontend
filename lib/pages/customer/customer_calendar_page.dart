@@ -45,12 +45,12 @@ class _CustomerCalendarPageState extends State<CustomerCalendarPage> {
     );
     if (response.statusCode == 200) {
       final List<dynamic> ordersJson = json.decode(response.body)['upcomingOrders'];
-      print(ordersJson);
+      // print(ordersJson);
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
         orders.add(orderInfo(
           serviceType: order['serviceType'],
-          address: order['address'],
+          address: order['address'].toString(),
           date: order['date'],
           time: order['time'],
           expectationNote: order['expectationNote'].toString(),

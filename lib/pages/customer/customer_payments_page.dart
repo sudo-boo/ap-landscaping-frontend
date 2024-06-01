@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/pages/customer/create_order_success_page.dart';
-import 'package:ap_landscaping/pages/customer/customer_home.dart';
+import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -133,14 +133,14 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                     navigationDelegate: (NavigationRequest request) {
                       print('Navigating to: ${request.url}');
                       if (request.url == 'https://www.google.com/') {
-                        Navigator.pushReplacement(
-                          context,
+                        Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => CustomerOrderConfirmationPage(
                                   token: widget.token,
                                   customerId: widget.customerId
                               )
                           ),
+                              (Route<dynamic> route) => false,
                         );
                         return NavigationDecision.prevent;
                       }
@@ -158,7 +158,7 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => customerPage(
+                                        builder: (context) => CustomerHomePage(
                                           token: widget.token,
                                           customerId: widget.customerId
                                         ),

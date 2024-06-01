@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ap_landscaping/pages/customer/customer_calendar_page.dart';
-import 'package:ap_landscaping/pages/customer/customer_home.dart';
+import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_update_profile_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
@@ -209,7 +209,7 @@ class _profilePageState extends State<profilePage> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => customerPage(
+                  builder: (context) => CustomerHomePage(
                     token: widget.token,
                     customerId: widget.customerId)
                 )
@@ -445,7 +445,7 @@ class _profilePageState extends State<profilePage> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => customerPage(
+                            builder: (context) => CustomerHomePage(
                                 token: widget.token,
                                 customerId: widget.customerId)));
                   },

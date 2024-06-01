@@ -6,6 +6,9 @@ import 'package:ap_landscaping/models/orderinfo.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../services_data.dart';
+import 'customer_home_page.dart';
+
 class CustomerBillingPage extends StatefulWidget {
   final token;
   final customerId;
@@ -20,7 +23,7 @@ class CustomerBillingPage extends StatefulWidget {
 
 class _CustomerBillingPageState extends State<CustomerBillingPage> {
 
-  Future<void> CreateOrder() async {
+  Future<void> createOrderFunc(BuildContext context) async {
     var orderBody = {
       "serviceType": widget.order_info.serviceType,
       "address": widget.order_info.address,
@@ -30,14 +33,47 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
       "customerId": widget.order_info.customerId,
     };
 
-    try {
-      var response = await http.post(Uri.parse(createOrder),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': '${widget.token}',
-          },
-          body: jsonEncode(orderBody));
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevents user from dismissing the dialog
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          content: SizedBox(
+            height: 120,
+            width: 120,
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Creating Order... Please Wait..!!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
 
+    try {
+      var response = await http.post(
+        Uri.parse(createOrder),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': '${widget.token}',
+        },
+        body: jsonEncode(orderBody),
+      );
+
+      Navigator.pop(context); // Close the loading dialog
 
       if (response.statusCode == 201) {
         var responseBody = jsonDecode(response.body);
@@ -60,6 +96,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
       }
     } catch (e) {
       print(e);
+      Navigator.pop(context); // Close the loading dialog
       showErrorDialog(context, 'An error occurred.');
     }
   }
@@ -249,36 +286,233 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                       ],
                     ),
                   ),
+                ),Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 16, 5, 0),
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        title: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: Text(
+                            widget.order_info.serviceType,
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'Date: \t ${widget.order_info.date}',
+                                  style: TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                                Text(
+                                  'Time: \t ${widget.order_info.time}',
+                                  style: TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                // const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 70),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green[900]),
-                        child: const Text(
-                          'Cancel Order ',
-                          style: TextStyle(
-                            color: Colors.white,
+                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 15),
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        title: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                          child: Text(
+                            "Price Details : ",
+                            style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        ),
+                        subtitle: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                          decoration: BoxDecoration(
+                            color: Color(0xFFCFF29B),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Price: ",
+                                    style: TextStyle(
+                                      color: Color(0xFF3E363F),
+                                      fontSize: 16,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    "\$${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['price']}",
+                                    style: TextStyle(
+                                      color: Color(0xFF3E363F),
+                                      fontSize: 16,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Offer: ",
+                                    style: TextStyle(
+                                      color: Color(0xFF3E363F),
+                                      fontSize: 16,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['offer']}% off",
+                                    style: TextStyle(
+                                      color: Color(0xFF3E363F),
+                                      fontSize: 16,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Total Amount: ",
+                                    style: TextStyle(
+                                      color: Color(0xFF3E363F),
+                                      fontSize: 17,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                  Text(
+                                    "\$${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['price']}",
+                                    style: TextStyle(
+                                      color: Color(0xFF3E363F),
+                                      fontSize: 17,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          CreateOrder();
+                    ],
+                  ),
+                ),
+                const Spacer(),
+
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          createOrderFunc(context);
                         },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green[900]),
-                        child: const Text(
-                          'Proceed to Payment',
-                          style: TextStyle(
-                            color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          child: Container(
+                            height: 50,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF4CAF50), // Changed color to a more appropriate green
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.payment, // Appropriate icon for payment
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 10), // Spacing between icon and text
+                                Text(
+                                  'Pay Online',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: -0.07,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => CustomerHomePage(
+                                    token: widget.token,
+                                    customerId: widget.customerId
+                                )
+                            ),
+                                (Route<dynamic> route) => false,
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          child: Container(
+                            height: 50,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 2
+                              )
+                            ),
+                            alignment: Alignment.center,
+                            child:
+                              Text(
+                                'Cancel Order',
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontSize: 18,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.07,
+                                ),
+                              ),
                           ),
                         ),
                       ),

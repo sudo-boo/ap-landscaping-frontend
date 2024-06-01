@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:ap_landscaping/pages/customer/customer_home.dart';
+import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:confetti/confetti.dart';
@@ -26,7 +26,7 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
   void initState() {
     super.initState();
     _controllerTopCenter =
-        ConfettiController(duration: const Duration(seconds: 5));
+        ConfettiController(duration: const Duration(seconds: 3));
 
     _controllerTopCenter.play();
   }
@@ -42,7 +42,6 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
     return SafeArea(
       child: Stack(
         children: <Widget>[
-
           Scaffold(
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -68,87 +67,97 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
                   ),
                 ),
                 const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CustomerServicesPage(
+                          token: widget.token,
+                          customerId: widget.customerId
+                        )
+                      )
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Container(
+                      height: 50,
+                      width: screenWidth(context) * 0.6,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF4CAF50), // Changed color to a more appropriate green
+                          borderRadius: BorderRadius.circular(20),
+                      ),
+                      alignment: Alignment.center,
+                      child:
+                      const Text(
+                        'View My Services',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontFamily: 'Inter',
+                          letterSpacing: -0.07,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CustomerServicesPage(
-                            token: widget.token,
-                            customerId: widget.customerId,
-                          ),
+                            builder: (context) => CustomerHomePage(
+                                token: widget.token,
+                                customerId: widget.customerId
+                            )
+                        )
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 40),
+                    child: Container(
+                      height: 50,
+                      width: screenWidth(context) * 0.6,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: const Color(0xFFB895FC)
+                        )
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Go to Home Page',
+                        style: TextStyle(
+                          color: const Color(0xFFB895FC),
+                          fontSize: 18,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.07,
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.green, // Text color
-                      textStyle: const TextStyle(fontSize: 16), // Text style
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15), // Button padding
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20), // Rounded corners
-                      ),
-                    ),
-                    child: Text(
-                      'View my Services',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: fontHelper(context) * 15,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 50),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => customerPage(
-                                  token: widget.token,
-                                  customerId: widget.customerId)));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.green, // Text color
-                      textStyle: const TextStyle(fontSize: 16), // Text style
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15), // Button padding
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20), // Rounded corners
-                      ),
-                    ),
-                    child: Text(
-                      'Book another Service',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: fontHelper(context) * 15,
-                      ),
-                    ),
+                      ),),
                   ),
                 ),
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: ConfettiWidget(
-              confettiController: _controllerTopCenter,
-              blastDirection: pi / 2,
-              maxBlastForce: 3,
-              minBlastForce: 2,
-              emissionFrequency: 0.05,
-              numberOfParticles: 30, // a lot of particles at once
-              gravity: 0.07,
-              colors: const [
-                Colors.greenAccent, Colors.yellowAccent, Colors.black
-              ],
-            ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: ConfettiWidget(
+            confettiController: _controllerTopCenter,
+            blastDirection: pi / 2,
+            maxBlastForce: 3,
+            minBlastForce: 2,
+            emissionFrequency: 0.05,
+            numberOfParticles: 40, // a lot of particles at once
+            gravity: 0.05,
+            colors: const [
+              Colors.greenAccent, Colors.yellowAccent, Colors.black
+            ],
           ),
-        ]
-      )
-    );
+        ),
+      ]
+    )
+  );
   }
 }

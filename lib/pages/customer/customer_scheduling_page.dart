@@ -21,8 +21,9 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
   TextEditingController expectationsController = TextEditingController();
-  TextEditingController addressController =
-  TextEditingController(text: 'Default Address of the user');
+  TextEditingController addressController = TextEditingController(text: '');
+
+  bool addressError = false;
 
   // Function to handle date selection
   Future<void> _selectDate(BuildContext context) async {
@@ -57,7 +58,6 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        // title: Text(widget.serviceName),
         title: const Text(
           'Book Services',
           style: TextStyle(
@@ -75,7 +75,6 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
             onPressed: () {
               Navigator.pop(context);
             }),
-        // backgroundColor: Colors.green[900],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -239,13 +238,10 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
                       child: Card(
                         color: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Adjust the border radius as needed
+                          borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
                         ),
                         child: ListTile(
-                          // tileColor: Colors.white,
-                          title: Text(
-                              "Select Date of Service: ${selectedDate.toLocal().toString().split(' ')[0]}"),
+                          title: Text("Select Date of Service: ${selectedDate.toLocal().toString().split(' ')[0]}"),
                           leading: const Icon(Icons.calendar_today),
                           onTap: () => _selectDate(context),
                         ),
@@ -256,12 +252,10 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
                       child: Card(
                         color: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Adjust the border radius as needed
+                          borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
                         ),
                         child: ListTile(
-                          title: Text(
-                              "Select Time of Service: ${selectedTime.format(context)}"),
+                          title: Text("Select Time of Service: ${selectedTime.format(context)}"),
                           leading: const Icon(Icons.access_time),
                           onTap: () => _selectTime(context),
                         ),
@@ -272,18 +266,16 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
                       child: Card(
                         color: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Adjust the border radius as needed
+                          borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
                         ),
                         child: TextField(
                           controller: addressController,
                           maxLines: 5,
-                          decoration: const InputDecoration(
-                            labelText: 'Edit Address',
+                          decoration: InputDecoration(
+                            labelText: 'Address',
                             hintText: 'Enter your address',
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 20.0, horizontal: 10.0),
-                            // border: OutlineInputBorder(),
+                            errorText: addressError ? 'Address is required' : null,
+                            contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                             border: InputBorder.none,
                           ),
                           keyboardType: TextInputType.streetAddress,
@@ -299,8 +291,7 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
                 child: Card(
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        10.0), // Adjust the border radius as needed
+                    borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
                   ),
                   child: TextField(
                     controller: expectationsController,
@@ -317,58 +308,51 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
                 ),
               ),
               const SizedBox(height: 30),
-              // const Spacer(),
               InkWell(
                 onTap: () {
-                  order_info.serviceType = widget.serviceName;
-                  order_info.date = DateFormat('yyyy-MM-dd').format(selectedDate);
-                  order_info.time = "${selectedTime.hour}:${selectedTime.minute}";
-                  order_info.address = addressController.text;
-                  order_info.expectationNote = expectationsController.text;
-                  order_info.customerId = widget.customerId;
-                  Navigator.push(
+                  if (addressController.text.isEmpty) {
+                    setState(() {
+                      addressError = true;
+                    });
+                  } else {
+                    order_info
+                      ..serviceType = widget.serviceName
+                      ..date = DateFormat('yyyy-MM-dd').format(selectedDate)
+                      ..time = "${selectedTime.hour}:${selectedTime.minute}"
+                      ..address = addressController.text
+                      ..expectationNote = expectationsController.text
+                      ..customerId = widget.customerId;
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CustomerBillingPage(
-                            token: widget.token,
-                            customerId: widget.customerId,
-                            order_info: order_info,
-                          )));
+                        builder: (context) => CustomerBillingPage(
+                          token: widget.token,
+                          customerId: widget.customerId,
+                          order_info: order_info,
+                        ),
+                      ),
+                    );
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                     height: 50,
-                    decoration: ShapeDecoration(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
                       color: const Color(0xFFA686FF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Row(
-                      // mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Next',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                // height: 0,
-                                letterSpacing: -0.07,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -0.07,
+                      ),
                     ),
                   ),
                 ),

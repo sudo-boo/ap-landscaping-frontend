@@ -207,10 +207,10 @@ class _ProviderServicesCardState extends State<ProviderServicesCard> {
                         ),
                       ),
                       const SizedBox(height: 8,),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Payment mode',
                             style: TextStyle(
                               color: Color(0xFF1C1F34),
@@ -221,73 +221,75 @@ class _ProviderServicesCardState extends State<ProviderServicesCard> {
                             ),
                           ),
                           Text(
-                            widget.order.providerId!,
+                            "Coming Soon!",
                             textAlign: TextAlign.center,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 15,),
-                      (widget.isAccepted)
-                          ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                      ProviderOrderDetailsPage(
-                                        token: widget.token,
-                                        providerId: widget.providerId,
-                                        orderId: widget.order.id,
-                                      ),
+                      const SizedBox(height: 10,),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                    ProviderOrderDetailsPage(
+                                      token: widget.token,
+                                      providerId: widget.providerId,
+                                      orderId: widget.order.id,
                                     ),
-                                  );
-                                },
-                                style:
-                                ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                  Colors.green[900],
-                                ),
-                                child: const Text(
-                                  'View Details',
-                                  style: TextStyle(
-                                    color: Colors.white,
                                   ),
+                                );
+                              },
+                              style:
+                              ElevatedButton.styleFrom(
+                                backgroundColor:
+                                Colors.green[900],
+                              ),
+                              child: const Text(
+                                'View Details',
+                                style: TextStyle(
+                                  color: Colors.white,
                                 ),
                               ),
-                            ],
-                          )
-                          : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ElevatedButton(
-                                onPressed: widget.onPress1,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromARGB(255, 144, 90, 219),
-                                ),
-                                child: const Text(
-                                  'Accept',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                            ),
+                          ],
+                        ),
+                      if (!widget.isAccepted) ...[
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                              onPressed: widget.onPress1,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color.fromARGB(255, 144, 90, 219),
+                              ),
+                              child: const Text(
+                                'Accept',
+                                style: TextStyle(
+                                  color: Colors.white,
                                 ),
                               ),
-                              ElevatedButton(
-                                onPressed: widget.onPress2,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                ),
-                                child: const Text(
-                                  'Decline',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
+                            ),
+                            ElevatedButton(
+                              onPressed: widget.onPress2,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                              ),
+                              child: const Text(
+                                'Decline',
+                                style: TextStyle(
+                                  color: Colors.black,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ],
                   ),
                 ),

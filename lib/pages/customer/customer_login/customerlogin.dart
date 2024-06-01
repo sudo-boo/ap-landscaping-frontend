@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:ap_landscaping/pages/customer/customer_home.dart';
+import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -48,7 +48,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  customerPage(token: myToken, customerId: myCustomerId)));
+                  CustomerHomePage(token: myToken, customerId: myCustomerId)));
     } else {
       setState(() {
         isLoading = false;

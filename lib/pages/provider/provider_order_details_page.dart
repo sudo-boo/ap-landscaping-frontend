@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/utilities/custom_spacer.dart';
 import 'package:ap_landscaping/utilities/order_details_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ import '../../config.dart';
 import '../../models/customerinfo.dart';
 import '../../models/orderinfo.dart';
 import '../../utilities/helper_functions.dart';
+import '../../utilities/order_details_utilities.dart';
 
 
 class ProviderOrderDetailsPage extends StatefulWidget {
@@ -24,7 +26,7 @@ class ProviderOrderDetailsPage extends StatefulWidget {
 class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
   bool isLoading = true;
   bool receivedCustomerData = false;
-  orderInfo order_info = orderInfo();
+  orderInfo order = orderInfo();
   customerInfo customer_info = customerInfo();
   @override
   void initState() {
@@ -49,16 +51,16 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
       if (response.statusCode == 200) {
         final dynamic data = json.decode(response.body);
         setState(() {
-          order_info.serviceType = data['order']['serviceType'] ?? '';
-          order_info.address = data['order']['address'] ?? '';
-          order_info.date = data['order']['date'] ?? '';
-          order_info.time = data['order']['time'] ?? '';
-          order_info.expectationNote = data['order']['expectationNote'] ?? '';
-          order_info.customerId = data['order']['customerId'] ?? '';
-          order_info.providerId = data['order']['providerId'] ?? '';
-          order_info.isFinished = data['order']['isFinished'] ?? '';
-          order_info.isCancelled = data['order']['isCancelled'] ?? '';
-          order_info.id = data['order']['id'] ?? '';
+          order.serviceType = data['order']['serviceType'] ?? '';
+          order.address = data['order']['address'] ?? '';
+          order.date = data['order']['date'] ?? '';
+          order.time = data['order']['time'] ?? '';
+          order.expectationNote = data['order']['expectationNote'] ?? '';
+          order.customerId = data['order']['customerId'] ?? '';
+          order.providerId = data['order']['providerId'] ?? '';
+          order.isFinished = data['order']['isFinished'] ?? '';
+          order.isCancelled = data['order']['isCancelled'] ?? '';
+          order.id = data['order']['id'] ?? '';
           // isLoading = false;
           isLoading = false;
         });
@@ -76,7 +78,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
   Future<void> getCustomerDetailsById() async {
     try {
       final response = await http.get(
-        Uri.parse('$customerDetailsbyId${order_info.customerId}'),
+        Uri.parse('$customerDetailsbyId${order.customerId}'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': '${widget.token}',
@@ -392,7 +394,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
             'Content-Type': 'application/json',
             'Authorization': '${widget.token}',
           },
-          body: json.encode(order_info),
+          body: json.encode(order),
         );
 
         if (response.statusCode == 200) {
@@ -549,9 +551,9 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: InkWell(
                   onTap: () {
-                    order_info.date =
+                    order.date =
                         DateFormat('yyyy-MM-dd').format(selectedDate);
-                    order_info.time =
+                    order.time =
                     "${selectedTime.hour}:${selectedTime.minute}";
                     rescheduleOrderFunc();
                   },
@@ -603,6 +605,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    OrderDetailsUtilityWidgets detailsUtilityWidgets = OrderDetailsUtilityWidgets(order: order,);
     if (isLoading) {
       return const OrderDetailsLoadingPage();
     } else {
@@ -629,7 +632,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                       title: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                         child: Text(
-                          order_info.serviceType,
+                          order.serviceType,
                           style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: fontHelper(context) * 28,
@@ -645,7 +648,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                'Date: \t ${order_info.date}',
+                                'Date: \t ${order.date}',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontSize: fontHelper(context) * 16,
@@ -653,7 +656,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                                 ),
                               ),
                               Text(
-                                'Time: \t ${order_info.time}',
+                                'Time: \t ${order.time}',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontSize: fontHelper(context) * 16,
@@ -668,6 +671,9 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                   ],
                 ),
               ),
+
+              SizedBox(height: 10,),
+              CustomSpacer(padding: 3,width: screenWidth(context) * 0.9, height: 2,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -843,7 +849,11 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                   ),
                 ],
               ),
-              if (!isLoading && !order_info.isCancelled && !order_info.isFinished) ...[
+
+              CustomSpacer(padding: 3,width: screenWidth(context) * 0.9, height: 2,),
+              detailsUtilityWidgets.buildPriceDetails(context),
+              SizedBox(height: 10,),
+              if (!isLoading && !order.isCancelled && !order.isFinished) ...[
                 InkWell(
                   onTap: () {
                     showCustomReschedulingBottomSheet(context);

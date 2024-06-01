@@ -1,4 +1,4 @@
-import 'package:ap_landscaping/pages/customer/customer_home.dart';
+import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:ap_landscaping/utilities/customer_services_card.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
@@ -79,7 +79,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
         await getProviderDetailsById(order['providerId']);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
-          address: order['address'],
+          address: order['address'].toString(),
           date: order['date'],
           time: order['time'],
           expectationNote: order['expectationNote'].toString(),
@@ -112,13 +112,14 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       json.decode(response.body)['upcomingOrders'];
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
+        // print(order);
         // print(order['providerId']);
         if(order['providerId'] != null){
           final providerDetails =
           await getProviderDetailsById(order['providerId']);
           orders.add(orderInfo(
             serviceType: order['serviceType'],
-            address: order['address'],
+            address: order['address'].toString(),
             date: order['date'],
             time: order['time'],
             expectationNote: order['expectationNote'].toString(),
@@ -134,7 +135,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
         else{
           orders.add(orderInfo(
             serviceType: order['serviceType'],
-            address: order['address'],
+            address: order['address'].toString(),
             date: order['date'],
             time: order['time'],
             expectationNote: order['expectationNote'].toString(),
@@ -228,7 +229,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => customerPage(
+                      builder: (context) => CustomerHomePage(
                           token: widget.token,
                           customerId: widget.customerId)));
             },
@@ -425,7 +426,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => customerPage(
+                          builder: (context) => CustomerHomePage(
                             token: widget.token,
                             customerId: widget.customerId
                           )

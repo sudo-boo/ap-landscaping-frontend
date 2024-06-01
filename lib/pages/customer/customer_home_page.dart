@@ -10,17 +10,17 @@ import '../../config.dart';
 import '../../models/customerinfo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class customerPage extends StatefulWidget {
+class CustomerHomePage extends StatefulWidget {
   final token;
   final customerId;
-  const customerPage({required this.token, required this.customerId, Key? key})
+  const CustomerHomePage({required this.token, required this.customerId, Key? key})
       : super(key: key);
 
   @override
-  State<customerPage> createState() => _customerPageState();
+  State<CustomerHomePage> createState() => _CustomerHomePageState();
 }
 
-class _customerPageState extends State<customerPage> {
+class _CustomerHomePageState extends State<CustomerHomePage> {
   // Define customerInfo1 at the class level
   customerInfo customerInfo1 = customerInfo();
 

@@ -12,6 +12,8 @@ import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../utilities/order_details_utilities.dart';
+
 class CustomerOrderDetailsPage extends StatefulWidget {
   final token;
   final customerId;
@@ -26,7 +28,7 @@ class CustomerOrderDetailsPage extends StatefulWidget {
 class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
   bool isLoading = true;
   bool receivedProviderData = false;
-  orderInfo order_info = orderInfo();
+  orderInfo order = orderInfo();
   providerInfo provider_info = providerInfo();
   @override
   void initState() {
@@ -36,7 +38,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
 
   void initialize() async {
     await getOrderById();
-    if(order_info.providerId != "") {
+    if(order.providerId != "") {
       getProviderDetailsById();
     }
     isLoading = false;
@@ -54,16 +56,16 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
       if (response.statusCode == 200) {
         final dynamic data = json.decode(response.body);
         setState(() {
-          order_info.serviceType = data['order']['serviceType'] ?? '';
-          order_info.address = data['order']['address'] ?? '';
-          order_info.date = data['order']['date'] ?? '';
-          order_info.time = data['order']['time'] ?? '';
-          order_info.expectationNote = data['order']['expectationNote'] ?? '';
-          order_info.customerId = data['order']['customerId'] ?? '';
-          order_info.providerId = data['order']['providerId'];
-          order_info.isFinished = data['order']['isFinished'] ?? '';
-          order_info.isCancelled = data['order']['isCancelled'] ?? '';
-          order_info.id = data['order']['id'] ?? '';
+          order.serviceType = data['order']['serviceType'] ?? '';
+          order.address = data['order']['address'] ?? '';
+          order.date = data['order']['date'] ?? '';
+          order.time = data['order']['time'] ?? '';
+          order.expectationNote = data['order']['expectationNote'] ?? '';
+          order.customerId = data['order']['customerId'] ?? '';
+          order.providerId = data['order']['providerId'];
+          order.isFinished = data['order']['isFinished'] ?? '';
+          order.isCancelled = data['order']['isCancelled'] ?? '';
+          order.id = data['order']['id'] ?? '';
           // isLoading = false;
         });
       } else if (response.statusCode == 404) {
@@ -79,9 +81,9 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
 
   Future<void> getProviderDetailsById() async {
     try {
-      if (order_info.providerId != null) {
+      if (order.providerId != null) {
         final response = await http.get(
-          Uri.parse('$providerDetailsbyId${order_info.providerId}'),
+          Uri.parse('$providerDetailsbyId${order.providerId}'),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': '${widget.token}',
@@ -403,7 +405,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
             'Content-Type': 'application/json',
             'Authorization': '${widget.token}',
           },
-          body: json.encode(order_info),
+          body: json.encode(order),
         );
 
         if (response.statusCode == 200) {
@@ -569,9 +571,9 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: InkWell(
                   onTap: () {
-                    order_info.date =
+                    order.date =
                         DateFormat('yyyy-MM-dd').format(selectedDate);
-                    order_info.time =
+                    order.time =
                     "${selectedTime.hour}:${selectedTime.minute}";
                     rescheduleOrderFunc();
                   },
@@ -623,6 +625,9 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    OrderDetailsUtilityWidgets detailsUtilityWidgets = OrderDetailsUtilityWidgets(order: order);
+
     if (isLoading) {
       return const OrderDetailsLoadingPage();
     } else {
@@ -649,7 +654,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                       title: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                         child: Text(
-                          order_info.serviceType,
+                          order.serviceType,
                           style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: fontHelper(context) * 28,
@@ -665,7 +670,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                'Date: \t ${order_info.date}',
+                                'Date: \t ${order.date}',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontSize: fontHelper(context) * 16,
@@ -673,7 +678,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                                 ),
                               ),
                               Text(
-                                'Time: \t ${order_info.time}',
+                                'Time: \t ${order.time}',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontSize: fontHelper(context) * 16,
@@ -712,17 +717,17 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                                 decoration: BoxDecoration(
-                                  color: order_info!.isCancelled
+                                  color: order!.isCancelled
                                     ? const Color(0xFFEA2F2F)
-                                    : order_info.isFinished
+                                    : order.isFinished
                                     ? const Color(0xFF3BAE5B)
                                     : Colors.orange,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  order_info!.isCancelled
+                                  order!.isCancelled
                                     ? "Cancelled"
-                                    : order_info.isFinished
+                                    : order.isFinished
                                     ? "Finished"
                                     : "Pending",
                                   style: TextStyle(
@@ -742,47 +747,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                 ),
               ),
               CustomSpacer(width: screenWidth(context) * 0.9, padding: 5, height: 2,),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(5, 10, 5, 15),
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                      // leading: Image.asset('assets/lawn_treatment.png'), // Replace with your image asset
-                      title: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                        child: Text(
-                            "Duration : ",
-                          style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: fontHelper(context) * 22,
-                              fontWeight: FontWeight.w600
-                          ),
-                        ),
-                      ),
-                      subtitle: Container(
-                          padding: const EdgeInsets.fromLTRB(20, 15, 8, 15),
-                          decoration: BoxDecoration(
-                            color: Colors.purple.shade100,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            "Service Time: ${servicesData
-                                .firstWhere((service) =>
-                                service.containsKey(order_info.serviceType))
-                                .values
-                                .first['time']}",
-                            style: TextStyle(
-                              color: Color(0xFF3E363F),
-                              fontSize: fontHelper(context) * 16,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                    ),
-                  ],
-                ),
-              ),
+              detailsUtilityWidgets.buildDurationWidget(context),
               CustomSpacer(width: screenWidth(context) * 0.9, height: 2,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -954,124 +919,10 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                   ),
                 ],
               ),
-
               CustomSpacer(width: screenWidth(context) * 0.9, padding: 5, height: 2,),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(5, 5, 5, 15),
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                      // leading: Image.asset('assets/lawn_treatment.png'), // Replace with your image asset
-                      title: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                        child: Text(
-                          "Price Details : ",
-                          style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: fontHelper(context) * 22,
-                              fontWeight: FontWeight.w600
-                          ),
-                        ),
-                      ),
-                      subtitle: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFCFF29B),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Price: ",
-                                  style: TextStyle(
-                                    color: Color(0xFF3E363F),
-                                    fontSize: fontHelper(context) * 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  "\$${servicesData
-                                      .firstWhere((service) =>
-                                      service.containsKey(order_info.serviceType))
-                                      .values
-                                      .first['price']}",
-                                  style: TextStyle(
-                                    color: Color(0xFF3E363F),
-                                    fontSize: fontHelper(context) * 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Offer: ",
-                                  style: TextStyle(
-                                    color: Color(0xFF3E363F),
-                                    fontSize: fontHelper(context) * 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  "${servicesData
-                                      .firstWhere((service) =>
-                                      service.containsKey(order_info.serviceType))
-                                      .values
-                                      .first['offer']}% off",
-                                  style: TextStyle(
-                                    color: Color(0xFF3E363F),
-                                    fontSize: fontHelper(context) * 16,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const CustomSpacer(padding: 4,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Total Amount: ",
-                                  style: TextStyle(
-                                    color: Color(0xFF3E363F),
-                                    fontSize: fontHelper(context) * 17,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                                Text(
-                                  "\$${servicesData
-                                      .firstWhere((service) =>
-                                      service.containsKey(order_info.serviceType))
-                                      .values
-                                      .first['price']}",
-                                  style: TextStyle(
-                                    color: Color(0xFF3E363F),
-                                    fontSize: fontHelper(context) * 17,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              detailsUtilityWidgets.buildPriceDetails(context),
 
-              if (!isLoading && !order_info.isCancelled && !order_info.isFinished) ...[
+              if (!isLoading && !order.isCancelled && !order.isFinished) ...[
                 InkWell(
                   onTap: () {
                     showCustomReschedulingBottomSheet(context);

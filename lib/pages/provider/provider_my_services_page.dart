@@ -49,7 +49,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
         await getCustomerDetailsById(order['customerId']);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
-          address: order['address'],
+          address: order['address'].toString(),
           date: order['date'],
           time: order['time'],
           expectationNote: order['expectationNote'].toString(),
@@ -87,7 +87,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
         await getCustomerDetailsById(order['customerId']);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
-          address: order['address'],
+          address: order['address'].toString(),
           date: order['date'],
           time: order['time'],
           expectationNote: order['expectationNote'].toString(),
@@ -140,6 +140,38 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
   }
 
   Future<void> acceptOrDeclineOrder(BuildContext context, String orderId, String action) async {
+    String message = "${action == 'accept' ? 'Accepting' : 'Declining'} Order... Please Wait..!!";
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevents user from dismissing the dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SizedBox(
+            height: 120,
+            width: 120,
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.green,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
     try {
       final response = await http.put(
         Uri.parse(acceptOrderByProvider),
@@ -149,6 +181,9 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
         },
         body: json.encode({'action': action, 'orderId': orderId}),
       );
+
+      Navigator.pop(context);
+
 
       if (response.statusCode == 200) {
         _showPopup(context, 'Success', 'Order ${action == 'accept' ? 'accepted' : 'declined'} successfully.!!');
