@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/customer/customer_signup/customer_signup_payment_details_page.dart';
 import '../../../models/customerinfo.dart';
-import '../../provider/provider_signup/providersignup.dart';
 
 class CustomerPersonalDetailsPage extends StatefulWidget {
   final customerInfo customer_info;

@@ -1,8 +1,6 @@
-import 'package:ap_landscaping/pages/customer/create_order_success_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_services_intro_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import '../pages/customer/customer_scheduling_page.dart';
 
 
 class HomePageCategoryCard extends StatelessWidget {

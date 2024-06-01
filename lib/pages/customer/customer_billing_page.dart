@@ -1,5 +1,4 @@
 import 'package:ap_landscaping/config.dart';
-import 'package:ap_landscaping/pages/customer/create_order_success_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_payments_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';

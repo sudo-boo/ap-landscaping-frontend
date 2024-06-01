@@ -1,6 +1,5 @@
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:ap_landscaping/pages/customer/customer_order_details.dart';
 
 import '../pages/services_data.dart';
 

@@ -20,13 +20,8 @@ class _CustomerOrderCancellationPageState extends State<CustomerOrderCancellatio
   TextEditingController additionalInfo = TextEditingController();
   Future<void> cancelOrderFunc() async {
     try {
-      var cBody = {
-        'reason': reasonController.text,
-        'additionalInfo': additionalInfo.text
-      };
       final response = await http.put(
-        Uri.parse(
-            '$cancelOrderByCustomer${widget.orderId}'), // Replace with your API endpoint
+        Uri.parse('$cancelOrderByCustomer${widget.orderId}'), // Replace with your API endpoint
         headers: {
           'Content-Type': 'application/json',
           'Authorization': '${widget.token}',
