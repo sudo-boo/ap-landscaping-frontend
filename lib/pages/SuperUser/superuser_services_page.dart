@@ -35,8 +35,8 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
   void initState() {
     super.initState();
     // Initial call to providerPreviousOrdersList
-    pastorders = superUserGetOrders();
     futureorders = superUserGetOrders();
+    pastorders = calculatePastOrders();
   }
 
   Future<List<orderInfo>> superUserGetOrders() async {
@@ -52,29 +52,31 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
       // print('Response status code: ${response.statusCode}');
       if (response.statusCode == 200) {
         dynamic decodedData = json.decode(response.body);
-        // print('Decoded data: $decodedData');
+        print('Decoded data: $decodedData');
         final List<dynamic>? ordersJson = decodedData != null ? decodedData['orders'] : null;
         if (ordersJson != null) {
           final List<orderInfo> orders = [];
           for (var order in ordersJson) {
             // print('Processing order: $order');
             // print('Provider ID: ${order['providerId']}');
-              // print('Fetching provider details for order...');
-              // print('Provider details received: $providerDetails');
-              orders.add(orderInfo(
-                serviceType: order['serviceType'],
-                address: order['address'],
-                date: order['date'],
-                time: order['time'],
-                expectationNote: order['expectationNote'] != null ? order['expectationNote'].toString() : '',
-                customerId: order['customerId'],
-                providerId: order['providerId'] ?? "Not Assigned",
-                isFinished: order['isFinished'],
-                isCancelled: order['isCancelled'],
-                id: order['id'],
-                orderId: order['orderId'] ?? "",
-                providerName: "Not Assigned yet!",
-              ));
+            //   print('Fetching provider details for order...');
+            print("Order date: ${order['date']}");
+            print('Order details cancelled details: ${order['isCancelled']}');
+            print("");
+            orders.add(orderInfo(
+              serviceType: order['serviceType'],
+              address: order['address'].toString(),
+              date: order['date'],
+              time: order['time'],
+              expectationNote: order['expectationNote'] != null ? order['expectationNote'].toString() : '',
+              customerId: order['customerId'],
+              providerId: order['providerId'] ?? "Not Assigned",
+              isFinished: order['isFinished'],
+              isCancelled: order['isCancelled'],
+              id: order['id'],
+              orderId: order['orderId'] ?? "",
+              providerName: "Not Assigned yet!",
+            ));
           }
           return orders;
         } else {
@@ -89,6 +91,33 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
       return [];
     }
   }
+
+
+  Future<List<orderInfo>> calculatePastOrders() async {
+    try {
+      List<orderInfo> futureOrdersList = await futureorders;
+      List<orderInfo> cancelledOrdersList = [];
+
+      // Filter out cancelled orders from futureOrdersList
+      futureOrdersList.removeWhere((order) {
+        if (order.isCancelled) {
+          cancelledOrdersList.add(order);
+          return true;
+        }
+        return false;
+      });
+
+      // Set the list of cancelled orders to pastorders
+      pastorders = Future.value(cancelledOrdersList);
+
+      // Return the list of cancelled orders
+      return cancelledOrdersList;
+    } catch (e) {
+      print('Error separating past orders: $e');
+      return []; // Return an empty list if an error occurs
+    }
+  }
+
 
 
   Future<void> assignProvider(String orderId, providerInfo? providerInfo1, BuildContext context) async {
@@ -375,11 +404,14 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
             onPressed: () {
               // Navigator.pop(context);
               Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SuperUserPage(
-                          token: widget.token,
-                          superuserId: widget.superUserId)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SuperUserPage(
+                    token: widget.token,
+                    superuserId: widget.superUserId
+                  )
+                )
+              );
             },
           ),
           actions: <Widget>[
@@ -460,8 +492,22 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                                 itemCount: orders?.length,
                                 itemBuilder: (context, index) {
                                   final order = orders?[index];
+                                  String statusText;
+                                  Color statusColor;
+                                  if (order!.isCancelled) {
+                                    statusText = 'Cancelled';
+                                    statusColor = const Color(0xFFEA2F2F);
+                                  } else if (order.isFinished) {
+                                    statusText = 'Finished';
+                                    statusColor = const Color(0xFF3BAE5B);
+                                  } else {
+                                    statusText = 'Not Assigned Yet';
+                                    statusColor = Colors.orange;
+                                  }
                                   return SuperUserServicesCard(
-                                      token: widget.token,
+                                    statusColor: statusColor,
+                                    statusText: statusText,
+                                    token: widget.token,
                                       superUserId: widget.superUserId,
                                       order: order,
                                       onPressed: (){
@@ -519,16 +565,18 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                                     statusText = 'Finished';
                                     statusColor = const Color(0xFF3BAE5B);
                                   } else {
-                                    statusText = 'Pending';
+                                    statusText = 'Not Assigned Yet';
                                     statusColor = Colors.orange;
                                   }
                                   return SuperUserServicesCard(
-                                      token: widget.token,
-                                      superUserId: widget.superUserId,
-                                      order: order,
-                                      onPressed: (){
-                                        _showProvidersPopup(order.id);
-                                      },
+                                    statusColor: statusColor,
+                                    statusText: statusText,
+                                    token: widget.token,
+                                    superUserId: widget.superUserId,
+                                    order: order,
+                                    onPressed: (){
+                                      _showProvidersPopup(order.id);
+                                    },
                                   );
                                 },
                               );

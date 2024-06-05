@@ -290,8 +290,8 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                       onRefresh: () async {
                         // Implement your refresh logic here.
                         // For example, you can call providerPreviousOrdersList() again.
-                        await Future.delayed(
-                            const Duration(seconds: 1)); // Simulating a delay
+                        // await Future.delayed(
+                        //     const Duration(seconds: 1)); // Simulating a delay
                         setState(() {
                           futureorders = customerUpcomingOrdersList();
                         });
@@ -351,8 +351,8 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                       onRefresh: () async {
                         // Implement your refresh logic here.
                         // For example, you can call providerPreviousOrdersList() again.
-                        await Future.delayed(
-                            const Duration(seconds: 1)); // Simulating a delay
+                        // await Future.delayed(
+                        //     const Duration(seconds: 1)); // Simulating a delay
                         setState(() {
                           pastorders = customerPreviousOrdersList();
                         });

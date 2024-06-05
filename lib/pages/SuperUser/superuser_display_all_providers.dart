@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../models/providerinfo.dart';
 import '../../config.dart';
+import '../provider/provider_my_services_page.dart';
 
 class SuperUserAllProvidersPage extends StatefulWidget {
   final token;
@@ -73,7 +75,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
     }
   }
 
-  void _showproviderDetailsDialog(BuildContext context, providerInfo provider) {
+  void _showProviderDetailsDialog(BuildContext context, providerInfo provider) {
     // Print provider details for debugging
     // print('Customer Details:');
     // print('Username: ${provider.username}');
@@ -92,33 +94,132 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Provider Details'),
+          title: const Text(
+            'Provider Details',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
+              height: 0,
+            ),
+          ),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Username: ${provider.username}'),
-                Text('ID: ${provider.id}'),
-                Text('Email: ${provider.email}'),
-                Text('Mobile Number: ${provider.mobile_number}'),
-                Text('Address: ${provider.address}'),
-                Text('Card Details: ${provider.card_details}'),
-                Text('CVV: ${provider.cvv}'),
-                Text('PayPal ID: ${provider.paypal_id}'),
-                Text('AEC Transfer: ${provider.aec_transfer}'),
-                Text('Card Type: ${provider.card_type}'),
-                Text('Card Holder\'s Name: ${provider.card_holders_name}'),
-                Text('Card Number: ${provider.card_number}'),
-                // Add more details here as needed
-              ],
+                children: [
+                  InfoWidget(
+                    label: 'Username:',
+                    value: provider.username,
+                  ),
+                  InfoWidget(
+                    label: 'ID:',
+                    value: provider.id,
+                  ),
+                  InfoWidget(
+                    label: 'Email:',
+                    value: provider.email,
+                  ),
+                  InfoWidget(
+                    label: 'Mobile Number:',
+                    value: provider.mobile_number,
+                  ),
+                  InfoWidget(
+                    label: 'Address:',
+                    value: provider.address,
+                  ),
+                  InfoWidget(
+                    label: 'Card Details:',
+                    value: provider.card_details,
+                  ),
+                  InfoWidget(
+                    label: 'CVV:',
+                    value: provider.cvv,
+                  ),
+                  InfoWidget(
+                    label: 'PayPal ID:',
+                    value: provider.paypal_id,
+                  ),
+                  InfoWidget(
+                    label: 'AEC Transfer:',
+                    value: provider.aec_transfer,
+                  ),
+                  InfoWidget(
+                    label: 'Card Type:',
+                    value: provider.card_type,
+                  ),
+                  InfoWidget(
+                    label: 'Card Holder\'s Name:',
+                    value: provider.card_holders_name,
+                  ),
+                  InfoWidget(
+                    label: 'Card Number:',
+                    value: provider.card_number,
+                  ),
+                  // Add more InfoWidget instances as needed
+                ],
+              
             ),
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Close'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                      'Close',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                      height: 0,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // _onItemTapped(1);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProviderMyServicesPage(
+                          token: widget.token,
+                          providerId: provider.id)
+                      )
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20), // Adjust border radius as needed
+                          border: Border.all(color: Colors.green, width: 1),
+                        ),
+                        padding: const EdgeInsets.all(15), // Adjust padding as needed
+                        child: const Row(
+                          children: [
+                            Text(
+                              'View Orders',
+                              style: TextStyle(
+                                color: Colors.green, // Text color is white for better visibility
+                                fontSize: 16,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                            Icon(Icons.arrow_forward_ios_rounded),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -177,7 +278,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
                               ),
                             ),
                             onTap: () {
-                              _showproviderDetailsDialog(context, provider);
+                              _showProviderDetailsDialog(context, provider);
                             },
                           ),
                         ),
@@ -193,3 +294,56 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
     );
   }
 }
+
+class InfoWidget extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const InfoWidget({
+    Key? key,
+    required this.label,
+    required this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 5,
+            child: Text(
+              label,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+                height: 0,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 9,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                value,
+                style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                  height: 0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

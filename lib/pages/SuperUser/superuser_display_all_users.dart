@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../models/customerinfo.dart';
@@ -97,33 +98,128 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('User Details'),
+          title: const Text(
+          'Customer Details',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w600,
+            height: 0,
+          ),
+        ),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Username: ${customer.username}'),
-                Text('Email: ${customer.email}'),
-                Text('Mobile Number: ${customer.mobile_number}'),
-                Text('Address: ${customer.address}'),
-                Text('Card Details: ${customer.card_details}'),
-                Text('CVV: ${customer.cvv}'),
-                Text('PayPal ID: ${customer.paypal_id}'),
-                Text('AEC Transfer: ${customer.aec_transfer}'),
-                Text('Card Type: ${customer.card_type}'),
-                Text('Card Holder\'s Name: ${customer.card_holders_name}'),
-                Text('Card Number: ${customer.card_number}'),
-                // Add more details here as needed
+                InfoWidget(
+                  label: 'Username:',
+                  value: customer.username,
+                ),
+                InfoWidget(
+                  label: 'Email:',
+                  value: customer.email,
+                ),
+                InfoWidget(
+                  label: 'Mobile Number:',
+                  value: customer.mobile_number,
+                ),
+                InfoWidget(
+                  label: 'Address:',
+                  value: customer.address,
+                ),
+                InfoWidget(
+                  label: 'Card Details:',
+                  value: customer.card_details,
+                ),
+                InfoWidget(
+                  label: 'CVV:',
+                  value: customer.cvv,
+                ),
+                InfoWidget(
+                  label: 'PayPal ID:',
+                  value: customer.paypal_id,
+                ),
+                InfoWidget(
+                  label: 'AEC Transfer:',
+                  value: customer.aec_transfer,
+                ),
+                InfoWidget(
+                  label: 'Card Type:',
+                  value: customer.card_type,
+                ),
+                InfoWidget(
+                  label: 'Card Holder\'s Name:',
+                  value: customer.card_holders_name,
+                ),
+                InfoWidget(
+                  label: 'Card Number:',
+                  value: customer.card_number,
+                ),
+                // Add more InfoWidget instances as needed
               ],
+
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Close'),
-            ),
+          actions: [Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Close',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    height: 0,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  // _onItemTapped(1);
+                  // Navigator.pushReplacement(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => Customer(
+                  //             token: widget.token,
+                  //             providerId: provider.id)
+                  //     )
+                  // );
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20), // Adjust border radius as needed
+                        border: Border.all(color: Colors.green, width: 1),
+                      ),
+                      padding: const EdgeInsets.all(15), // Adjust padding as needed
+                      child: const Row(
+                        children: [
+                          Text(
+                            'View Orders',
+                            style: TextStyle(
+                              color: Colors.green, // Text color is white for better visibility
+                              fontSize: 16,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios_rounded),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
           ],
         );
       },

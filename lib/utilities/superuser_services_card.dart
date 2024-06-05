@@ -1,12 +1,15 @@
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/SuperUser/superuser_order_details_page.dart';
 import '../pages/services_data.dart';
 
 class SuperUserServicesCard extends StatefulWidget {
   final order;
   final token;
   final superUserId;
+  final String statusText;
+  final Color statusColor;
   final VoidCallback? onPressed;
 
   const SuperUserServicesCard({
@@ -14,6 +17,8 @@ class SuperUserServicesCard extends StatefulWidget {
     required this.token,
     required this.superUserId,
     required this.order,
+    required this.statusText,
+    required this.statusColor,
     this.onPressed,
   }) : super(key: key);
 
@@ -271,20 +276,37 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      // ListTile(
-                      //   title: Text(
-                      //     order.serviceType,
-                      //     textAlign: TextAlign.center,
-                      //   ),
-                      //   subtitle: Text(
-                      //     order.date,
-                      //     textAlign: TextAlign.center,
-                      //   ),
-                      // ),
+                      const SizedBox(height: 15,),
                       Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                    SuperUserOrderDetailsPage(
+                                      token: widget.token,
+                                      superUserId: widget.superUserId,
+                                      orderId: widget.order.id,
+                                    ),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF24730B),
+                            ),
+                            child: const Text(
+                              'View Details',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (widget.statusText != 'Cancelled') Row(
                         mainAxisAlignment:
                         MainAxisAlignment.center,
                         children: [
@@ -305,9 +327,7 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                               // );
                               // }
 
-                              style: ElevatedButton
-                                .styleFrom(
-                              backgroundColor: Color(0xFFA687FF),
+                              style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFA687FF),
                             ),
                             child: const Text(
                               'Assign',
@@ -322,6 +342,28 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: 69,
+          left: 30,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: widget.statusColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              widget.statusText,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: fontHelper(context) * 12,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+                height: 0,
+              ),
             ),
           ),
         ),
