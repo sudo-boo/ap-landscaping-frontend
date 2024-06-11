@@ -47,7 +47,7 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                const SizedBox(height: 250),
+                const SizedBox(height: 80),
                 const Icon(
                   Icons.check_circle_outline,
                   size: 100,
@@ -66,6 +66,22 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
                     ),
                   ),
                 ),
+                const Spacer(),
+                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Text(
+                    'You\'ll soon receive a call about your services!\n\nThank You!!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+
                 const Spacer(),
                 InkWell(
                   onTap: () {

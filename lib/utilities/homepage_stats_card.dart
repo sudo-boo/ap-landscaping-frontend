@@ -27,8 +27,8 @@ class StatsCard extends StatelessWidget {
             boxShadow: const [
               BoxShadow(
                 color: Color(0x3F000000),
-                blurRadius: 4,
-                offset: Offset(0, 4),
+                blurRadius: 1,
+                offset: Offset(0, 1),
                 spreadRadius: 0,
               ),
             ],
@@ -42,7 +42,7 @@ class StatsCard extends StatelessWidget {
                 value,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 22,
+                  fontSize: 18,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                   height: 0.05,
@@ -53,7 +53,7 @@ class StatsCard extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
                   height: 0,

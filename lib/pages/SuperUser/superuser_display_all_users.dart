@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_providers.dart';
+import 'package:ap_landscaping/pages/SuperUser/superuser_view_customer_orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../models/customerinfo.dart';
@@ -49,7 +50,7 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
         List<customerInfo> allcustomersList = [];
 
         for (var customerData in customersData) {
-          // print('Customer data: $customerData');
+          print('Customer data: $customerData');
           customerInfo customer = customerInfo(
             username: customerData['username'].toString(),
             email: customerData['email'].toString(),
@@ -63,6 +64,7 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
             card_type: customerData['cardtype'].toString(),
             card_holders_name: customerData['cardholdersname'].toString(),
             card_number: customerData['cardnumber'].toString(),
+            id: customerData['id'].toString(),
           );
           allcustomersList.add(customer);
         }
@@ -83,6 +85,7 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
     // Print customer details for debugging
     print('Customer Details:');
     print('Username: ${customer.username}');
+    print('Customer ID: ${customer.id}');
     print('Email: ${customer.email}');
     print('Mobile Number: ${customer.mobile_number}');
     print('Address: ${customer.address}');
@@ -93,6 +96,7 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
     print('Card Type: ${customer.card_type}');
     print('Card Holder\'s Name: ${customer.card_holders_name}');
     print('Card Number: ${customer.card_number}');
+
 
     showDialog(
       context: context,
@@ -115,6 +119,10 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
                 InfoWidget(
                   label: 'Username:',
                   value: customer.username,
+                ),
+                InfoWidget(
+                  label: 'Customer ID:',
+                  value: customer.id,
                 ),
                 InfoWidget(
                   label: 'Email:',
@@ -182,14 +190,16 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
               TextButton(
                 onPressed: () {
                   // _onItemTapped(1);
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => Customer(
-                  //             token: widget.token,
-                  //             providerId: provider.id)
-                  //     )
-                  // );
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SuperUserViewParticularCustomerOrdersPage(
+                              token: widget.token,
+                            superUserId: widget.superUserId,
+                            customerdetails: customer,
+                          )
+                      )
+                  );
                 },
                 child: Row(
                   children: [

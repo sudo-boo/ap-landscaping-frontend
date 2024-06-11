@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
-
+import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/helper_functions.dart';
 
 class SuperUserServicesPage extends StatefulWidget {
@@ -41,28 +41,27 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
 
   Future<List<orderInfo>> superUserGetOrders() async {
     try {
-      // print('Fetching orders...');
       final response = await http.get(
-        Uri.parse(superUserGetOrdersWithNoProviders),
+        Uri.parse(superUserGetAllOrders),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': '${widget.token}',
         },
       );
-      // print('Response status code: ${response.statusCode}');
+
       if (response.statusCode == 200) {
         dynamic decodedData = json.decode(response.body);
-        print('Decoded data: $decodedData');
+        // print('Decoded data: $decodedData');
         final List<dynamic>? ordersJson = decodedData != null ? decodedData['orders'] : null;
         if (ordersJson != null) {
           final List<orderInfo> orders = [];
           for (var order in ordersJson) {
-            // print('Processing order: $order');
-            // print('Provider ID: ${order['providerId']}');
-            //   print('Fetching provider details for order...');
-            print("Order date: ${order['date']}");
-            print('Order details cancelled details: ${order['isCancelled']}');
-            print("");
+            // print(order);
+            // Skip order if customerId is not a string
+            if (order['customerId'] is! String) {
+              print('Skipping order due to invalid customerId format: ${order['customerId']}');
+              continue;
+            }
             orders.add(orderInfo(
               serviceType: order['serviceType'],
               address: order['address'].toString(),
@@ -70,12 +69,12 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
               time: order['time'],
               expectationNote: order['expectationNote'] != null ? order['expectationNote'].toString() : '',
               customerId: order['customerId'],
-              providerId: order['providerId'] ?? "Not Assigned",
+              providerId: order['providerId'] ?? "NA",
               isFinished: order['isFinished'],
               isCancelled: order['isCancelled'],
               id: order['id'],
               orderId: order['orderId'] ?? "",
-              providerName: "Not Assigned yet!",
+              providerName: '',
             ));
           }
           return orders;
@@ -92,7 +91,6 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
     }
   }
 
-
   Future<List<orderInfo>> calculatePastOrders() async {
     try {
       List<orderInfo> futureOrdersList = await futureorders;
@@ -100,7 +98,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
 
       // Filter out cancelled orders from futureOrdersList
       futureOrdersList.removeWhere((order) {
-        if (order.isCancelled) {
+        if (order.isCancelled || order.isFinished) {
           cancelledOrdersList.add(order);
           return true;
         }
@@ -457,7 +455,8 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
               ),
             ]),
             Expanded(
-              child: TabBarView(children: [
+              child: TabBarView(
+                  children: [
                 SizedBox(
                   // color: Colors.green[100],
                   width: double.infinity,
@@ -492,18 +491,28 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                                 itemCount: orders?.length,
                                 itemBuilder: (context, index) {
                                   final order = orders?[index];
+                                  // print(order?.providerId);
+                                  // print(order?.date);
                                   String statusText;
                                   Color statusColor;
                                   if (order!.isCancelled) {
                                     statusText = 'Cancelled';
                                     statusColor = const Color(0xFFEA2F2F);
+                                  } else if (order.providerId == "NA"){
+                                    statusText = 'Not Assigned Yet';
+                                    statusColor = Colors.orange;
                                   } else if (order.isFinished) {
                                     statusText = 'Finished';
                                     statusColor = const Color(0xFF3BAE5B);
+                                  } else if (!order.isFinished && order.isAcceptedByProvider) {
+                                    statusText = 'Accepted, not yet Finished';
+                                    statusColor = const Color(0xFFFFE015);
                                   } else {
-                                    statusText = 'Not Assigned Yet';
-                                    statusColor = Colors.orange;
+                                    statusText = 'Assigned';
+                                    statusColor = const Color(0xFF311E5B);
                                   }
+                                  // print(statusText);
+                                  // print(statusColor);
                                   return SuperUserServicesCard(
                                     statusColor: statusColor,
                                     statusText: statusText,
@@ -602,7 +611,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                 children: <Widget>[
                   IconButton(
                     icon: Image.asset('assets/images/homeIcon.png',
-                        height: 45, width: 45),
+                        height: 35, width: 35),
                     onPressed: () {
                       // Navigator.pop(context);
                       Navigator.pushReplacement(
@@ -628,13 +637,13 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                       width: 90), // Placeholder for the center button
                   IconButton(
                     icon: Image.asset('assets/images/communicationIcon.png',
-                        height: 45, width: 45),
-                    onPressed: () {},
+                        height: 35, width: 35),
+                    onPressed: () {showComingSoonDialog(context);},
                     // onPressed: () => _onItemTapped(3),
                   ),
                   IconButton(
                     icon: Image.asset('assets/images/moreIcon.png',
-                        height: 45, width: 45),
+                        height: 35, width: 35),
                     onPressed: () {
                       // Navigator.pop(context);
                       Navigator.pushReplacement(

@@ -3,6 +3,7 @@ import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/customer_category_page_card.dart';
 
 
@@ -121,13 +122,13 @@ class _ServicesCategoriesState extends State<ServicesCategoriesPage> {
               children: <Widget>[
                 IconButton(
                   icon: Image.asset('assets/images/homePressedIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(0),
                 ),
                 IconButton(
                     icon: Image.asset('assets/images/myServicesIcon.png',
-                        height: 45, width: 45),
+                        height: 35, width: 35),
                     onPressed: () {
                       // _onItemTapped(1);
                       Navigator.pushReplacement(
@@ -140,13 +141,15 @@ class _ServicesCategoriesState extends State<ServicesCategoriesPage> {
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
                   icon: Image.asset('assets/images/communicationIcon.png',
-                      height: 45, width: 45),
-                  onPressed: () {},
+                      height: 35, width: 35),
+                  onPressed: () {
+                    showComingSoonDialog(context);
+                  },
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
                   icon: Image.asset('assets/images/moreIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,

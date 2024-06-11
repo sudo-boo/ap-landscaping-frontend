@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/models/customerinfo.dart';
 import 'package:ap_landscaping/utilities/custom_spacer.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:ap_landscaping/utilities/order_details_loading_page.dart';
@@ -8,17 +9,20 @@ import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../utilities/order_details_utilities.dart';
 
 class SuperUserOrderDetailsPage extends StatefulWidget {
   final token;
   final superUserId;
   final orderId;
+  final statusText;
+  final statusColor;
   const SuperUserOrderDetailsPage({Key? key,
     required this.token,
     required this.superUserId,
-    required this.orderId
+    required this.orderId,
+    required this.statusColor,
+    required this.statusText,
   }) : super(key: key);
 
   @override
@@ -26,14 +30,19 @@ class SuperUserOrderDetailsPage extends StatefulWidget {
 }
 
 class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
+
+  bool receivedCustomerData = false;
   bool isLoading = true;
   bool receivedProviderData = false;
   orderInfo order = orderInfo();
   providerInfo provider_info = providerInfo();
+  customerInfo customer_info = customerInfo();
+
   @override
   void initState() {
     super.initState();
     initialize();
+
   }
 
   void initialize() async {
@@ -41,7 +50,15 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
     if(order.providerId != "") {
       getProviderDetailsById();
     }
+    print(customer_info.username);
     isLoading = false;
+
+    if(order.customerId != ""){
+      getCustomerDetailsById();
+    }
+    // print("isfinished: ${order.isFinished}");
+    // print("is accepted by provider : ${order.isAcceptedByProvider}");
+    print(order.providerId);
   }
 
   Future<void> getOrderById() async {
@@ -124,6 +141,51 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
     } catch (e) {
       print('Error getting order: $e');
       // Handle error
+    }
+  }
+
+  Future<void> getCustomerDetailsById() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$customerDetailsbyId${order.customerId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': '${widget.token}',
+        },
+      );
+      if (response.statusCode == 200) {
+        final dynamic data = json.decode(response.body);
+        setState(() {
+          customer_info.username = data['customer']['username'] ?? '';
+          customer_info.email = data['customer']['email'] ?? '';
+          customer_info.mobile_number = data['customer']['mobilenumber'] ?? '';
+          // provider_info.password = data['provider']['username'] ?? '';
+          customer_info.address = data['customer']['address'] ?? '';
+          // provider_info.card_details = data['provider']['username'] ?? '';
+          // provider_info.cvv = data['provider']['username'] ?? '';
+          // provider_info.paypal_id = data['provider']['username'] ?? '';
+          // provider_info.aec_transfer = data['provider']['username'] ?? '';
+          // provider_info.card_type = data['provider']['username'] ?? '';
+          // provider_info.card_holders_name = data['provider']['username'] ?? '';
+          // provider_info.card_number = data['provider']['username'] ?? '';
+          // provider_info.qualifications = data['provider']['username'] ?? '';
+          // provider_info.years_of_experience =
+          //     data['provider']['yearsofexperience'] ?? 0;
+          // provider_info.bio = data['provider']['bio'] ?? '';
+          // provider_info.bank_name = data['provider']['username'] ?? '';
+          // provider_info.account_nummber = data['provider']['username'] ?? '';
+          // provider_info.services = data['provider']['services'] ?? '';
+          // customer_info.google_id = data['provider']['googleId'] ?? '';
+          receivedCustomerData = true;
+        });
+      } else if (response.statusCode == 404) {
+        // return {'error': 'Order not found'};
+      } else {
+        // return {'error': 'Failed to fetch order'};
+      }
+    } catch (e) {
+      print('Error getting order: $e');
+      // return {'error': 'Failed to fetch order'};
     }
   }
 
@@ -221,19 +283,11 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                                 decoration: BoxDecoration(
-                                  color: order!.isCancelled
-                                      ? const Color(0xFFEA2F2F)
-                                      : order.isFinished
-                                      ? const Color(0xFF3BAE5B)
-                                      : Colors.orange,
+                                  color: widget.statusColor,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  order!.isCancelled
-                                      ? "Cancelled"
-                                      : order.isFinished
-                                      ? "Finished"
-                                      : "Not Assigned Yet",
+                                  widget.statusText,
                                   style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontSize: fontHelper(context) * 16,
@@ -396,6 +450,177 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
                                     receivedProviderData
                                         ? Text(
                                       provider_info.mobile_number,
+                                      style: const TextStyle(
+                                        color: Color(0xFF3E363F),
+                                        fontSize: 16,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                        : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: 200,
+                                        height: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              CustomSpacer(width: screenWidth(context) * 0.9, height: 2,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 27.0, top: 16.0),
+                    child: Text(
+                      'About Customer : ',
+                      style: TextStyle(
+                        color: Color(0xFF3E363F),
+                        fontSize: fontHelper(context) * 22,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 16.0),
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFFEAEA),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 5, 20),
+                              child: Row(
+                                children: [
+                                  receivedCustomerData
+                                      ? CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.green[100],
+                                    child: const Icon(
+                                      Icons.person,
+                                      size: 35,
+                                    ),
+                                  )
+                                      : SizedBox(
+                                    width: 48,
+                                    height: 48,
+                                    child: Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 15), // Spacing between avatar and username
+                                  // Username
+                                  Flexible(
+                                    child: receivedCustomerData
+                                        ? Text(
+                                      customer_info.username,
+                                      style: TextStyle(
+                                        color: Color(0xFF3E363F),
+                                        fontSize: fontHelper(context) * 22,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                        : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    const Icon(Icons.email_rounded, color: Color(0xFF3E363F)),
+                                    const SizedBox(width: 8,),
+                                    receivedProviderData
+                                        ? Text(
+                                      customer_info.email,
+                                      style: const TextStyle(
+                                        color: Color(0xFF3E363F),
+                                        fontSize: 16,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                        : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: 150,
+                                        height: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    const Icon(Icons.location_on_rounded, color: Color.fromRGBO(62, 54, 63, 1)), // Email icon
+                                    const SizedBox(width: 8,),
+                                    receivedCustomerData
+                                        ? Text(
+                                      customer_info.address,
+                                      style: const TextStyle(
+                                        color: Color(0xFF3E363F),
+                                        fontSize: 16,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                        : Shimmer.fromColors(
+                                      baseColor: Colors.green.shade100,
+                                      highlightColor: Colors.green.shade50,
+                                      child: Container(
+                                        width: 200,
+                                        height: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    const Icon(Icons.call_rounded, color: Color.fromRGBO(62, 54, 63, 1)), // Email icon
+                                    const SizedBox(width: 8,),
+                                    receivedCustomerData
+                                        ? Text(
+                                      customer_info.mobile_number,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
                                         fontSize: 16,

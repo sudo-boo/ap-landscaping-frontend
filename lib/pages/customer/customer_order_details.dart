@@ -291,7 +291,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                         IconButton(
                           icon: Image.asset(
                             'assets/images/reasonIcon.png',
-                            // height: 45, width: 45
+                            // height: 35, width: 35
                           ),
                           onPressed: () {},
                         ),
@@ -545,7 +545,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                         IconButton(
                           icon: Image.asset(
                             'assets/images/reasonIcon.png',
-                            // height: 45, width: 45
+                            // height: 35, width: 35
                           ),
                           onPressed: () {},
                         ),

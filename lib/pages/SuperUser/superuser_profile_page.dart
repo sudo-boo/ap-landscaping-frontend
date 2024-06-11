@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config.dart';
+import '../../utilities/coming_soon_popup.dart';
 
 class SuperUserProfilePage extends StatefulWidget {
   final token;
@@ -247,80 +248,6 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           width: 40,
                           height: 40,
                           decoration: const ShapeDecoration(
-                            color: Color(0xFF3E363F),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/userIcon.png',
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        title: const Text(
-                          'Users',
-                          style: TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: 16,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SuperUserAllCustomersPage(
-                                    superUserId: widget.superuserId,
-                                    token: widget.token,
-                                  ),
-                          ));
-                        },
-                      ),
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF3E363F),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/userIcon.png',
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        title: const Text(
-                          'Providers',
-                          style: TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: 16,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SuperUserAllProvidersPage(
-                                  superUserId: widget.superuserId,
-                                  token: widget.token,
-                                ),
-                              ));
-                        },
-                      ),
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
                             color: Color(0xFF96C257),
                             shape: OvalBorder(),
                           ),
@@ -344,7 +271,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                           ),
                         ),
                         trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {},
+                        onTap: () {showComingSoonDialog(context);},
                       ),
                       ListTile(
                         leading: Container(
@@ -400,7 +327,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
               children: <Widget>[
                 IconButton(
                   icon: Image.asset('assets/images/homeIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
@@ -415,7 +342,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                 ),
                 IconButton(
                     icon: Image.asset('assets/images/myServicesIcon.png',
-                        height: 45, width: 45),
+                        height: 35, width: 35),
                     onPressed: () {
                       // _onItemTapped(1);
                       Navigator.pushReplacement(
@@ -428,13 +355,13 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
                   icon: Image.asset('assets/images/communicationIcon.png',
-                      height: 45, width: 45),
-                  onPressed: () {},
+                      height: 35, width: 35),
+                  onPressed: () {showComingSoonDialog(context);},
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
                   icon: Image.asset('assets/images/morePressedIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(4),
                 ),

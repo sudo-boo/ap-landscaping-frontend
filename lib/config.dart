@@ -15,9 +15,12 @@ const superUserLogout = "${url}super-user/logout";
 
 // superuser
 const superUserGetAllUsers = "${url}super-user/customers";
+const superUserGetAllOrders = "${url}super-user/orders";
 const superUserGetAllProviders = "${url}super-user/providers";
 const superUserGetOrdersWithNoProviders = "${url}super-user/unassigned";
 const superUserAssignProvider = "${url}orders/assign-provider";
+const superUserGetOrdersByCustomer = "${url}super-user/orders/customer/";
+const superUserGetOrdersByProvider = "${url}super-user/orders/provider/";
 
 // customer
 const customerOrders = "${url}orders/customerOrders/";
@@ -56,7 +59,7 @@ const getOrder = "${url}orders/";
 const providerDetailsbyId = "${url}provider/profile/";
 const rescheduleByCustomer = "${url}orders/update/customer/";
 const customerDetailsbyId = "${url}customer/profile/";
-const rescheduleByProvider = "${url}orders/update/provider/";
+const updateOrderByProvider = "${url}orders/update/provider/";
 
 // google login
 const googleLogin = "${url}user/auth/google";

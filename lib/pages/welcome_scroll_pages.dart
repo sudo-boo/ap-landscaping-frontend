@@ -362,8 +362,8 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
             ),
           ),
           Positioned(
-            left: 70,
-            right: 70,
+            left: 30,
+            right: 30,
             top: screenHeight(context) * 0.75,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -380,7 +380,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                   },
                   child: Text('Customer',
                       style: TextStyle(
-                        fontSize: fontHelper(context) * 18,
+                        fontSize: fontHelper(context) * 16,
                         color: Colors.white,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
@@ -388,7 +388,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                         letterSpacing: -0.30,
                       )),
                 ),
-                // const SizedBox(width: 100,),
+                // const SizedBox(width: 10,),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -401,7 +401,7 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                   },
                   child: Text('Provider',
                       style: TextStyle(
-                        fontSize: fontHelper(context) * 18,
+                        fontSize: fontHelper(context) * 16,
                         color: Colors.white,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,

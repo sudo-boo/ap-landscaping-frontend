@@ -11,6 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ap_landscaping/config.dart';
 
+import '../../utilities/coming_soon_popup.dart';
+
 
 class profilePage extends StatefulWidget {
   final token;
@@ -385,7 +387,7 @@ class _profilePageState extends State<profilePage> {
                           ),
                         ),
                         trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {},
+                        onTap: () {showComingSoonDialog(context);},
                       ),
                     ),
                     Padding(
@@ -469,7 +471,7 @@ class _profilePageState extends State<profilePage> {
                 IconButton(
                   icon: Image.asset('assets/images/communicationIcon.png',
                       height: 40, width: 40),
-                  onPressed: () {},
+                  onPressed: () {showComingSoonDialog(context);},
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(

@@ -6,8 +6,9 @@ import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
-import '../../models/customerinfo.dart';
 import '../../models/orderinfo.dart';
+import '../../utilities/apis.dart';
+import '../../utilities/coming_soon_popup.dart';
 
 
 class ProviderMyServicesPage extends StatefulWidget {
@@ -28,8 +29,8 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
   void initState() {
     super.initState();
     // Initial call to providerPreviousOrdersList
-    pastorders = providerPreviousOrdersList();
     futureorders = providerUpcomingOrdersList();
+    pastorders = providerPreviousOrdersList();
   }
 
   Future<List<orderInfo>> providerPreviousOrdersList() async {
@@ -45,8 +46,8 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
       final List<orderInfo> orders = [];
 
       for (var order in ordersJson) {
-        final customerDetails =
-        await getCustomerDetailsById(order['customerId']);
+        // print(order);
+        final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -58,6 +59,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
           isFinished: order['isFinished'],
           isCancelled: order['isCancelled'],
           id: order['id'],
+          isRescheduled: order['isRescheduled'] ?? false,
           customerName: customerDetails.username,
           isAcceptedByProvider: order['isAcceptedByProvider'] ?? false,
           // Add other customer details as needed
@@ -83,8 +85,8 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
       final List<orderInfo> orders = [];
 
       for (var order in ordersJson) {
-        final customerDetails =
-        await getCustomerDetailsById(order['customerId']);
+        // print(order);
+        final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -96,46 +98,17 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
           isFinished: order['isFinished'],
           isCancelled: order['isCancelled'],
           id: order['id'],
+          isRescheduled: order['isRescheduled'] ?? false,
           customerName: customerDetails.username,
           isAcceptedByProvider: order['isAcceptedByProvider'] ?? false,
           // Add other customer details as needed
         ));
+        // print(order['isAcceptedByProvider']);
       }
 
       return orders;
     } else {
       throw Exception('Failed to load provider orders');
-    }
-  }
-
-  Future<customerInfo> getCustomerDetailsById(String customer_id) async {
-    try {
-      final response = await http.get(
-        Uri.parse('$customerDetailsbyId${customer_id}'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': '${widget.token}',
-        },
-      );
-      if (response.statusCode == 200) {
-        final dynamic data = json.decode(response.body);
-        return customerInfo(
-          username: data['customer']['username'] ?? '',
-          email: data['customer']['email'] ?? '',
-          mobile_number: data['customer']['mobilenumber'] ?? '',
-          address: data['customer']['address'] ?? '',
-        );
-      } else if (response.statusCode == 404) {
-        // return {'error': 'Order not found'};
-        return customerInfo();
-      } else {
-        return customerInfo();
-        // return {'error': 'Failed to fetch order'};
-      }
-    } catch (e) {
-      print('Error getting order: $e');
-      return customerInfo();
-      // return {'error': 'Failed to fetch order'};
     }
   }
 
@@ -159,7 +132,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                     style: const TextStyle(
                       color: Colors.green,
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Inter'
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -338,6 +311,11 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                                   final order = orders?[index];
                                   String statusText;
                                   Color statusColor;
+                                  // print(order?.isFinished);
+                                  // print(order?.isRescheduled);
+                                  // print(order?.isCancelled);
+                                  // print(order?.isAcceptedByProvider);
+                                  // print("");
                                   if (!order!.isAcceptedByProvider) {
                                     statusText = 'Not Accepted Yet';
                                     statusColor = Colors.orange;
@@ -458,7 +436,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                   IconButton(
                     icon: Image.asset(
                       'assets/images/homeIcon.png',
-                      height: 45, width: 45
+                      height: 35, width: 35
                     ),
                     onPressed: () {
                       Navigator.pushReplacement(
@@ -474,20 +452,20 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                   IconButton(
                       icon: Image.asset(
                           'assets/images/myServicesPressedIcon.png',
-                          height: 45,
-                          width: 45),
+                          height: 40,
+                          width: 40),
                       onPressed: () {
                       }),
                   const SizedBox(
                       width: 90), // Placeholder for the center button
                   IconButton(
                     icon: Image.asset('assets/images/communicationIcon.png',
-                        height: 45, width: 45),
-                    onPressed: () {},
+                        height: 35, width: 35),
+                    onPressed: () {showComingSoonDialog(context);},
                   ),
                   IconButton(
                     icon: Image.asset('assets/images/moreIcon.png',
-                        height: 45, width: 45),
+                        height: 35, width: 35),
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,

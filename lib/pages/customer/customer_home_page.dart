@@ -8,7 +8,10 @@ import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
 import '../../models/customerinfo.dart';
+import 'package:ap_landscaping/utilities/coming_soon_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'create_order_success_page.dart';
 
 class CustomerHomePage extends StatefulWidget {
   final token;
@@ -89,7 +92,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
               size: 35,
             ),
             onPressed: () {
-              // Handle notifications icon action (e.g., show notifications)
+              showComingSoonDialog(context);
             },
           ),
         ],
@@ -293,7 +296,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                   icon: Image.asset('assets/images/communicationIcon.png',
                       height: 40, width: 40),
                   onPressed: () {
-
+                    showComingSoonDialog(context);
                   },
                   // onPressed: () => _onItemTapped(3),
                 ),

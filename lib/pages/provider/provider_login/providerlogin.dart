@@ -550,7 +550,7 @@ class _CustomPhoneNumberDialogState extends State<CustomPhoneNumberDialog> {
         children: <Widget>[
           Image.asset(
             'assets/images/forgotPasswordImage.png',
-            // height: 45, width: 45
+            // height: 35, width: 35
           ),
           const SizedBox(height: 16.0),
           const Text(
@@ -681,7 +681,7 @@ class _CustomEmailDialogState extends State<CustomEmailDialog> {
         children: <Widget>[
           Image.asset(
             'assets/images/forgotPasswordImage.png',
-            // height: 45, width: 45
+            // height: 35, width: 35
           ),
           const SizedBox(height: 16.0),
           const Text(
@@ -780,7 +780,7 @@ class _CustomOTPDialogState extends State<CustomOTPDialog> {
         children: <Widget>[
           Image.asset(
             'assets/images/forgotPasswordImage.png',
-            // height: 45, width: 45
+            // height: 35, width: 35
           ),
           const SizedBox(height: 16.0),
           const Text(
@@ -971,7 +971,7 @@ class _CustomPasswordResetDialogState extends State<CustomPasswordResetDialog> {
         children: <Widget>[
           Image.asset(
             'assets/images/forgotPasswordImage.png',
-            // height: 45, width: 45
+            // height: 35, width: 35
           ),
           const SizedBox(height: 16.0),
           const Text(

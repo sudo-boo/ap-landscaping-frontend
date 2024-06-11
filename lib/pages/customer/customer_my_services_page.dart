@@ -11,6 +11,9 @@ import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 
+import '../../utilities/apis.dart';
+import '../../utilities/coming_soon_popup.dart';
+
 class CustomerServicesPage extends StatefulWidget {
   final token;
   final customerId;
@@ -59,8 +62,8 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
   void initState() {
     super.initState();
     // Initial call to providerPreviousOrdersList
-    pastorders = customerPreviousOrdersList();
     futureorders = customerUpcomingOrdersList();
+    pastorders = customerPreviousOrdersList();
   }
 
   Future<List<orderInfo>> customerPreviousOrdersList() async {
@@ -75,8 +78,14 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       final List<dynamic> ordersJson = json.decode(response.body)['pastOrders'];
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
-        final providerDetails =
-        await getProviderDetailsById(order['providerId']);
+        print(order);
+        // print(order['providerId']);
+        String providerName = "Not Assigned yet!";
+        // if(order['providerId'] != null) {
+        //   final providerDetails = await getProviderDetailsById(
+        //       order['providerId'], widget.token);
+        //   providerName = providerDetails.username;
+        // }
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -84,17 +93,18 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
           time: order['time'],
           expectationNote: order['expectationNote'].toString(),
           customerId: order['customerId'],
-          providerId: order['providerId'],
+          providerId: order['providerId'] ?? "NA",
           isFinished: order['isFinished'],
           isCancelled: order['isCancelled'],
           id: order['id'],
-          providerName: providerDetails.username,
+          providerName: providerName,
           // Add other customer details as needed
         ));
       }
       // print();
       return orders;
     } else {
+      print(response.statusCode);
       throw Exception('Failed to load customer orders');
     }
   }
@@ -112,42 +122,28 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       json.decode(response.body)['upcomingOrders'];
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
-        // print(order);
+        print(order);
         // print(order['providerId']);
-        if(order['providerId'] != null){
-          final providerDetails =
-          await getProviderDetailsById(order['providerId']);
-          orders.add(orderInfo(
-            serviceType: order['serviceType'],
-            address: order['address'].toString(),
-            date: order['date'],
-            time: order['time'],
-            expectationNote: order['expectationNote'].toString(),
-            customerId: order['customerId'],
-            providerId: order['providerId'] ?? "Not Assigned",
-            isFinished: order['isFinished'],
-            isCancelled: order['isCancelled'],
-            id: order['id'],
-            providerName: providerDetails.username,
-            // Add other customer details as needed
-          ));
-        }
-        else{
-          orders.add(orderInfo(
-            serviceType: order['serviceType'],
-            address: order['address'].toString(),
-            date: order['date'],
-            time: order['time'],
-            expectationNote: order['expectationNote'].toString(),
-            customerId: order['customerId'],
-            providerId: order['providerId'] ?? "Not Assigned",
-            isFinished: order['isFinished'],
-            isCancelled: order['isCancelled'],
-            id: order['id'],
-            providerName: "Not Assigned yet!",
-            // Add other customer details as needed
-          ));
-        }
+        String providerName = "Not Assigned yet!";
+        // if(order['providerId'] != null) {
+        //   final providerDetails = await getProviderDetailsById(
+        //       order['providerId'], widget.token);
+        //   providerName = providerDetails.username;
+        // }
+        orders.add(orderInfo(
+          serviceType: order['serviceType'],
+          address: order['address'].toString(),
+          date: order['date'],
+          time: order['time'],
+          expectationNote: order['expectationNote'].toString(),
+          customerId: order['customerId'],
+          providerId: order['providerId'] ?? "NA",
+          isFinished: order['isFinished'],
+          isCancelled: order['isCancelled'],
+          id: order['id'],
+          providerName: providerName,
+          // Add other customer details as needed
+        ));
       }
       // for (var order in orders) {
       //   print("Order ID: ${order.id}");
@@ -171,36 +167,36 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
     }
   }
 
-  Future<providerInfo> getProviderDetailsById(String provider_id) async {
-    try {
-      final response = await http.get(
-        Uri.parse('$providerDetailsbyId$provider_id'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': '${widget.token}',
-        },
-      );
-      if (response.statusCode == 200) {
-        final dynamic data = json.decode(response.body);
-        return providerInfo(
-          username: data['provider']['username'] ?? '',
-          email: data['provider']['email'] ?? '',
-          mobile_number: data['provider']['mobilenumber'] ?? '',
-          address: data['provider']['address'] ?? '',
-        );
-      } else if (response.statusCode == 404) {
-        // return {'error': 'Order not found'};
-        return providerInfo();
-      } else {
-        // return {'error': 'Failed to fetch order'};
-        return providerInfo();
-      }
-    } catch (e) {
-      print('Error getting order: $e');
-      return providerInfo();
-      // return {'error': 'Failed to fetch order'};
-    }
-  }
+  // Future<providerInfo> getProviderDetailsById(String provider_id) async {
+  //   try {
+  //     final response = await http.get(
+  //       Uri.parse('$providerDetailsbyId$provider_id'),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': '${widget.token}',
+  //       },
+  //     );
+  //     if (response.statusCode == 200) {
+  //       final dynamic data = json.decode(response.body);
+  //       return providerInfo(
+  //         username: data['provider']['username'] ?? '',
+  //         email: data['provider']['email'] ?? '',
+  //         mobile_number: data['provider']['mobilenumber'] ?? '',
+  //         address: data['provider']['address'] ?? '',
+  //       );
+  //     } else if (response.statusCode == 404) {
+  //       // return {'error': 'Order not found'};
+  //       return providerInfo();
+  //     } else {
+  //       // return {'error': 'Failed to fetch order'};
+  //       return providerInfo();
+  //     }
+  //   } catch (e) {
+  //     print('Error getting order: $e');
+  //     return providerInfo();
+  //     // return {'error': 'Failed to fetch order'};
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -321,12 +317,18 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                                   if (order!.isCancelled) {
                                     statusText = 'Cancelled';
                                     statusColor = const Color(0xFFEA2F2F);
+                                  } else if (order.providerId == "NA"){
+                                    statusText = 'Not Assigned Yet';
+                                    statusColor = Colors.orange;
                                   } else if (order.isFinished) {
                                     statusText = 'Finished';
                                     statusColor = const Color(0xFF3BAE5B);
+                                  } else if (!order.isFinished && order.isAcceptedByProvider) {
+                                    statusText = 'Accepted, not yet Finished';
+                                    statusColor = const Color(0xFFFFE015);
                                   } else {
-                                    statusText = 'Pending';
-                                    statusColor = Colors.orange;
+                                    statusText = 'Assigned';
+                                    statusColor = const Color(0xFF714AC0);
                                   }
                                   return CustomerMyServicesCard(
                                     token: widget.token,
@@ -389,6 +391,22 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                                     statusText = 'Pending';
                                     statusColor = Colors.orange;
                                   }
+                                  if (order!.isCancelled) {
+                                    statusText = 'Cancelled';
+                                    statusColor = const Color(0xFFEA2F2F);
+                                  } else if (order.providerId == "NA"){
+                                    statusText = 'Not Assigned Yet';
+                                    statusColor = Colors.orange;
+                                  } else if (order.isFinished) {
+                                    statusText = 'Finished';
+                                    statusColor = const Color(0xFF3BAE5B);
+                                  } else if (!order.isFinished && order.isAcceptedByProvider) {
+                                    statusText = 'Accepted, not yet Finished';
+                                    statusColor = const Color(0xFFFFE015);
+                                  } else {
+                                    statusText = 'Assigned';
+                                    statusColor = const Color(0xFF714AC0);
+                                  }
                                   return CustomerMyServicesCard(
                                     token: widget.token,
                                     customerId: widget.customerId,
@@ -446,14 +464,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                   IconButton(
                     icon: Image.asset('assets/images/communicationIcon.png',
                         height: 40, width: 40),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const OrderDetailsLoadingPage()
-                          )
-                      );
-                    },
+                    onPressed: () {showComingSoonDialog(context);},
                     // onPressed: () => _onItemTapped(3),
                   ),
                   IconButton(

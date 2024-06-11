@@ -10,6 +10,7 @@ class orderInfo {
   String? providerId;
   bool isFinished = false;
   bool isCancelled = false;
+  bool isRescheduled = false;
   String id;
   String customerName;
   String? providerName;
@@ -26,6 +27,7 @@ class orderInfo {
       this.providerId = '',
       this.isFinished = false,
       this.isCancelled = false,
+      this.isRescheduled = false,
       this.id = '',
       this.orderId = '',
       this.customerName = '',
@@ -41,6 +43,7 @@ class orderInfo {
     'providerId': providerId,
     'isFinished': isFinished,
     'isCancelled': isCancelled,
+    'isRescheduled': isRescheduled,
     'id': id,
     'orderId': orderId,
     'customerName': customerName,

@@ -2,6 +2,7 @@ import 'dart:core';
 
 class customerInfo {
   String username;
+  String id;
   String email;
   String mobile_number;
   String password;
@@ -17,6 +18,7 @@ class customerInfo {
   customerInfo(
       {this.username = '',
       this.email = '',
+      this.id = '',
       this.mobile_number = '',
       this.password = '',
       this.address = '',
@@ -42,5 +44,6 @@ class customerInfo {
         'card_type': card_type,
         'card_holders_name': card_holders_name,
         'card_number': card_number,
+        'id': id
       };
 }

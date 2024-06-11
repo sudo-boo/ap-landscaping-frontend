@@ -106,24 +106,18 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10,),
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: ShapeDecoration(
                     color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.circular(10),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Date',
@@ -144,30 +138,19 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Container(
                         width: double.maxFinite,
                         height: 1,
                         decoration: ShapeDecoration(
-                          color:
-                          const Color(0xFF3E363F),
-                          shape:
-                          RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(
-                                12),
+                          color: const Color(0xFF3E363F),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Time',
@@ -188,93 +171,88 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8,),
                       Container(
                         width: double.maxFinite,
                         height: 1,
                         decoration: ShapeDecoration(
-                          color:
-                          const Color(0xFF3E363F),
-                          shape:
-                          RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(
-                                12),
+                          color: const Color(0xFF3E363F),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      // const SizedBox(height: 8,),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       'Provider ID',
+                      //       style: TextStyle(
+                      //         color:
+                      //         Color(0xFF1C1F34),
+                      //         fontSize: fontHelper(context) * 12,
+                      //         fontFamily: 'Inter',
+                      //         fontWeight:
+                      //         FontWeight.w600,
+                      //         height: 0,
+                      //       ),
+                      //     ),
+                      //     Text(
+                      //       widget.order.providerId,
+                      //       textAlign:
+                      //       TextAlign.center,
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(
+                      //   height: 8,
+                      // ),
+                      // Container(
+                      //   width: double.maxFinite,
+                      //   height: 1,
+                      //   decoration: ShapeDecoration(
+                      //     color: const Color(0xFF3E363F),
+                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
+                      //     ),
+                      //   ),
+                      // ),
+                      const SizedBox(height: 8,),
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-                        children: [
-                          Text(
-                            'Provider',
-                            style: TextStyle(
-                              color:
-                              Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
-                              fontFamily: 'Inter',
-                              fontWeight:
-                              FontWeight.w600,
-                              height: 0,
-                            ),
-                          ),
-                          Text(
-                            widget.order.providerName,
-                            textAlign:
-                            TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                        width: double.maxFinite,
-                        height: 1,
-                        decoration: ShapeDecoration(
-                          color:
-                          const Color(0xFF3E363F),
-                          shape:
-                          RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(
-                                12),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Address',
                             style: TextStyle(
-                              color:
-                              Color(0xFF1C1F34),
+                              color: Color(0xFF1C1F34),
                               fontSize: fontHelper(context) * 12,
                               fontFamily: 'Inter',
-                              fontWeight:
-                              FontWeight.w600,
+                              fontWeight: FontWeight.w600,
                               height: 0,
                             ),
                           ),
-                          Text(
-                            widget.order.address,
-                            textAlign:
-                            TextAlign.center,
+                          SizedBox(width: 10), // Add some spacing between the label and address
+                          Flexible(
+                            flex: 7,
+                            child: Text(
+                              widget.order.address,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.visible,
+                              softWrap: true, // Ensures text wraps to the next line
+                            ),
                           ),
                         ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        height: 1,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFF3E363F),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 15,),
                       Row(
@@ -291,6 +269,8 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                                       token: widget.token,
                                       superUserId: widget.superUserId,
                                       orderId: widget.order.id,
+                                      statusText: widget.statusText,
+                                      statusColor: widget.statusColor,
                                     ),
                                 ),
                               );
@@ -301,38 +281,25 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                               'View Details',
                               style: TextStyle(
                                 color: Colors.white,
+                                fontFamily: 'Inter'
                               ),
                             ),
                           ),
                         ],
                       ),
-                      if (widget.statusText != 'Cancelled') Row(
+                      if (widget.order.providerId == 'NA' && !widget.order.isCancelled) Row(
                         mainAxisAlignment:
                         MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
                             onPressed: widget.onPressed,
-
-                              // () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         CustomerOrderDetailsPage(
-                              //           token: widget.token,
-                              //           customerId: widget.customerId,
-                              //           orderId: widget.order.id,
-                              //         ),
-                              //   ),
-                              // );
-                              // }
-
                               style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFA687FF),
                             ),
                             child: const Text(
                               'Assign',
                               style: TextStyle(
                                 color: Colors.white,
+                                fontFamily: 'Inter'
                               ),
                             ),
                           ),

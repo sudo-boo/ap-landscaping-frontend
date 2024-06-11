@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:ap_landscaping/pages/SuperUser/superuser_view_customer_orders_page.dart';
+import 'package:ap_landscaping/pages/SuperUser/superuser_view_provider_orders_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -186,9 +188,11 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProviderMyServicesPage(
-                          token: widget.token,
-                          providerId: provider.id)
+                        builder: (context) => SuperUserViewParticularProviderOrdersPage(
+                            token: widget.token,
+                            superUserId: widget.superUserId,
+                            providerId: provider.id
+                        )
                       )
                     );
                   },

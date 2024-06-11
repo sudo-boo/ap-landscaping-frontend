@@ -8,8 +8,9 @@ import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/homepage_stats_card.dart';
-import 'crew_page.dart';
+import 'provider_crew_page.dart';
 
 class ProviderPage extends StatefulWidget {
   final token;
@@ -139,7 +140,7 @@ class _ProviderPageState extends State<ProviderPage> {
                       'Welcome Provider!!',
                       style: TextStyle(
                         color: Color(0xFF3E363F),
-                        fontSize: 28,
+                        fontSize: 20,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                         height: 0,
@@ -148,7 +149,7 @@ class _ProviderPageState extends State<ProviderPage> {
                     SizedBox(width: getDims.fractionWidth(0.03)),
                     Icon(
                       Icons.settings_suggest,
-                      size: 34, // Adjust size as needed
+                      size: 30, // Adjust size as needed
                       color: Colors.blue.shade400,
                     )
                   ],
@@ -221,13 +222,13 @@ class _ProviderPageState extends State<ProviderPage> {
               children: <Widget>[
                 IconButton(
                   icon: Image.asset('assets/images/homePressedIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(0),
                 ),
                 IconButton(
                     icon: Image.asset('assets/images/myServicesIcon.png',
-                        height: 45, width: 45),
+                        height: 35, width: 35),
                     onPressed: () {
                       // _onItemTapped(1);
                       Navigator.pushReplacement(
@@ -240,13 +241,15 @@ class _ProviderPageState extends State<ProviderPage> {
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
                   icon: Image.asset('assets/images/communicationIcon.png',
-                      height: 45, width: 45),
-                  onPressed: () {},
+                      height: 35, width: 35),
+                  onPressed: () {
+                    showComingSoonDialog(context);
+                  },
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
                   icon: Image.asset('assets/images/moreIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,

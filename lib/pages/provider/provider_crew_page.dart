@@ -27,7 +27,7 @@ class _crewPageState extends State<crewPage> {
     if (response.statusCode == 200) {
       final List<dynamic> crewJson = json.decode(response.body)['crews'];
       final List<crewInfo> crewMembers = crewJson.map((crewMember) {
-        print(crewMember['yearsofexperience']);
+        // print(crewMember['yearsofexperience']);
         return crewInfo(
             fullname: crewMember['yearsofexperience'] ?? '',
             username: crewMember['username'] ?? '',
@@ -108,7 +108,9 @@ class _crewPageState extends State<crewPage> {
             future: crewMembersList(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return Center(
+                    child: const CircularProgressIndicator()
+                );
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -212,8 +214,7 @@ class _crewPageState extends State<crewPage> {
                                         ElevatedButton(
                                           onPressed: () {
                                             deleteCrew(crewMember.id);
-                                            Navigator.pop(context);
-                                            Navigator.push(
+                                            Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) => crewPage(

@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
 import 'package:ap_landscaping/utilities/custom_spacer.dart';
 import 'package:ap_landscaping/utilities/order_details_loading_page.dart';
 import 'package:flutter/material.dart';
@@ -58,9 +59,10 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
           order.expectationNote = data['order']['expectationNote'] ?? '';
           order.customerId = data['order']['customerId'] ?? '';
           order.providerId = data['order']['providerId'] ?? '';
-          order.isFinished = data['order']['isFinished'] ?? '';
-          order.isCancelled = data['order']['isCancelled'] ?? '';
+          order.isFinished = data['order']['isFinished'];
+          order.isCancelled = data['order']['isCancelled'];
           order.id = data['order']['id'] ?? '';
+          order.isRescheduled = data['order']['isRescheduled'];
           // isLoading = false;
           isLoading = false;
         });
@@ -278,7 +280,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                         IconButton(
                           icon: Image.asset(
                             'assets/images/reasonIcon.png',
-                            // height: 45, width: 45
+                            // height: 35, width: 35
                           ),
                           onPressed: () {},
                         ),
@@ -351,6 +353,71 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
     );
   }
 
+
+  Future<void> updateOrderFunc() async {
+    try {
+
+      final response = await http.put(
+        Uri.parse('$updateOrderByProvider${widget.orderId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': '${widget.token}',
+        },
+        body: json.encode(order),
+      );
+
+      if (response.statusCode == 200) {
+        // print('Order Updated Successfully');
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Order Updated Successfully!"),
+                // content: Text(err.message),
+                actions: [
+                  TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProviderMyServicesPage(
+                            token: widget.token,
+                            providerId: widget.providerId,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                ],
+              );
+            });
+      } else {
+        throw Exception('Failed to cancel order');
+      }
+    } catch (error) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              // content: Text(err.message),
+              actions: [
+                TextButton(
+                  child: const Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+      print('Error cancelling order: $error');
+      // throw Exception('Internal Server Error');
+    }
+  }
+
+
   void showCustomReschedulingBottomSheet(BuildContext context) {
     DateTime selectedDate = DateTime.now();
     TimeOfDay selectedTime = TimeOfDay.now();
@@ -379,64 +446,6 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
         setState(() {
           selectedTime = pickedTime;
         });
-      }
-    }
-
-    Future<void> rescheduleOrderFunc() async {
-      try {
-        var cBody = {
-          'reason': _reasonController.text,
-        };
-        final response = await http.put(
-          Uri.parse(
-              '$rescheduleByProvider${widget.orderId}'), // Replace with your API endpoint
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': '${widget.token}',
-          },
-          body: json.encode(order),
-        );
-
-        if (response.statusCode == 200) {
-          print('Order Rescheduled successfully');
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("Order cancelled successfully"),
-                  // content: Text(err.message),
-                  actions: [
-                    TextButton(
-                      child: const Text("Ok"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
-                );
-              });
-        } else {
-          throw Exception('Failed to cancel order');
-        }
-      } catch (error) {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Error"),
-                // content: Text(err.message),
-                actions: [
-                  TextButton(
-                    child: const Text("Ok"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              );
-            });
-        print('Error cancelling order: $error');
-        // throw Exception('Internal Server Error');
       }
     }
 
@@ -526,7 +535,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                         IconButton(
                           icon: Image.asset(
                             'assets/images/reasonIcon.png',
-                            // height: 45, width: 45
+                            // height: 35, width: 35
                           ),
                           onPressed: () {},
                         ),
@@ -551,11 +560,10 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: InkWell(
                   onTap: () {
-                    order.date =
-                        DateFormat('yyyy-MM-dd').format(selectedDate);
-                    order.time =
-                    "${selectedTime.hour}:${selectedTime.minute}";
-                    rescheduleOrderFunc();
+                    order.date = DateFormat('yyyy-MM-dd').format(selectedDate);
+                    order.time = "${selectedTime.hour}:${selectedTime.minute}";
+                    order.isRescheduled = true;
+                    updateOrderFunc();
                   },
                   child: Container(
                     width: 327,
@@ -852,6 +860,86 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
 
               CustomSpacer(padding: 3,width: screenWidth(context) * 0.9, height: 2,),
               detailsUtilityWidgets.buildPriceDetails(context),
+              if (!order.isFinished) ...[
+                const SizedBox(height: 20,),
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Do you want to set this order status as completed?"),
+                            // content: Text(err.message),
+                            actions: [
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: const Text("Yes"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  order.isFinished = true;
+                                  updateOrderFunc();
+                                  // Navigator.of(context).pop();
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => ProviderMyServicesPage(
+                                  //       token: widget.token,
+                                  //       providerId: widget.providerId,
+                                  //     ),
+                                  //   ),
+                                  // );
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                    );
+                  },
+                  child: Container(
+                    width: 336,
+                    height: 56,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    decoration: ShapeDecoration(
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Mark as Finished',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w600,
+                                  height: 0,
+                                  letterSpacing: -0.07,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
               SizedBox(height: 10,),
               if (!isLoading && !order.isCancelled && !order.isFinished) ...[
                 InkWell(
@@ -898,7 +986,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(height: 10,),
                 InkWell(
                   onTap: () {
                     showCustomCancellationBottomSheet(context);

@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config.dart';
+import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/helper_functions.dart';
 
 class ProviderProfilePage extends StatefulWidget {
@@ -344,7 +345,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                           ),
                         ),
                         trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {},
+                        onTap: () {showComingSoonDialog(context);},
                       ),
                     ),
                     Padding(
@@ -566,7 +567,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
               children: <Widget>[
                 IconButton(
                   icon: Image.asset('assets/images/homeIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {
                     Navigator.pushReplacement(
                         context,
@@ -579,7 +580,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                 ),
                 IconButton(
                     icon: Image.asset('assets/images/myServicesIcon.png',
-                        height: 45, width: 45),
+                        height: 35, width: 35),
                     onPressed: () {
                       // _onItemTapped(1);
                       Navigator.pushReplacement(
@@ -592,13 +593,13 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                 const SizedBox(width: 90), // Placeholder for the center button
                 IconButton(
                   icon: Image.asset('assets/images/communicationIcon.png',
-                      height: 45, width: 45),
-                  onPressed: () {},
+                      height: 35, width: 35),
+                  onPressed: () {showComingSoonDialog(context);},
                   // onPressed: () => _onItemTapped(3),
                 ),
                 IconButton(
                   icon: Image.asset('assets/images/morePressedIcon.png',
-                      height: 45, width: 45),
+                      height: 35, width: 35),
                   onPressed: () {},
                   // onPressed: () => _onItemTapped(4),
                 ),
