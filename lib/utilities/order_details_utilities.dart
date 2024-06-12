@@ -39,79 +39,88 @@ class OrderDetailsUtilityWidgets extends StatelessWidget {
                 color: Color(0xFFCFF29B),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Price: ",
-                        style: TextStyle(
-                          color: Color(0xFF3E363F),
-                          fontSize: fontHelper(context) * 16,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        "\$${price}",
-                        style: TextStyle(
-                          color: Color(0xFF3E363F),
-                          fontSize: fontHelper(context) * 16,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Offer: ",
-                        style: TextStyle(
-                          color: Color(0xFF3E363F),
-                          fontSize: fontHelper(context) * 16,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        "$offer% off",
-                        style: TextStyle(
-                          color: Color(0xFF3E363F),
-                          fontSize: fontHelper(context) * 16,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4), // CustomSpacer replacement
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Total Amount: ",
-                        style: TextStyle(
-                          color: Color(0xFF3E363F),
-                          fontSize: fontHelper(context) * 17,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      Text(
-                        "\$${price}",
-                        style: TextStyle(
-                          color: Color(0xFF3E363F),
-                          fontSize: fontHelper(context) * 17,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              // child: Column(
+              //   children: [
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Text(
+              //           "Price: ",
+              //           style: TextStyle(
+              //             color: Color(0xFF3E363F),
+              //             fontSize: fontHelper(context) * 16,
+              //             fontFamily: 'Inter',
+              //             fontWeight: FontWeight.w600,
+              //           ),
+              //         ),
+              //         Text(
+              //           "\$${price}",
+              //           style: TextStyle(
+              //             color: Color(0xFF3E363F),
+              //             fontSize: fontHelper(context) * 16,
+              //             fontFamily: 'Inter',
+              //             fontWeight: FontWeight.w600,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Text(
+              //           "Offer: ",
+              //           style: TextStyle(
+              //             color: Color(0xFF3E363F),
+              //             fontSize: fontHelper(context) * 16,
+              //             fontFamily: 'Inter',
+              //             fontWeight: FontWeight.w600,
+              //           ),
+              //         ),
+              //         Text(
+              //           "$offer% off",
+              //           style: TextStyle(
+              //             color: Color(0xFF3E363F),
+              //             fontSize: fontHelper(context) * 16,
+              //             fontFamily: 'Inter',
+              //             fontWeight: FontWeight.w600,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     const SizedBox(height: 4), // CustomSpacer replacement
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: [
+              //         Text(
+              //           "Total Amount: ",
+              //           style: TextStyle(
+              //             color: Color(0xFF3E363F),
+              //             fontSize: fontHelper(context) * 17,
+              //             fontFamily: 'Inter',
+              //             fontWeight: FontWeight.w900,
+              //           ),
+              //         ),
+              //         Text(
+              //           "\$${price}",
+              //           style: TextStyle(
+              //             color: Color(0xFF3E363F),
+              //             fontSize: fontHelper(context) * 17,
+              //             fontFamily: 'Inter',
+              //             fontWeight: FontWeight.w900,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              child: Text(
+                "Prices will be decided based on numerous factors.",
+                style: TextStyle(
+                  color: Color(0xFF3E363F),
+                  fontSize: fontHelper(context) * 17,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
           ),

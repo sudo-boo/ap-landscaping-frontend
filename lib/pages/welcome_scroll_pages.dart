@@ -1,5 +1,7 @@
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class FirstScrollPage extends StatefulWidget {
   const FirstScrollPage({super.key});
@@ -12,7 +14,7 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFFF1DDDF),
+        color: Colors.green.shade100,
       child: Stack(
         children: [
           const Positioned(
@@ -47,71 +49,46 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
                   'assets/images/welcomePage1cloud4.png'),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: 0,
             right: 0,
-            top: 50,
-            child: Image(
-              image:
-              AssetImage('assets/images/welcomePage1.png'),
+            top: screenHeight(context) * 0.23,
+            child: Padding(
+              padding: EdgeInsets.all(screenWidth(context) * 0.1),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: screenHeight(context) * 0.45,
+                    height: screenHeight(context) * 0.45,
+                    child: Image.asset("assets/images/ScrollPage1.png"),
+                  ),
+                  SizedBox(height: 20), // Add spacing between the image and the text
+                  Text(
+                    "All Lawn Care Services",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                      height: 1.2,
+                    ),
+                  ),
+                  SizedBox(height: 30), // Add spacing between the texts
+                  Text(
+                    "Transforming Your Lawn into a Lush Paradise",
+                    style: TextStyle(
+                      color: Color(0xFF960505),
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w400,
+                      height: 1.2,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Positioned(
-            left: -280,
-            right: -280,
-            top: 540,
-            child: Container(
-                width: 960,
-                height: 960,
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(1234),
-                  ),
-                  shadows: const [
-                    BoxShadow(
-                      color: Color(0x0C4B3425),
-                      blurRadius: 0,
-                      offset: Offset(0, 0),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x0C4B3425),
-                      blurRadius: 38,
-                      offset: Offset(0, -17),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x0A4B3425),
-                      blurRadius: 69,
-                      offset: Offset(0, -69),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x074B3425),
-                      blurRadius: 93,
-                      offset: Offset(0, -154),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x024B3425),
-                      blurRadius: 110,
-                      offset: Offset(0, -274),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x004B3425),
-                      blurRadius: 120,
-                      offset: Offset(0, -428),
-                      spreadRadius: 0,
-                    )
-                  ],
-                )),
-          ),
-          // Positioned(
-          //   child: ,
-          // )
         ],
       ),
     );
@@ -142,77 +119,45 @@ class _SecondScrollPageState extends State<SecondScrollPage> {
               fit: BoxFit.cover,
             ),
           ),
-          const Positioned(
-            left: 0,
-            right: 0,
-            top: 270,
-            child: Image(
-              image: AssetImage(
-                  'assets/images/welcomePage2rainbow.png'),
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-          const Positioned(
-            left: 0,
-            right: 0,
-            top: 100,
-            child: Image(
-              image: AssetImage(
-                  'assets/images/welcomePage2brain.png'),
-            ),
-          ),
           Positioned(
-            left: -280,
-            right: -280,
-            top: 540,
-            child: Container(
-                width: 960,
-                height: 960,
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(1234),
+            left: 0,
+            right: 0,
+            top: screenHeight(context) * 0.35,
+            child: Padding(
+              padding: EdgeInsets.all(screenWidth(context) * 0.02),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    // width: screenHeight(context) * 0.45,
+                    // height: screenHeight(context) * 0.45,
+                    child: Image.asset("assets/images/ScrollPage2.png"),
                   ),
-                  shadows: const [
-                    BoxShadow(
-                      color: Color(0x0C4B3425),
-                      blurRadius: 0,
-                      offset: Offset(0, 0),
-                      spreadRadius: 0,
+                  SizedBox(height: 20), // Add spacing between the image and the text
+                  Text(
+                    "Donation Pick-Up Services",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                      height: 1.2,
                     ),
-                    BoxShadow(
-                      color: Color(0x0C4B3425),
-                      blurRadius: 38,
-                      offset: Offset(0, -17),
-                      spreadRadius: 0,
+                  ),
+                  SizedBox(height: 30), // Add spacing between the texts
+                  Text(
+                    "Simplifying Donations, One Pick-Up at a Time",
+                    style: TextStyle(
+                      color: Color(0xFF960505),
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w400,
+                      height: 1.2,
                     ),
-                    BoxShadow(
-                      color: Color(0x0A4B3425),
-                      blurRadius: 69,
-                      offset: Offset(0, -69),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x074B3425),
-                      blurRadius: 93,
-                      offset: Offset(0, -154),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x024B3425),
-                      blurRadius: 110,
-                      offset: Offset(0, -274),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x004B3425),
-                      blurRadius: 120,
-                      offset: Offset(0, -428),
-                      spreadRadius: 0,
-                    )
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -231,81 +176,80 @@ class _ThirdScrollPageState extends State<ThirdScrollPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF86B049),
+      color: const Color(0xFF8CF3F3),
       child: Stack(
         children: [
           const Positioned(
-            left: 0,
             right: 0,
-            top: 0,
+            top: 60,
             child: Image(
               image: AssetImage(
-                  'assets/images/welcomePage3group1.png'),
-              fit: BoxFit.cover,
+                  'assets/images/welcomePage1cloud1.png'),
             ),
           ),
           const Positioned(
             left: 0,
-            right: 0,
-            top: 120,
+            top: 100,
             child: Image(
-              image:
-              AssetImage('assets/images/welcomePage3.png'),
-              fit: BoxFit.fitWidth,
+              image: AssetImage(
+                  'assets/images/welcomePage1cloud2.png'),
+            ),
+          ),
+          const Positioned(
+            left: 0,
+            top: 350,
+            child: Image(
+              image: AssetImage(
+                  'assets/images/welcomePage1cloud3.png'),
+            ),
+          ),
+          const Positioned(
+            right: 0,
+            top: 200,
+            child: Image(
+              image: AssetImage(
+                  'assets/images/welcomePage1cloud4.png'),
             ),
           ),
           Positioned(
-            left: -280,
-            right: -280,
-            top: 540,
-            child: Container(
-                width: 960,
-                height: 960,
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(1234),
+            left: 0,
+            right: 0,
+            top: screenHeight(context) * 0.3,
+            child: Padding(
+              padding: EdgeInsets.all(screenWidth(context) * 0.05),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    // width: screenHeight(context) * 0.45,
+                    // height: screenHeight(context) * 0.45,
+                    child: Image.asset("assets/images/ScrollPage3.png"),
                   ),
-                  shadows: const [
-                    BoxShadow(
-                      color: Color(0x0C4B3425),
-                      blurRadius: 0,
-                      offset: Offset(0, 0),
-                      spreadRadius: 0,
+                  SizedBox(height: 20), // Add spacing between the image and the text
+                  Text(
+                    "Traditional Moving Services ",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                      height: 0,
                     ),
-                    BoxShadow(
-                      color: Color(0x0C4B3425),
-                      blurRadius: 38,
-                      offset: Offset(0, -17),
-                      spreadRadius: 0,
+                  ),
+                  SizedBox(height: 30), // Add spacing between the texts
+                  Text(
+                    "Trusted Partner for Hassle-Free Relocations",
+                    style: TextStyle(
+                      color: Color(0xFF960505),
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w400,
+                      height: 1.2,
                     ),
-                    BoxShadow(
-                      color: Color(0x0A4B3425),
-                      blurRadius: 69,
-                      offset: Offset(0, -69),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x074B3425),
-                      blurRadius: 93,
-                      offset: Offset(0, -154),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x024B3425),
-                      blurRadius: 110,
-                      offset: Offset(0, -274),
-                      spreadRadius: 0,
-                    ),
-                    BoxShadow(
-                      color: Color(0x004B3425),
-                      blurRadius: 120,
-                      offset: Offset(0, -428),
-                      spreadRadius: 0,
-                    )
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -330,86 +274,78 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
         children: <Widget>[
           const Positioned(
             left: 0,
+            right: 0,
             top: 100,
             child: Image(
-              image:
-              AssetImage('assets/images/startPageRect.png'),
-            ),
-          ),
-          const Positioned(
-            left: 0,
-            right: 35,
-            top: 100,
-            child: Image(
-              image: AssetImage('assets/images/startPage.png'),
+              image: AssetImage('assets/images/ScrollPage4.png'),
             ),
           ),
           Positioned(
             left: 50,
             right: 50,
-            top: screenHeight(context) * 0.6,
+            top: screenHeight(context) * 0.65,
             child: SizedBox(
-              child: Text(
-                "Would you like to register as a customer seeking landscaping services, or as a service provider offering your landscaping expertise?",
-                style: TextStyle(
-                  color: Color(0xFF3E363F),
-                  fontSize: fontHelper(context) * 15,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  // height: 0.08,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    "Would you like to register as a customer seeking landscaping services, or as a service provider offering your landscaping expertise?",
+                    style: TextStyle(
+                      color: Color(0xFF3E363F),
+                      fontSize: fontHelper(context) * 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                      // height: 0.08,
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor:
+                          const Color(0xFF3E363F), // Text color
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('/customersignin');
+                        },
+                        child: Text('Customer',
+                            style: TextStyle(
+                              fontSize: fontHelper(context) * 16,
+                              color: Colors.white,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                              letterSpacing: -0.30,
+                            )),
+                      ),
+                      // const SizedBox(width: 10,),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor:
+                          const Color(0xFF3E363F), // Text color
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('/providersignin');
+                        },
+                        child: Text('Provider',
+                            style: TextStyle(
+                              fontSize: fontHelper(context) * 16,
+                              color: Colors.white,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0,
+                              letterSpacing: -0.30,
+                            )),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ),
-          ),
-          Positioned(
-            left: 30,
-            right: 30,
-            top: screenHeight(context) * 0.75,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor:
-                    const Color(0xFF3E363F), // Text color
-                  ),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed('/customersignin');
-                  },
-                  child: Text('Customer',
-                      style: TextStyle(
-                        fontSize: fontHelper(context) * 16,
-                        color: Colors.white,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                        letterSpacing: -0.30,
-                      )),
-                ),
-                // const SizedBox(width: 10,),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor:
-                    const Color(0xFF3E363F), // Text color
-                  ),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed('/providersignin');
-                  },
-                  child: Text('Provider',
-                      style: TextStyle(
-                        fontSize: fontHelper(context) * 16,
-                        color: Colors.white,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                        letterSpacing: -0.30,
-                      )),
-                ),
-              ],
             ),
           ),
           Positioned(

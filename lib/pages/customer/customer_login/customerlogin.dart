@@ -276,85 +276,12 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                     child: const Text(
                       'Forgot password?',
                       style: TextStyle(
+                        fontFamily: 'Inter',
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
-                            'Or continue with',
-                            style: TextStyle(color: Colors.grey[700]),
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-
-              // google + apple sign in buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // google button
-                    InkWell(
-                      onTap: () {
-                        // auth
-                        // customerGLogin();
-                        signInWithGoogle();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.grey[200],
-                        ),
-                        child: const Image(
-                          image: AssetImage('assets/images/google.png'),
-                          height: 40,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    // apple button
-                    InkWell(
-                      onTap: () {
-                        // auth
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.grey[200],
-                        ),
-                        child: const Image(
-                          image: AssetImage('assets/images/apple.png'),
-                          height: 40,
-                        ),
-                      ),
-                    ),
-                  ],),
-
                   const SizedBox(height: 10),
                   // not a member? register now
                   Row(

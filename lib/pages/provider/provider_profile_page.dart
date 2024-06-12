@@ -48,7 +48,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                     "Sign Out",
                     style: TextStyle(
                       color: Color(0xFF3E363F),
-                      fontSize: 28,
+                      fontSize: 20,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                       height: 0,
@@ -62,7 +62,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                   "Are you sure you want to sign out?",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,
@@ -96,7 +96,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 10.0),
+                    horizontal: 40.0, vertical: 0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // Dismiss the bottom sheet
@@ -192,7 +192,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
           'More',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 20,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
             height: 0,
@@ -230,13 +230,13 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                 ),
                 color: const Color(0xFFFDFABE),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 18, 10, 18),
+                  padding: const EdgeInsets.all(5.0),
                   child: Column(
                     children: [
                       ListTile(
                         leading: Container(
-                          width: 60,
-                          height: 60,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF3E363F),
                             shape: CircleBorder(),
@@ -253,7 +253,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                           username,
                           style: const TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 20,
+                            fontSize: 16,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -273,14 +273,14 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 color: Colors.white,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: ListTile(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: Column(
+                    children: [
+                      ListTile(
                         leading: Container(
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF3E363F),
                             shape: OvalBorder(),
@@ -313,13 +313,10 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                                       providerId: widget.providerId)));
                         },
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: ListTile(
+                      ListTile(
                         leading: Container(
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF96C257),
                             shape: OvalBorder(),
@@ -347,13 +344,10 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {showComingSoonDialog(context);},
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-                      child: ListTile(
+                      ListTile(
                         leading: Container(
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFFC8B88A),
                             shape: OvalBorder(),
@@ -381,8 +375,8 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                           showCustomSignOutBottomSheet(context);
                         },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

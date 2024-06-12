@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'package:ap_landscaping/pages/SuperUser/superuser_view_customer_orders_page.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_view_provider_orders_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../models/providerinfo.dart';
 import '../../config.dart';
-import '../provider/provider_my_services_page.dart';
 
 class SuperUserAllProvidersPage extends StatefulWidget {
   final token;
@@ -198,26 +196,14 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
                   },
                   child: Row(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20), // Adjust border radius as needed
-                          border: Border.all(color: Colors.green, width: 1),
-                        ),
-                        padding: const EdgeInsets.all(15), // Adjust padding as needed
-                        child: const Row(
-                          children: [
-                            Text(
-                              'View Orders',
-                              style: TextStyle(
-                                color: Colors.green, // Text color is white for better visibility
-                                fontSize: 16,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                                height: 0,
-                              ),
-                            ),
-                            Icon(Icons.arrow_forward_ios_rounded),
-                          ],
+                      Text(
+                        'View Orders',
+                        style: TextStyle(
+                          color: Colors.green, // Text color is white for better visibility
+                          fontSize: 16,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w600,
+                          height: 0,
                         ),
                       ),
                     ],
@@ -235,7 +221,16 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
+        leading: IconButton(
+            icon: const Image(
+              image: AssetImage('assets/images/backIcon.png'),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }
+        ),
         title: Text('Providers'),
       ),
       body: FutureBuilder<List<providerInfo>>(
@@ -267,7 +262,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
                         child: Center(
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                            leading: CircleAvatar(
+                            leading: const CircleAvatar(
                               backgroundColor: Colors.white,
                               child: Icon(Icons.person),
                             ),
@@ -322,9 +317,9 @@ class InfoWidget extends StatelessWidget {
               label,
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 14,
+                fontSize: 12,
                 fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
+                // fontWeight: FontWeight.w600,
                 height: 0,
               ),
             ),
@@ -335,11 +330,11 @@ class InfoWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.green,
-                  fontSize: 16,
+                  fontSize: 13,
                   fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
+                  // fontWeight: FontWeight.w600,
                   height: 0,
                 ),
               ),

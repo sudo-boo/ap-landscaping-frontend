@@ -110,7 +110,7 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
                         'View My Services',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 16,
                           fontFamily: 'Inter',
                           letterSpacing: -0.07,
                         ),
@@ -146,7 +146,7 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
                         'Go to Home Page',
                         style: TextStyle(
                           color: const Color(0xFFB895FC),
-                          fontSize: 18,
+                          fontSize: 16,
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.w600,
                           letterSpacing: -0.07,

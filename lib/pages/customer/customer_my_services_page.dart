@@ -210,7 +210,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
             'My Services',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -230,20 +230,20 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                           customerId: widget.customerId)));
             },
           ),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                icon: Icon(
-                    Icons.notifications_rounded,
-                  size: fontHelper(context) * 30,
-                ),
-                onPressed: () {
-                  // Handle notifications icon action (e.g., show notifications)
-                },
-              ),
-            ),
-          ],
+          // actions: <Widget>[
+          //   Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: IconButton(
+          //       icon: Icon(
+          //           Icons.notifications_rounded,
+          //         size: fontHelper(context) * 30,
+          //       ),
+          //       onPressed: () {
+          //         // Handle notifications icon action (e.g., show notifications)
+          //       },
+          //     ),
+          //   ),
+          // ],
           backgroundColor: Colors.transparent,
         ),
         body: Column(
@@ -254,7 +254,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                   'Upcoming',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,
@@ -267,7 +267,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
                   'Past',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,

@@ -67,8 +67,128 @@ class _CustomerServicesInfoPageState extends State<CustomerServicesInfoPage> {
                     fit: BoxFit.fitHeight,
                   ),
                 ),
+                SizedBox(height: 8,),
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFFE1E1),
+                      borderRadius: BorderRadius.circular(20.0), // Rounded corners
+                    ),
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start, // Align items to the left
+                      children: [
+                        Text(
+                          widget.serviceName,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: fontHelper(context) * 22.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Order hold fee: ",
+                              style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontSize: fontHelper(context) * 16.0,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF3E363F)
+                              ),
+                            ),
+                            Text(
+                              "\$$price",
+                              style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontSize: fontHelper(context) * 16.0,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xDD3E363F),
+                                  height: 0
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                "Please note that pricing is subject to variation based on several factors.\nWe will contact you with further details.\n*Hold fee is included in the actual pricing and refunded if cancelled.",
+                                style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: fontHelper(context) * 12.0,
+                                    // fontWeight: FontWeight.w600,
+                                    color: Color(0xFF3E363F)
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Duration : ",
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: fontHelper(context) * 14.0,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF3E363F),
+                              ),
+                            ),
+                            Text(
+                              time,
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: fontHelper(context) * 14.0,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0x993E363F),
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Rating : ",
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: fontHelper(context) * 14.0,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF3E363F),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star_rounded,
+                                  color: Colors.orangeAccent,
+                                ),
+                                Text(
+                                  "$rating",
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: fontHelper(context) * 14.0,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0x993E363F),
+                                    height: 0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(screenHeight(context) * 0.03, screenHeight(context) * 0.1, screenHeight(context) * 0.03, 20),
+                  padding: EdgeInsets.fromLTRB(screenHeight(context) * 0.03, 20, screenHeight(context) * 0.03, 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -138,113 +258,11 @@ class _CustomerServicesInfoPageState extends State<CustomerServicesInfoPage> {
                 ),
               ],
             ),
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.4,
-              left: MediaQuery.of(context).size.width * 0.075,
-              child: Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFFFE1E1),
-                    borderRadius: BorderRadius.circular(20.0), // Rounded corners
-                  ),
-                  padding: EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, // Align items to the left
-                    children: [
-                      Text(
-                        widget.serviceName,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: fontHelper(context) * 22.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(height: 10,),
-                      Row(
-                        children: [
-                          Text(
-                            "\$$price",
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: fontHelper(context) * 20.0,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF3E363F)
-                            ),
-                          ),
-                          SizedBox(width: 10,),
-                          Text(
-                            "$offer% off",
-                            style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: fontHelper(context) * 16.0,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0x993E363F),
-                                height: 0
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Duration : ",
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: fontHelper(context) * 14.0,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF3E363F),
-                            ),
-                          ),
-                          Text(
-                            time,
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: fontHelper(context) * 14.0,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0x993E363F),
-                              height: 0,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Rating : ",
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: fontHelper(context) * 14.0,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF3E363F),
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star_rounded,
-                                color: Colors.orangeAccent,
-                              ),
-                              Text(
-                                "$rating",
-                                style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontSize: fontHelper(context) * 14.0,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0x993E363F),
-                                  height: 0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-              ),
-            ),
+            // Positioned(
+            //   top: MediaQuery.of(context).size.height * 0.35,
+            //   left: MediaQuery.of(context).size.width * 0.075,
+            //   child:
+            // ),
 
             Positioned(
               top: screenHeight(context) * (0.05),
@@ -255,9 +273,9 @@ class _CustomerServicesInfoPageState extends State<CustomerServicesInfoPage> {
                 },
                 backgroundColor: Colors.transparent, // Button background color
                 child: Icon(
-                  Icons.arrow_circle_left_outlined,
+                  Icons.arrow_back_ios_new_rounded,
                   color: Colors.white, // Icon color
-                  size: screenWidth(context) * 0.09,
+                  size: screenWidth(context) * 0.05,
                 ),
               ),
             ),

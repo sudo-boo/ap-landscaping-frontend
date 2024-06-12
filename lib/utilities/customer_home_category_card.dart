@@ -65,7 +65,7 @@ class HomePageCategoryCard extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(2.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Image.asset(
                   imageLink,
                   fit: BoxFit.fitHeight,

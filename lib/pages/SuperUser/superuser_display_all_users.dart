@@ -201,28 +201,16 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
                       )
                   );
                 },
-                child: Row(
+                child: const Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20), // Adjust border radius as needed
-                        border: Border.all(color: Colors.green, width: 1),
-                      ),
-                      padding: const EdgeInsets.all(15), // Adjust padding as needed
-                      child: const Row(
-                        children: [
-                          Text(
-                            'View Orders',
-                            style: TextStyle(
-                              color: Colors.green, // Text color is white for better visibility
-                              fontSize: 16,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              height: 0,
-                            ),
-                          ),
-                          Icon(Icons.arrow_forward_ios_rounded),
-                        ],
+                    Text(
+                      'View Orders',
+                      style: TextStyle(
+                        color: Colors.green, // Text color is white for better visibility
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                        height: 0,
                       ),
                     ),
                   ],
@@ -241,6 +229,14 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: const Image(
+              image: AssetImage('assets/images/backIcon.png'),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }
+        ),
         title: const Text('Users'),
       ),
       body: FutureBuilder<List<customerInfo>>(

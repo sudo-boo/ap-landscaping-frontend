@@ -62,7 +62,7 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
           'Book Services',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 20,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
             height: 0,
@@ -241,7 +241,14 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
                           borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
                         ),
                         child: ListTile(
-                          title: Text("Select Date of Service: ${selectedDate.toLocal().toString().split(' ')[0]}"),
+                          title: Text(
+                              "Select Date of Service: ${selectedDate.toLocal().toString().split(' ')[0]}",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: 'Inter',
+                              letterSpacing: 0,
+                            ),
+                          ),
                           leading: const Icon(Icons.calendar_today),
                           onTap: () => _selectDate(context),
                         ),
@@ -255,7 +262,14 @@ class _CustomerSchedulingPageState extends State<CustomerSchedulingPage> {
                           borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
                         ),
                         child: ListTile(
-                          title: Text("Select Time of Service: ${selectedTime.format(context)}"),
+                          title: Text(
+                              "Select Time of Service: ${selectedTime.format(context)}",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: 'Inter',
+                              letterSpacing: 0,
+                            ),
+                          ),
                           leading: const Icon(Icons.access_time),
                           onTap: () => _selectTime(context),
                         ),

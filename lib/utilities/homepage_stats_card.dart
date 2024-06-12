@@ -20,7 +20,7 @@ class StatsCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed, // Call the onPressed function when the card is tapped
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           decoration: BoxDecoration(
             color: cardColor,
             borderRadius: BorderRadius.circular(20),

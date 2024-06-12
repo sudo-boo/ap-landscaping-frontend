@@ -501,7 +501,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                             'Select your Date & Time?',
                             style: TextStyle(
                               color: Color(0xFF3E363F),
-                              fontSize: 18,
+                              fontSize: 15,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
                               height: 0,
@@ -520,13 +520,31 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                     children: [
                       ListTile(
                         title: Text(
-                            "Select Date of Service: ${selectedDate.toLocal().toString().split(' ')[0]}"),
+                            "Select Date of Service: ${selectedDate.toLocal().toString().split(' ')[0]}",
+                          style: const TextStyle(
+                            color: Color(0xFF3E363F),
+                            fontSize: 15,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                            letterSpacing: -0.1,
+                          ),
+                        ),
                         leading: const Icon(Icons.calendar_today),
                         onTap: () => _selectDate(context),
                       ),
                       ListTile(
                         title: Text(
-                            "Select Time of Service: ${selectedTime.format(context)}"),
+                            "Select Time of Service: ${selectedTime.format(context)}",
+                          style: const TextStyle(
+                            color: Color(0xFF3E363F),
+                            fontSize: 14,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                            letterSpacing: -0.36,
+                          ),
+                        ),
                         leading: const Icon(Icons.access_time),
                         onTap: () => _selectTime(context),
                       ),
@@ -542,13 +560,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                     padding: const EdgeInsets.fromLTRB(6.0, 0, 6.0, 0),
                     child: Row(
                       children: [
-                        IconButton(
-                          icon: Image.asset(
-                            'assets/images/reasonIcon.png',
-                            // height: 35, width: 35
-                          ),
-                          onPressed: () {},
-                        ),
+                        Icon(Icons.edit_note_rounded),
                         Expanded(
                           child: TextField(
                             controller: _reasonController,
@@ -843,7 +855,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                                       provider_info.email,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -868,7 +880,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                                       provider_info.address,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -893,7 +905,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                                       provider_info.mobile_number,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),

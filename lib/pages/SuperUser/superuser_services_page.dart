@@ -389,7 +389,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
             'My Services',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -412,16 +412,16 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
               );
             },
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/notificationsIcon.png'),
-              ), // Notifications Bell Icon
-              onPressed: () {
-                // Handle notifications icon action (e.g., show notifications)
-              },
-            ),
-          ],
+          // actions: <Widget>[
+          //   IconButton(
+          //     icon: const Image(
+          //       image: AssetImage('assets/images/notificationsIcon.png'),
+          //     ), // Notifications Bell Icon
+          //     onPressed: () {
+          //       // Handle notifications icon action (e.g., show notifications)
+          //     },
+          //   ),
+          // ],
           backgroundColor: Colors.transparent,
         ),
         body: Column(
@@ -432,7 +432,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                   'Upcoming',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 15,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,
@@ -445,7 +445,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                   'Past',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 15,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,

@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/pages/customer/create_order_success_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:webview_flutter/webview_flutter.dart';
-
 import '../services_data.dart';
 
 class CustomerPaymentsPage extends StatefulWidget {
@@ -39,16 +38,6 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
     createPayment();
   }
 
-  // Future<void> _launchUrl(String paymenturl) async {
-  //   print('Launching payment URL...');
-  //   try {
-  //     await launch(paymenturl, forceWebView: true, enableJavaScript: true);
-  //     print('Payment URL launched successfully. Test Complete');
-  //   } catch (e) {
-  //     print('Could not launch payment URL: $e');
-  //   }
-  // }
-
   void createPayment() async {
     double priceAmount = 0.0;
     for (var service in servicesData) {
@@ -73,13 +62,6 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
         }),
       );
 
-      // Print the request body for debugging
-      // print('Request body: ${json.encode({
-      //   "orderId": widget.orderID,
-      //   "amount": 10,
-      // })}');
-
-      // Print the response status code for debugging
       print('Response status code: ${response.statusCode}');
 
       if (response.statusCode == 200) {
@@ -87,22 +69,11 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
         setState(() {
           sessionId = responseData['sessionId']['id'];
           paymentUrl = responseData['sessionId']['url'];
-          // print("session ID: $sessionId");
-          // print("url: $paymentUrl");
-          // print('Response Data:');
-          // responseData.forEach((key, value) {
-          //   print('$key: $value');
-          // });
         });
-
-        // Launch the payment URL directly
-        // _launchUrl(paymentUrl);
       } else {
-        // Handle error
         print('Error: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle network errors
       print('Error: $e');
     }
   }
@@ -110,9 +81,6 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Customer Payments'),
-      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -137,9 +105,7 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                           MaterialPageRoute(
                               builder: (context) => CustomerOrderConfirmationPage(
                                   token: widget.token,
-                                  customerId: widget.customerId
-                              )
-                          ),
+                                  customerId: widget.customerId)),
                               (Route<dynamic> route) => false,
                         );
                         return NavigationDecision.prevent;
@@ -159,9 +125,8 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => CustomerHomePage(
-                                          token: widget.token,
-                                          customerId: widget.customerId
-                                        ),
+                                            token: widget.token,
+                                            customerId: widget.customerId),
                                       ),
                                     );
                                   },
@@ -179,7 +144,7 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
               ),
             )
                 : const Center(
-                  child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(),
             ),
           ),
         ],

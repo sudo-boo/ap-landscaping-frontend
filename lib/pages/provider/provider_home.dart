@@ -77,7 +77,7 @@ class _ProviderPageState extends State<ProviderPage> {
           'Home',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 20,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
             height: 0,
@@ -89,16 +89,16 @@ class _ProviderPageState extends State<ProviderPage> {
         //     Navigator.of(context).pushReplacementNamed('/home');
         //   },
         // ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Image(
-              image: AssetImage('assets/images/notificationsIcon.png'),
-            ), // Notifications Bell Icon
-            onPressed: () {
-              // Handle notifications icon action (e.g., show notifications)
-            },
-          ),
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: const Image(
+        //       image: AssetImage('assets/images/notificationsIcon.png'),
+        //     ), // Notifications Bell Icon
+        //     onPressed: () {
+        //       // Handle notifications icon action (e.g., show notifications)
+        //     },
+        //   ),
+        // ],
         backgroundColor: Colors.transparent,
       ),
       body: Column(
@@ -125,8 +125,8 @@ class _ProviderPageState extends State<ProviderPage> {
                   shadows: const [
                     BoxShadow(
                       color: Color(0x3F000000),
-                      blurRadius: 4,
-                      offset: Offset(0, 4),
+                      blurRadius: 1,
+                      offset: Offset(0, 1),
                       spreadRadius: 0,
                     )
                   ],
@@ -140,7 +140,7 @@ class _ProviderPageState extends State<ProviderPage> {
                       'Welcome Provider!!',
                       style: TextStyle(
                         color: Color(0xFF3E363F),
-                        fontSize: 20,
+                        fontSize: 18,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                         height: 0,
@@ -153,7 +153,6 @@ class _ProviderPageState extends State<ProviderPage> {
                       color: Colors.blue.shade400,
                     )
                   ],
-
                 ),
               ),
             ),
@@ -164,6 +163,37 @@ class _ProviderPageState extends State<ProviderPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        height: 2,
+                        width: screenWidth(context) * 0.4,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(1),
+                        ),
+                      ),
+                      // SizedBox(width: screenWidth(context) * 0.1,),
+                      Container(
+                        height: 10,
+                        width: 10,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      Container(
+                        height: 2,
+                        width: screenWidth(context) * 0.4,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(1),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
                   Row(
                     children: [
                       const StatsCard(

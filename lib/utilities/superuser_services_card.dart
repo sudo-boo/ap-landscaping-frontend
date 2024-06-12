@@ -124,7 +124,7 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                             style: TextStyle(
                               color:
                               Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
+                              fontSize: 13,
                               fontFamily: 'Inter',
                               fontWeight:
                               FontWeight.w600,
@@ -135,6 +135,13 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                             widget.order!.date,
                             textAlign:
                             TextAlign.center,
+
+                            style: TextStyle(
+                              color: Color(0xFF1C1F34),
+                              fontSize: 13,
+                              fontFamily: 'Inter',
+                              height: 0,
+                            ),
                           ),
                         ],
                       ),
@@ -157,7 +164,7 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                             style: TextStyle(
                               color:
                               Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
+                              fontSize: 13,
                               fontFamily: 'Inter',
                               fontWeight:
                               FontWeight.w600,
@@ -168,6 +175,12 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                             widget.order.time,
                             textAlign:
                             TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF1C1F34),
+                              fontSize: 13,
+                              fontFamily: 'Inter',
+                              height: 0,
+                            ),
                           ),
                         ],
                       ),
@@ -190,7 +203,7 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                       //       style: TextStyle(
                       //         color:
                       //         Color(0xFF1C1F34),
-                      //         fontSize: fontHelper(context) * 12,
+                      //         fontSize: 14,
                       //         fontFamily: 'Inter',
                       //         fontWeight:
                       //         FontWeight.w600,
@@ -224,7 +237,7 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                             'Address',
                             style: TextStyle(
                               color: Color(0xFF1C1F34),
-                              fontSize: fontHelper(context) * 12,
+                              fontSize: 13,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
                               height: 0,
@@ -237,7 +250,13 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
                               widget.order.address,
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.visible,
-                              softWrap: true, // Ensures text wraps to the next line
+                              softWrap: true,
+                              style: TextStyle(
+                                color: Color(0xFF1C1F34),
+                                fontSize: 13,
+                                fontFamily: 'Inter',
+                                height: 0,
+                              ),
                             ),
                           ),
                         ],
@@ -326,7 +345,7 @@ class _SuperUserServicesCardState extends State<SuperUserServicesCard> {
               widget.statusText,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: fontHelper(context) * 12,
+                fontSize: 10,
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
                 height: 0,

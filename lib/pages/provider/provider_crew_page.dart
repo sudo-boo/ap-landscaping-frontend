@@ -74,7 +74,7 @@ class _crewPageState extends State<crewPage> {
             'Crew',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -138,7 +138,7 @@ class _crewPageState extends State<crewPage> {
                                         crewMember!.username,
                                         style: const TextStyle(
                                           color: Color(0xFF3E363F),
-                                          fontSize: 20,
+                                          fontSize:18,
                                           fontFamily: 'Inter',
                                           fontWeight: FontWeight.w600,
                                         ),

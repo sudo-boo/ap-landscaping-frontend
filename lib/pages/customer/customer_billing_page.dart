@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../services_data.dart';
+import 'create_order_success_page.dart';
 import 'customer_home_page.dart';
 
 class CustomerBillingPage extends StatefulWidget {
@@ -89,6 +90,16 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
             ),
           ),
         );
+        // Navigator.of(context).pushAndRemoveUntil(
+        //   MaterialPageRoute(
+        //       builder: (context) => CustomerOrderConfirmationPage(
+        //           token: widget.token,
+        //           customerId: widget.customerId
+        //       )
+        //   ),
+        //       (Route<dynamic> route) => false,
+        // );
+
       } else {
         print(response.statusCode);
         showErrorDialog(context, 'Error: ${response.statusCode}');
@@ -129,7 +140,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
             'Book Services',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -159,7 +170,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                           left: 0,
                           top: 53,
                           child: Text(
-                            'Step1',
+                            'Step 1',
                             style: TextStyle(
                               color: Color(0xFF3E363F),
                               fontSize: 14,
@@ -296,7 +307,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                             widget.order_info.serviceType,
                             style: TextStyle(
                               fontFamily: 'Inter',
-                              fontSize: 28,
+                              fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -312,7 +323,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                                   'Date: \t ${widget.order_info.date}',
                                   style: TextStyle(
                                       fontFamily: 'Inter',
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
@@ -320,7 +331,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                                   'Time: \t ${widget.order_info.time}',
                                   style: TextStyle(
                                       fontFamily: 'Inter',
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
@@ -343,7 +354,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                             "Price Details : ",
                             style: TextStyle(
                                 fontFamily: 'Inter',
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w600
                             ),
                           ),
@@ -354,16 +365,25 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                             color: Color(0xFFCFF29B),
                             borderRadius: BorderRadius.circular(20),
                           ),
+                          // child: Text(
+                          //   "Note that pricing is subject to variation based on several factors. \nWe will contact you with further details.",
+                          //   style: TextStyle(
+                          //     color: Color(0xFF3E363F),
+                          //     fontSize: 16,
+                          //     fontFamily: 'Inter',
+                          //     fontWeight: FontWeight.w600,
+                          //   ),
+                          // ),
                           child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Price: ",
+                                    "Hold fee: ",
                                     style: TextStyle(
                                       color: Color(0xFF3E363F),
-                                      fontSize: 16,
+                                      fontSize: 12,
                                       fontFamily: 'Inter',
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -372,56 +392,60 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                                     "\$${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['price']}",
                                     style: TextStyle(
                                       color: Color(0xFF3E363F),
-                                      fontSize: 16,
+                                      fontSize: 12,
                                       fontFamily: 'Inter',
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Offer: ",
-                                    style: TextStyle(
-                                      color: Color(0xFF3E363F),
-                                      fontSize: 16,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['offer']}% off",
-                                    style: TextStyle(
-                                      color: Color(0xFF3E363F),
-                                      fontSize: 16,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       "Offer: ",
+                              //       style: TextStyle(
+                              //         color: Color(0xFF3E363F),
+                              //         fontSize: 14,
+                              //         fontFamily: 'Inter',
+                              //         fontWeight: FontWeight.w600,
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       "${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['offer']}% off",
+                              //       style: TextStyle(
+                              //         color: Color(0xFF3E363F),
+                              //         fontSize: 14,
+                              //         fontFamily: 'Inter',
+                              //         fontWeight: FontWeight.w600,
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // const SizedBox(height: 4),
+                              const Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Total Amount: ",
                                     style: TextStyle(
                                       color: Color(0xFF3E363F),
-                                      fontSize: 17,
+                                      fontSize: 12,
                                       fontFamily: 'Inter',
                                       fontWeight: FontWeight.w900,
                                     ),
                                   ),
-                                  Text(
-                                    "\$${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['price']}",
-                                    style: TextStyle(
-                                      color: Color(0xFF3E363F),
-                                      fontSize: 17,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w900,
+                                  SizedBox(width: 10,),
+                                  Flexible(
+                                    child: Text(
+                                      // "\$${servicesData.firstWhere((service) => service.containsKey(widget.order_info.serviceType)).values.first['price']}",
+                                      "Not yet determined",
+                                      style: TextStyle(
+                                        color: Color(0xFF3E363F),
+                                        fontSize: 12,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w900,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -444,7 +468,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                           createOrderFunc(context);
                         },
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                           child: Container(
                             height: 50,
                             width: double.infinity,
@@ -465,7 +489,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                                   'Pay Online',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: -0.07,
@@ -503,10 +527,10 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                             alignment: Alignment.center,
                             child:
                               Text(
-                                'Cancel Order',
+                                'Cancel',
                                 style: TextStyle(
                                   color: Colors.redAccent,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: -0.07,

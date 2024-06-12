@@ -96,11 +96,11 @@ class _SuperUserViewParticularProviderOrdersPageState extends State<SuperUserVie
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          title: Text(
+          title: const Text(
             'Provider\'s Orders',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -114,16 +114,16 @@ class _SuperUserViewParticularProviderOrdersPageState extends State<SuperUserVie
               Navigator.pop(context);
             },
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/notificationsIcon.png'),
-              ), // Notifications Bell Icon
-              onPressed: () {
-                // Handle notifications icon action (e.g., show notifications)
-              },
-            ),
-          ],
+          // actions: <Widget>[
+          //   IconButton(
+          //     icon: const Image(
+          //       image: AssetImage('assets/images/notificationsIcon.png'),
+          //     ), // Notifications Bell Icon
+          //     onPressed: () {
+          //       // Handle notifications icon action (e.g., show notifications)
+          //     },
+          //   ),
+          // ],
           backgroundColor: Colors.transparent,
         ),
         body: SizedBox(

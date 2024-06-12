@@ -49,7 +49,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                     "Sign Out",
                     style: TextStyle(
                       color: Color(0xFF3E363F),
-                      fontSize: 28,
+                      fontSize: 20,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                       height: 0,
@@ -63,7 +63,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                   "Are you sure you want to sign out?",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,
@@ -91,13 +91,13 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                   ),
                   child: const Text(
                     "Sign out",
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 16.0),
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 10.0),
+                    horizontal: 40.0, vertical: 0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // Dismiss the bottom sheet
@@ -114,7 +114,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                   child: const Text(
                     "Cancel",
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 16.0,
                       color: Color(0xFFA686FF),
                     ),
                   ),
@@ -177,7 +177,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
           'More',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 20,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
             height: 0,
@@ -197,107 +197,72 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
         width: double.infinity,
         height: double.infinity,
         child: Column(
-          children: [
+          children: [Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Card(
+              color: Colors.yellow.shade100,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0), // Increased border radius for more rounded corners
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFFC8B88A),
+                          shape: OvalBorder(),
+                        ),
+                        child: Icon(Icons.person), // Added color to the icon for better visibility
+                      ),
+                      title: const Text(
+                        'Super User',
+                        style: TextStyle(
+                          color: Color(0xFF181D27),
+                          fontSize: 16,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w600,
+                          height: 1.5, // Adjusted height for better text alignment
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Card(
                 color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0), // Increased border radius for more rounded corners
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: Column(
                     children: [
                       ListTile(
                         leading: Container(
                           width: 40,
                           height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF3E363F),
-                            shape: OvalBorder(),
+                          decoration: ShapeDecoration(
+                            color: Colors.pink.shade100,
+                            shape: CircleBorder(),
                           ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/userIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        title: const Text(
-                          'My Account',
-                          style: TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: 16,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => updateprofileInfoPage(
-                          //             token: widget.token,
-                          //             providerId: widget.providerId)));
-                        },
-                      ),
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF96C257),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/settingsIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        title: const Text(
-                          'Settings',
-                          style: TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: 16,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {showComingSoonDialog(context);},
-                      ),
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFFC8B88A),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              'assets/images/logoutIcon.png',
-                              // height: 100, // Adjust the size of the inner image/icon
-                              // width: 100,
-                            ),
-                            onPressed: () {},
-                          ),
+                          child: Icon(Icons.logout_rounded),
                         ),
                         title: const Text(
                           'Sign out',
                           style: TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 16,
+                            fontSize: 15,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
-                            height: 0.12,
+                            height: 0,
                           ),
                         ),
                         trailing: const Icon(Icons.arrow_forward_ios),

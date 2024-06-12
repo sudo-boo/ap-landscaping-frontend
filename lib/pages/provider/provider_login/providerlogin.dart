@@ -86,238 +86,169 @@ class _ProviderSignInState extends State<ProviderSignIn> {
         color: const Color(0xFFBBE1C5),
         height: double.infinity,
         child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-                child: Column(children: <Widget>[
-              const Image(
-                image: AssetImage('assets/images/loginPage.png'),
-              ),
-              const Text(
-                'Welcome Back Provider!',
-                style: TextStyle(
-                  color: Color(0xFF3E363F),
-                  fontSize: 30,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  // height: 0.02,
-                  letterSpacing: -0.30,
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                const Image(
+                  image: AssetImage('assets/images/loginPage.png'),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
-                child: TextFormField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    labelText: "Enter Email Address",
-                    // enabledBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(10.0),
-                    // ),
+                const Text(
+                  'Welcome Back Provider!',
+                  style: TextStyle(
+                    color: Color(0xFF3E363F),
+                    fontSize: 24,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    // height: 0.02,
+                    letterSpacing: -0.30,
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter Email Address';
-                    } else if (!value.contains('@')) {
-                      return 'Please enter a valid email address!';
-                    }
-                    return null;
-                  },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
-                child: TextFormField(
-                  obscureText: _isObscured,
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    labelText: "Enter Password",
-                    suffixIcon: IconButton(
-                    icon: Icon(
-                      _isObscured ? Icons.visibility : Icons.visibility_off,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                  child: TextFormField(
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                      labelText: "Enter Email Address",
+                      // enabledBorder: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(10.0),
+                      // ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _isObscured = !_isObscured;
-                      });
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter Email Address';
+                      } else if (!value.contains('@')) {
+                        return 'Please enter a valid email address!';
+                      }
+                      return null;
                     },
-                    // enabledBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(10.0),
-                    // ),
                   ),
-                    // enabledBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(10.0),
-                    // ),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter Password';
-                    }
-                    // else if (value.length < 6) {
-                    //   return 'Password must be atleast 6 characters!';
-                    // }
-                    return null;
-                  },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                child: isLoading
-                    ? const CircularProgressIndicator()
-                    : InkWell(
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              isLoading = true;
-                            });
-                            //auth
-                            pLogin();
-                          }
-                  },
-                  child: SizedBox(
-                    width: double.infinity, // Takes the width of the parent
-                    // padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50, // Adjust the height as needed
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF3E363F), // Background color
-                        borderRadius: BorderRadius.circular(5), // Adjust the radius as needed
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
+                  child: TextFormField(
+                    obscureText: _isObscured,
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      labelText: "Enter Password",
+                      suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscured ? Icons.visibility : Icons.visibility_off,
                       ),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white, // Text color
-                          fontSize: 16, // Adjust the font size as needed
+                      onPressed: () {
+                        setState(() {
+                          _isObscured = !_isObscured;
+                        });
+                      },
+                      // enabledBorder: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(10.0),
+                      // ),
+                    ),
+                      // enabledBorder: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(10.0),
+                      // ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter Password';
+                      }
+                      // else if (value.length < 6) {
+                      //   return 'Password must be atleast 6 characters!';
+                      // }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                  child: isLoading
+                      ? const CircularProgressIndicator()
+                      : InkWell(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              //auth
+                              pLogin();
+                            }
+                    },
+                    child: SizedBox(
+                      width: double.infinity, // Takes the width of the parent
+                      // padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50, // Adjust the height as needed
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF3E363F), // Background color
+                          borderRadius: BorderRadius.circular(5), // Adjust the radius as needed
+                        ),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            color: Colors.white, // Text color
+                            fontSize: 16, // Adjust the font size as needed
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const providerForgotPasswordPage()));
-                },
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero, // Remove padding
-                  tapTargetSize: MaterialTapTargetSize
-                      .shrinkWrap, // Minimize the tap target size
-                ),
-                child: const Text(
-                  'Forgot password?',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
+                TextButton(
+                  onPressed: () {
+                     Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const providerForgotPasswordPage()));
+                  },
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero, // Remove padding
+                    tapTargetSize: MaterialTapTargetSize
+                        .shrinkWrap, // Minimize the tap target size
+                  ),
+                  child: const Text(
+                    'Forgot password?',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
+                const SizedBox(height: 10),
+                // not a member? register now
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
+                    Text(
+                      'Not a member?',
+                      style: TextStyle(color: Colors.grey[700]),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        'Or continue with',
-                        style: TextStyle(color: Colors.grey[700]),
+                    const SizedBox(width: 4),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed('/providersignup');
+                      },
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero, // Remove padding
+                        tapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap, // Minimize the tap target size
                       ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
+                      child: const Text(
+                        'Register now',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              // google + apple sign in buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // google button
-                  InkWell(
-                    onTap: () {
-                      // auth
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(16),
-                        color: Colors.grey[200],
-                      ),
-                      child: const Image(
-                        image: AssetImage('assets/images/google.png'),
-                        height: 40,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  // apple button
-                  InkWell(
-                    onTap: () {
-                      // auth
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(16),
-                        color: Colors.grey[200],
-                      ),
-                      child: const Image(
-                        image: AssetImage('assets/images/apple.png'),
-                        height: 40,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 10),
-              // not a member? register now
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Not a member?',
-                    style: TextStyle(color: Colors.grey[700]),
-                  ),
-                  const SizedBox(width: 4),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/providersignup');
-                    },
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero, // Remove padding
-                      tapTargetSize: MaterialTapTargetSize
-                          .shrinkWrap, // Minimize the tap target size
-                    ),
-                    child: const Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ]))),
+                )
+              ]
+            )
+          )
+        ),
       ),
     );
   }
@@ -342,7 +273,7 @@ class _providerForgotPasswordPageState
             'Forgot Password',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,

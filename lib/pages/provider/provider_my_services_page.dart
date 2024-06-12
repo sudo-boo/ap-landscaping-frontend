@@ -221,28 +221,41 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: true,
+          leading: IconButton(
+              icon: const Image(
+                image: AssetImage('assets/images/backIcon.png'),
+              ),
+              onPressed: () {Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProviderPage(
+                          token: widget.token,
+                          providerId: widget.providerId
+                      )
+                  )
+              );
+              }),
           // title: Text(widget.serviceName),
           title: const Text(
             'My Services',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
             ),
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/notificationsIcon.png'),
-              ), // Notifications Bell Icon
-              onPressed: () {
-                // Handle notifications icon action (e.g., show notifications)
-              },
-            ),
-          ],
+          // actions: <Widget>[
+          //   IconButton(
+          //     icon: const Image(
+          //       image: AssetImage('assets/images/notificationsIcon.png'),
+          //     ), // Notifications Bell Icon
+          //     onPressed: () {
+          //       // Handle notifications icon action (e.g., show notifications)
+          //     },
+          //   ),
+          // ],
           backgroundColor: Colors.transparent,
         ),
         body: Column(

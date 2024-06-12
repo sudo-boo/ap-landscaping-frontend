@@ -52,6 +52,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
       if (response.statusCode == 200) {
         final dynamic data = json.decode(response.body);
         setState(() {
+          print(data);
           order.serviceType = data['order']['serviceType'] ?? '';
           order.address = data['order']['address'] ?? '';
           order.date = data['order']['date'] ?? '';
@@ -62,7 +63,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
           order.isFinished = data['order']['isFinished'];
           order.isCancelled = data['order']['isCancelled'];
           order.id = data['order']['id'] ?? '';
-          order.isRescheduled = data['order']['isRescheduled'];
+          order.isRescheduled = data['order']['isRescheduled'] ?? false;
           // isLoading = false;
           isLoading = false;
         });
@@ -860,7 +861,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
 
               CustomSpacer(padding: 3,width: screenWidth(context) * 0.9, height: 2,),
               detailsUtilityWidgets.buildPriceDetails(context),
-              if (!order.isFinished) ...[
+              if (!order.isFinished && !order.isCancelled) ...[
                 const SizedBox(height: 20,),
                 InkWell(
                   onTap: () {

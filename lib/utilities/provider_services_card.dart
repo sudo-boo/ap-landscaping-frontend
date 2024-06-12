@@ -70,7 +70,7 @@ class _ProviderServicesCardState extends State<ProviderServicesCard> {
                     // textAlign: TextAlign.left,
                     style: const TextStyle(
                       color: Color(0xFF1C1F34),
-                      fontSize: 24,
+                      fontSize: 20,
                       fontFamily: 'Inter',
                       fontWeight:
                       FontWeight.w600,
@@ -128,6 +128,12 @@ class _ProviderServicesCardState extends State<ProviderServicesCard> {
                           Text(
                             widget.order!.date,
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF1C1F34),
+                              fontSize: 14,
+                              fontFamily: 'Inter',
+                              height: 0,
+                            ),
                           ),
                         ],
                       ),
@@ -160,6 +166,12 @@ class _ProviderServicesCardState extends State<ProviderServicesCard> {
                           Text(
                             widget.order.time,
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF1C1F34),
+                              fontSize: 14,
+                              fontFamily: 'Inter',
+                              height: 0,
+                            ),
                           ),
                         ],
                       ),
@@ -191,6 +203,12 @@ class _ProviderServicesCardState extends State<ProviderServicesCard> {
                           Text(
                             widget.order.customerName,
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF1C1F34),
+                              fontSize: 14,
+                              fontFamily: 'Inter',
+                              height: 0,
+                            ),
                           ),
                         ],
                       ),
@@ -223,6 +241,12 @@ class _ProviderServicesCardState extends State<ProviderServicesCard> {
                           Text(
                             "Coming Soon!",
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF1C1F34),
+                              fontSize: 14,
+                              fontFamily: 'Inter',
+                              height: 0,
+                            ),
                           ),
                         ],
                       ),

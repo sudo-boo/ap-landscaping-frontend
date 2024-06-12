@@ -335,7 +335,7 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
                           ListTile(
                             contentPadding: EdgeInsets.zero,
                             title: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 5, 5, 20),
+                              padding: const EdgeInsets.fromLTRB(10, 5, 5, 15),
                               child: Row(
                                 children: [
                                   receivedProviderData
@@ -369,7 +369,7 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
                                       provider_info.username,
                                       style: TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: fontHelper(context) * 22,
+                                        fontSize: 16,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -402,7 +402,7 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
                                       provider_info.email,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -427,7 +427,7 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
                                       provider_info.address,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -452,7 +452,7 @@ class _SuperUserOrderDetailsPageState extends State<SuperUserOrderDetailsPage> {
                                       provider_info.mobile_number,
                                       style: const TextStyle(
                                         color: Color(0xFF3E363F),
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontFamily: 'Inter',
                                         fontWeight: FontWeight.w600,
                                       ),

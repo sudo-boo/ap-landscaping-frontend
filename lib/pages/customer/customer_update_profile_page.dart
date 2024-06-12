@@ -191,7 +191,7 @@ class _CustomerUpdateProfileInfoPageState extends State<CustomerUpdateProfileInf
             'My Account',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,

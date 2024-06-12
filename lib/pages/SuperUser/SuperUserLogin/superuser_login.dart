@@ -96,7 +96,7 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
                     'Welcome Back SuperUser!',
                     style: TextStyle(
                       color: Color(0xFF3E363F),
-                      fontSize: 30,
+                      fontSize: 22,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                       // height: 0.02,

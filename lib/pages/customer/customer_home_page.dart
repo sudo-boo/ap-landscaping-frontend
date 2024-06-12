@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:ap_landscaping/utilities/customer_home_category_card.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:ap_landscaping/pages/customer/categories_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:http/http.dart' as http;
@@ -76,168 +75,133 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
   Widget build(BuildContext context) {
     Dimensions getDims = Dimensions(context);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.person,
-            size: 35,
-          ), // Profile Icon
-          onPressed: () {
-            // Handle profile icon action (e.g., navigate to profile page)
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none_rounded,
-              size: 35,
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          // height: screenHeight(context),
+          clipBehavior: Clip.antiAlias,
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0),
             ),
-            onPressed: () {
-              showComingSoonDialog(context);
-            },
           ),
-        ],
-        backgroundColor: Colors.transparent,
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        clipBehavior: Clip.antiAlias,
-        decoration: ShapeDecoration(
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              left: -280,
-              right: -280,
-              top: -screenHeight(context) * 0.82,
-              child: Container(
-                height: screenHeight(context) * 1.3,
-                decoration: const ShapeDecoration(
+          child: Column(
+            children: [
+              Container(
+                width: screenWidth(context) * 2, // Set your desired width
+                // height: screenHeight(context)*0.45, // Set your desired height
+                decoration: BoxDecoration(
                   color: Color(0xFF73A580),
-                  shape: OvalBorder(),
+                  borderRadius: BorderRadius.only(// Top-right corner radius
+                    bottomLeft: Radius.elliptical(200, 50), // Bottom-left corner radius
+                    bottomRight: Radius.elliptical(200, 50), // Bottom-right corner radius
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: screenHeight(context)*0.08,),
+                    Image(
+                      image: AssetImage('assets/images/homeScreen.png',),
+                      height: screenHeight(context) * 0.3,
+                    ),
+                    SizedBox(height: screenHeight(context)*0.03,),
+                  ],
                 ),
               ),
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              child: Image(
-                image: AssetImage('assets/images/homeScreen.png',),
-                height: screenHeight(context) * 0.4,
-              ),
-            ),
-            Positioned(
-                top: screenHeight(context) * 0.4,
-                left: 0,
-                right: 0,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30),
                 child: Text(
                   'Welcome Customer',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFF3E363F),
                     fontSize: fontHelper(context) * 24,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,
                   ),
-                )),
-            Positioned(
-              top: screenHeight(context) * 0.47,
-              left: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Category',
-                      style: TextStyle(
-                        color: Color(0xFF3E363F),
-                        fontSize: fontHelper(context) * 18,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                      ),
-                    ),
-                    SizedBox(width: getDims.fractionWidth(0.55)),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ServicesCategoriesPage(
-                                token: widget.token,
-                                customerId: widget.customerId),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'View All',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF3E363F),
-                          fontSize: fontHelper(context) * 14,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
-            ),
-            Positioned(
-              top: screenHeight(context) * 0.52,
-              left: 0,
-              right: 0,
-              child: Container(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    height: 2,
+                    width: screenWidth(context) * 0.4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(1),
+                    ),
+                  ),
+                  // SizedBox(width: screenWidth(context) * 0.1,),
+                  Container(
+                    height: 10,
+                    width: 10,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  Container(
+                    height: 2,
+                    width: screenWidth(context) * 0.4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(1),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 30,),
+              Text(
+                'Services',
+                style: TextStyle(
+                  color: Color(0xFF3E363F),
+                  fontSize: 20,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                  height: 0,
+                ),
+              ),
+              SizedBox(height: 5,),
+              Container(
                 child: GridView.count(
                   crossAxisCount: 3,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
                   padding: const EdgeInsets.all(16),
                   shrinkWrap: true,
-                  physics: ScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     HomePageCategoryCard(
-                        serviceName: 'Lawn Treatment',
-                        token: widget.token,
-                        customerId: widget.customerId,
-                        imageLink: 'assets/images/serviceIcon1.png',
-                        containerColorTop: const Color(0xFFFFE9E9),
-                        containerColorBottom: const Color(0xFFFFBBC1),
-                    ),
-                    HomePageCategoryCard(
-                      serviceName: 'Leaf Removal',
+                      serviceName: 'Lawn Care',
                       token: widget.token,
                       customerId: widget.customerId,
-                      imageLink: 'assets/images/serviceIcon2.png',
-                      containerColorTop: const Color(0xFF96C257),
-                      containerColorBottom: const Color(0xFF96C257),
+                      imageLink: 'assets/images/lawn-care-icon.png',
+                      containerColorTop: const Color(0xFFFFE9E9),
+                      containerColorBottom: const Color(0xFFFFBBC1),
                     ),
                     HomePageCategoryCard(
-                      serviceName: 'Landscaping',
+                      serviceName: 'Junk Removal',
                       token: widget.token,
                       customerId: widget.customerId,
-                      imageLink: 'assets/images/serviceIcon3.png',
+                      imageLink: 'assets/images/junk-removal-icon.png',
+                      containerColorTop: const Color(0xFFFAE957),
+                      containerColorBottom: const Color(0xFFFAD957),
+                    ),
+                    HomePageCategoryCard(
+                      serviceName: 'Donation Pickup',
+                      token: widget.token,
+                      customerId: widget.customerId,
+                      imageLink: 'assets/images/donation-pickup-icon.png',
                       containerColorTop: const Color(0xFFFDFABE),
                       containerColorBottom: const Color(0xFFF4D376),
                     ),
                     HomePageCategoryCard(
-                      serviceName: 'Bush Trimming',
+                      serviceName: 'Power Washing',
                       token: widget.token,
                       customerId: widget.customerId,
-                      imageLink: 'assets/images/serviceIcon4.png',
+                      imageLink: 'assets/images/power-washing-icon.png',
                       containerColorTop: const Color(0xFFFEDCFD),
                       containerColorBottom: const Color(0xFFFFB0FE),
                     ),
@@ -245,7 +209,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       serviceName: 'Mulching',
                       token: widget.token,
                       customerId: widget.customerId,
-                      imageLink: 'assets/images/serviceIcon5.png',
+                      imageLink: 'assets/images/mulching-icon.png',
                       containerColorTop: const Color(0xFFFFDFCB),
                       containerColorBottom: const Color(0xFFFD9F67),
                     ),
@@ -253,15 +217,23 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       serviceName: 'Tree Care',
                       token: widget.token,
                       customerId: widget.customerId,
-                      imageLink: 'assets/images/serviceIcon6.png',
+                      imageLink: 'assets/images/tree-care-icon.png',
+                      containerColorTop: const Color(0xFFB0E5FC),
+                      containerColorBottom: const Color(0xFF8DC3DA),
+                    ),
+                    HomePageCategoryCard(
+                      serviceName: 'Moving Service',
+                      token: widget.token,
+                      customerId: widget.customerId,
+                      imageLink: 'assets/images/moving-services-icon.png',
                       containerColorTop: const Color(0xFFB0E5FC),
                       containerColorBottom: const Color(0xFF8DC3DA),
                     ),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(

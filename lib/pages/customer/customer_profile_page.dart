@@ -51,7 +51,7 @@ class _profilePageState extends State<profilePage> {
                     "Sign Out",
                     style: TextStyle(
                       color: Color(0xFF3E363F),
-                      fontSize: 28,
+                      fontSize: 20,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
                       height: 0,
@@ -65,7 +65,7 @@ class _profilePageState extends State<profilePage> {
                   "Are you sure you want to sign out?",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                     height: 0,
@@ -99,7 +99,7 @@ class _profilePageState extends State<profilePage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 10.0),
+                    horizontal: 40.0, vertical: 0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // Dismiss the bottom sheet
@@ -197,7 +197,7 @@ class _profilePageState extends State<profilePage> {
           'More',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 20,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
             height: 0,
@@ -217,7 +217,7 @@ class _profilePageState extends State<profilePage> {
                 )
               );
             }),
-        // backgroundColor: Colors.green[900],
+        // backgroundColor: Colors.transparent
       ),
       body: Container(
         color: const Color(0xFFBBE1C5),
@@ -226,20 +226,20 @@ class _profilePageState extends State<profilePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 color: const Color(0xFFFDFABE),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 18, 10, 18),
+                  padding: const EdgeInsets.fromLTRB(5, 10, 10, 10),
                   child: Column(
                     children: [
                       ListTile(
                         leading: Container(
-                          width: 60,
-                          height: 60,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF3E363F),
                             shape: CircleBorder(),
@@ -256,7 +256,7 @@ class _profilePageState extends State<profilePage> {
                           username,
                           style: const TextStyle(
                             color: Color(0xFF181D27),
-                            fontSize: 20,
+                            fontSize: 18,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w600,
                             height: 0.12,
@@ -270,20 +270,20 @@ class _profilePageState extends State<profilePage> {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 color: Colors.white,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: ListTile(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Column(
+                    children: [
+                      ListTile(
                         leading: Container(
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF3E363F),
                             shape: OvalBorder(),
@@ -316,13 +316,10 @@ class _profilePageState extends State<profilePage> {
                                       customerId: widget.customerId)));
                         },
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: ListTile(
+                      ListTile(
                         leading: Container(
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Colors.orangeAccent,
                             shape: OvalBorder(),
@@ -355,13 +352,10 @@ class _profilePageState extends State<profilePage> {
                                       customerId: widget.customerId)));
                         },
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: ListTile(
+                      ListTile(
                         leading: Container(
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFF96C257),
                             shape: OvalBorder(),
@@ -389,13 +383,10 @@ class _profilePageState extends State<profilePage> {
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {showComingSoonDialog(context);},
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-                      child: ListTile(
+                      ListTile(
                         leading: Container(
-                          width: 50,
-                          height: 50,
+                          width: 40,
+                          height: 40,
                           decoration: const ShapeDecoration(
                             color: Color(0xFFC8B88A),
                             shape: OvalBorder(),
@@ -423,8 +414,8 @@ class _profilePageState extends State<profilePage> {
                           showCustomSignOutBottomSheet(context);
                         },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

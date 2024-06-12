@@ -326,7 +326,7 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
             'Assign Orders',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
               height: 0,
@@ -337,28 +337,27 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
               image: AssetImage('assets/images/backIcon.png'),
             ),
             onPressed: () {
-              // Navigator.pop(context);
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SuperUserPage(
-                          token: widget.token,
-                          superuserId: widget.superUserId
-                      )
-                  )
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => SuperUserPage(
+                        token: widget.token,
+                        superuserId: widget.superUserId
+                    )
+                ),
+                    (Route<dynamic> route) => false,
               );
             },
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/notificationsIcon.png'),
-              ), // Notifications Bell Icon
-              onPressed: () {
-                // Handle notifications icon action (e.g., show notifications)
-              },
-            ),
-          ],
+          // actions: <Widget>[
+          //   IconButton(
+          //     icon: const Image(
+          //       image: AssetImage('assets/images/notificationsIcon.png'),
+          //     ), // Notifications Bell Icon
+          //     onPressed: () {
+          //       // Handle notifications icon action (e.g., show notifications)
+          //     },
+          //   ),
+          // ],
           backgroundColor: Colors.transparent,
         ),
         body: SizedBox(
