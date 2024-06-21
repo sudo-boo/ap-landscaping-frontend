@@ -4,6 +4,7 @@ import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../config.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -156,117 +157,148 @@ class _CustomerSignInState extends State<CustomerSignIn> {
             key: _formKey,
             child: SingleChildScrollView(
                 child: Column(children: <Widget>[
-                  const Image(
-                    image: AssetImage('assets/images/loginPage.png'),
-                  ),
-                  Text(
-                    'Welcome Back Customer!',
-                    style: TextStyle(
-                      color: Color(0xFF3E363F),
-                      fontSize: fontHelper(context) * 30,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w600,
-                      // height: 0.02,
-                      letterSpacing: -0.30,
-                    ),
-                  ),
+              const Image(
+                image: AssetImage('assets/images/loginPage.png'),
+              ),
+              Text(
+                'Welcome Back Customer!',
+                style: TextStyle(
+                  color: Color(0xFF3E363F),
+                  fontSize: fontHelper(context) * 30,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                  // height: 0.02,
+                  letterSpacing: -0.30,
+                ),
+              ),
 
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
-                    child: TextFormField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                        labelText: "Enter Email Address",
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                child: TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: "Enter Email Address",
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter Email Address';
+                    } else if (!value.contains('@') & !value.contains('.')) {
+                      return 'Please enter a valid email address!';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
+                child: TextFormField(
+                  obscureText: _isObscured,
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    labelText: "Enter Password",
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscured ? Icons.visibility : Icons.visibility_off,
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Email Address';
-                        } else if (!value.contains('@') & !value.contains('.')) {
-                          return 'Please enter a valid email address!';
-                        }
-                        return null;
+                      onPressed: () {
+                        setState(() {
+                          _isObscured = !_isObscured;
+                        });
                       },
+                      // enabledBorder: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(10.0),
+                      // ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
-                    child: TextFormField(
-                      obscureText: _isObscured,
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        labelText: "Enter Password",
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _isObscured ? Icons.visibility : Icons.visibility_off,
-                          ),
-                          onPressed: () {
+                  // The validator receives the text that the user has entered.
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter Password';
+                    }
+                    // else if (value.length < 6) {
+                    //   return 'Password must be atleast 6 characters!';
+                    // }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                child: isLoading
+                    ? const CircularProgressIndicator()
+                    : InkWell(
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
                             setState(() {
-                              _isObscured = !_isObscured;
+                              isLoading = true;
                             });
-                          },
-                          // enabledBorder: OutlineInputBorder(
-                          //   borderRadius: BorderRadius.circular(10.0),
-                          // ),
-                        ),
-                      ),
-                      // The validator receives the text that the user has entered.
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Password';
-                        }
-                        // else if (value.length < 6) {
-                        //   return 'Password must be atleast 6 characters!';
-                        // }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                    child: isLoading
-                        ? const CircularProgressIndicator()
-                        : InkWell(
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                // auth;
-                                cLogin();
-                              }
-                            },
-                            child: SizedBox(
-                              width:
-                                  double.infinity,
-                              // padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 50, // Adjust the height as needed
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFF3E363F), // Background color
-                                  borderRadius: BorderRadius.circular(
-                                      5), // Adjust the radius as needed
-                                ),
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    color: Colors.white, // Text color
-                                    fontSize: 16 * fontHelper(context), // Adjust the font size as needed
-                                  ),
-                                ),
+                            // auth;
+                            cLogin();
+                          }
+                        },
+                        child: SizedBox(
+                          width: double.infinity,
+                          // padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50, // Adjust the height as needed
+                            decoration: BoxDecoration(
+                              color:
+                                  const Color(0xFF3E363F), // Background color
+                              borderRadius: BorderRadius.circular(
+                                  5), // Adjust the radius as needed
+                            ),
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white, // Text color
+                                fontSize: 16 *
+                                    fontHelper(
+                                        context), // Adjust the font size as needed
                               ),
                             ),
                           ),
-                  ),
+                        ),
+                      ),
+              ),
 
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const customerForgotPasswordPage()));
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero, // Remove padding
+                  tapTargetSize: MaterialTapTargetSize
+                      .shrinkWrap, // Minimize the tap target size
+                ),
+                child: const Text(
+                  'Forgot password?',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // not a member? register now
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Not a member?',
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
+                  const SizedBox(width: 4),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const customerForgotPasswordPage()));
+                      Navigator.of(context)
+                          .pushReplacementNamed('/customersignup');
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero, // Remove padding
@@ -274,48 +306,34 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                           .shrinkWrap, // Minimize the tap target size
                     ),
                     child: const Text(
-                      'Forgot password?',
+                      'Register now',
                       style: TextStyle(
-                        fontFamily: 'Inter',
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  // not a member? register now
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Not a member?',
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                      const SizedBox(width: 4),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed('/customersignup');
-                        },
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero, // Remove padding
-                          tapTargetSize: MaterialTapTargetSize
-                              .shrinkWrap, // Minimize the tap target size
-                        ),
-                        child: const Text(
-                          'Register now',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ]
-                )
-            )
-        ),
+
+                ],
+              ),Padding( padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                child: SignInWithAppleButton(
+                      onPressed: () async {
+                        final credential =
+                        await SignInWithApple.getAppleIDCredential(
+                          scopes: [
+                            AppleIDAuthorizationScopes.email,
+                            AppleIDAuthorizationScopes.fullName,
+                          ],
+                        );
+
+                        print(credential);
+
+                        // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
+                        // after they have been validated with Apple (see `Integration` section for more information on how to do this)
+                      },
+                    ),
+              ),
+            ]))),
       ),
     );
   }
