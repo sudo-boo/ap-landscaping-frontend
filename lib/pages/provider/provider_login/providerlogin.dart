@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config.dart';
+import '../../../utilities/helper_functions.dart';
 
 class ProviderSignIn extends StatefulWidget {
   const ProviderSignIn({super.key});
@@ -91,8 +92,9 @@ class _ProviderSignInState extends State<ProviderSignIn> {
             child: Column(
               children: <Widget>[
                 const Image(
-                  image: AssetImage('assets/images/loginPage.png'),
+                  image: AssetImage('assets/images/login-cover.png'),
                 ),
+                SizedBox(height: 20,),
                 const Text(
                   'Welcome Back Provider!',
                   style: TextStyle(
@@ -105,7 +107,7 @@ class _ProviderSignInState extends State<ProviderSignIn> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                  padding: const EdgeInsets.fromLTRB(50, 20, 50, 0),
                   child: TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
@@ -319,32 +321,38 @@ class _providerForgotPasswordPageState
                         CustomPhoneNumberDialog(),
                   );
                 },
-                child: const Card(
+                child: Card(
                   color: Colors.white,
                   child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 10, 35, 10),
+                      padding: EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image(
-                            image: AssetImage(
-                                'assets/images/forgotPasswordMobileNumber.png'),
+                          // const Image(
+                          //   image: AssetImage(
+                          //       'assets/images/forgotPasswordMobileNumber.png'),
+                          // ),
+                          const Expanded(
+                              flex: 3,
+                              child: Icon(Icons.message_outlined)
                           ),
-                          Text(
-                            'Mobile Number',
-                            style: TextStyle(
-                              color: Color(0xFF3E363F),
-                              fontSize: 20,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              height: 0,
-                              letterSpacing: -0.10,
+                          Expanded(
+                            flex: 7,
+                            child: Text(
+                              'Mobile Number',
+                              style: TextStyle(
+                                color: Color(0xFF3E363F),
+                                fontSize: 20 * fontHelper(context),
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                                letterSpacing: -0.10,
+                              ),
                             ),
                           )
                         ],
-                      )),
+                      )
+                  ),
                 ),
               ),
             ),
@@ -357,28 +365,34 @@ class _providerForgotPasswordPageState
                     builder: (BuildContext context) => CustomEmailDialog(),
                   );
                 },
-                child: const Card(
+                child: Card(
                   color: Colors.white,
                   child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 10, 100, 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image(
-                            image: AssetImage(
-                                'assets/images/forgotPasswordEmail.png'),
+                          // const Image(
+                          //   image: AssetImage(
+                          //       'assets/images/forgFotPasswordEmail.png'),
+                          // ),
+                          const Expanded(
+                              flex: 3,
+                              child: Icon(Icons.email_outlined)
                           ),
-                          Text(
-                            'Email',
-                            style: TextStyle(
-                              color: Color(0xFF3E363F),
-                              fontSize: 20,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              height: 0,
-                              letterSpacing: -0.10,
+
+                          Expanded(
+                            flex: 7,
+                            child: Text(
+                              'Email',
+                              style: TextStyle(
+                                color: Color(0xFF3E363F),
+                                fontSize: 20 * fontHelper(context),
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                                letterSpacing: -0.10,
+                              ),
                             ),
                           )
                         ],
@@ -968,7 +982,7 @@ class _CustomPasswordResetDialogState extends State<CustomPasswordResetDialog> {
                   resetPassword(widget.otp, _newPasswordController.text);
                 }
               },
-              child: const Text("Sign in"),
+              child: const Text("Done"),
             ),
           ),
         ],

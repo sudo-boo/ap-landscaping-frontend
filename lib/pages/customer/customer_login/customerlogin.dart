@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
+import 'package:ap_landscaping/pages/customer/customer_login/customer_google_signin.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -55,89 +56,103 @@ class _CustomerSignInState extends State<CustomerSignIn> {
         isLoading = false;
       });
       showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Error"),
-              content: Text("Error code: ${response.statusCode}"),
-              actions: [
-                TextButton(
-                  child: const Text("Ok"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          // Extract the error message from response.body
+          String errorMessage = "Unknown Error";
+          try {
+            // Parse response.body as JSON to access specific error message
+            Map<String, dynamic> errorJson = jsonDecode(response.body);
+            if (errorJson.containsKey("error")) {
+              errorMessage = errorJson["error"];
+            }
+          } catch (e) {
+            errorMessage = response.body;
+          }
+
+          return AlertDialog(
+            title: Text("Error ${response.statusCode}"),
+            content: Text(errorMessage), // Display extracted error message
+            actions: [
+              TextButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
     }
   }
 
-  void customerGLogin() async {
-    // var cBody = {
-    //   'role': 'customer'
-    // };
-    final response = await http.get(
-      Uri.parse(googleLogin),
-      headers: {"Content-Type": "application/json"},
-      // body: jsonEncode(cBody),
-    );
-    if (response.statusCode == 200) {
-      // final Map<String, dynamic> responseData = json.decode(response.body);
-      // final user = responseData['user'];
-      print('worked');
-      // You can access the user data here, such as user['id'], user['name'], etc.
-      // return {'success': true, 'user': user};
-    } else {
-      // If the request fails, handle the error
-      print('failed');
-      // return {'success': false, 'error': 'Authentication failed'};
-    }
-  }
+  // void customerGLogin() async {
+  //   var cBody = {
+  //     'role': 'customer'
+  //   };
+  //   final response = await http.get(
+  //     Uri.parse(googleLogin),
+  //     headers: {"Content-Type": "application/json"},
+  //     // body: jsonEncode(cBody),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     // final Map<String, dynamic> responseData = json.decode(response.body);
+  //     // final user = responseData['user'];
+  //     print('worked');
+  //     // You can access the user data here, such as user['id'], user['name'], etc.
+  //     // return {'success': true, 'user': user};
+  //   } else {
+  //     // If the request fails, handle the error
+  //     print('failed');
+  //     // return {'success': false, 'error': 'Authentication failed'};
+  //   }
+  // }
 
-  final GoogleSignIn googleSignIn = GoogleSignIn(
-    scopes: ['email', 'profile'],
-  );
+  // final GoogleSignIn googleSignIn = GoogleSignIn(
+  //   scopes: ['email', 'profile'],
+  // );
 
-  Future<void> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-
-      if (googleUser == null) {
-        // The user canceled the sign-in process
-        // return;
-        print("null googleUser");
-      } else {
-        print("here");
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
-
-        // Get the role, perhaps from the user's choice or app's state
-        const String role = 'customer'; // or 'provider'
-
-        // Build the URL with query parameters
-        final uri = Uri.http('localhost:8000', '/api/user/auth/google', {
-          'role': role, // Append the role as a query parameter
-        });
-
-        // Make the HTTP GET request
-        final response = await http.get(uri);
-
-        // Handle the response from your server
-        if (response.statusCode == 200) {
-          // Successful authentication with Google
-          // Now the server should handle the callback
-          print("worked");
-        } else {
-          // Handle errors
-          print(response.statusCode);
-        }
-      }
-    } catch (error) {
-      // Handle exceptions
-      print(error);
-    }
-  }
+  // Future<void> signInWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+  //
+  //     if (googleUser == null) {
+  //       // The user canceled the sign-in process
+  //       // return;
+  //       print("null googleUser");
+  //     } else {
+  //       print("here");
+  //       final GoogleSignInAuthentication googleAuth =
+  //           await googleUser.authentication;
+  //
+  //       // Get the role, perhaps from the user's choice or app's state
+  //       const String role = 'customer'; // or 'provider'
+  //
+  //       // Build the URL with query parameters
+  //       final uri = Uri.http('localhost:8000', '/api/user/auth/google', {
+  //         'role': role, // Append the role as a query parameter
+  //       });
+  //
+  //       // Make the HTTP GET request
+  //       final response = await http.get(uri);
+  //
+  //       // Handle the response from your server
+  //       if (response.statusCode == 200) {
+  //         // Successful authentication with Google
+  //         // Now the server should handle the callback
+  //         print("worked");
+  //       } else {
+  //         // Handle errors
+  //         print(response.statusCode);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     // Handle exceptions
+  //     print(error);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -154,12 +169,14 @@ class _CustomerSignInState extends State<CustomerSignIn> {
         color: const Color(0xFFBBE1C5),
         height: double.infinity,
         child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-                child: Column(children: <Widget>[
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
               const Image(
-                image: AssetImage('assets/images/loginPage.png'),
+                image: AssetImage('assets/images/login-cover.png'),
               ),
+              SizedBox(height: 20,),
               Text(
                 'Welcome Back Customer!',
                 style: TextStyle(
@@ -313,27 +330,68 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                       ),
                     ),
                   ),
-
                 ],
-              ),Padding( padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                child: SignInWithAppleButton(
-                      onPressed: () async {
-                        final credential =
-                        await SignInWithApple.getAppleIDCredential(
-                          scopes: [
-                            AppleIDAuthorizationScopes.email,
-                            AppleIDAuthorizationScopes.fullName,
-                          ],
-                        );
-
-                        print(credential);
-
-                        // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
-                        // after they have been validated with Apple (see `Integration` section for more information on how to do this)
-                      },
-                    ),
               ),
-            ]))),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(50, 0, 50, 10),
+              //   child: InkWell(
+              //     onTap: (){
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => CustomerGoogleLoginPage()
+              //           )
+              //       );
+              //     },
+              //     borderRadius: BorderRadius.circular(4.0),
+              //     child: Container(
+              //       height: 45,
+              //       padding: EdgeInsets.all(9.0),
+              //       decoration: BoxDecoration(
+              //         color: Colors.white,
+              //         border: Border.all(color: Colors.grey),
+              //         borderRadius: BorderRadius.circular(4.0),
+              //       ),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           Image.asset("assets/images/google-logo.png"),
+              //           SizedBox(width: 3.0),
+              //           Text(
+              //             'Sign in with Google',
+              //             style: TextStyle(
+              //               color: Colors.black,
+              //               fontSize: 16.0,
+              //               fontWeight: FontWeight.w600,
+              //               fontFamily: 'Inter'
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   )
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(50, 0, 50, 10),
+              //   child: SignInWithAppleButton(
+              //     onPressed: () async {
+              //       final credential =
+              //       await SignInWithApple.getAppleIDCredential(
+              //         scopes: [
+              //           AppleIDAuthorizationScopes.email,
+              //           AppleIDAuthorizationScopes.fullName,
+              //         ],
+              //       );
+              //       print(credential);
+              //       // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
+              //       // after they have been validated with Apple (see `Integration` section for more information on how to do this)
+              //     },
+              //   ),
+              // ),
+            ]
+            )
+          )
+        ),
       ),
     );
   }
@@ -408,17 +466,21 @@ class _customerForgotPasswordPageState
                 child: Card(
                   color: Colors.white,
                   child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 10, 35, 10),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Image(
-                            image: AssetImage(
-                                'assets/images/forgotPasswordMobileNumber.png'),
-                          ),
-                          Text(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        // const Image(
+                        //   image: AssetImage(
+                        //       'assets/images/forgotPasswordMobileNumber.png'),
+                        // ),
+                        const Expanded(
+                          flex: 3,
+                            child: Icon(Icons.message_outlined)
+                        ),
+                        Expanded(
+                          flex: 7,
+                          child: Text(
                             'Mobile Number',
                             style: TextStyle(
                               color: Color(0xFF3E363F),
@@ -428,9 +490,11 @@ class _customerForgotPasswordPageState
                               height: 0,
                               letterSpacing: -0.10,
                             ),
-                          )
-                        ],
-                      )),
+                          ),
+                        )
+                      ],
+                    )
+                  ),
                 ),
               ),
             ),
@@ -446,25 +510,31 @@ class _customerForgotPasswordPageState
                 child: Card(
                   color: Colors.white,
                   child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 10, 100, 10),
+                      padding: EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Image(
-                            image: AssetImage(
-                                'assets/images/forgotPasswordEmail.png'),
+                          // const Image(
+                          //   image: AssetImage(
+                          //       'assets/images/forgotPasswordEmail.png'),
+                          // ),
+                          Expanded(
+                            flex: 3,
+                            child: Icon(Icons.email_outlined)
                           ),
-                          Text(
-                            'Email',
-                            style: TextStyle(
-                              color: Color(0xFF3E363F),
-                              fontSize: 20 * fontHelper(context),
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              height: 0,
-                              letterSpacing: -0.10,
+
+                          Expanded(
+                            flex: 7,
+                            child: Text(
+                              'Email',
+                              style: TextStyle(
+                                color: Color(0xFF3E363F),
+                                fontSize: 20 * fontHelper(context),
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                                letterSpacing: -0.10,
+                              ),
                             ),
                           )
                         ],
@@ -1054,7 +1124,7 @@ class _CustomPasswordResetDialogState extends State<CustomPasswordResetDialog> {
                   resetPassword(widget.otp, _newPasswordController.text);
                 }
               },
-              child: const Text("Sign in"),
+              child: const Text("Done"),
             ),
           ),
         ],

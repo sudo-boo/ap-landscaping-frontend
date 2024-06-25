@@ -53,21 +53,35 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
         isLoading = false;
       });
       showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Error"),
-              content: Text("Error code: ${response.statusCode}"),
-              actions: [
-                TextButton(
-                  child: const Text("Ok"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          // Extract the error message from response.body
+          String errorMessage = "Unknown Error";
+          try {
+            // Parse response.body as JSON to access specific error message
+            Map<String, dynamic> errorJson = jsonDecode(response.body);
+            if (errorJson.containsKey("error")) {
+              errorMessage = errorJson["error"];
+            }
+          } catch (e) {
+            errorMessage = response.body;
+          }
+
+          return AlertDialog(
+            title: Text("Error ${response.statusCode}"),
+            content: Text(errorMessage), // Display extracted error message
+            actions: [
+              TextButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -90,8 +104,9 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
             child: SingleChildScrollView(
                 child: Column(children: <Widget>[
                   const Image(
-                    image: AssetImage('assets/images/loginPage.png'),
+                    image: AssetImage('assets/images/login-cover.png'),
                   ),
+                  SizedBox(height: 20,),
                   const Text(
                     'Welcome Back SuperUser!',
                     style: TextStyle(
@@ -189,34 +204,35 @@ class _SuperUserSignInState extends State<SuperUserSignIn> {
                   ),
                   const SizedBox(height: 10),
                   // not a member? register now
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Not a member?',
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                      const SizedBox(width: 4),
-                      TextButton(
-                        onPressed: () {
-                          // Navigator.of(context)
-                          //     .pushReplacementNamed('/superusersignup');
-                        },
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero, // Remove padding
-                          tapTargetSize: MaterialTapTargetSize
-                              .shrinkWrap, // Minimize the tap target size
-                        ),
-                        child: const Text(
-                          'Register now',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )]
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Text(
+                  //       'Not a member?',
+                  //       style: TextStyle(color: Colors.grey[700]),
+                  //     ),
+                  //     const SizedBox(width: 4),
+                  //     TextButton(
+                  //       onPressed: () {
+                  //         // Navigator.of(context)
+                  //         //     .pushReplacementNamed('/superusersignup');
+                  //       },
+                  //       style: TextButton.styleFrom(
+                  //         padding: EdgeInsets.zero, // Remove padding
+                  //         tapTargetSize: MaterialTapTargetSize
+                  //             .shrinkWrap, // Minimize the tap target size
+                  //       ),
+                  //       child: const Text(
+                  //         'Register now',
+                  //         style: TextStyle(
+                  //           color: Colors.blue,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // )
+          ]
                 )
             )
         ),
