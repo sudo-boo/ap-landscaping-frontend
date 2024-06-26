@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ComingSoonDialog extends StatelessWidget {
-  const ComingSoonDialog({Key? key}) : super(key: key);
+class ComingSoonPopUp extends StatelessWidget {
+  const ComingSoonPopUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,43 @@ void showComingSoonDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return const ComingSoonDialog();
+      return const ComingSoonPopUp();
     },
   );
+}
+
+
+class ComingSoonPage extends StatelessWidget {
+  const ComingSoonPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Feature Coming Soon...',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 28
+              ),
+            ),
+            const SizedBox(height: 30),
+            // Replace this with your own GIF path
+            Image.asset("assets/images/coming-soon.gif"),
+            const SizedBox(height: 30),
+            const Text(
+              'Stay Tuned!!',
+              style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 24
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

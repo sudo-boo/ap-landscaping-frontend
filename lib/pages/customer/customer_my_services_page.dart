@@ -78,7 +78,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       final List<dynamic> ordersJson = json.decode(response.body)['pastOrders'];
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
-        print(order);
+        // print(order);
         // print(order['providerId']);
         String providerName = "Not Assigned yet!";
         // if(order['providerId'] != null) {
@@ -104,7 +104,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       // print();
       return orders;
     } else {
-      print(response.statusCode);
+      // print(response.statusCode);
       throw Exception('Failed to load customer orders');
     }
   }
@@ -122,7 +122,7 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       json.decode(response.body)['upcomingOrders'];
       final List<orderInfo> orders = [];
       for (var order in ordersJson) {
-        print(order);
+        // print(order);
         // print(order['providerId']);
         String providerName = "Not Assigned yet!";
         // if(order['providerId'] != null) {
@@ -204,8 +204,8 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           automaticallyImplyLeading: true,
-          // title: Text(widget.serviceName),
           title: const Text(
             'My Services',
             style: TextStyle(
@@ -216,20 +216,20 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
               height: 0,
             ),
           ),
-          leading: IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/backIcon.png'),
-              ),
-            onPressed: () {
-              // Navigator.pop(context);
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CustomerHomePage(
-                          token: widget.token,
-                          customerId: widget.customerId)));
-            },
-          ),
+          // leading: IconButton(
+          //     icon: const Image(
+          //       image: AssetImage('assets/images/backIcon.png'),
+          //     ),
+          //   onPressed: () {
+          //     // Navigator.pop(context);
+          //     Navigator.pushReplacement(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => CustomerHomePage(
+          //                 token: widget.token,
+          //                 customerId: widget.customerId)));
+          //   },
+          // ),
           // actions: <Widget>[
           //   Padding(
           //     padding: const EdgeInsets.all(8.0),
@@ -427,86 +427,86 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
             ),
           ],
         ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
-          child: Stack(
-            alignment: Alignment.topCenter,
-            clipBehavior: Clip.none, // Allows the child to overflow the stack
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  IconButton(
-                    icon: Image.asset('assets/images/homeIcon.png',
-                        height: 40, width: 40),
-                    onPressed: () {
-                      // Navigator.pop(context);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CustomerHomePage(
-                            token: widget.token,
-                            customerId: widget.customerId
-                          )
-                        )
-                      );
-                    },
-                    // onPressed: () => _onItemTapped(0),
-                  ),
-                  IconButton(
-                      icon: Image.asset(
-                          'assets/images/myServicesPressedIcon.png',
-                          height: 40, width: 40),
-                      onPressed: () {
-                      }),
-                  const SizedBox(
-                      width: 90), // Placeholder for the center button
-                  IconButton(
-                    icon: Image.asset('assets/images/communicationIcon.png',
-                        height: 40, width: 40),
-                    onPressed: () {showComingSoonDialog(context);},
-                    // onPressed: () => _onItemTapped(3),
-                  ),
-                  IconButton(
-                    icon: Image.asset('assets/images/moreIcon.png',
-                        height: 40, width: 40),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => profilePage(
-                              token: widget.token,
-                              customerId: widget.customerId),
-                        ),
-                      );
-                    },
-                    // onPressed: () => _onItemTapped(4),
-                  ),
-                ],
-              ),
-              Positioned(
-                top: -30, // Adjust this value to position the button as needed
-                child: Container(
-                  height: 90, // Increase the height for a larger button
-                  width: 90, // Increase the width for a larger button
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle, // Ensures the container is circular
-                    color: Color(0xFFBCDD8C), // Background color of the button
-                  ),
-                  child: IconButton(
-                    icon: Image.asset(
-                      'assets/images/centerIcon.png',
-                      height: 90, // Adjust the size of the inner image/icon
-                      width: 90,
-                    ),
-                    onPressed: () {},
-                    // onPressed: () => _onItemTapped(2),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        // bottomNavigationBar: BottomAppBar(
+        //   color: Colors.white,
+        //   child: Stack(
+        //     alignment: Alignment.topCenter,
+        //     clipBehavior: Clip.none, // Allows the child to overflow the stack
+        //     children: [
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //         children: <Widget>[
+        //           IconButton(
+        //             icon: Image.asset('assets/images/homeIcon.png',
+        //                 height: 40, width: 40),
+        //             onPressed: () {
+        //               // Navigator.pop(context);
+        //               Navigator.pushReplacement(
+        //                 context,
+        //                 MaterialPageRoute(
+        //                   builder: (context) => CustomerHomePage(
+        //                     token: widget.token,
+        //                     customerId: widget.customerId
+        //                   )
+        //                 )
+        //               );
+        //             },
+        //             // onPressed: () => _onItemTapped(0),
+        //           ),
+        //           IconButton(
+        //               icon: Image.asset(
+        //                   'assets/images/myServicesPressedIcon.png',
+        //                   height: 40, width: 40),
+        //               onPressed: () {
+        //               }),
+        //           const SizedBox(
+        //               width: 90), // Placeholder for the center button
+        //           IconButton(
+        //             icon: Image.asset('assets/images/communicationIcon.png',
+        //                 height: 40, width: 40),
+        //             onPressed: () {showComingSoonDialog(context);},
+        //             // onPressed: () => _onItemTapped(3),
+        //           ),
+        //           IconButton(
+        //             icon: Image.asset('assets/images/moreIcon.png',
+        //                 height: 40, width: 40),
+        //             onPressed: () {
+        //               Navigator.pushReplacement(
+        //                 context,
+        //                 MaterialPageRoute(
+        //                   builder: (context) => CustomerProfilePage(
+        //                       token: widget.token,
+        //                       customerId: widget.customerId),
+        //                 ),
+        //               );
+        //             },
+        //             // onPressed: () => _onItemTapped(4),
+        //           ),
+        //         ],
+        //       ),
+        //       Positioned(
+        //         top: -30, // Adjust this value to position the button as needed
+        //         child: Container(
+        //           height: 90, // Increase the height for a larger button
+        //           width: 90, // Increase the width for a larger button
+        //           decoration: const BoxDecoration(
+        //             shape: BoxShape.circle, // Ensures the container is circular
+        //             color: Color(0xFFBCDD8C), // Background color of the button
+        //           ),
+        //           child: IconButton(
+        //             icon: Image.asset(
+        //               'assets/images/centerIcon.png',
+        //               height: 90, // Adjust the size of the inner image/icon
+        //               width: 90,
+        //             ),
+        //             onPressed: () {},
+        //             // onPressed: () => _onItemTapped(2),
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }

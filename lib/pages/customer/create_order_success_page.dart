@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
+import 'package:ap_landscaping/pages/customer/customer_main.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:confetti/confetti.dart';
@@ -88,7 +89,7 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CustomerServicesPage(
+                        builder: (context) => CustomerMain(
                           token: widget.token,
                           customerId: widget.customerId
                         )
@@ -107,7 +108,7 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
                       alignment: Alignment.center,
                       child:
                       const Text(
-                        'View My Services',
+                        'Go to Home Page',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -118,42 +119,43 @@ class _CustomerOrderConfirmationPageState extends State<CustomerOrderConfirmatio
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CustomerHomePage(
-                                token: widget.token,
-                                customerId: widget.customerId
-                            )
-                        )
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 40),
-                    child: Container(
-                      height: 50,
-                      width: screenWidth(context) * 0.6,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: const Color(0xFFB895FC)
-                        )
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Go to Home Page',
-                        style: TextStyle(
-                          color: const Color(0xFFB895FC),
-                          fontSize: 16,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: -0.07,
-                        ),
-                      ),),
-                  ),
-                ),
+                const Spacer(),
+                // InkWell(
+                //   onTap: () {
+                //     Navigator.pushReplacement(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => CustomerHomePage(
+                //                 token: widget.token,
+                //                 customerId: widget.customerId
+                //             )
+                //         )
+                //     );
+                //   },
+                //   child: Padding(
+                //     padding: const EdgeInsets.fromLTRB(20, 10, 20, 40),
+                //     child: Container(
+                //       height: 50,
+                //       width: screenWidth(context) * 0.6,
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(20),
+                //         border: Border.all(
+                //           color: const Color(0xFFB895FC)
+                //         )
+                //       ),
+                //       alignment: Alignment.center,
+                //       child: const Text(
+                //         'Go to Home Page',
+                //         style: TextStyle(
+                //           color: const Color(0xFFB895FC),
+                //           fontSize: 16,
+                //           fontFamily: 'Inter',
+                //           fontWeight: FontWeight.w600,
+                //           letterSpacing: -0.07,
+                //         ),
+                //       ),),
+                //   ),
+                // ),
               ],
             ),
           ),

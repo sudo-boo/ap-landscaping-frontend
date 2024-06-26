@@ -14,17 +14,17 @@ import 'package:ap_landscaping/config.dart';
 import '../../utilities/coming_soon_popup.dart';
 
 
-class profilePage extends StatefulWidget {
+class CustomerProfilePage extends StatefulWidget {
   final token;
   final customerId;
-  const profilePage({required this.token, required this.customerId, Key? key})
+  const CustomerProfilePage({required this.token, required this.customerId, Key? key})
       : super(key: key);
 
   @override
-  State<profilePage> createState() => _profilePageState();
+  State<CustomerProfilePage> createState() => _CustomerProfilePageState();
 }
 
-class _profilePageState extends State<profilePage> {
+class _CustomerProfilePageState extends State<CustomerProfilePage> {
 
   late String username = '';
 
@@ -191,6 +191,7 @@ class _profilePageState extends State<profilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         automaticallyImplyLeading: true,
         // title: Text(widget.serviceName),
         title: const Text(
@@ -203,20 +204,20 @@ class _profilePageState extends State<profilePage> {
             height: 0,
           ),
         ),
-        leading: IconButton(
-            icon: const Image(
-              image: AssetImage('assets/images/backIcon.png'),
-            ),
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CustomerHomePage(
-                    token: widget.token,
-                    customerId: widget.customerId)
-                )
-              );
-            }),
+        // leading: IconButton(
+        //     icon: const Image(
+        //       image: AssetImage('assets/images/backIcon.png'),
+        //     ),
+        //     onPressed: () {
+        //       Navigator.pushReplacement(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => CustomerHomePage(
+        //             token: widget.token,
+        //             customerId: widget.customerId)
+        //         )
+        //       );
+        //     }),
         // backgroundColor: Colors.transparent
       ),
       body: Container(
@@ -420,80 +421,80 @@ class _profilePageState extends State<profilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        child: Stack(
-          alignment: Alignment.topCenter,
-          clipBehavior: Clip.none, // Allows the child to overflow the stack
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                IconButton(
-                  icon: Image.asset('assets/images/homeIcon.png',
-                      height: 40, width: 40),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CustomerHomePage(
-                                token: widget.token,
-                                customerId: widget.customerId)));
-                  },
-                  // onPressed: () => _onItemTapped(0),
-                ),
-                IconButton(
-                    icon: Image.asset('assets/images/myServicesIcon.png',
-                        height: 40, width: 40),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CustomerServicesPage(
-                            token: widget.token,
-                            customerId: widget.customerId,
-                          ),
-                        ),
-                      );
-                    }),
-                const SizedBox(width: 90), // Placeholder for the center button
-                IconButton(
-                  icon: Image.asset('assets/images/communicationIcon.png',
-                      height: 40, width: 40),
-                  onPressed: () {showComingSoonDialog(context);},
-                  // onPressed: () => _onItemTapped(3),
-                ),
-                IconButton(
-                  icon: Image.asset('assets/images/morePressedIcon.png',
-                      height: 40, width: 40),
-                  onPressed: () {},
-                  // onPressed: () => _onItemTapped(4),
-                ),
-              ],
-            ),
-            Positioned(
-              top: -30, // Adjust this value to position the button as needed
-              child: Container(
-                height: 90, // Increase the height for a larger button
-                width: 90, // Increase the width for a larger button
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle, // Ensures the container is circular
-                  color: Color(0xFFBCDD8C), // Background color of the button
-                ),
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/images/centerIcon.png',
-                    height: 90, // Adjust the size of the inner image/icon
-                    width: 90,
-                  ),
-                  onPressed: () {},
-                  // onPressed: () => _onItemTapped(2),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   color: Colors.white,
+      //   child: Stack(
+      //     alignment: Alignment.topCenter,
+      //     clipBehavior: Clip.none, // Allows the child to overflow the stack
+      //     children: [
+      //       Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //         children: <Widget>[
+      //           IconButton(
+      //             icon: Image.asset('assets/images/homeIcon.png',
+      //                 height: 40, width: 40),
+      //             onPressed: () {
+      //               Navigator.pushReplacement(
+      //                   context,
+      //                   MaterialPageRoute(
+      //                       builder: (context) => CustomerHomePage(
+      //                           token: widget.token,
+      //                           customerId: widget.customerId)));
+      //             },
+      //             // onPressed: () => _onItemTapped(0),
+      //           ),
+      //           IconButton(
+      //               icon: Image.asset('assets/images/myServicesIcon.png',
+      //                   height: 40, width: 40),
+      //               onPressed: () {
+      //                 Navigator.pushReplacement(
+      //                   context,
+      //                   MaterialPageRoute(
+      //                     builder: (context) => CustomerServicesPage(
+      //                       token: widget.token,
+      //                       customerId: widget.customerId,
+      //                     ),
+      //                   ),
+      //                 );
+      //               }),
+      //           const SizedBox(width: 90), // Placeholder for the center button
+      //           IconButton(
+      //             icon: Image.asset('assets/images/communicationIcon.png',
+      //                 height: 40, width: 40),
+      //             onPressed: () {showComingSoonDialog(context);},
+      //             // onPressed: () => _onItemTapped(3),
+      //           ),
+      //           IconButton(
+      //             icon: Image.asset('assets/images/morePressedIcon.png',
+      //                 height: 40, width: 40),
+      //             onPressed: () {},
+      //             // onPressed: () => _onItemTapped(4),
+      //           ),
+      //         ],
+      //       ),
+      //       Positioned(
+      //         top: -30, // Adjust this value to position the button as needed
+      //         child: Container(
+      //           height: 90, // Increase the height for a larger button
+      //           width: 90, // Increase the width for a larger button
+      //           decoration: const BoxDecoration(
+      //             shape: BoxShape.circle, // Ensures the container is circular
+      //             color: Color(0xFFBCDD8C), // Background color of the button
+      //           ),
+      //           child: IconButton(
+      //             icon: Image.asset(
+      //               'assets/images/centerIcon.png',
+      //               height: 90, // Adjust the size of the inner image/icon
+      //               width: 90,
+      //             ),
+      //             onPressed: () {},
+      //             // onPressed: () => _onItemTapped(2),
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
