@@ -26,8 +26,7 @@ class _CustomerMainState extends State<CustomerMain> {
       CustomerHomePage(token: widget.token, customerId: widget.customerId),
       CustomerServicesPage(token: widget.token, customerId: widget.customerId),
       const ComingSoonPage(),
-      // const ComingSoonPage(),
-      CustomerOrderConfirmationPage (token: widget.token, customerId: widget.customerId),
+      const ComingSoonPage(),
       CustomerProfilePage(token: widget.token, customerId: widget.customerId),
     ];
     return Scaffold(
