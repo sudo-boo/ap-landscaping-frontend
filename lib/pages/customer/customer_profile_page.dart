@@ -236,33 +236,43 @@ class _profilePageState extends State<profilePage> {
                   padding: const EdgeInsets.fromLTRB(5, 10, 10, 10),
                   child: Column(
                     children: [
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF3E363F),
-                            shape: CircleBorder(),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomerUpdateProfileInfoPage(
+                                token: widget.token,
+                                customerId: widget.customerId,
+                              ),
+                            ),
+                          );
+                        },
+                        child: ListTile(
+                          leading: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: const ShapeDecoration(
+                              color: Color(0xFF3E363F),
+                              shape: CircleBorder(),
+                            ),
+                            child: const Icon(
                               Icons.perm_identity_outlined,
                               color: Colors.white,
                             ),
-                            onPressed: () {},
+                          ),
+                          title: Text(
+                            username,
+                            style: const TextStyle(
+                              color: Color(0xFF181D27),
+                              fontSize: 18,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                              height: 0.12,
+                            ),
                           ),
                         ),
-                        title: Text(
-                          username,
-                          style: const TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: 18,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -280,42 +290,39 @@ class _profilePageState extends State<profilePage> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: Column(
                     children: [
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF3E363F),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.perm_identity_outlined,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        title: Text(
-                          'My Account',
-                          style: TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: fontHelper(context) * 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CustomerUpdateProfileInfoPage(
-                                      token: widget.token,
-                                      customerId: widget.customerId)));
-                        },
-                      ),
+                      // ListTile(
+                      //   leading: Container(
+                      //     width: 40,
+                      //     height: 40,
+                      //     decoration: const ShapeDecoration(
+                      //       color: Color(0xFF3E363F),
+                      //       shape: OvalBorder(),
+                      //     ),
+                      //     child: const Icon(
+                      //         Icons.perm_identity_outlined,
+                      //         color: Colors.white,
+                      //       )
+                      //   ),
+                      //   title: Text(
+                      //     'My Account',
+                      //     style: TextStyle(
+                      //       color: Color(0xFF181D27),
+                      //       fontSize: fontHelper(context) * 15,
+                      //       fontFamily: 'Inter',
+                      //       fontWeight: FontWeight.w600,
+                      //       height: 0.12,
+                      //     ),
+                      //   ),
+                      //   trailing: const Icon(Icons.arrow_forward_ios),
+                      //   onTap: () {
+                      //     Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => CustomerUpdateProfileInfoPage(
+                      //                 token: widget.token,
+                      //                 customerId: widget.customerId)));
+                      //   },
+                      // ),
                       ListTile(
                         leading: Container(
                           width: 40,
@@ -324,13 +331,10 @@ class _profilePageState extends State<profilePage> {
                             color: Colors.orangeAccent,
                             shape: OvalBorder(),
                           ),
-                          child: IconButton(
-                            icon: const Icon(
+                          child: const Icon(
                                 Icons.calendar_month_rounded,
                               color: Colors.white,
                             ),
-                            onPressed: () {},
-                          ),
                         ),
                         title: Text(
                           'Calendar',
@@ -361,13 +365,10 @@ class _profilePageState extends State<profilePage> {
                             shape: OvalBorder(),
                           ),
                           child: Center(
-                            child: IconButton(
-                              icon: const Icon(
+                            child: const Icon(
                                 Icons.settings_outlined,
                                 color: Colors.white,
-                              ),
-                              onPressed: () {},
-                            ),
+                            )
                           ),
                         ),
                         title: Text(
@@ -391,13 +392,10 @@ class _profilePageState extends State<profilePage> {
                             color: Color(0xFFC8B88A),
                             shape: OvalBorder(),
                           ),
-                          child: IconButton(
-                            icon: const Icon(
+                          child: const Icon(
                               Icons.logout_rounded,
                               color: Colors.white,
                             ),
-                            onPressed: () {},
-                          ),
                         ),
                         title: Text(
                           'Sign out',
