@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/customer/customer_main.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -43,7 +44,7 @@ class _CustomerOrderCancellationPageState extends State<CustomerOrderCancellatio
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => CustomerServicesPage(
+                          builder: (context) => CustomerMain(
                               token: widget.token,
                               customerId: widget.customerId
                           )

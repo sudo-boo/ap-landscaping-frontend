@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/SuperUser/superuser_main.dart';
 import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:ap_landscaping/utilities/superuser_services_card.dart';
 import 'package:flutter/material.dart';
@@ -168,9 +169,9 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                     // Navigate to another page after the assignment is done
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => SuperUserServicesPage(
+                        builder: (context) => SuperUserMain(
                           token: widget.token,
-                          superUserId: widget.superUserId,
+                          superuserId: widget.superUserId,
                         ),
                       ),
                           (Route<dynamic> route) => false,

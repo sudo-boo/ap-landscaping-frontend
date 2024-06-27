@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/customer/customer_main.dart';
 import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/utilities/custom_spacer.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
@@ -156,7 +157,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                            builder: (context) => CustomerServicesPage(
+                            builder: (context) => CustomerMain(
                                 token: widget.token,
                                 customerId: widget.customerId
                             )
@@ -421,7 +422,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CustomerServicesPage(
+                            builder: (context) => CustomerMain(
                               token: widget.token,
                               customerId: widget.customerId,
                             ),

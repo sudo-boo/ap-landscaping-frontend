@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ap_landscaping/pages/provider/privider_main.dart';
 import 'package:ap_landscaping/utilities/provider_services_card.dart';
 import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:flutter/material.dart';
@@ -196,7 +197,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ProviderMyServicesPage(
+                        builder: (context) => ProviderMain(
                             token: widget.token,
                             providerId: widget.providerId
                         )

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ap_landscaping/pages/customer/customer_main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
@@ -124,7 +125,7 @@ class _CustomerPaymentsPageState extends State<CustomerPaymentsPage> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => CustomerHomePage(
+                                        builder: (context) => CustomerMain(
                                             token: widget.token,
                                             customerId: widget.customerId),
                                       ),

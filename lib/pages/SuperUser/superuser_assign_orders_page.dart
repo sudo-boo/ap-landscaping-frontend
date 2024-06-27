@@ -151,9 +151,9 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
                     // Navigate to another page after the assignment is done
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => SuperUserAssignServicesPage(
+                        builder: (context) => SuperUserMain(
                           token: widget.token,
-                          superUserId: widget.superUserId,
+                          superuserId: widget.superUserId,
                         ),
                       ),
                           (Route<dynamic> route) => false,

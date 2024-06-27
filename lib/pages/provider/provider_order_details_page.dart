@@ -1,3 +1,4 @@
+import 'package:ap_landscaping/pages/provider/privider_main.dart';
 import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
 import 'package:ap_landscaping/utilities/custom_spacer.dart';
 import 'package:ap_landscaping/utilities/order_details_loading_page.dart';
@@ -384,7 +385,7 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProviderMyServicesPage(
+                          builder: (context) => ProviderMain(
                             token: widget.token,
                             providerId: widget.providerId,
                           ),

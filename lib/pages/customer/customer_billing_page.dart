@@ -5,7 +5,7 @@ import 'package:ap_landscaping/models/orderinfo.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../services_data.dart';
-import 'customer_home_page.dart';
+import 'customer_main.dart';
 
 class CustomerBillingPage extends StatefulWidget {
   final token;
@@ -502,7 +502,7 @@ class _CustomerBillingPageState extends State<CustomerBillingPage> {
                         onTap: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => CustomerHomePage(
+                                builder: (context) => CustomerMain(
                                     token: widget.token,
                                     customerId: widget.customerId
                                 )
