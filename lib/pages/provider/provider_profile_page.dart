@@ -135,6 +135,9 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
     var url = Uri.parse(providerLogout); // Replace with your actual endpoint
     try {
       // print(widget.token);
+
+      Navigator.of(context).pop();
+
       showDialog(
         barrierDismissible: false,
         context: context,

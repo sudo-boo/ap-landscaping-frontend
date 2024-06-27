@@ -122,6 +122,8 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
     var url = Uri.parse(superUserLogout);
     try {
 
+      Navigator.of(context).pop();
+
       showDialog(
         barrierDismissible: false,
         context: context,

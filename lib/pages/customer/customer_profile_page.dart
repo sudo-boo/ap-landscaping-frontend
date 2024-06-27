@@ -127,6 +127,8 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
     var url = Uri.parse(customerLogout); // Replace with your actual endpoint
     try {
 
+      Navigator.of(context).pop();
+
       showDialog(
         barrierDismissible: false,
         context: context,
