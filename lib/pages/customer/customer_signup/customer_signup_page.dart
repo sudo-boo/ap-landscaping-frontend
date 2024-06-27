@@ -41,9 +41,27 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
       "password": customer_info.password,
     };
 
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          content: SizedBox(
+            width: 50.0, // Example width
+            height: 50.0, // Example height
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        );
+      },
+    );
+
     var response = await http.post(Uri.parse(customerRegister),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(regBody));
+
+    Navigator.of(context).pop();
 
     if (response.statusCode == 201) {
       showDialog(

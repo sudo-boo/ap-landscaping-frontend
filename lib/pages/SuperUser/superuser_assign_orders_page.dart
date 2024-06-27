@@ -210,7 +210,7 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
   }
 
 
-  void _showProvidersPopup(String orderId) {
+  void _showProvidersPopup(String orderId, String serviceType) {
     providerInfo? selectedProvider;
 
     showDialog(
@@ -235,33 +235,35 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
               ),
               content: SingleChildScrollView(
                 child: Column(
-                  children: allProvidersList.map((provider) {
+                  children: allProvidersList.where((provider) => provider.services.contains(serviceType)).map((provider) {
+                        // print(provider);
                     return Card(
                       elevation: 0,
-                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+                      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
                       child: SizedBox( // Wrap ListTile with SizedBox
                         width: double.infinity, // Set width to match parent width
                         child: ListTile(
                           leading: const Icon(
                             Icons.account_circle_rounded,
-                            size: 35,
+                            size: 30,
                             color: Colors.black,
                           ),
                           title: Text(
                             provider.username,
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Inter'
+                              fontFamily: 'Inter',
+                              fontSize: 14
                             ),
                           ),
-                          subtitle: Text(
-                            'ID: ${provider.id}',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color: Colors.grey,
-                              fontFamily: 'Inter'
-                            ),
-                          ),
+                          // subtitle: Text(
+                          //   'ID: ${provider.id}',
+                          //   style: TextStyle(
+                          //       fontSize: 10,
+                          //       color: Colors.grey,
+                          //     fontFamily: 'Inter'
+                          //   ),
+                          // ),
                           trailing: Radio<providerInfo>(
                             value: provider,
                             groupValue: selectedProvider,
@@ -411,7 +413,7 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
                             superUserId: widget.superUserId,
                             order: order,
                             onPressed: (){
-                              _showProvidersPopup(order!.id);
+                              _showProvidersPopup(order!.id, order.serviceType);
                             },
                           );
                         },

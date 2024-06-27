@@ -136,37 +136,36 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
                   label: 'Address:',
                   value: customer.address,
                 ),
-                InfoWidget(
-                  label: 'Card Details:',
-                  value: customer.card_details,
-                ),
-                InfoWidget(
-                  label: 'CVV:',
-                  value: customer.cvv,
-                ),
-                InfoWidget(
-                  label: 'PayPal ID:',
-                  value: customer.paypal_id,
-                ),
-                InfoWidget(
-                  label: 'AEC Transfer:',
-                  value: customer.aec_transfer,
-                ),
-                InfoWidget(
-                  label: 'Card Type:',
-                  value: customer.card_type,
-                ),
-                InfoWidget(
-                  label: 'Card Holder\'s Name:',
-                  value: customer.card_holders_name,
-                ),
-                InfoWidget(
-                  label: 'Card Number:',
-                  value: customer.card_number,
-                ),
+                // InfoWidget(
+                //   label: 'Card Details:',
+                //   value: customer.card_details,
+                // ),
+                // InfoWidget(
+                //   label: 'CVV:',
+                //   value: customer.cvv,
+                // ),
+                // InfoWidget(
+                //   label: 'PayPal ID:',
+                //   value: customer.paypal_id,
+                // ),
+                // InfoWidget(
+                //   label: 'AEC Transfer:',
+                //   value: customer.aec_transfer,
+                // ),
+                // InfoWidget(
+                //   label: 'Card Type:',
+                //   value: customer.card_type,
+                // ),
+                // InfoWidget(
+                //   label: 'Card Holder\'s Name:',
+                //   value: customer.card_holders_name,
+                // ),
+                // InfoWidget(
+                //   label: 'Card Number:',
+                //   value: customer.card_number,
+                // ),
                 // Add more InfoWidget instances as needed
               ],
-
             ),
           ),
           actions: [Row(

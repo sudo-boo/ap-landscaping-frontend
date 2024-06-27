@@ -72,7 +72,7 @@ Future<customerInfo> getCustomerDetailsById(String customer_id, String token) as
 
 Future<List<providerInfo>> fetchAllProviderDetails(String token) async {
   try {
-    print('Fetching provider details...');
+    // print('Fetching provider details...');
     final response = await http.get(
       Uri.parse(superUserGetAllProviders),
       headers: {
@@ -102,6 +102,7 @@ Future<List<providerInfo>> fetchAllProviderDetails(String token) async {
           card_type: providerData['cardtype'].toString(),
           card_holders_name: providerData['cardholdersname'].toString(),
           card_number: providerData['cardnumber'].toString(),
+          services: (providerData['services'] is List) ? (providerData['services'] as List).whereType<String>().toList() : [],
         );
         allProvidersList.add(provider);
       }

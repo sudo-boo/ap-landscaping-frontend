@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 import '../../../config.dart';
 import '../../../utilities/helper_functions.dart';
+import '../../services_data.dart';
 
 class ProviderSignUp extends StatefulWidget {
   const ProviderSignUp({super.key});
@@ -25,6 +26,8 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
   bool hasSpecialCharacter = false;
   bool hasMinLength = false;
 
+  List<String> services = servicesData.map((service) => service.keys.first).toList();
+  Map<String, bool> selectedServices = {};
 
   void pSignup(providerInfo provider_info) async {
     var regBody = {
@@ -40,10 +43,33 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
       "cardholdersname": provider_info.card_holders_name,
       "cardnumber": provider_info.card_number,
       "password": provider_info.password,
+      "services": provider_info.services
     };
+
+    // Loading PopUp
+
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          content: SizedBox(
+            width: 50.0, // Example width
+            height: 50.0, // Example height
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        );
+      },
+    );
+
     var response = await http.post(Uri.parse(providerRegister),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(regBody));
+
+    Navigator.of(context).pop();
+
     // var jsonResponse = jsonDecode(response.body);
     if (response.statusCode == 201) {
       showDialog(
@@ -121,6 +147,14 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
           );
         },
       );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    for (var service in services) {
+      selectedServices[service] = false;
     }
   }
 
@@ -212,9 +246,6 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       labelText: 'Username',
-                      // enabledBorder: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10.0),
-                      // ),
                     ),
                     onSaved: (value) => provider_info.username = value ?? '',
                     validator: (value) =>
@@ -298,7 +329,7 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -313,7 +344,7 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                       ),
                       SizedBox(width: screenWidth(context) * 0.03),
                       const Text(
-                        "Qualification Details",
+                        "Services",
                         style: TextStyle(fontFamily: 'Inter', height: 0),
                       ),
                       SizedBox(width: screenWidth(context) * 0.03),
@@ -330,13 +361,32 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  child: Column(
+                    children: services.map((service) {
+                      return CheckboxListTile(
+                        title: Text(
+                          service,
+                          style: const TextStyle(fontFamily: 'Inter', height: 0, fontSize: 14),
+                        ),
+                        value: selectedServices[service],
+                        dense: true,  // Makes the tile dense
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 2.0),  // Adjusts the padding
+                        visualDensity: const VisualDensity(horizontal: 0, vertical: -4), // Adjusts the visual density
+                        onChanged: (bool? value) {
+                          setState(() {
+                            selectedServices[service] = value ?? false;
+                          });
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 10),
                   child: TextFormField(
                     decoration: const InputDecoration(
                       labelText: 'Years of Service',
-                      // enabledBorder: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10.0),
-                      // ),
                     ),
                     keyboardType: TextInputType.number,
                     onSaved: (value) => provider_info.years_of_experience = value ?? '',
@@ -348,9 +398,6 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       labelText: 'Qualification',
-                      // enabledBorder: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10.0),
-                      // ),
                     ),
                     onSaved: (value) => provider_info.qualifications = value ?? '',
                     validator: (value) => value!.isEmpty ? 'Please enter your Qualifications' : null,
@@ -393,9 +440,6 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       labelText: 'Address',
-                      // enabledBorder: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10.0),
-                      // ),
                     ),
                     maxLength: 80, // Maximum length of the input
                     maxLines: null, // Allows multiline input
@@ -418,9 +462,6 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                       labelText: 'Mobile number',
                       prefixText: '+1 ',
                       prefixStyle: TextStyle(color: Colors.black), // Customize prefix text style if needed
-                      // enabledBorder: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10.0),
-                      // ),
                     ),
                     keyboardType: TextInputType.phone,
                     inputFormatters: [
@@ -432,13 +473,9 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                       provider_info.mobile_number = value!.replaceAll(RegExp(r'[^\d]'), '');
                     },
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter a mobile number';
-                      }
+                      if (value!.isEmpty) {return 'Please enter a mobile number';}
                       // Regular expression to match a typical 10-digit mobile number
-                      if (!RegExp(r'^\d{10}$').hasMatch(value)) {
-                        return 'Please enter a valid mobile number';
-                      }
+                      if (!RegExp(r'^\d{10}$').hasMatch(value)) {return 'Please enter a valid mobile number';}
                       return null;
                     },
                   ),
@@ -453,9 +490,20 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                             duration: Duration(seconds: 2),
                           ),
                         );
+                      } else if (selectedServices.values.every((value) => !value)) {
+                        // Check if no service is selected
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please select at least one service.'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                       } else {
-                        // print(provider_info.mobile_number);
                         _formKey.currentState!.save();
+                        provider_info.services = selectedServices.entries
+                            .where((entry) => entry.value)
+                            .map((entry) => entry.key)
+                            .toList();
                         pSignup(provider_info);
                       }
                     }
@@ -468,8 +516,7 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                       height: 50, // Adjust the height as needed
                       decoration: BoxDecoration(
                         color: const Color(0xFF3E363F), // Background color
-                        borderRadius: BorderRadius.circular(
-                            5), // Adjust the radius as needed
+                        borderRadius: BorderRadius.circular(5), // Adjust the radius as needed
                       ),
                       child: const Text(
                         'Register',

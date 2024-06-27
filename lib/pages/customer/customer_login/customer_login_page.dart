@@ -316,19 +316,18 @@ class _CustomerSignInState extends State<CustomerSignIn> {
                   const SizedBox(width: 4),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/customersignup');
+                      Navigator.of(context).pushReplacementNamed('/customersignup');
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero, // Remove padding
-                      tapTargetSize: MaterialTapTargetSize
-                          .shrinkWrap, // Minimize the tap target size
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Minimize the tap target size
                     ),
                     child: const Text(
                       'Register now',
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'Inter'
                       ),
                     ),
                   ),

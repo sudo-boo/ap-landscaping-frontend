@@ -126,7 +126,24 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
   Future<void> logoutCustomer() async {
     var url = Uri.parse(customerLogout); // Replace with your actual endpoint
     try {
-      print(widget.token);
+
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            content: SizedBox(
+              width: 50.0, // Example width
+              height: 50.0, // Example height
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        },
+      );
+
+      // print(widget.token);
       var response = await http.post(
         url,
         headers: {
@@ -134,6 +151,8 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
           'Authorization': '${widget.token}', // Include the token in the header
         },
       );
+
+      Navigator.of(context).pop();
 
       if (response.statusCode == 200) {
         print('Logout successful');

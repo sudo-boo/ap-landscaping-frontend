@@ -135,6 +135,22 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
     var url = Uri.parse(providerLogout); // Replace with your actual endpoint
     try {
       // print(widget.token);
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            content: SizedBox(
+              width: 50.0, // Example width
+              height: 50.0, // Example height
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        },
+      );
+
       var response = await http.post(
         url,
         headers: {
@@ -142,6 +158,8 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
           'Authorization': '${widget.token}', // Include the token in the header
         },
       );
+
+      Navigator.of(context).pop();
 
       if (response.statusCode == 200) {
         // print('Logout successful');

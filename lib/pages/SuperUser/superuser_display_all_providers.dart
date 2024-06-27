@@ -45,7 +45,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
         List<providerInfo> allProvidersList = [];
 
         for (var providerData in providersData) {
-          // print("$providerData");
+          // print("${providerData['services']}");
           providerInfo provider = providerInfo(
             id: providerData['id'].toString(),
             username: providerData['username'].toString(),
@@ -60,7 +60,9 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
             card_type: providerData['cardtype'].toString(),
             card_holders_name: providerData['cardholdersname'].toString(),
             card_number: providerData['cardnumber'].toString(),
+            services: (providerData['services'] is List) ? (providerData['services'] as List).whereType<String>().toList() : [],
           );
+          // print(provider.services);
           allProvidersList.add(provider);
         }
 
@@ -117,6 +119,10 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
                     value: provider.id,
                   ),
                   InfoWidget(
+                    label: 'Services Provided',
+                    value: provider.services.join(', '),
+                  ),
+                  InfoWidget(
                     label: 'Email:',
                     value: provider.email,
                   ),
@@ -128,34 +134,34 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
                     label: 'Address:',
                     value: provider.address,
                   ),
-                  InfoWidget(
-                    label: 'Card Details:',
-                    value: provider.card_details,
-                  ),
-                  InfoWidget(
-                    label: 'CVV:',
-                    value: provider.cvv,
-                  ),
-                  InfoWidget(
-                    label: 'PayPal ID:',
-                    value: provider.paypal_id,
-                  ),
-                  InfoWidget(
-                    label: 'AEC Transfer:',
-                    value: provider.aec_transfer,
-                  ),
-                  InfoWidget(
-                    label: 'Card Type:',
-                    value: provider.card_type,
-                  ),
-                  InfoWidget(
-                    label: 'Card Holder\'s Name:',
-                    value: provider.card_holders_name,
-                  ),
-                  InfoWidget(
-                    label: 'Card Number:',
-                    value: provider.card_number,
-                  ),
+                  // InfoWidget(
+                  //   label: 'Card Details:',
+                  //   value: provider.card_details,
+                  // ),
+                  // InfoWidget(
+                  //   label: 'CVV:',
+                  //   value: provider.cvv,
+                  // ),
+                  // InfoWidget(
+                  //   label: 'PayPal ID:',
+                  //   value: provider.paypal_id,
+                  // ),
+                  // InfoWidget(
+                  //   label: 'AEC Transfer:',
+                  //   value: provider.aec_transfer,
+                  // ),
+                  // InfoWidget(
+                  //   label: 'Card Type:',
+                  //   value: provider.card_type,
+                  // ),
+                  // InfoWidget(
+                  //   label: 'Card Holder\'s Name:',
+                  //   value: provider.card_holders_name,
+                  // ),
+                  // InfoWidget(
+                  //   label: 'Card Number:',
+                  //   value: provider.card_number,
+                  // ),
                   // Add more InfoWidget instances as needed
                 ],
               
@@ -169,7 +175,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
                   onPressed: (){
                     Navigator.of(context).pop();
                   },
-                  child: Text(
+                  child: const Text(
                       'Close',
                     style: TextStyle(
                       color: Colors.black,

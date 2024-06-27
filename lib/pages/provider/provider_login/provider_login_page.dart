@@ -234,14 +234,14 @@ class _ProviderSignInState extends State<ProviderSignIn> {
                       },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero, // Remove padding
-                        tapTargetSize: MaterialTapTargetSize
-                            .shrinkWrap, // Minimize the tap target size
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Minimize the tap target size
                       ),
                       child: const Text(
                         'Register now',
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'Inter'
                         ),
                       ),
                     ),

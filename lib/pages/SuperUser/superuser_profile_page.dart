@@ -121,6 +121,23 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
   Future<void> logoutSuperUser() async {
     var url = Uri.parse(superUserLogout);
     try {
+
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            content: SizedBox(
+              width: 50.0, // Example width
+              height: 50.0, // Example height
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        },
+      );
+
       var response = await http.post(
         url,
         headers: {
@@ -128,6 +145,8 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
           'Authorization': '${widget.token}',
         },
       );
+
+      Navigator.of(context).pop();
 
       if (response.statusCode == 200) {
         await SharedPreferences.getInstance().then((prefs) {

@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
+import '../../utilities/apis.dart';
 import '../../utilities/helper_functions.dart';
 
 class SuperUserServicesPage extends StatefulWidget {
@@ -228,7 +229,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
   }
 
 
-  void _showProvidersPopup(String orderId) {
+  void _showProvidersPopup(String orderId, String serviceType) {
     providerInfo? selectedProvider;
 
     showDialog(
@@ -238,14 +239,14 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
           builder: (context, setState) {
             if (allProvidersList.isEmpty) {
               // Fetch providers only if the list is empty
-              fetchAllProviderDetails().then((providers) {
+              fetchAllProviderDetails(widget.token).then((providers) {
                 setState(() {
                   allProvidersList = providers;
                 });
               });
             }
             return AlertDialog(
-              title: Text(
+              title: const Text(
                 'Select Provider',
                 style: TextStyle(
                   color: Colors.green, // Text color of the title
@@ -253,28 +254,35 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
               ),
               content: SingleChildScrollView(
                 child: Column(
-                  children: allProvidersList.map((provider) {
+                  children: allProvidersList.where((provider) => provider.services.contains(serviceType)).map((provider) {
+                    // print(provider);
                     return Card(
                       elevation: 0,
-                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
                       child: SizedBox( // Wrap ListTile with SizedBox
                         width: double.infinity, // Set width to match parent width
                         child: ListTile(
-                          leading: Icon(
-                            Icons.account_circle,
-                            size: 40,
-                            color: Colors.black12,
+                          leading: const Icon(
+                            Icons.account_circle_rounded,
+                            size: 30,
+                            color: Colors.black,
                           ),
                           title: Text(
                             provider.username,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Inter',
+                                fontSize: 14
                             ),
                           ),
-                          subtitle: Text(
-                            'ID: ${provider.id}',
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
+                          // subtitle: Text(
+                          //   'ID: ${provider.id}',
+                          //   style: TextStyle(
+                          //       fontSize: 10,
+                          //       color: Colors.grey,
+                          //     fontFamily: 'Inter'
+                          //   ),
+                          // ),
                           trailing: Radio<providerInfo>(
                             value: provider,
                             groupValue: selectedProvider,
@@ -325,54 +333,6 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
         );
       },
     );
-  }
-
-
-  Future<List<providerInfo>> fetchAllProviderDetails() async {
-    try {
-      // print('Fetching provider details...');
-      final response = await http.get(
-        Uri.parse(superUserGetAllProviders),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': '${widget.token}',
-        },
-      );
-      if (response.statusCode == 200) {
-        final dynamic data = json.decode(response.body);
-        final List<dynamic> providersData = data['providers'];
-
-        List<providerInfo> allProvidersList = [];
-
-        for (var providerData in providersData) {
-          // print("$providerData");
-          providerInfo provider = providerInfo(
-            id: providerData['id'].toString(),
-            username: providerData['username'].toString(),
-            email: providerData['email'].toString(),
-            mobile_number: providerData['mobilenumber'].toString(),
-            password: providerData['password'].toString(),
-            address: providerData['address'].toString(),
-            card_details: providerData['carddetails'].toString(),
-            cvv: providerData['cvv'].toString(),
-            paypal_id: providerData['paypal_id'].toString(),
-            aec_transfer: providerData['aectransfer'].toString(),
-            card_type: providerData['cardtype'].toString(),
-            card_holders_name: providerData['cardholdersname'].toString(),
-            card_number: providerData['cardnumber'].toString(),
-          );
-          allProvidersList.add(provider);
-        }
-
-        return allProvidersList;
-      } else {
-        // print('Failed to fetch provider data');
-        throw Exception('Failed to fetch provider data');
-      }
-    } catch (e) {
-      // print('Error getting provider details: $e');
-      throw Exception('Failed to fetch provider data');
-    }
   }
 
   @override
@@ -491,7 +451,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                                       superUserId: widget.superUserId,
                                       order: order,
                                       onPressed: (){
-                                        _showProvidersPopup(order!.id);
+                                        _showProvidersPopup(order!.id, order.serviceType);
                                       },
                                   );
                                 },
@@ -555,7 +515,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                                     superUserId: widget.superUserId,
                                     order: order,
                                     onPressed: (){
-                                      _showProvidersPopup(order.id);
+                                      _showProvidersPopup(order.id, order.serviceType);
                                     },
                                   );
                                 },
