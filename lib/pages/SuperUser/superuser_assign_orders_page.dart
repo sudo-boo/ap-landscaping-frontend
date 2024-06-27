@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
+import 'package:ap_landscaping/pages/SuperUser/superuser_main.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_services_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -339,7 +340,7 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                    builder: (context) => SuperUserPage(
+                    builder: (context) => SuperUserMain(
                         token: widget.token,
                         superuserId: widget.superUserId
                     )

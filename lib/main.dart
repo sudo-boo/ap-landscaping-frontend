@@ -1,9 +1,8 @@
 import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
+import 'package:ap_landscaping/pages/SuperUser/superuser_main.dart';
 import 'package:ap_landscaping/pages/customer/customer_main.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/SuperUser/SuperUserLogin/superuser_login.dart';
-// import 'package:ap_landscaping/pages/SuperUser/SuperUserSignUp/superuser_signup.dart';
-import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'pages/customer/customer_login/customerlogin.dart';
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
         } else if (profileType == 'provider') {
           homeWidget = ProviderPage(token: token, providerId: id);
         } else if(profileType == 'superuser'){
-          homeWidget = SuperUserPage(token: token, superuserId: id);
+          homeWidget = SuperUserMain(token: token, superuserId: id);
         } else{
           homeWidget = const MyHomePage(title: 'AP Landscaping');
         }

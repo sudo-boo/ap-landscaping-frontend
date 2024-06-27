@@ -30,7 +30,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
 
   Future<List<providerInfo>> fetchAllProviderDetails() async {
     try {
-      print('Fetching provider details...');
+      // print('Fetching provider details...');
       final response = await http.get(
         Uri.parse(superUserGetAllProviders),
         headers: {
@@ -45,7 +45,7 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
         List<providerInfo> allProvidersList = [];
 
         for (var providerData in providersData) {
-          print("$providerData");
+          // print("$providerData");
           providerInfo provider = providerInfo(
             id: providerData['id'].toString(),
             username: providerData['username'].toString(),
@@ -66,11 +66,11 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
 
         return allProvidersList;
       } else {
-        print('Failed to fetch provider data');
+        // print('Failed to fetch provider data');
         throw Exception('Failed to fetch provider data');
       }
     } catch (e) {
-      print('Error getting provider details: $e');
+      // print('Error getting provider details: $e');
       throw Exception('Failed to fetch provider data');
     }
   }
