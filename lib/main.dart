@@ -4,6 +4,7 @@ import 'package:ap_landscaping/pages/provider/privider_main.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/pages/SuperUser/SuperUserLogin/superuser_login_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
+import 'package:flutter/services.dart';
 import 'pages/customer/customer_login/customer_login_page.dart';
 import 'pages/provider/provider_login/provider_login_page.dart';
 import 'pages/customer/customer_signup/customer_signup_page.dart';
@@ -35,6 +36,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     Widget homeWidget;
     if (token != null) {
       bool isExpired = JwtDecoder.isExpired(token);
