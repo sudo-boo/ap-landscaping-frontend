@@ -1,18 +1,10 @@
-import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
-import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:ap_landscaping/utilities/customer_services_card.dart';
-import 'package:ap_landscaping/utilities/helper_functions.dart';
-import 'package:ap_landscaping/utilities/order_details_loading_page.dart';
 import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
-import 'package:ap_landscaping/models/providerinfo.dart';
-
-import '../../utilities/apis.dart';
-import '../../utilities/coming_soon_popup.dart';
 
 class CustomerServicesPage extends StatefulWidget {
   final token;

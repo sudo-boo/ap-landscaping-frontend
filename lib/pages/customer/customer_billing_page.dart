@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../services_data.dart';
-import 'create_order_success_page.dart';
 import 'customer_home_page.dart';
 
 class CustomerBillingPage extends StatefulWidget {

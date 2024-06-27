@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:ap_landscaping/pages/provider/provider_signup/provider_qualifications_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 import '../../../config.dart';

@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
-import 'package:ap_landscaping/pages/customer/customer_login/customer_google_signin.dart';
 import 'package:ap_landscaping/pages/customer/customer_main.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';

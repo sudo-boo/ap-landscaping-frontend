@@ -1,6 +1,5 @@
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 
 class FirstScrollPage extends StatefulWidget {

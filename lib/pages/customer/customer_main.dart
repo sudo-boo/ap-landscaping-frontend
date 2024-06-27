@@ -4,8 +4,6 @@ import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:ap_landscaping/utilities/coming_soon_popup.dart';
 import 'package:flutter/material.dart';
 
-import 'create_order_success_page.dart';
-
 class CustomerMain extends StatefulWidget {
   final String token;
   final String customerId;

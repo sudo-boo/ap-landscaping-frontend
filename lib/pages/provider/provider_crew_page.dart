@@ -89,9 +89,7 @@ class _crewPageState extends State<crewPage> {
               }),
           actions: <Widget>[
             IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/addCrewIcon.png'),
-              ),
+              icon: const Icon(Icons.add),
               onPressed: () {
                 Navigator.push(
                   context,

@@ -1,15 +1,13 @@
-import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_main.dart';
 import 'package:ap_landscaping/pages/customer/customer_main.dart';
 import 'package:ap_landscaping/pages/provider/privider_main.dart';
 import 'package:flutter/material.dart';
-import 'package:ap_landscaping/pages/SuperUser/SuperUserLogin/superuser_login.dart';
+import 'package:ap_landscaping/pages/SuperUser/SuperUserLogin/superuser_login_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
-import 'package:ap_landscaping/pages/provider/provider_home.dart';
-import 'pages/customer/customer_login/customerlogin.dart';
-import 'pages/provider/provider_login/providerlogin.dart';
-import 'pages/customer/customer_signup/customer_signup.dart';
-import 'pages/provider/provider_signup/providersignup.dart';
+import 'pages/customer/customer_login/customer_login_page.dart';
+import 'pages/provider/provider_login/provider_login_page.dart';
+import 'pages/customer/customer_signup/customer_signup_page.dart';
+import 'pages/provider/provider_signup/provider_signup_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 

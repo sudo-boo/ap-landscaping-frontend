@@ -116,16 +116,6 @@ class _SuperUserViewParticularCustomerOrdersPageState extends State<SuperUserVie
               Navigator.pop(context);
             },
           ),
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: const Image(
-          //       image: AssetImage('assets/images/notificationsIcon.png'),
-          //     ), // Notifications Bell Icon
-          //     onPressed: () {
-          //       // Handle notifications icon action (e.g., show notifications)
-          //     },
-          //   ),
-          // ],
           backgroundColor: Colors.transparent,
         ),
         body: SizedBox(

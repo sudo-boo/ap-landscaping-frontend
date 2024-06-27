@@ -2,15 +2,10 @@ import 'dart:convert';
 import 'package:ap_landscaping/utilities/customer_home_category_card.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
-import 'package:ap_landscaping/pages/customer/customer_profile_page.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
 import '../../models/customerinfo.dart';
-import 'package:ap_landscaping/utilities/coming_soon_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'create_order_success_page.dart';
 
 class CustomerHomePage extends StatefulWidget {
   final token;
@@ -73,7 +68,6 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
   }
 
   Widget build(BuildContext context) {
-    Dimensions getDims = Dimensions(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(

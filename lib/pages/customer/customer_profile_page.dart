@@ -1,8 +1,5 @@
 import 'dart:convert';
-
 import 'package:ap_landscaping/pages/customer/customer_calendar_page.dart';
-import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
-import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_update_profile_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
@@ -10,9 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ap_landscaping/config.dart';
-
-import '../../utilities/coming_soon_popup.dart';
-
 
 class CustomerProfilePage extends StatefulWidget {
   final token;
@@ -204,21 +198,6 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
             height: 0,
           ),
         ),
-        // leading: IconButton(
-        //     icon: const Image(
-        //       image: AssetImage('assets/images/backIcon.png'),
-        //     ),
-        //     onPressed: () {
-        //       Navigator.pushReplacement(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => CustomerHomePage(
-        //             token: widget.token,
-        //             customerId: widget.customerId)
-        //         )
-        //       );
-        //     }),
-        // backgroundColor: Colors.transparent
       ),
       body: Container(
         color: const Color(0xFFBBE1C5),
@@ -279,7 +258,6 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: Card(
@@ -291,39 +269,6 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: Column(
                     children: [
-                      // ListTile(
-                      //   leading: Container(
-                      //     width: 40,
-                      //     height: 40,
-                      //     decoration: const ShapeDecoration(
-                      //       color: Color(0xFF3E363F),
-                      //       shape: OvalBorder(),
-                      //     ),
-                      //     child: const Icon(
-                      //         Icons.perm_identity_outlined,
-                      //         color: Colors.white,
-                      //       )
-                      //   ),
-                      //   title: Text(
-                      //     'My Account',
-                      //     style: TextStyle(
-                      //       color: Color(0xFF181D27),
-                      //       fontSize: fontHelper(context) * 15,
-                      //       fontFamily: 'Inter',
-                      //       fontWeight: FontWeight.w600,
-                      //       height: 0.12,
-                      //     ),
-                      //   ),
-                      //   trailing: const Icon(Icons.arrow_forward_ios),
-                      //   onTap: () {
-                      //     Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(
-                      //             builder: (context) => CustomerUpdateProfileInfoPage(
-                      //                 token: widget.token,
-                      //                 customerId: widget.customerId)));
-                      //   },
-                      // ),
                       ListTile(
                         leading: Container(
                           width: 40,
@@ -357,34 +302,34 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
                                       customerId: widget.customerId)));
                         },
                       ),
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF96C257),
-                            shape: OvalBorder(),
-                          ),
-                          child: Center(
-                            child: const Icon(
-                                Icons.settings_outlined,
-                                color: Colors.white,
-                            )
-                          ),
-                        ),
-                        title: Text(
-                          'Settings',
-                          style: TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: fontHelper(context) * 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {showComingSoonDialog(context);},
-                      ),
+                      // ListTile(
+                      //   leading: Container(
+                      //     width: 40,
+                      //     height: 40,
+                      //     decoration: const ShapeDecoration(
+                      //       color: Color(0xFF96C257),
+                      //       shape: OvalBorder(),
+                      //     ),
+                      //     child: Center(
+                      //       child: const Icon(
+                      //           Icons.settings_outlined,
+                      //           color: Colors.white,
+                      //       )
+                      //     ),
+                      //   ),
+                      //   title: Text(
+                      //     'Settings',
+                      //     style: TextStyle(
+                      //       color: Color(0xFF181D27),
+                      //       fontSize: fontHelper(context) * 15,
+                      //       fontFamily: 'Inter',
+                      //       fontWeight: FontWeight.w600,
+                      //       height: 0.12,
+                      //     ),
+                      //   ),
+                      //   trailing: const Icon(Icons.arrow_forward_ios),
+                      //   onTap: () {showComingSoonDialog(context);},
+                      // ),
                       ListTile(
                         leading: Container(
                           width: 40,

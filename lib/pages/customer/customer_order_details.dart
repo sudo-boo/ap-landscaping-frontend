@@ -288,12 +288,11 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                     padding: const EdgeInsets.fromLTRB(6.0, 0, 6.0, 0),
                     child: Row(
                       children: [
-                        IconButton(
-                          icon: Image.asset(
-                            'assets/images/reasonIcon.png',
-                            // height: 35, width: 35
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Icon(
+                              Icons.edit_note_rounded
                           ),
-                          onPressed: () {},
                         ),
                         Expanded(
                           child: TextField(
@@ -589,7 +588,12 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                     padding: const EdgeInsets.fromLTRB(6.0, 0, 6.0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.edit_note_rounded),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Icon(
+                              Icons.edit_note_rounded
+                          ),
+                        ),
                         Expanded(
                           child: TextField(
                             controller: _reasonController,

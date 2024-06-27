@@ -4,25 +4,22 @@ import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
-import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/homepage_stats_card.dart';
 import 'provider_crew_page.dart';
 
-class ProviderPage extends StatefulWidget {
+class ProviderHomePage extends StatefulWidget {
   final token;
   final providerId;
-  const ProviderPage({required this.token, required this.providerId, Key? key})
+  const ProviderHomePage({required this.token, required this.providerId, Key? key})
       : super(key: key);
 
   @override
-  State<ProviderPage> createState() => _ProviderPageState();
+  State<ProviderHomePage> createState() => _ProviderHomePageState();
 }
 
-class _ProviderPageState extends State<ProviderPage> {
+class _ProviderHomePageState extends State<ProviderHomePage> {
   providerInfo providerInfo1 = providerInfo();
 
   Future<void> fetchAndSaveProviderInfo() async {

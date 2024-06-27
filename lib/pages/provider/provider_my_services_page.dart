@@ -1,15 +1,10 @@
 import 'dart:convert';
-import 'package:ap_landscaping/pages/provider/provider_profile_page.dart';
-import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'package:ap_landscaping/utilities/provider_services_card.dart';
 import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
 import '../../models/orderinfo.dart';
-import '../../utilities/apis.dart';
-import '../../utilities/coming_soon_popup.dart';
-
 
 class ProviderMyServicesPage extends StatefulWidget {
   final token;
@@ -233,16 +228,6 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
               height: 0,
             ),
           ),
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: const Image(
-          //       image: AssetImage('assets/images/notificationsIcon.png'),
-          //     ), // Notifications Bell Icon
-          //     onPressed: () {
-          //       // Handle notifications icon action (e.g., show notifications)
-          //     },
-          //   ),
-          // ],
           backgroundColor: Colors.transparent,
         ),
         body: Column(

@@ -1,15 +1,11 @@
-import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
-import 'package:ap_landscaping/pages/SuperUser/superuser_profile_page.dart';
 import 'package:ap_landscaping/utilities/services_loading_page.dart';
 import 'package:ap_landscaping/utilities/superuser_services_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ap_landscaping/models/orderinfo.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:ap_landscaping/config.dart';
 import 'package:ap_landscaping/models/providerinfo.dart';
-import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/helper_functions.dart';
 
 class SuperUserServicesPage extends StatefulWidget {
@@ -396,16 +392,6 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
               height: 0,
             ),
           ),
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: const Image(
-          //       image: AssetImage('assets/images/notificationsIcon.png'),
-          //     ), // Notifications Bell Icon
-          //     onPressed: () {
-          //       // Handle notifications icon action (e.g., show notifications)
-          //     },
-          //   ),
-          // ],
           backgroundColor: Colors.transparent,
         ),
         body: Column(

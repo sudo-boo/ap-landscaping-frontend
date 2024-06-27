@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../models/orderinfo.dart';
 import '../../utilities/apis.dart';
-import '../../utilities/customer_services_card.dart';
 import '../../utilities/provider_services_card.dart';
 import '../../utilities/services_loading_page.dart';
 
@@ -114,16 +113,6 @@ class _SuperUserViewParticularProviderOrdersPageState extends State<SuperUserVie
               Navigator.pop(context);
             },
           ),
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: const Image(
-          //       image: AssetImage('assets/images/notificationsIcon.png'),
-          //     ), // Notifications Bell Icon
-          //     onPressed: () {
-          //       // Handle notifications icon action (e.g., show notifications)
-          //     },
-          //   ),
-          // ],
           backgroundColor: Colors.transparent,
         ),
         body: SizedBox(

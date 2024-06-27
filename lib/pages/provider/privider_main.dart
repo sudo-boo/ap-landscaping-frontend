@@ -22,7 +22,7 @@ class _ProviderMainState extends State<ProviderMain> {
   @override
   Widget build(BuildContext context) {
     List<Widget> widgetList = [
-      ProviderPage(token: widget.token, providerId: widget.providerId),
+      ProviderHomePage(token: widget.token, providerId: widget.providerId),
       ProviderMyServicesPage(token: widget.token, providerId: widget.providerId),
       const ComingSoonPage(),
       const ComingSoonPage(),

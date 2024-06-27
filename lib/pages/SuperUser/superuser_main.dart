@@ -23,7 +23,7 @@ class _SuperUserMainState extends State<SuperUserMain> {
   @override
   Widget build(BuildContext context) {
     List<Widget> widgetList = [
-      SuperUserPage(token: widget.token, superuserId: widget.superuserId),
+      SuperUserHomePage(token: widget.token, superuserId: widget.superuserId),
       SuperUserServicesPage(token: widget.token, superUserId: widget.superuserId),
       const ComingSoonPage(),
       const ComingSoonPage(),

@@ -1,8 +1,5 @@
 import 'dart:math';
-
-import 'package:ap_landscaping/pages/customer/customer_home_page.dart';
 import 'package:ap_landscaping/pages/customer/customer_main.dart';
-import 'package:ap_landscaping/pages/customer/customer_my_services_page.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';

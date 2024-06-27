@@ -279,9 +279,11 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                     child: Row(
                       children: [
                         IconButton(
-                          icon: Image.asset(
-                            'assets/images/reasonIcon.png',
-                            // height: 35, width: 35
+                          icon: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Icon(
+                                Icons.edit_note_rounded
+                            ),
                           ),
                           onPressed: () {},
                         ),
@@ -534,9 +536,11 @@ class _ProviderOrderDetailsPageState extends State<ProviderOrderDetailsPage> {
                     child: Row(
                       children: [
                         IconButton(
-                          icon: Image.asset(
-                            'assets/images/reasonIcon.png',
-                            // height: 35, width: 35
+                          icon: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Icon(
+                                Icons.edit_note_rounded
+                            ),
                           ),
                           onPressed: () {},
                         ),

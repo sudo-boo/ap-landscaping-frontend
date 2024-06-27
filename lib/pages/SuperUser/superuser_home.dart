@@ -1,28 +1,21 @@
 import 'package:ap_landscaping/pages/SuperUser/superuser_assign_orders_page.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_providers.dart';
 import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_users.dart';
-import 'package:ap_landscaping/pages/SuperUser/superuser_profile_page.dart';
-import 'package:ap_landscaping/pages/SuperUser/superuser_services_page.dart';
-import 'package:ap_landscaping/utilities/custom_spacer.dart';
 import 'package:ap_landscaping/utilities/helper_functions.dart';
 import 'package:ap_landscaping/utilities/homepage_stats_card.dart';
 import 'package:flutter/material.dart';
 
-import '../../utilities/coming_soon_popup.dart';
-
-// import 'provider_crew_page.dart';
-
-class SuperUserPage extends StatefulWidget {
+class SuperUserHomePage extends StatefulWidget {
   final token;
   final superuserId;
-  const SuperUserPage({required this.token, required this.superuserId, Key? key})
+  const SuperUserHomePage({required this.token, required this.superuserId, Key? key})
       : super(key: key);
 
   @override
-  State<SuperUserPage> createState() => _SuperUserPageState();
+  State<SuperUserHomePage> createState() => _SuperUserHomePageState();
 }
 
-class _SuperUserPageState extends State<SuperUserPage> {
+class _SuperUserHomePageState extends State<SuperUserHomePage> {
   @override
   Widget build(BuildContext context) {
     Dimensions getDims = Dimensions(context);
@@ -172,8 +165,9 @@ class _SuperUserPageState extends State<SuperUserPage> {
                     shape: OvalBorder(),
                   ),
                   child: IconButton(
-                    icon: Image.asset(
-                      'assets/images/userIcon.png',
+                    icon: const Icon(
+                      Icons.person_3_rounded,
+                      color: Colors.white,
                     ),
                     onPressed: () {},
                   ),
@@ -212,8 +206,9 @@ class _SuperUserPageState extends State<SuperUserPage> {
                     shape: OvalBorder(),
                   ),
                   child: IconButton(
-                    icon: Image.asset(
-                      'assets/images/userIcon.png',
+                    icon: const Icon(
+                      Icons.person_3_rounded,
+                      color: Colors.white,
                     ),
                     onPressed: () {},
                   ),

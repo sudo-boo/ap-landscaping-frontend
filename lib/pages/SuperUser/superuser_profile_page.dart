@@ -1,19 +1,9 @@
 import 'dart:convert';
-
-import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_providers.dart';
-import 'package:ap_landscaping/pages/SuperUser/superuser_display_all_users.dart';
-import 'package:ap_landscaping/pages/SuperUser/superuser_home.dart';
-import 'package:ap_landscaping/pages/SuperUser/superuser_services_page.dart';
 import 'package:ap_landscaping/pages/my_home_page.dart';
-// import 'package:ap_landscaping/pages/provider/customer_my_services_page.dart';
-// import 'package:ap_landscaping/pages/provider/provider_home.dart';
-// import 'package:ap_landscaping/pages/provider/provider_update_profile_info.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 import '../../config.dart';
-import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/helper_functions.dart';
 
 class SuperUserProfilePage extends StatefulWidget {

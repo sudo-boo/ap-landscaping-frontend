@@ -1,15 +1,9 @@
-import 'dart:convert';
-
 import 'package:ap_landscaping/pages/my_home_page.dart';
-import 'package:ap_landscaping/pages/provider/provider_my_services_page.dart';
-import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'package:ap_landscaping/pages/provider/provider_update_profile_info.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 import '../../config.dart';
-import '../../utilities/coming_soon_popup.dart';
 import '../../utilities/helper_functions.dart';
 
 class ProviderProfilePage extends StatefulWidget {
@@ -271,70 +265,6 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                   child: Column(
                     children: [
-                      // ListTile(
-                      //   leading: Container(
-                      //     width: 40,
-                      //     height: 40,
-                      //     decoration: const ShapeDecoration(
-                      //       color: Color(0xFF3E363F),
-                      //       shape: OvalBorder(),
-                      //     ),
-                      //     child: const Icon(
-                      //         Icons.perm_identity_outlined,
-                      //         color: Colors.white,
-                      //       ),
-                      //   ),
-                      //   title: Text(
-                      //     'My Account',
-                      //     style: TextStyle(
-                      //       color: Color(0xFF181D27),
-                      //       fontSize: fontHelper(context) * 15,
-                      //       fontFamily: 'Inter',
-                      //       fontWeight: FontWeight.w600,
-                      //       height: 0.12,
-                      //     ),
-                      //   ),
-                      //   trailing: const Icon(Icons.arrow_forward_ios),
-                      //   onTap: () {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (context) => ProviderUpdateProfileInfoPage(
-                      //           token: widget.token,
-                      //           providerId: widget.providerId
-                      //         )
-                      //       )
-                      //     );
-                      //   },
-                      // ),
-                      ListTile(
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF96C257),
-                            shape: OvalBorder(),
-                          ),
-                          child: Center(
-                            child: const Icon(
-                                Icons.settings_outlined,
-                                color: Colors.white,
-                              ),
-                          ),
-                        ),
-                        title: Text(
-                          'Settings',
-                          style: TextStyle(
-                            color: Color(0xFF181D27),
-                            fontSize: fontHelper(context) * 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0.12,
-                          ),
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios),
-                        onTap: () {showComingSoonDialog(context);},
-                      ),
                       ListTile(
                         leading: Container(
                           width: 40,
