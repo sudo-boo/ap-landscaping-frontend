@@ -77,11 +77,11 @@ class _CustomerUpdateProfileInfoPageState extends State<CustomerUpdateProfileInf
         return customer_info1;
       } else {
         // Handle error or non-200 responses
-        print('Failed to fetch customer info');
+        // print('Failed to fetch customer info');
         return customer_info1;
       }
     } catch (e) {
-      print('Error: $e');
+      // print('Error: $e');
       return customer_info1;
     }
   }
@@ -125,7 +125,7 @@ class _CustomerUpdateProfileInfoPageState extends State<CustomerUpdateProfileInf
           customer_info.card_number =
               data['updatedCustomer']['cardnumber'] ?? '';
         });
-        print('Customer profile updated successfully');
+        // print('Customer profile updated successfully');
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -143,7 +143,7 @@ class _CustomerUpdateProfileInfoPageState extends State<CustomerUpdateProfileInf
               );
             });
       } else {
-        print('Failed to update customer profile');
+        // print('Failed to update customer profile');
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -162,7 +162,7 @@ class _CustomerUpdateProfileInfoPageState extends State<CustomerUpdateProfileInf
             });
       }
     } catch (e) {
-      print('Error: $e');
+      // print('Error: $e');
     }
   }
 

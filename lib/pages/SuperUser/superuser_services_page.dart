@@ -59,7 +59,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
             // print(order);
             // Skip order if customerId is not a string
             if (order['customerId'] is! String) {
-              print('Skipping order due to invalid customerId format: ${order['customerId']}');
+              // print('Skipping order due to invalid customerId format: ${order['customerId']}');
               continue;
             }
             orders.add(orderInfo(
@@ -79,14 +79,14 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
           }
           return orders;
         } else {
-          print('No orders found.');
+          // print('No orders found.');
           return [];
         }
       } else {
         throw Exception('Failed to load customer orders');
       }
     } catch (e) {
-      print('Error fetching orders: $e');
+      // print('Error fetching orders: $e');
       return [];
     }
   }
@@ -111,7 +111,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
       // Return the list of cancelled orders
       return cancelledOrdersList;
     } catch (e) {
-      print('Error separating past orders: $e');
+      // print('Error separating past orders: $e');
       return []; // Return an empty list if an error occurs
     }
   }
@@ -187,7 +187,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
           },
         );
       } else {
-        print("Request failed with status: ${response.statusCode}");
+        // print("Request failed with status: ${response.statusCode}");
         // Show error dialog
         showDialog(
           context: context,
@@ -208,7 +208,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
         );
       }
     } catch (e) {
-      print("Error occurred: $e");
+      // print("Error occurred: $e");
       // Show error dialog
       showDialog(
         context: context,
@@ -308,9 +308,9 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
                 TextButton(
                   onPressed: () async {
                     if (selectedProvider != null) {
-                      print('Selected Provider: ${selectedProvider!.username}');
-                      print("OrderID: $orderId");
-                      print('ProviderID: ${selectedProvider!.id}');
+                      // print('Selected Provider: ${selectedProvider!.username}');
+                      // print("OrderID: $orderId");
+                      // print('ProviderID: ${selectedProvider!.id}');
 
                       await assignProvider(orderId, selectedProvider, context); // Wait for the function to complete
                     } else {
@@ -333,7 +333,7 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
 
   Future<List<providerInfo>> fetchAllProviderDetails() async {
     try {
-      print('Fetching provider details...');
+      // print('Fetching provider details...');
       final response = await http.get(
         Uri.parse(superUserGetAllProviders),
         headers: {
@@ -369,11 +369,11 @@ class _SuperUserServicesPageState extends State<SuperUserServicesPage> {
 
         return allProvidersList;
       } else {
-        print('Failed to fetch provider data');
+        // print('Failed to fetch provider data');
         throw Exception('Failed to fetch provider data');
       }
     } catch (e) {
-      print('Error getting provider details: $e');
+      // print('Error getting provider details: $e');
       throw Exception('Failed to fetch provider data');
     }
   }

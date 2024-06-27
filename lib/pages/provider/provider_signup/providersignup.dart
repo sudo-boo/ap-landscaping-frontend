@@ -455,7 +455,7 @@ class _ProviderSignUpState extends State<ProviderSignUp> {
                           ),
                         );
                       } else {
-                        print(provider_info.mobile_number);
+                        // print(provider_info.mobile_number);
                         _formKey.currentState!.save();
                         pSignup(provider_info);
                       }

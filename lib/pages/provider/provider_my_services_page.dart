@@ -47,7 +47,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
 
       for (var order in ordersJson) {
         // print(order);
-        final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
+        // final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -60,7 +60,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
           isCancelled: order['isCancelled'],
           id: order['id'],
           isRescheduled: order['isRescheduled'] ?? false,
-          customerName: customerDetails.username,
+          customerName: "Click 'View Details'",
           isAcceptedByProvider: order['isAcceptedByProvider'] ?? false,
           // Add other customer details as needed
         ));
@@ -86,7 +86,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
 
       for (var order in ordersJson) {
         // print(order);
-        final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
+        // final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -99,7 +99,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
           isCancelled: order['isCancelled'],
           id: order['id'],
           isRescheduled: order['isRescheduled'] ?? false,
-          customerName: customerDetails.username,
+          customerName: "Click 'View Details'",
           isAcceptedByProvider: order['isAcceptedByProvider'] ?? false,
           // Add other customer details as needed
         ));
@@ -221,21 +221,8 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              icon: const Image(
-                image: AssetImage('assets/images/backIcon.png'),
-              ),
-              onPressed: () {Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProviderPage(
-                          token: widget.token,
-                          providerId: widget.providerId
-                      )
-                  )
-              );
-              }),
-          // title: Text(widget.serviceName),
+          automaticallyImplyLeading: true,
+          centerTitle: true,
           title: const Text(
             'My Services',
             style: TextStyle(
@@ -436,83 +423,6 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
               ]),
             ),
           ],
-        ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
-          child: Stack(
-            alignment: Alignment.topCenter,
-            clipBehavior: Clip.none, // Allows the child to overflow the stack
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  IconButton(
-                    icon: Image.asset(
-                      'assets/images/homeIcon.png',
-                      height: 35, width: 35
-                    ),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProviderPage(
-                            token: widget.token,
-                            providerId: widget.providerId
-                          )
-                        )
-                      );},
-                  ),
-                  IconButton(
-                      icon: Image.asset(
-                          'assets/images/myServicesPressedIcon.png',
-                          height: 40,
-                          width: 40),
-                      onPressed: () {
-                      }),
-                  const SizedBox(
-                      width: 90), // Placeholder for the center button
-                  IconButton(
-                    icon: Image.asset('assets/images/communicationIcon.png',
-                        height: 35, width: 35),
-                    onPressed: () {showComingSoonDialog(context);},
-                  ),
-                  IconButton(
-                    icon: Image.asset('assets/images/moreIcon.png',
-                        height: 35, width: 35),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProviderProfilePage(
-                              token: widget.token,
-                              providerId: widget.providerId),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Positioned(
-                top: -35, // Adjust this value to position the button as needed
-                child: Container(
-                  height: 100, // Increase the height for a larger button
-                  width: 100, // Increase the width for a larger button
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle, // Ensures the container is circular
-                    color: Color(0xFFBCDD8C), // Background color of the button
-                  ),
-                  child: IconButton(
-                    icon: Image.asset(
-                      'assets/images/centerIcon.png',
-                      height: 100, // Adjust the size of the inner image/icon
-                      width: 100,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

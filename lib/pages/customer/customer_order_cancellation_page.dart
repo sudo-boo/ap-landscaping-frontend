@@ -30,7 +30,7 @@ class _CustomerOrderCancellationPageState extends State<CustomerOrderCancellatio
       );
 
       if (response.statusCode == 200) {
-        print('Order cancelled successfully');
+        // print('Order cancelled successfully');
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -76,7 +76,7 @@ class _CustomerOrderCancellationPageState extends State<CustomerOrderCancellatio
               ],
             );
           });
-      print('Error cancelling order: $error');
+      // print('Error cancelling order: $error');
       // throw Exception('Internal Server Error');
     }
   }

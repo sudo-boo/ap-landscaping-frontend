@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ap_landscaping/pages/provider/privider_main.dart';
 import 'package:ap_landscaping/pages/provider/provider_home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -48,7 +49,7 @@ class _ProviderSignInState extends State<ProviderSignIn> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  ProviderPage(token: myToken, providerId: myProviderId)));
+                  ProviderMain(token: myToken, providerId: myProviderId)));
     } else {
       setState(() {
         isLoading = false;

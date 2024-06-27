@@ -73,7 +73,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
         // return {'error': 'Failed to fetch order'};
       }
     } catch (e) {
-      print('Error getting order: $e');
+      // print('Error getting order: $e');
       // return {'error': 'Failed to fetch order'};
     }
   }
@@ -121,7 +121,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
         });
       }
     } catch (e) {
-      print('Error getting order: $e');
+      // print('Error getting order: $e');
       // Handle error
     }
   }
@@ -143,7 +143,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
       );
 
       if (response.statusCode == 200) {
-        print('Order cancelled successfully');
+        // print('Order cancelled successfully');
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -188,7 +188,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
               ],
             );
           });
-      print('Error cancelling order: $error');
+      // print('Error cancelling order: $error');
       // throw Exception('Internal Server Error');
     }
   }
@@ -408,7 +408,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
         );
 
         if (response.statusCode == 200) {
-          print('Order Rescheduled successfully');
+          // print('Order Rescheduled successfully');
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -483,7 +483,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
                 ],
               );
             });
-        print('Error cancelling order: $error');
+        // print('Error cancelling order: $error');
         // throw Exception('Internal Server Error');
       }
     }

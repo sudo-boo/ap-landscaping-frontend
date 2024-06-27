@@ -77,11 +77,11 @@ class _ProviderUpdateProfileInfoPageState extends State<ProviderUpdateProfileInf
         return provider_info1;
       } else {
         // Handle error or non-200 responses
-        print('Failed to fetch provider info');
+        // print('Failed to fetch provider info');
         return provider_info1;
       }
     } catch (e) {
-      print('Error: $e');
+      // print('Error: $e');
       return provider_info1;
     }
   }
@@ -125,7 +125,7 @@ class _ProviderUpdateProfileInfoPageState extends State<ProviderUpdateProfileInf
           provider_info.card_number =
               data['updatedProvider']['cardnumber'] ?? '';
         });
-        print('Provider profile updated successfully');
+        // print('Provider profile updated successfully');
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -143,7 +143,7 @@ class _ProviderUpdateProfileInfoPageState extends State<ProviderUpdateProfileInf
               );
             });
       } else {
-        print('Failed to update provider profile');
+        // print('Failed to update provider profile');
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -162,7 +162,7 @@ class _ProviderUpdateProfileInfoPageState extends State<ProviderUpdateProfileInf
             });
       }
     } catch (e) {
-      print('Error: $e');
+      // print('Error: $e');
     }
   }
 
