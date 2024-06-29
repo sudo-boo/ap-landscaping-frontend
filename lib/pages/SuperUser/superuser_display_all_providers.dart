@@ -66,6 +66,8 @@ class _SuperUserAllProvidersPageState extends State<SuperUserAllProvidersPage> {
           allProvidersList.add(provider);
         }
 
+        allProvidersList.sort((a, b) => a.username.compareTo(b.username));
+
         return allProvidersList;
       } else {
         // print('Failed to fetch provider data');

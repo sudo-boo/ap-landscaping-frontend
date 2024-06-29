@@ -48,7 +48,7 @@ class _SuperUserViewParticularProviderOrdersPageState extends State<SuperUserVie
       // print(ordersJson);
       for (var order in ordersJson) {
         print(order);
-        final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
+        // final customerDetails = await getCustomerDetailsById(order['customerId'], widget.token);
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -61,7 +61,7 @@ class _SuperUserViewParticularProviderOrdersPageState extends State<SuperUserVie
           isCancelled: order['isCancelled'],
           id: order['id'],
           isRescheduled: order['isRescheduled'] ?? false,
-          customerName: customerDetails.username,
+          customerName: "Click 'View Details'",
           isAcceptedByProvider: order['isAcceptedByProvider'] ?? false,
           // Add other customer details as needed
         ));

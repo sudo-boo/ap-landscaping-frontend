@@ -197,7 +197,7 @@ class _CustomerMyServicesCardState extends State<CustomerMyServicesCard> {
                             ),
                           ),
                           Text(
-                            "Click View Details",
+                            "Click 'View Details'",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color(0xFF1C1F34),

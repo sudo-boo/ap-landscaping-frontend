@@ -25,10 +25,10 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
   @override
   void initState() {
     super.initState();
-    _customerDetailsFuture = fetchAllcustomerDetails();
+    _customerDetailsFuture = fetchAllCustomerDetails();
   }
 
-  Future<List<customerInfo>> fetchAllcustomerDetails() async {
+  Future<List<customerInfo>> fetchAllCustomerDetails() async {
     try {
       // print('Fetching customer details...');
       // print(widget.token);
@@ -47,7 +47,7 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
         final dynamic data = json.decode(response.body);
         final List<dynamic> customersData = data['customers'];
 
-        List<customerInfo> allcustomersList = [];
+        List<customerInfo> allCustomersList = [];
 
         for (var customerData in customersData) {
           // print('Customer data: $customerData');
@@ -66,10 +66,12 @@ class _SuperUserAllCustomersPageState extends State<SuperUserAllCustomersPage> {
             card_number: customerData['cardnumber'].toString(),
             id: customerData['id'].toString(),
           );
-          allcustomersList.add(customer);
+          allCustomersList.add(customer);
         }
 
-        return allcustomersList;
+        allCustomersList.sort((a, b) => a.username.compareTo(b.username));
+
+        return allCustomersList;
       } else {
         // print('Failed to fetch customer data');
         throw Exception('Failed to fetch customer data');

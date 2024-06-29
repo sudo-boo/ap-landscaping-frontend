@@ -46,8 +46,8 @@ class _SuperUserViewParticularCustomerOrdersPageState extends State<SuperUserVie
       final List<orderInfo> orders = [];
       print(ordersJson);
       for (var order in ordersJson) {
-        print(order);
-        print(order['providerId']);
+        // print(order);
+        // print(order['providerId']);
         String providerName = "Not Assigned yet!";
         // if(order['providerId'] != null) {
         //   final providerDetails = await getProviderDetailsById(
@@ -68,8 +68,8 @@ class _SuperUserViewParticularCustomerOrdersPageState extends State<SuperUserVie
           providerName: providerName,
           // Add other customer details as needed
         ));
-        print(order);
-        print("----");
+        // print(order);
+        // print("----");
       }
       // for (var order in orders) {
       //   print("Order ID: ${order.id}");
