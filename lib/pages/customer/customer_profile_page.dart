@@ -8,18 +8,23 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ap_landscaping/config.dart';
 
+import '../../utilities/loading_popup.dart';
+
 class CustomerProfilePage extends StatefulWidget {
-  final token;
-  final customerId;
-  const CustomerProfilePage({required this.token, required this.customerId, Key? key})
-      : super(key: key);
+  final String token;
+  final String customerId;
+
+  const CustomerProfilePage({
+    required this.token,
+    required this.customerId,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<CustomerProfilePage> createState() => _CustomerProfilePageState();
 }
 
 class _CustomerProfilePageState extends State<CustomerProfilePage> {
-
   late String username = '';
 
   void showCustomSignOutBottomSheet(BuildContext context) {
@@ -72,9 +77,9 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
                     horizontal: 40.0, vertical: 10.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle sign out logic
+                    Navigator.of(context).pop();
+                    showLoadingIndicator(context);
                     logoutCustomer();
-                    Navigator.of(context).pop(); // Dismiss the bottom sheet
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -126,26 +131,6 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
   Future<void> logoutCustomer() async {
     var url = Uri.parse(customerLogout); // Replace with your actual endpoint
     try {
-
-      Navigator.of(context).pop();
-
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) {
-          return const AlertDialog(
-            content: SizedBox(
-              width: 50.0, // Example width
-              height: 50.0, // Example height
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
-          );
-        },
-      );
-
-      // print(widget.token);
       var response = await http.post(
         url,
         headers: {
@@ -154,7 +139,7 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
         },
       );
 
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(); // Dismiss the loading indicator
 
       if (response.statusCode == 200) {
         print('Logout successful');
@@ -166,24 +151,36 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
         });
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-              builder: (context) => const MyHomePage(
-                title: 'AP Landscaping',
-              )),
+            builder: (context) => const MyHomePage(
+              title: 'AP Landscaping',
+            ),
+          ),
               (Route<dynamic> route) => false,
         );
-        // Handle successful logout
       } else {
+        String errorMessage = json.decode(response.body)['error'] ?? 'Failed to logout';
         print(response.statusCode);
-        // print(response['error']);
-        print(json.decode(response.body)['error']);
+        print(errorMessage);
         print('Failed to logout');
-        // Handle error response
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            duration: const Duration(seconds: 2),
+          ),
+        );
       }
     } catch (e) {
       print('Error during logout: $e');
-      // Handle any exceptions
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error during logout: $e'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+      Navigator.of(context).pop(); // Dismiss the loading indicator if error
     }
   }
+
 
   Future<void> getUsernameFromSharedPreferences() async {
     try {
@@ -196,19 +193,18 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
     getUsernameFromSharedPreferences();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: true,
-        // title: Text(widget.serviceName),
         title: const Text(
           'More',
           style: TextStyle(
@@ -299,9 +295,9 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
                             shape: OvalBorder(),
                           ),
                           child: const Icon(
-                                Icons.calendar_month_rounded,
-                              color: Colors.white,
-                            ),
+                            Icons.calendar_month_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                         title: Text(
                           'Calendar',
@@ -316,41 +312,16 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CustomerCalendarPage(
-                                      token: widget.token,
-                                      customerId: widget.customerId)));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomerCalendarPage(
+                                token: widget.token,
+                                customerId: widget.customerId,
+                              ),
+                            ),
+                          );
                         },
                       ),
-                      // ListTile(
-                      //   leading: Container(
-                      //     width: 40,
-                      //     height: 40,
-                      //     decoration: const ShapeDecoration(
-                      //       color: Color(0xFF96C257),
-                      //       shape: OvalBorder(),
-                      //     ),
-                      //     child: Center(
-                      //       child: const Icon(
-                      //           Icons.settings_outlined,
-                      //           color: Colors.white,
-                      //       )
-                      //     ),
-                      //   ),
-                      //   title: Text(
-                      //     'Settings',
-                      //     style: TextStyle(
-                      //       color: Color(0xFF181D27),
-                      //       fontSize: fontHelper(context) * 15,
-                      //       fontFamily: 'Inter',
-                      //       fontWeight: FontWeight.w600,
-                      //       height: 0.12,
-                      //     ),
-                      //   ),
-                      //   trailing: const Icon(Icons.arrow_forward_ios),
-                      //   onTap: () {showComingSoonDialog(context);},
-                      // ),
                       ListTile(
                         leading: Container(
                           width: 40,
@@ -360,9 +331,9 @@ class _CustomerProfilePageState extends State<CustomerProfilePage> {
                             shape: OvalBorder(),
                           ),
                           child: const Icon(
-                              Icons.logout_rounded,
-                              color: Colors.white,
-                            ),
+                            Icons.logout_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                         title: Text(
                           'Sign out',

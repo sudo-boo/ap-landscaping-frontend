@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:ap_landscaping/pages/my_home_page.dart';
 import 'package:ap_landscaping/pages/provider/provider_update_profile_info.dart';
 import 'package:flutter/material.dart';
@@ -5,10 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
 import '../../utilities/helper_functions.dart';
+import '../../utilities/loading_popup.dart';
 
 class ProviderProfilePage extends StatefulWidget {
-  final token;
-  final providerId;
+  final String token;
+  final String providerId;
   const ProviderProfilePage({required this.token, required this.providerId, Key? key})
       : super(key: key);
 
@@ -65,13 +67,12 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle sign out logic
+                    Navigator.of(context).pop();
+                    showLoadingIndicator(context);
                     logoutProvider();
-                    Navigator.of(context).pop(); // Dismiss the bottom sheet
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -79,8 +80,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 12.0),
                   ),
                   child: const Text(
                     "Sign out",
@@ -89,8 +89,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 0.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // Dismiss the bottom sheet
@@ -101,8 +100,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 12.0),
                   ),
                   child: const Text(
                     "Cancel",
@@ -127,33 +125,13 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
         username = prefs.getString('name') ?? ''; // Retrieve username from shared preferences
       });
     } catch (e) {
-      // print('Error retrieving username: $e');
+      print('Error retrieving username: $e');
     }
   }
 
   Future<void> logoutProvider() async {
     var url = Uri.parse(providerLogout); // Replace with your actual endpoint
     try {
-      // print(widget.token);
-
-      Navigator.of(context).pop();
-
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) {
-          return const AlertDialog(
-            content: SizedBox(
-              width: 50.0, // Example width
-              height: 50.0, // Example height
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
-          );
-        },
-      );
-
       var response = await http.post(
         url,
         headers: {
@@ -162,33 +140,45 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
         },
       );
 
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(); // Dismiss the loading indicator
 
       if (response.statusCode == 200) {
-        // print('Logout successful');
+        print('Logout successful');
         await SharedPreferences.getInstance().then((prefs) {
           prefs.remove('token');
           prefs.remove('profileType');
           prefs.remove('id');
+          prefs.remove('name');
         });
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-              builder: (context) => const MyHomePage(
-                title: 'AP Landscaping',
-              )),
+            builder: (context) => const MyHomePage(
+              title: 'AP Landscaping',
+            ),
+          ),
               (Route<dynamic> route) => false,
         );
-        // Handle successful logout
       } else {
-        // print(response.statusCode);
-        // print(response['error']);
-        // print(json.decode(response.body)['error']);
-        // print('Failed to logout');
-        // Handle error response
+        String errorMessage = json.decode(response.body)['error'] ?? 'Failed to logout';
+        print(response.statusCode);
+        print(errorMessage);
+        print('Failed to logout');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            duration: const Duration(seconds: 2),
+          ),
+        );
       }
     } catch (e) {
-      // print('Error during logout: $e');
-      // Handle any exceptions
+      print('Error during logout: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error during logout: $e'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+      Navigator.of(context).pop(); // Dismiss the loading indicator if error
     }
   }
 
@@ -198,6 +188,7 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
     getUsernameFromSharedPreferences();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -214,7 +205,6 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
           ),
         ),
       ),
-
       body: Container(
         color: const Color(0xFFBBE1C5),
         width: double.infinity,
@@ -239,9 +229,9 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                             MaterialPageRoute(
                               builder: (context) => ProviderUpdateProfileInfoPage(
                                 token: widget.token,
-                                providerId: widget.providerId
-                              )
-                            )
+                                providerId: widget.providerId,
+                              ),
+                            ),
                           );
                         },
                         child: ListTile(
@@ -268,13 +258,12 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Card(
@@ -295,9 +284,9 @@ class _ProviderProfilePageState extends State<ProviderProfilePage> {
                             shape: OvalBorder(),
                           ),
                           child: const Icon(
-                              Icons.logout_rounded,
-                              color: Colors.white,
-                            ),
+                            Icons.logout_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                         title: Text(
                           'Sign out',

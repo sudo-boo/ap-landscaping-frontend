@@ -178,12 +178,12 @@ class _CustomerSignInState extends State<CustomerSignIn> {
               const Image(
                 image: AssetImage('assets/images/login-cover.png'),
               ),
-              SizedBox(height: 20,),
-              Text(
+              SizedBox(height: 50,),
+              const Text(
                 'Welcome Back Customer!',
                 style: TextStyle(
                   color: Color(0xFF3E363F),
-                  fontSize: fontHelper(context) * 30,
+                  fontSize: 24,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                   // height: 0.02,
@@ -192,7 +192,7 @@ class _CustomerSignInState extends State<CustomerSignIn> {
               ),
 
               Padding(
-                padding: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                padding: const EdgeInsets.fromLTRB(50, 20, 50, 0),
                 child: TextFormField(
                   controller: emailController,
                   decoration: const InputDecoration(

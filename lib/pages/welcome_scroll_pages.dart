@@ -51,19 +51,19 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
           Positioned(
             left: 0,
             right: 0,
-            top: screenHeight(context) * 0.23,
+            top: screenHeight(context) * 0.3,
             child: Padding(
-              padding: EdgeInsets.all(screenWidth(context) * 0.1),
+              padding: EdgeInsets.all(screenWidth(context) * 0.02),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: screenHeight(context) * 0.45,
-                    height: screenHeight(context) * 0.45,
+                    width: screenHeight(context) * 0.35,
+                    height: screenHeight(context) * 0.35,
                     child: Image.asset("assets/images/ScrollPage1.png"),
                   ),
-                  SizedBox(height: 20), // Add spacing between the image and the text
-                  Text(
+                  const SizedBox(height: 20), // Add spacing between the image and the text
+                  const Text(
                     "All Lawn Care Services",
                     style: TextStyle(
                       color: Colors.black,
@@ -73,8 +73,8 @@ class _FirstScrollPageState extends State<FirstScrollPage> {
                       height: 1.2,
                     ),
                   ),
-                  SizedBox(height: 30), // Add spacing between the texts
-                  Text(
+                  const SizedBox(height: 30), // Add spacing between the texts
+                  const Text(
                     "Transforming Your Lawn into a Lush Paradise",
                     style: TextStyle(
                       color: Color(0xFF960505),
@@ -133,7 +133,7 @@ class _SecondScrollPageState extends State<SecondScrollPage> {
                     child: Image.asset("assets/images/ScrollPage2.png"),
                   ),
                   SizedBox(height: 20), // Add spacing between the image and the text
-                  Text(
+                  const Text(
                     "Donation Pick-Up Services",
                     style: TextStyle(
                       color: Colors.black,
@@ -144,7 +144,7 @@ class _SecondScrollPageState extends State<SecondScrollPage> {
                     ),
                   ),
                   SizedBox(height: 30), // Add spacing between the texts
-                  Text(
+                  const Text(
                     "Simplifying Donations, One Pick-Up at a Time",
                     style: TextStyle(
                       color: Color(0xFF960505),
@@ -225,7 +225,7 @@ class _ThirdScrollPageState extends State<ThirdScrollPage> {
                     child: Image.asset("assets/images/ScrollPage3.png"),
                   ),
                   SizedBox(height: 20), // Add spacing between the image and the text
-                  Text(
+                  const Text(
                     "Traditional Moving Services ",
                     style: TextStyle(
                       color: Colors.black,
@@ -236,7 +236,7 @@ class _ThirdScrollPageState extends State<ThirdScrollPage> {
                     ),
                   ),
                   SizedBox(height: 30), // Add spacing between the texts
-                  Text(
+                  const Text(
                     "Trusted Partner for Hassle-Free Relocations",
                     style: TextStyle(
                       color: Color(0xFF960505),
@@ -271,18 +271,23 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
       child: Stack(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Positioned(
+          Positioned(
             left: 0,
             right: 0,
             top: 100,
-            child: Image(
-              image: AssetImage('assets/images/ScrollPage4.png'),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Image(
+                image: const AssetImage('assets/images/ScrollPage4.png',),
+                height: screenHeight(context) * 0.45,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
           Positioned(
             left: 50,
             right: 50,
-            top: screenHeight(context) * 0.65,
+            top: screenHeight(context) * 0.6,
             child: SizedBox(
               child: Column(
                 children: [
@@ -292,11 +297,11 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                       color: Color(0xFF3E363F),
                       fontSize: fontHelper(context) * 15,
                       fontFamily: 'Inter',
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       // height: 0.08,
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(height: screenHeight(context) * 0.05,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -310,7 +315,8 @@ class _FourthScrollPageState extends State<FourthScrollPage> {
                           Navigator.of(context)
                               .pushReplacementNamed('/customersignin');
                         },
-                        child: Text('Customer',
+                        child: Text(
+                            'Customer',
                             style: TextStyle(
                               fontSize: fontHelper(context) * 16,
                               color: Colors.white,

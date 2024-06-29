@@ -5,10 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../config.dart';
 import '../../utilities/helper_functions.dart';
+import '../../utilities/loading_popup.dart';
 
 class SuperUserProfilePage extends StatefulWidget {
-  final token;
-  final superuserId;
+  final String token;
+  final String superuserId;
   const SuperUserProfilePage({required this.token, required this.superuserId, Key? key})
       : super(key: key);
 
@@ -63,13 +64,12 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle sign out logic
+                    Navigator.of(context).pop();
+                    showLoadingIndicator(context);
                     logoutSuperUser();
-                    Navigator.of(context).pop(); // Dismiss the bottom sheet
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -77,8 +77,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 12.0),
                   ),
                   child: const Text(
                     "Sign out",
@@ -87,8 +86,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, vertical: 0.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // Dismiss the bottom sheet
@@ -99,8 +97,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 12.0),
                   ),
                   child: const Text(
                     "Cancel",
@@ -121,25 +118,6 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
   Future<void> logoutSuperUser() async {
     var url = Uri.parse(superUserLogout);
     try {
-
-      Navigator.of(context).pop();
-
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) {
-          return const AlertDialog(
-            content: SizedBox(
-              width: 50.0, // Example width
-              height: 50.0, // Example height
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
-          );
-        },
-      );
-
       var response = await http.post(
         url,
         headers: {
@@ -148,7 +126,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
         },
       );
 
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(); // Dismiss the loading indicator
 
       if (response.statusCode == 200) {
         await SharedPreferences.getInstance().then((prefs) {
@@ -172,18 +150,23 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
         );
       }
     } catch (e) {
+      print('Error during logout: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error during logout: $e')),
+        SnackBar(
+          content: Text('Error during logout: $e'),
+          duration: const Duration(seconds: 2),
+        ),
       );
+      Navigator.of(context).pop(); // Dismiss the loading indicator if error
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
         centerTitle: true,
-        // title: Text(widget.serviceName),
         title: const Text(
           'More',
           style: TextStyle(
@@ -237,7 +220,7 @@ class _SuperUserProfilePageState extends State<SuperUserProfilePage> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

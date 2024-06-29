@@ -69,13 +69,27 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
           // isLoading = false;
         });
       } else if (response.statusCode == 404) {
-        // return {'error': 'Order not found'};
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Order not found'),
+            duration: Duration(seconds: 1),
+          ),
+        );
       } else {
-        // return {'error': 'Failed to fetch order'};
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to fetch order'),
+            duration: Duration(seconds: 1),
+          ),
+        );
       }
     } catch (e) {
-      // print('Error getting order: $e');
-      // return {'error': 'Failed to fetch order'};
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error getting order: $e'),
+          duration: Duration(seconds: 1),
+        ),
+      );
     }
   }
 
@@ -103,12 +117,21 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
             receivedProviderData = true;
           });
         } else if (response.statusCode == 404) {
-          // Handle 404 error
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Provider not found'),
+              duration: Duration(seconds: 1),
+            ),
+          );
         } else {
-          // Handle other errors
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to fetch provider details'),
+              duration: Duration(seconds: 1),
+            ),
+          );
         }
       } else {
-        // Initialize to 'Not Assigned Yet!!' if providerId is null
         setState(() {
           provider_info.username = 'Not Assigned Yet!!';
           provider_info.email = 'NA';
@@ -122,8 +145,12 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
         });
       }
     } catch (e) {
-      // print('Error getting order: $e');
-      // Handle error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error getting provider details: $e'),
+          duration: Duration(seconds: 1),
+        ),
+      );
     }
   }
 
@@ -134,8 +161,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
       //   'additionalInfo': additionalInfo.text
       // };
       final response = await http.put(
-        Uri.parse(
-            '$cancelOrderByCustomer${widget.orderId}'), // Replace with your API endpoint
+        Uri.parse('$cancelOrderByCustomer${widget.orderId}'), // Replace with your API endpoint
         headers: {
           'Content-Type': 'application/json',
           'Authorization': '${widget.token}',
@@ -178,7 +204,7 @@ class _CustomerOrderDetailsPageState extends State<CustomerOrderDetailsPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text("Error"),
-              // content: Text(err.message),
+              content: Text('Error cancelling order: $error'),
               actions: [
                 TextButton(
                   child: const Text("Ok"),
