@@ -17,35 +17,6 @@ class CustomerServicesPage extends StatefulWidget {
 }
 
 class _CustomerServicesPageState extends State<CustomerServicesPage> {
-  // Future<List<orderInfo>> customerOrdersList() async {
-  //   final response = await http.get(
-  //     Uri.parse('$customerOrders${widget.customerId}'),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': '${widget.token}',
-  //     },
-  //   );
-  //   if (response.statusCode == 200) {
-  //     final List<dynamic> ordersJson = json.decode(response.body)['orders'];
-  //     final List<orderInfo> orders = ordersJson.map((order) {
-  //       return orderInfo(
-  //           serviceType: order['serviceType'],
-  //           address: order['address'],
-  //           date: order['date'],
-  //           time: order['time'],
-  //           expectationNote: order['expectationNote'].toString(),
-  //           customerId: order['customerId'],
-  //           providerId: order['providerId'],
-  //           isFinished: order['isFinished'],
-  //           isCancelled: order['isCancelled'],
-  //           id: order['id']);
-  //     }).toList();
-  //     // print();
-  //     return orders;
-  //   } else {
-  //     throw Exception('Failed to load customer orders');
-  //   }
-  // }
 
   late Future<List<orderInfo>> pastorders;
   late Future<List<orderInfo>> futureorders;
@@ -73,11 +44,6 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
         // print(order);
         // print(order['providerId']);
         String providerName = "Not Assigned yet!";
-        // if(order['providerId'] != null) {
-        //   final providerDetails = await getProviderDetailsById(
-        //       order['providerId'], widget.token);
-        //   providerName = providerDetails.username;
-        // }
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -93,6 +59,8 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
           // Add other customer details as needed
         ));
       }
+
+      orders.sort((a, b) => b.date.compareTo(a.date));
       // print();
       return orders;
     } else {
@@ -117,11 +85,6 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
         // print(order);
         // print(order['providerId']);
         String providerName = "Not Assigned yet!";
-        // if(order['providerId'] != null) {
-        //   final providerDetails = await getProviderDetailsById(
-        //       order['providerId'], widget.token);
-        //   providerName = providerDetails.username;
-        // }
         orders.add(orderInfo(
           serviceType: order['serviceType'],
           address: order['address'].toString(),
@@ -153,42 +116,14 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
       //   print("-----------------------------------");
       // }
       // print();
+
+      orders.sort((a, b) => b.date.compareTo(a.date));
+
       return orders;
     } else {
       throw Exception('Failed to load customer orders');
     }
   }
-
-  // Future<providerInfo> getProviderDetailsById(String provider_id) async {
-  //   try {
-  //     final response = await http.get(
-  //       Uri.parse('$providerDetailsbyId$provider_id'),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': '${widget.token}',
-  //       },
-  //     );
-  //     if (response.statusCode == 200) {
-  //       final dynamic data = json.decode(response.body);
-  //       return providerInfo(
-  //         username: data['provider']['username'] ?? '',
-  //         email: data['provider']['email'] ?? '',
-  //         mobile_number: data['provider']['mobilenumber'] ?? '',
-  //         address: data['provider']['address'] ?? '',
-  //       );
-  //     } else if (response.statusCode == 404) {
-  //       // return {'error': 'Order not found'};
-  //       return providerInfo();
-  //     } else {
-  //       // return {'error': 'Failed to fetch order'};
-  //       return providerInfo();
-  //     }
-  //   } catch (e) {
-  //     print('Error getting order: $e');
-  //     return providerInfo();
-  //     // return {'error': 'Failed to fetch order'};
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -208,34 +143,6 @@ class _CustomerServicesPageState extends State<CustomerServicesPage> {
               height: 0,
             ),
           ),
-          // leading: IconButton(
-          //     icon: const Image(
-          //       image: AssetImage('assets/images/backIcon.png'),
-          //     ),
-          //   onPressed: () {
-          //     // Navigator.pop(context);
-          //     Navigator.pushReplacement(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => CustomerHomePage(
-          //                 token: widget.token,
-          //                 customerId: widget.customerId)));
-          //   },
-          // ),
-          // actions: <Widget>[
-          //   Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: IconButton(
-          //       icon: Icon(
-          //           Icons.notifications_rounded,
-          //         size: fontHelper(context) * 30,
-          //       ),
-          //       onPressed: () {
-          //         // Handle notifications icon action (e.g., show notifications)
-          //       },
-          //     ),
-          //   ),
-          // ],
           backgroundColor: Colors.transparent,
         ),
         body: Column(

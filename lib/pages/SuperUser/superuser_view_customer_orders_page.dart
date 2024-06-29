@@ -87,6 +87,7 @@ class _SuperUserViewParticularCustomerOrdersPageState extends State<SuperUserVie
       //   print("-----------------------------------");
       // }
       // print("");
+      orders.sort((a, b) => b.date.compareTo(a.date));
       return orders;
     } else {
       throw Exception('Failed to load customer orders');

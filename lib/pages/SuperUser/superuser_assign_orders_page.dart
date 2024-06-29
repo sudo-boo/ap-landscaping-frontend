@@ -77,6 +77,7 @@ class _SuperUserAssignServicesPageState extends State<SuperUserAssignServicesPag
             }
             // print(customerDetails.username);
           }
+          orders.sort((a, b) => b.date.compareTo(a.date));
           return orders;
         } else {
           print('No orders found.');

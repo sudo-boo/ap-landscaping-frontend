@@ -106,6 +106,7 @@ Future<List<providerInfo>> fetchAllProviderDetails(String token) async {
         );
         allProvidersList.add(provider);
       }
+      allProvidersList.sort((a, b) => a.username.compareTo(b.username));
 
       return allProvidersList;
     } else {

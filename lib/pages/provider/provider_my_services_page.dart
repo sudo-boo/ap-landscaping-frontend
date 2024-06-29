@@ -61,6 +61,8 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
           // Add other customer details as needed
         ));
       }
+
+      orders.sort((a, b) => b.date.compareTo(a.date));
       return orders;
     } else {
       throw Exception('Failed to load provider orders');
@@ -101,6 +103,8 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
         ));
         // print(order['isAcceptedByProvider']);
       }
+
+      orders.sort((a, b) => b.date.compareTo(a.date));
 
       return orders;
     } else {
@@ -171,14 +175,14 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
         return AlertDialog(
           title: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Inter',
               color: Colors.green, // Change title color to green
             ),
           ),
           content: Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Inter',
               color: Colors.black87, // Change content text color to black
             ),
@@ -186,7 +190,7 @@ class _ProviderMyServicesPageState extends State<ProviderMyServicesPage> {
           backgroundColor: Colors.white, // Change background color to white
           actions: [
             TextButton(
-              child: Text(
+              child: const Text(
                 'OK',
                 style: TextStyle(
                   fontFamily: 'Inter',
